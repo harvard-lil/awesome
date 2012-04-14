@@ -1,0 +1,188 @@
+@import "960.css";
+@import "ie.css";
+@import "reset.css";
+@import "text.css";
+
+/* Remove annoying border on linked images. */
+a img { border: none; }
+a {outline: none;}
+a:hover, a:active, a:focus {
+    outline: none;
+}
+input.button:focus { 
+    outline: none; 
+}
+/*for FireFox*/
+input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner
+{   
+	border : 0px;
+} 
+/*for IE8 */
+input[type="submit"]:focus, input[type="button"]:focus
+{     
+	outline : none; 
+}
+
+@charset "UTF-8";
+/* CSS Document */
+
+html{
+	overflow-y: scroll;
+}
+body{
+	background:#FFF;
+	font-size: 11px;
+	margin-top: 0px;
+	}
+a 	{ 
+	color:#000;
+	}
+	
+a:hover {
+	color:#0072BB;
+	}
+	
+a:visited {
+	color:#F60;
+	}
+#container{
+	overflow: hidden;
+	margin-top: 20px;
+	}
+	
+#footer{
+	display: inline-block;
+	background:#FFF;
+	color:#999;
+	font-size: 90%;
+	}
+	
+#footer a {
+	color:#000;
+	text-decoration: none;
+	}
+
+h1 {
+	margin-bottom: -.2em;
+	color: #09F;
+	font-size: 3em;
+	}
+h2 {
+	margin-bottom: -.2em;
+	color: #09F;
+	font-size: 1.5em;
+	}
+h4 a {
+	text-decoration: none;
+	color:#09F;
+	}
+	
+h4 a:visited {
+	text-decoration: none;
+	color:#09F;
+	}
+	
+h4 a:hover {
+	text-decoration: none;
+	color:#09F;
+	}
+
+h5 {
+	font-size: 12px;
+	margin-top:-25px;
+	margin-bottom: 25px;
+	
+	}
+
+h5 a {
+	text-decoration: none;
+	color:#09F;
+	}
+	
+h5 a:visited {
+	text-decoration: none;
+	color:#09F;
+	}
+	
+h5 a:hover {
+	text-decoration: none;
+	color:#060;
+	} 
+#header {
+	margin-top:00px;
+	margin-left:8px;
+	}
+	
+.feeds {
+	display:block;
+	float:right;
+	margin-bottom:4px;
+}
+.logo {
+	margin-top:0px;
+	}	
+.rssIcon {
+	width:18px;
+	margin-right:8px;
+}
+.twitterIcon {
+	margin-right:4px;
+}
+
+#awesome a{
+	color:#333333;
+	font-size:1.2em;
+	text-decoration:none;
+}
+
+.item {
+	cursor:pointer;
+	margin-bottom:25px;
+}
+
+.faceUp-book-image {
+	float:left;
+	border:0px solid #999;
+	margin:0 15px 15px 0;
+	background-image:url('../images/faceUp-icons.png');
+	background-repeat: no-repeat;
+	height:160px;
+	width:110px;
+	background-position: -170px -4px;
+	padding:0;
+}
+
+.faceUp-details {
+	margin: 5px 0 0 10px;
+}
+
+.faceUp-title {
+	font-size:1.2em;
+	line-height:1.2em;
+	float:left;
+	margin-bottom:8px;
+	width:145px;
+}
+
+.faceUp-author {
+	font-size:1.1em;
+	float:left;
+	color:#444444;
+	width:145px;
+}
+
+.date {
+	color:#999;
+	font-style:italic;
+	}
+
+.checkout { 
+	color:#666;
+	
+	padding-bottom:15px;
+	}
+	
+.author { 
+	color:#666;
+	font-style:italic;
+	}
