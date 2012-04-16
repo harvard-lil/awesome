@@ -1,38 +1,237 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-      <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-      <title>Recently Awesome | Harvard Library Innovation Lab</title>
-		 
-        <link rel="stylesheet" href="css/style.css" type="text/css" />
+<!DOCTYPE html>
+
+<html>
+	
+	<head>
+		<title>Awesome at the Harvard Library</title>
+
+		<meta charset="utf-8" />
+		<meta name="description" content="Awesome at the Harvard Library" />
+
+		<link rel="stylesheet" media="all" href="css/recent.css" />
+		<link href="favicon.ico" rel="shortcut icon">
+
+		<script src="js/modernizr.custom.37797.js"></script> 
+		<!-- Grab Google CDN's jQuery. fall back to local if necessary --> 
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> 
+		<script>!window.jQuery && document.write('<script src="/js/jquery-1.7.1.min.js"><\/script>')</script>
+		<script src="js/handlebars.js"></script>
+    <script src="js/recent.js"></script>
+		<script src="js/parallax.js"></script>
+		<script src="http://use.typekit.com/vpi8egr.js"></script>
+    <script >try{Typekit.load();}catch(e){}</script>
+	</head>
+
+	<body>
+
+		<div id="wrapper" class="container">
+			
+			<header id="branding">
+			  <span id="feeds">
+			    <a href="feed.php" target="_blank">
+            <img src="images/rss.png" class="rssIcon" alt="Awesome RSS" />
+          </a> 
+          <a href="http://twitter.com/#!/HLAwesome" target="_blank">
+            <img src="images/twitter.png" class="twitterIcon" alt="Follow HLAwesome on Twitter" />
+          </a>
+        </span>
+				<h1>Awesome at the Harvard Library</h1>
+			</header>
+			
+			<nav id="primary">
+				<ul>
+					<li>
+						<h1>Recently Awesome</h1>
+						<a class="recently-awesome" href="#recently-awesome">View</a>
+					</li>
+					<li>
+						<h1>Most Awesome</h1>
+						<a class="most-awesome" href="#most-awesome">View</a>
+					</li>
+					<li>
+						<h1>About Awesome</h1>
+						<a class="about-awesome" href="#about-awesome">View</a>
+					</li>
+					<li>
+						<h1>About</h1>
+						<a class="about" href="#about">View</a>
+					</li>
+				</ul>
+			</nav>
+			
+			<div id="content">
+				<article id="recently-awesome">
+					<header>
+						<h1>Recently Awesome</h1>
+					</header>
+
+          <div id="recent"></div>
+  
+					<nav class="next-prev">
+						<a class="next most-awesome" href="#most-awesome">Next</a>
+					</nav>
+				</article>
+				
+				<article id="most-awesome">
+					<header>
+						<h1>Most Awesome of All Time</h1>
+					</header>
+					<div class=" item">
+            <img class="item-cover" src="http://images.amazon.com/images/P/1401226922.01.ZTZZZZZZ.jpg" alt="Batwoman: elegy">
+            <div class="item-details">
+              <p class="item-title">
+                <a href="http://hollis.harvard.edu/?itemid=%7Clibrary/m/aleph%7C012672334" target="_blank">Batwoman: elegy</a>
+              </p>
+              <p class="item-author">Greg Rucka</p>
+            </div>
+          </div>
         
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-        <script type="text/javascript" src="js/awesome.js"></script>
-       
-    </head>  
-    
-    <body><!-- This sets the bounds of the 960-driven layout -->  
-        <div id="container" class="container_12">
-          <div id="logo" class="grid_3 alpha">
-            <img class="logo" src="images/awesome.png" alt="hose logo" />
+          <div class=" item">
+            <img class="item-cover" src="http://images.amazon.com/images/P/0805082093.01.ZTZZZZZZ.jpg" alt="Smile when you're lying: confessions of a rogue travel writer">
+            <div class="item-details">
+              <p class="item-title">
+                <a href="http://hollis.harvard.edu/?itemid=%7Clibrary/m/aleph%7C011348588" target="_blank">Smile when you're lying: confessions of a rogue travel writer</a>
+              </p>
+              <p class="item-author">Chuck Thompson</p>
+            </div>
           </div>
-          <div id="header" class="grid_9 omega">
-          	<h1>Recently Awesome</h1>
-            <h2>At the Harvard Library</h2>
-         </div><!-- end header --> 
-        <div class="grid_12">
-        <span class="feeds"><a href="feed.php" target="_blank"><img src="images/feed-icon.png" class="rssIcon" alt="Awesome RSS" /></a> <a href="http://twitter.com/#!/HLAwesome" target="_blank"><img src="images/twitterIcon.png" class="twitterIcon" alt="Follow HLAwesome on Twitter" /></a></span>
-            <hr />  
-        </div>
-        <div id="awesome" class="grid_12">
-          
-        </div>
-          <div id="footer" class="grid_12">
-          	<hr />
-            <p><a href="http://librarylab.law.harvard.edu/">The Harvard Library Innovation Lab</a> 2011</p>  
+        
+          <div class=" item">
+            <img class="item-cover" src="http://images.amazon.com/images/P/0374275637.01.ZTZZZZZZ.jpg" alt="Thinking, fast and slow">
+            <div class="item-details">
+              <p class="item-title">
+                <a href="http://hollis.harvard.edu/?itemid=%7Clibrary/m/aleph%7C012947847" target="_blank">Thinking, fast and slow</a>
+              </p>
+              <p class="item-author">Daniel Kahneman</p>
+            </div>
           </div>
-          
-   	   </div><!-- end container -->
-   </body>
+                    <div class=" item">
+            <img class="item-cover" src="http://images.amazon.com/images/P/159420229X.01.ZTZZZZZZ.jpg" alt="Moonwalking with Einstein: the art and science of remembering everything">
+            <div class="item-details">
+              <p class="item-title">
+                <a href="http://hollis.harvard.edu/?itemid=%7Clibrary/m/aleph%7C012704014" target="_blank">Moonwalking with Einstein: the art and science of remembering everything</a>
+              </p>
+              <p class="item-author">Joshua Foer</p>
+            </div>
+          </div>
+        
+          <div class=" item">
+            <img class="item-cover" src="http://images.amazon.com/images/P/0765304368.01.ZTZZZZZZ.jpg" alt="Down and out in the Magic Kingdom">
+            <div class="item-details">
+              <p class="item-title">
+                <a href="http://hollis.harvard.edu/?itemid=%7Clibrary/m/aleph%7C009053397" target="_blank">Down and out in the Magic Kingdom</a>
+              </p>
+              <p class="item-author">Cory Doctorow</p>
+            </div>
+          </div>
+        
+          <div class=" item">
+            <img class="item-cover" src="http://images.amazon.com/images/P/1560978902.01.ZTZZZZZZ.jpg" alt="Ghost world">
+            <div class="item-details">
+              <p class="item-title">
+                <a href="http://hollis.harvard.edu/?itemid=%7Clibrary/m/aleph%7C010684762" target="_blank">Ghost world</a>
+              </p>
+              <p class="item-author">Daniel Clowes</p>
+            </div>
+          </div>
+          <div class=" item">
+            <img class="item-cover" src="http://images.amazon.com/images/P/006097625X.01.ZTZZZZZZ.jpg" alt="Understanding comics: the invisible art">
+            <div class="item-details">
+              <p class="item-title">
+                <a href="http://hollis.harvard.edu/?itemid=%7Clibrary/m/aleph%7C004194192" target="_blank">Understanding comics: the invisible art</a>
+              </p>
+              <p class="item-author">Scott McCloud</p>
+            </div>
+          </div>
+        
+          <div class=" item">
+            <img class="item-cover" src="http://images.amazon.com/images/P/684853779.01.ZTZZZZZZ.jpg" alt="Bobos in paradise: the new upper class and how they got there">
+            <div class="item-details">
+              <p class="item-title">
+                <a href="http://hollis.harvard.edu/?itemid=%7Clibrary/m/aleph%7C008337644" target="_blank">Bobos in paradise: the new upper class and how they got there</a>
+              </p>
+              <p class="item-author">David Brooks</p>
+            </div>
+          </div>
+        
+          <div class=" item">
+            <img class="item-cover" src="http://images.amazon.com/images/P/0374532184.01.ZTZZZZZZ.jpg" alt="The possessed: adventures with Russian books and the people who read them">
+            <div class="item-details">
+              <p class="item-title">
+                <a href="http://hollis.harvard.edu/?itemid=%7Clibrary/m/aleph%7C012240717" target="_blank">The possessed: adventures with Russian books and the people who read them</a>
+              </p>
+              <p class="item-author">Elif Batuman</p>
+            </div>
+          </div>
+					<nav class="next-prev">
+						<a class="prev recently-awesome" href="#recently-awesome">Prev</a>
+						<a class="next about-awesome" href="#about-awesome">Next</a>
+					</nav>
+				</article>
+				
+				<article id="about-awesome">
+					<header>
+						<h1>About Awesome</h1>
+					</header>
+					<p>Returning something awesome to the Harvard Library?  Put it in the Awesome Box.</p>
+					<p>Funded by the Library Lab, the Awesome Box allows the community to see what others have found helpful, entertaining, or mind-blowing.</p>
+					<nav class="next-prev">
+						<a class="prev most-awesome" href="#most-awesome">Prev</a>
+						<a class="next about" href="#about">Next</a>
+					</nav>
+				</article>
+				
+				<article id="about">
+					<header>
+						<h1>Another section?</h1>
+					</header>
+					<p>Thought I had an idea for another one.  Manual input?</p>
+					<nav class="next-prev">
+						<a class="prev about-awesome" href="#about-awesome">Prev</a>
+					</nav>
+				</article>
+			</div>
+			
+			<!-- Parallax foreground -->
+			<div id="parallax-bg3">
+				<img id="bg3-1" src="images/awesome.png" width="529" height="757" alt="awesome"/>
+				<img id="bg3-2" src="images/awesome2.png" width="377" height="789" alt="awesome"/>
+				<img id="bg3-3" src="images/awesome3.png" width="600" height="745" alt="awesome"/>
+				<img id="bg3-4" src="images/ground.png" width="1100" height="753" alt="awesome"/>
+			</div>
+			
+			<!-- Parallax  midground clouds -->
+			<div id="parallax-bg2">
+				<img id="bg2-1" src="images/blue-exclamation.png" alt="cloud"/>
+				<img id="bg2-2" src="images/blue-exclamation.png" alt="cloud"/>
+				<img id="bg2-3" src="images/blue-exclamation.png" alt="cloud"/>
+				<img id="bg2-4" src="images/blue-exclamation.png" alt="cloud"/>
+				<img id="bg2-5" src="images/blue-exclamation.png" alt="cloud"/>
+			</div>
+			
+			<!-- Parallax  background clouds -->
+			<div id="parallax-bg1">
+				<img id="bg1-1" src="images/green-exclamation.png" alt="cloud"/>
+				<img id="bg1-2" src="images/green-exclamation.png" alt="cloud"/>
+				<img id="bg1-3" src="images/green-exclamation.png" alt="cloud"/>
+				<img id="bg1-4" src="images/green-exclamation.png" alt="cloud"/>
+			</div>
+		
+		</div>
+		<script id="awesome-template" type="text/x-handlebars-template">
+        {{#docs}}
+          <div class="item">
+            <img class="item-cover" src="http://images.amazon.com/images/P/{{isbn}}.01.ZTZZZZZZ.jpg" alt="{{title}}" />
+            <div class="item-details">
+              <p class="item-title">
+                <a href="http://hollis.harvard.edu/?itemid=|library/m/aleph|{{hollis_id}}" target="_blank">{{title}}</a>
+              </p>
+              <p class="item-author">{{creator}}</p>
+            </div>
+          </div>
+        {{/docs}}
+  </script> 
+	
+	</body>
   
 </html>
