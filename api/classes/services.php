@@ -5,8 +5,8 @@ class Services extends F3instance {
     function tweet_new_item() {
         // Tweet a checkin
         $title = $_REQUEST['title'];
-        $author = $_REQUEST['author'];
-        $hollis = $_REQUEST['hollis'];
+        $creator = $_REQUEST['creator'];
+        $hollis_id = $_REQUEST['hollis_id'];
 
         $consumer_key = $this->get('CONSUMER_KEY');
 
@@ -14,7 +14,7 @@ class Services extends F3instance {
 
         $content = $connection->get('account/verify_credentials');
 
-        $hollis_link = 'http://discovery.lib.harvard.edu/?itemid=|library/m/aleph|'.$hollis;
+        $hollis_link = 'http://discovery.lib.harvard.edu/?itemid=|library/m/aleph|'.$hollis_id;
          /* make a URL small */
         $format = 'xml';
         $version = '2.0.1';
@@ -41,10 +41,10 @@ class Services extends F3instance {
         }
 
         $message = $title;
-        $author_pieces = explode(",", $author);
-        $author = $author_pieces[1]." ".$author_pieces[0];
-        if($author != ' ')
-        	$message.= " by $author";
+        //$creator_pieces = explode(",", $creator);
+        //$creator = $creator_pieces[1]." ".$creator_pieces[0];
+        if($creator!= ' ')
+        	$message.= " by $creator";
         $message = mb_substr($message, 0, 119);
 
         $message .= ' ';
