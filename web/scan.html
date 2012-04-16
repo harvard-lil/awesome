@@ -1,187 +1,62 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 <title>Awesome Box Barcode Scan</title> 
 
+<link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
+<link href="favicon.ico" rel="shortcut icon">
 <style>
-.awesome {
-	color:#ffffff;
+body {
+  background-image:url('images/awesome.png');
+  background-repeat: no-repeat;
 }
-/*
- * CSS animated rainbow dividers of awesome 
- * by Chris Heilmann @codepo8 and Lea Verou @leaverou 
-**/
-@-moz-keyframes charlieeee {
-  from { background-position:top left; } 
-  to {background-position:top right; }
-}
-@-webkit-keyframes charlieeee { 
-  from { background-position:top left; }  
-  to { background-position:top right; }  
-}
-@-o-keyframes charlieeee { 
-  from { background-position:top left; }  
-  to { background-position:top right; }  
-}
-@-ms-keyframes charlieeee { 
-  from { background-position:top left; }  
-  to { background-position:top right; }  
-}
-@-khtml-keyframes charlieeee { 
-  from { background-position:top left; }  
-  to { background-position:top right; }  
-}
-@keyframes charlieeee { 
-  from { background-position:top left; }  
-  to { background-position:top right; }  
-}
-.catchadream{
-  background-image:-webkit-linear-gradient( left, red, orange, yellow, green,
-                                          blue, indigo, violet, indigo, blue,
-                                          green, yellow, orange, red );
-  background-image:-moz-linear-gradient( left, red, orange, yellow, green,
-                                         blue,indigo, violet, indigo, blue,
-                                         green, yellow, orange,red );
-  background-image:-o-linear-gradient( left, red, orange, yellow, green,
-                                         blue,indigo, violet, indigo, blue,
-                                         green, yellow, orange,red );
-  background-image:-ms-linear-gradient( left, red, orange, yellow, green,
-                                         blue,indigo, violet, indigo, blue,
-                                         green, yellow, orange,red );
-  background-image:-khtml-linear-gradient( left, red, orange, yellow, green,
-                                         blue,indigo, violet, indigo, blue,
-                                         green, yellow, orange,red );
-  background-image:linear-gradient( left, red, orange, yellow, green,
-                                         blue,indigo, violet, indigo, blue,
-                                         green, yellow, orange,red );
-  -moz-animation:charlieeee 2.5s forwards linear infinite;
-  -webkit-animation:charlieeee 2.5s forwards linear infinite;
-  -o-animation:charlieeee 2.5s forwards linear infinite;
-  -khtml-animation:charlieeee 2.5s forwards linear infinite;
-  -ms-animation:charlieeee 2.5s forwards linear infinite;
-  -lynx-animation:charlieeee 2.5s forwards linear infinite;
-  animation:charlieeee 2.5s forwards linear infinite;
-  background-size:50% auto;
-}
-#tongue{position:cheek;}
-/* ^ OMG! An ID! That kills performance! */
 
-/*
-  .catchadream:after{content:'廌'}
+h1 {
+  color: #11cbf7;
+}
 
-*/
-/* ^ uncomment to add unicorn */
 #innerlay {
     background: none repeat scroll 0 0 #FFFFFF;
-    border: 3px solid #0099FF;
+    border: 3px solid #bee620;
     border-radius: 3px 3px 3px 3px;
     height: 220px;
-    line-height: 1.2em;
     margin: 80px auto 0;
-    opacity: 0.95;
     padding: 30px;
     width: 580px;
-    z-index: 1001;
-}
-h1 {
-	color:#333333;
-}
-h2 {
-	padding: 3px;
-}
-h3 {
-	color:#333333;
 }
 #barcode {
-	border: solid 1px #0099FF;
+	border: solid 1px #bee620;
 	font-size:24px;
 	width:375px;
 	padding:10px;
+	margin-top:25px;
 }
-#submit {
-    font-size:24px;
-    background: none repeat scroll 0 0 #0099FF;
-    border: 1px solid #005288;
-    border-radius: 3px 3px 3px 3px;
-    box-shadow: 0 0 1px 1px #33ADFF inset;
-    color: #FFFFFF;
-    cursor: pointer;
-    display: inline-block;
-    margin-left: 6px;
-    margin-top: 8px;
-    min-width: 40px;
-    padding: 8px 10px 9px;
-    text-align: center;
-    text-shadow: 0 -1px 0 #0066AA;
-    width: auto;
+.added-title {
+  margin-left:8px;
 }
 </style>
 
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.min.js"></script>
-<script language="javascript" type="text/javascript">
-var title = '',
-hollis = '',
-isbn = '';
-$(document).ready(function() {
-	$('#barcode').focus();
-    $('#lookup').submit(function() {
-    	var barcode = $('#barcode').val();
-    	$.getJSON('lookup.php?barcode=' + barcode,
-			function (data) {
-				var item = data.rlistFormat.hollis;
-				$('.awesome').show();
-				hollis = item.hollisId;
-				hollis = hollis.substr(0, 9);
-				title = item.title;
-				
-				var isbn = -1;
-				if(item.isbn instanceof Array)
-					isbn = item.isbn[0] + '';
-				else
-					isbn = item.isbn + '';
-
-				if (isbn.indexOf(" ") != -1) {
-					isbn = isbn.split(' ')[0];
-				}
-				
-				$.ajax({
-  					url: 'convert.php?isbn=' + isbn,
-  					async: false,
-  					success: function(isbn10){
-                  		isbn = isbn10;
-               		}
-				});
-				
-				var author_first = item.authors.authorName.authorFirst;
-				author_first = author_first.replace(/\.$/, "");
-				var author = author_first + ' ' + item.authors.authorName.authorLast;
-
-				$('#barcode').val('').focus();
-				
-				var url = "services/awesome-service.php";
-		
-				$.post(url, {id: hollis, title: title, creator: author, isbn: isbn}, function(data) {
-  					$('h3').text(title);
-				});
-				
-				$.post('tweet.php', {hollis: hollis, title: title, author: author, isbn: isbn});
-			});
-		return false;	
-	});
-});
-
+<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="js/scan.js">
 </script>
 </head>
 <body>
 <div id="innerlay">
 	<h1>Awesome Box Barcode Scan</h1>
 	<form id="lookup">
-        <input type="text" id="barcode" />
-        <input type="submit" value="submit" id="submit" />
-    </form>
-	<h2 class="awesome catchadream" style="display:none;">THIS THING HAS BEEN AWESOMED!<h2>
-    <h3></h3>
+    <input type="text" id="barcode" />
+    <input type="submit" value="submit" id="submit" style="display:none;" />
+  </form>
+  <div class="progress" style="display:none;">
+    <div class="bar" style="width: 10%;"></div>
+  </div>
+  <div class="alert alert-error" style="display:none;"></div>
+  <div class="alert alert-success" style="display:none;">
+    <h4 class="alert-heading">Awesome!</h4>
+    <span class="label label-success"><i class="icon-ok-sign icon-white"></i> Added</span> <span class="added-title">
+  </div>
 </div>
 </body>
+</html>
