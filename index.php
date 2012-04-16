@@ -10,11 +10,19 @@ $f3->set('DEBUG',3);
 $f3->config(dirname(__FILE__) . '/etc/master.cfg');
 
 // Let F3 load our other things
-$autoload_path = "{$f3->get('AWESOME_HOME')}/api/classes/;";
+$autoload_path = "{$f3->get('AWESOME_HOME')}/api/classes/; {$f3->get('AWESOME_HOME')}/lib/;";
 $f3->set('AUTOLOAD', $autoload_path);
 
-$f3->route('GET /api/item/@item','Item->get_single');
-$f3->route('GET /api/item/search','Item->search');
+// API business
+$f3->route('GET /api/item/@item_id', 'Item->get_single');
+$f3->route('POST /api/item', 'Item->create');
+$f3->route('GET /api/item', 'Item->create');
+$f3->route('GET /api/item/search', 'Item->search');
+
+// Service business
+$f3->route('GET /api/services/tweet', 'Services->tweet_new_item');
+$f3->route('GET /api/services/barcode-lookup', 'Services->barcode_lookup');
+
 $f3->run();
 
 ?>

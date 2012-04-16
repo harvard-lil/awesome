@@ -28,6 +28,9 @@ foreach ($results['hits']['hits'] as $result) {
     if (!empty($result['_source']['checked_in'])) {
         $doc['checked_in'] = $result['_source']['checked_in'];
     }
+    if (!empty($result['_id'])) {
+        $doc['id'] = $result['_id'];
+    }
     array_push($docs, $doc);
 }
 
