@@ -18,7 +18,7 @@ $(document).ready(function() {
       $('.progress').show();
       updateProgress();
     	var barcode = $('#barcode').val();
-    	$.getJSON('lookup.php?barcode=' + barcode,
+    	$.getJSON('../api/services/barcode-lookup/?barcode=' + barcode,
 			function (data) {
 			  $('.bar').css('width', '100%');
 			  $('.progress').hide();

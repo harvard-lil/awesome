@@ -8,10 +8,11 @@ class Services extends F3instance {
         $author = $_REQUEST['author'];
         $hollis = $_REQUEST['hollis'];
 
-        $connection = new TwitterOAuth($this->get('CONSUMER_KEY'), $this->get('CONSUMER_SECRET'), $this->get('OAUTH_TOKEN'),  $this->get('OAUTH_SECRET'));
-        $content = $connection->get('account/verify_credentials');
+        $consumer_key = $this->get('CONSUMER_KEY');
 
-//        $connection->post('statuses/update', array('status' => 'post w/oauth'));
+        $connection = new TwitterOAuth($this->get('TWITTER_CONSUMER_KEY'), $this->get('TWITTER_CONSUMER_SECRET'), $this->get('TWITTER_OAUTH_TOKEN'),  $this->get('TWITTER_OAUTH_SECRET'));
+
+        $content = $connection->get('account/verify_credentials');
 
         $hollis_link = 'http://discovery.lib.harvard.edu/?itemid=|library/m/aleph|'.$hollis;
          /* make a URL small */
@@ -19,6 +20,7 @@ class Services extends F3instance {
         $version = '2.0.1';
         $login = 'hallcheckouts';
         $appkey = $this->get('BITLY_KEY');
+
         //create the URL
         $bitly = 'http://api.bit.ly/shorten?version='.$version.'&longUrl='.urlencode($hollis_link).'&login='.$login.'&apiKey='.$appkey.'&format='.$format;
 
@@ -70,8 +72,12 @@ class Services extends F3instance {
         $contents = curl_exec ($ch);
 
         curl_close ($ch);
+        
+        $this->set('contents', json_decode($contents, true));
+        $path_to_template = 'api/templates/barcode_json.php';
+        echo $this->render($path_to_template);
 
-        print $contents;
+        //print json_encode($contents);
     }
 }
 ?>
