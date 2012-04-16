@@ -20,7 +20,7 @@ $f3->route('GET /api/item', 'Item->create');
 $f3->route('GET /api/item/search', 'Item->search');
 
 // Service business
-$f3->route('GET /api/services/tweet', 'Services->tweet_new_item');
+$f3->route('POST /api/services/tweet', 'Services->tweet_new_item');
 $f3->route('GET /api/services/barcode-lookup', 'Services->barcode_lookup');
 
 $f3->run();

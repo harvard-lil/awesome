@@ -38,14 +38,6 @@ $(document).ready(function() {
             isbn = isbn.split(' ')[0];
           }
           
-          $.ajax({
-              url: 'convert.php?isbn=' + isbn,
-              async: false,
-              success: function(isbn10){
-                        isbn = isbn10;
-                    }
-          });
-          
           if(item.authors.authorName) {
             var authorName = item.authors.authorName;
             if(authorName instanceof Array)
@@ -56,14 +48,14 @@ $(document).ready(function() {
           $('#barcode').val('').focus();
           $('.bar').css('width', '10%')
           
-          var url = "services/awesome-service.php";
+          var url = "../api/item";
       
           $.post(url, {id: hollis, title: title, creator: creator, isbn: isbn}, function(data) {
               $('.alert-success').show();
               $('.added-title').html(title)
           });
           
-          $.post('tweet.php', {id: hollis, title: title, creator: creator, isbn: isbn});
+          $.post('../api/services/tweet', {id: hollis, title: title, creator: creator, isbn: isbn});
 				}
 				else {
 				  $('.alert-error').text('The barcode lookup failed').fadeIn();;
