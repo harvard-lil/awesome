@@ -1,6 +1,6 @@
 $(document).ready(function() {
 		
-	var url = "services/awesome-service.php";
+	var url = "../api/item/search?limit=9";
 		
 	$.get(url, function(data) {
     	var source = $("#awesome-template").html();
