@@ -8,14 +8,13 @@ $(document).ready(function() {
 	$('#barcode').focus();
     $('#lookup').submit(function() {
       $('.alert').hide();
+      $('.progress').show();
       function updateProgress() {
         val += 10;
         $('.bar').css('width', val + '%');
         if(val < 100)
           timer = setTimeout(updateProgress, 500);
       }
-      $('.bar').css('width', '10%')
-      $('.progress').show();
       updateProgress();
     	var barcode = $('#barcode').val();
     	$.getJSON('../api/services/barcode-lookup/?barcode=' + barcode,
@@ -46,7 +45,8 @@ $(document).ready(function() {
           }
   
           $('#barcode').val('').focus();
-          $('.bar').css('width', '10%')
+          $('.bar').css('width', '10%');
+          val = 10;
           
           var url = "../api/item";
       

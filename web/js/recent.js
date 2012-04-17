@@ -1,6 +1,6 @@
 $(document).ready(function() {
 		
-	var url = "../api/item/search?limit=9";
+	var url = "../api/item/search?limit=9&sort=checked_in desc";
 		
 	$.get(url, function(data) {
     	var source = $("#awesome-template").html();
