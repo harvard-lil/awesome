@@ -8,8 +8,8 @@ echo "<" . "?" . "xml version=\"1.0\" encoding=\"ISO-8859-1\"" . "?" . ">";
 ?>
 <rss version="2.0"><channel>
 
-<title>Recently Awesome at the Harvard Library</title>"
-<link>http://hlsl7.law.harvard.edu/dev/annie/awesome/src/web/</link>";
+<title>Recently Awesome at the Harvard Library</title>
+<link>http://hlsl7.law.harvard.edu/dev/annie/awesome/src/web/</link>
 <description>Keep up with the latest awesome items at the Harvard Library</description>
 
 <language>en-gb</language>
@@ -21,7 +21,7 @@ echo "<" . "?" . "xml version=\"1.0\" encoding=\"ISO-8859-1\"" . "?" . ">";
         
 <?php
 
-$url = "http://hlsl7.law.harvard.edu/dev/annie/awesome/src/services/awesome-service.php";
+$url = "http://hlsl7.law.harvard.edu/dev/annie/awesome/api/item/search";
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
