@@ -23,6 +23,10 @@ $f3->route('GET /api/item/search', 'Item->search');
 $f3->route('POST /api/services/tweet', 'Services->tweet_new_item');
 $f3->route('GET /api/services/barcode-lookup', 'Services->barcode_lookup');
 
+
+// Web business
+$f3->route('GET /', 'web/index.php');
+
 $f3->run();
 
 ?>

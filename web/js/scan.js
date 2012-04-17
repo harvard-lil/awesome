@@ -50,12 +50,12 @@ $(document).ready(function() {
           
           var url = "../api/item";
       
-          $.post(url, {id: hollis, title: title, creator: creator, isbn: isbn}, function(data) {
+          $.post(url, {hollis_id: hollis, title: title, creator: creator, isbn: isbn}, function(data) {
               $('.alert-success').show();
               $('.added-title').html(title)
           });
           
-          $.post('../api/services/tweet', {id: hollis, title: title, creator: creator, isbn: isbn});
+          $.post('../api/services/tweet', {hollis_id: hollis, title: title, creator: creator, isbn: isbn});
 				}
 				else {
 				  $('.alert-error').text('The barcode lookup failed').fadeIn();;
