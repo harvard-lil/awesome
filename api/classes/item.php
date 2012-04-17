@@ -115,6 +115,8 @@ class Item extends F3instance {
         }
         
         $new_item['id'] = $this->gen_uuid();
+        
+        $new_item['checked_in'] = time();
 
         $jsoned_new_item = json_encode($new_item);
         
