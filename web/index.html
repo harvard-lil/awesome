@@ -176,7 +176,7 @@
 					<p>Find something awesome at the Harvard Library.</p>
 					<form id="search-awesome" class="form-inline">
             <input type="text" id="query" />
-            <input class="btn" type="submit" value="GO" id="submit" />
+            <input class="btn btn-large" type="submit" value="GO" id="submit" />
           </form>
           <div id="search-results"></div>
 					<nav class="next-prev">
@@ -189,8 +189,11 @@
 					<header>
 						<h1>About Awesome</h1>
 					</header>
-					<p>Returning something awesome to the Harvard Library?  Put it in the Awesome Box.</p>
-					<p>Funded by the Library Lab, the Awesome Box allows the community to see what others have found helpful, entertaining, or mind-blowing.</p>
+					<p>Returning something awesome to the Harvard Library?</p>
+					<br />
+					<p class="bold">Put it in the Awesome Box.</p>
+					<br />
+					<p>Funded by the <a href="http://osc.hul.harvard.edu/liblab">Library Lab</a>, the Awesome Box allows the community to see what others have found helpful, entertaining, or mind-blowing.</p>
 					<nav class="next-prev">
 						<a class="prev search" href="#search">Prev</a>
 					</nav>
@@ -205,7 +208,7 @@
 				<img id="bg3-4" src="images/ground.png" width="1100" height="753" alt="awesome"/>
 			</div>
 			
-			<!-- Parallax  midground clouds -->
+			<!-- Parallax midground clouds -->
 			<div id="parallax-bg2">
 				<img id="bg2-1" src="images/blue-exclamation.png" alt="cloud"/>
 				<img id="bg2-2" src="images/blue-exclamation.png" alt="cloud"/>
@@ -214,7 +217,7 @@
 				<img id="bg2-5" src="images/blue-exclamation.png" alt="cloud"/>
 			</div>
 			
-			<!-- Parallax  background clouds -->
+			<!-- Parallax background clouds -->
 			<div id="parallax-bg1">
 				<img id="bg1-1" src="images/green-exclamation.png" alt="cloud"/>
 				<img id="bg1-2" src="images/green-exclamation.png" alt="cloud"/>
@@ -223,13 +226,15 @@
 			</div>
 		
 		</div>
+		<!--http://images.amazon.com/images/P/{{isbn}}.01.ZTZZZZZZ.jpg-->
 		<script id="awesome-template" type="text/x-handlebars-template">
         {{#docs}}
           <div class="item">
-            <img class="item-cover" src="http://images.amazon.com/images/P/{{isbn}}.01.ZTZZZZZZ.jpg" alt="{{title}}" />
+            <a href="http://hollis.harvard.edu/?itemid=|library/m/aleph|{{hollis_id}}" target="_blank" style="display:none;">{{title}}</a>
+            <img class="item-cover" src="http://covers.openlibrary.org/b/isbn/{{isbn}}-M.jpg" alt="{{title}}" />
             <div class="item-details">
               <span class="item-title">
-                <a href="http://hollis.harvard.edu/?itemid=|library/m/aleph|{{hollis_id}}" target="_blank">{{title}}</a>
+                {{title}}
               </span>
               <span class="item-author">{{creator}}</span>
             </div>

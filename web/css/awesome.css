@@ -78,12 +78,12 @@ a:visited {
 	-moz-transition: color 0.25s ease-out;
 	-o-transition: color 0.25s ease-out;
 	transition: color 0.25s ease-out;
-	color:#00333C;
+	color:#11cbf7;
 	outline: none;
 	text-decoration:none;
 	}
 	a:hover { 
-		color:#000;
+		color:#07a8ce;
 		}
 img { 
 	display:block;
@@ -212,7 +212,8 @@ nav.next-prev {
 			top: 2180px;
 			}
 			#content h1 {
-			  color:#bee620;
+			  /*color:#bee620;*/
+			  color: #11cbf7;
 				margin: 0 0 25px 0;
 				font-size: 60px;
 				font-weight:bold;
@@ -229,6 +230,9 @@ nav.next-prev {
 			  width:600px;
 			  margin-bottom:8px;
 			}
+			p.bold {
+        font-weight: 700;
+      }
 /* foreground (ballons/landscape) */
 #parallax-bg3 {
 	z-index: 3;
@@ -324,6 +328,7 @@ nav.next-prev {
 		}
 
 .item {
+  color:#00333C;
 	cursor:pointer;
 	margin-bottom:25px;
 	width:300px;
@@ -365,115 +370,22 @@ nav.next-prev {
 	font-size:12px;
 	line-height:14px;
 	float:left;
-	color:#00333C;
 	width:145px;
 }
 
-input {
-  display: inline-block;
-	font-size:24px;
-  padding: 4px;
-  line-height: 18px;
-  color: #00333C;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-}
-
-input {
-  border: solid 1px #bee620;
-}
-
 #query {
+  border: solid 1px #bee620;
+	font-size:24px;
+  color: #00333C;
   width:375px;
   height:28px;
+}
+
+#results-info {
+  height:25px;
 }
 
 #search-results {
 	height:200px;
 	margin-top:25px;
-}
-
-.form-inline, .form-inline input {
-  display: inline-block;
-}
-.btn {
-  padding: 9px 14px;
-  font-size: 15px;
-  line-height: normal;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  
-  display: inline-block;
-  /*padding: 4px 10px 4px;
-  font-size: 13px;
-  line-height: 18px;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px;*/
-  
-  margin-bottom: 0;
-  color: #333333;
-  text-align: center;
-  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
-  vertical-align: middle;
-  background-color: #f5f5f5;
-  background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
-  background-image: -ms-linear-gradient(top, #ffffff, #e6e6e6);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
-  background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
-  background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
-  background-image: linear-gradient(top, #ffffff, #e6e6e6);
-  background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e6e6e6', GradientType=0);
-  border-color: #bee620 #bee620 #bee620;
-  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
-  border: 1px solid #bee620;
-  border-bottom-color: #bee620;
-  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-  -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-  cursor: pointer;
-  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
-  *margin-left: .3em;
-}
-.btn:hover,
-.btn:active,
-.btn.active,
-.btn.disabled,
-.btn[disabled] {
-  background-color: #e6e6e6;
-}
-.btn:active, .btn.active {
-  background-color: #cccccc \9;
-}
-.btn:first-child {
-  *margin-left: 0;
-}
-.btn:hover {
-  color: #333333;
-  text-decoration: none;
-  background-color: #e6e6e6;
-  background-position: 0 -15px;
-  -webkit-transition: background-position 0.1s linear;
-  -moz-transition: background-position 0.1s linear;
-  -ms-transition: background-position 0.1s linear;
-  -o-transition: background-position 0.1s linear;
-  transition: background-position 0.1s linear;
-}
-.btn:focus {
-  outline: thin dotted #333;
-  outline: 5px auto -webkit-focus-ring-color;
-  outline-offset: -2px;
-}
-.btn.active, .btn:active {
-  background-image: none;
-  -webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
-  -moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
-  background-color: #e6e6e6;
-  background-color: #d9d9d9 \9;
-  outline: 0;
 }

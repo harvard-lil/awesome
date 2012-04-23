@@ -17,6 +17,7 @@ $(document).ready(function() {
 	$('#search-awesome').submit(function() {
 		var query = $("#query").val();
 		$.get("../api/item/search?limit=3&filter=_all:" + query, function(data) {
+		  showResults(data);
     	var source = $("#awesome-template").html();
 		  var template = Handlebars.compile(source);
       $('#search-results').html(template(data));
@@ -76,6 +77,10 @@ $(document).ready(function() {
 		}
     );	
 });
+
+function showResults(data){
+  
+}
 
 /* Scroll the background layers */
 function parallaxScroll(){

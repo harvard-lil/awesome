@@ -2,6 +2,7 @@ var title = '',
 creator = '',
 hollis = '',
 isbn = '',
+library = '',
 val = 10,
 timer;
 $(document).ready(function() {
@@ -18,14 +19,14 @@ $(document).ready(function() {
       updateProgress();
     	var barcode = $('#barcode').val();
     	$.getJSON('../api/services/barcode-lookup/?barcode=' + barcode,
-			function (data) {
+			function (item) {
 			  $('.bar').css('width', '100%');
 			  $('.progress').hide();
 			  clearTimeout(timer);
-			  if(data) {
-          var item = data.rlistFormat.hollis;
+			  if(item) {
           hollis = item.hollisId.substr(0, 9);
           title = item.title;
+          library = item.library;
           
           var isbn = -1;
           if(item.isbn instanceof Array)
@@ -50,7 +51,7 @@ $(document).ready(function() {
           
           var url = "../api/item";
       
-          $.post(url, {hollis_id: hollis, title: title, creator: creator, isbn: isbn}, function(data) {
+          $.post(url, {hollis_id: hollis, title: title, creator: creator, isbn: isbn, library: library}, function(data) {
               $('.alert-success').show();
               $('.added-title').html(title)
           });
