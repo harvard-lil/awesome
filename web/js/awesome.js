@@ -3,7 +3,7 @@ $(document).ready(function() {
 	var url = "../api/item/search?limit=9&sort=checked_in desc";
 		
 	$.get(url, function(data) {
-    	var source = $("#awesome-template").html();
+    	var source = $("#items-template").html();
 		  var template = Handlebars.compile(source);
       $('#recent').html(template(data));
 	});
@@ -16,11 +16,8 @@ $(document).ready(function() {
 	
 	$('#search-awesome').submit(function() {
 		var query = $("#query").val();
-		$.get("../api/item/search?limit=3&filter=_all:" + query, function(data) {
+		$.get("../api/item/search?limit=45&filter=_all:" + query, function(data) {
 		  showResults(data);
-    	var source = $("#awesome-template").html();
-		  var template = Handlebars.compile(source);
-      $('#search-results').html(template(data));
 		});
 		return false;
 	});
@@ -78,8 +75,18 @@ $(document).ready(function() {
     );	
 });
 
-function showResults(data){
-  
+function showResults(data){ 
+  var source = $("#search-template").html();
+	var template = Handlebars.compile(source);
+	Handlebars.registerPartial("items", $("#items-template").html());
+  $('#search-results').html(template(data));
+  $("#search-results").jCarouselLite({
+    btnNext: ".right",
+    btnPrev: ".left",
+    speed: 600,
+    circular: false,
+    scroll: 3
+  });
 }
 
 /* Scroll the background layers */

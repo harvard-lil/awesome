@@ -16,6 +16,7 @@
 		<!-- Grab Google CDN's jQuery. fall back to local if necessary --> 
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> 
 		<script>!window.jQuery && document.write('<script src="/js/jquery-1.7.1.min.js"><\/script>')</script>
+		<script src="js/jcarousellite.min.js"></script>
 		<script src="js/handlebars.js"></script>
     <script src="js/awesome.js"></script>
 		<script src="http://use.typekit.com/vpi8egr.js"></script>
@@ -64,7 +65,7 @@
 					<header>
 						<h1>Recently Awesome</h1>
 					</header>
-
+          
           <div id="recent"></div>
   
 					<nav class="next-prev">
@@ -227,9 +228,21 @@
 		
 		</div>
 		<!--http://images.amazon.com/images/P/{{isbn}}.01.ZTZZZZZZ.jpg-->
-		<script id="awesome-template" type="text/x-handlebars-template">
+		<!--http://covers.openlibrary.org/b/isbn/{{isbn}}-M.jpg-->
+		<!--http://images.booksense.com/images/books/812/478/FC9780525478812.JPG-->
+		<!--http://www.syndetics.com/index.aspx?isbn={{isbn}}/SC.gif-->
+		<script id="search-template" type="text/x-handlebars-template">
+		  <p class="num-found">{{num_found}} results</p>
+		  <span class="left-right">
+						<a class="left">Prev</a>
+						<a class="right">Next</a>
+				</span>
+		  {{>items}}
+		</script>
+		<script id="items-template" type="text/x-handlebars-template">
+      <ul> 
         {{#docs}}
-          <div class="item">
+          <li class="item">
             <a href="http://hollis.harvard.edu/?itemid=|library/m/aleph|{{hollis_id}}" target="_blank" style="display:none;">{{title}}</a>
             <img class="item-cover" src="http://covers.openlibrary.org/b/isbn/{{isbn}}-M.jpg" alt="{{title}}" />
             <div class="item-details">
@@ -238,8 +251,9 @@
               </span>
               <span class="item-author">{{creator}}</span>
             </div>
-          </div>
+          </li>
         {{/docs}}
+      </ul>
   </script> 
 	
 	</body>

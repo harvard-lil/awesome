@@ -165,6 +165,13 @@ class Item extends F3instance {
     function convert_isbn($isbn13OrEAN) {
         $isbn13OrEAN = str_replace(" ","",str_replace("-","",$isbn13OrEAN));
         $isbnLen=strlen($isbn13OrEAN);
+        if($isbnLen <= 10) {
+	        $loop = 10 - $isbnLen;
+	        for($j=0; $j<$loop; $j++){
+		        $isbn13OrEAN = '0'.$isbn13OrEAN;
+	        }
+	        return $isbn13OrEAN;
+        }
         if ($isbnLen!=13)
         {
             //Invalid length

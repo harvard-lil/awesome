@@ -62,7 +62,7 @@ body {
 	/*background: #00333c;*/
 	background: #ffffff;
 	overflow-x: hidden;
-	height: 4550px;
+	height: 4350px;
 	line-height: 1.5;
 	color: #000;
 	font-size: 14px;
@@ -156,11 +156,32 @@ nav.next-prev {
 	margin: 20px 0 0 0;
 		clear:both;
 	}
+.left-right {
+  float:left;
+  display:block;
+  margin-top:5px;
+}
+#search	p.num-found {
+  width:150px;
+  float:left;
+  font-size:18px;
+}
+#search-results ul {
+  clear:both;
+}
 	a.prev,
-	a.next {
+	a.next{
 		display: block;
 		width: 15px;
 		height: 11px;
+		text-indent: -9999px;
+		}
+	a.left,
+	a.right{
+		display: block;
+		float:left;
+		width: 11px;
+		height: 15px;
 		text-indent: -9999px;
 		}
 	a.prev {
@@ -176,6 +197,20 @@ nav.next-prev {
 		}
 		a.next:hover {
 			background: transparent url('../images/scroll-arrow-down.png') -1px -11px no-repeat;
+			}
+	a.left {
+		margin: 5px auto 5px auto;
+		background: transparent url('../images/scroll-arrow-left.png') 0 0 no-repeat;
+		}
+		a.left:hover {
+			background: transparent url('../images/scroll-arrow-left.png') -12px 0 no-repeat;
+			}
+	a.right {
+		margin: 6px auto 0 15px;
+		background: transparent url('../images/scroll-arrow-right.png') 0px 0 no-repeat;
+		}
+		a.right:hover {
+			background: transparent url('../images/scroll-arrow-right.png') -11px 0px no-repeat;
 			}
 
 /* Parallax
@@ -197,7 +232,7 @@ nav.next-prev {
 		#most-awesome,
 		#search,
 		#about {
-			padding-top: 75px;
+			padding-top: 55px;
 			}
 		#recently-awesome {
 			position: absolute;
@@ -324,14 +359,19 @@ nav.next-prev {
 	#bg1-4 {
 		position: absolute;
 		top: 1020px;
-		left: 450px;
+		left: 465px;
 		}
 
+#recent {
+  /*width:600px;*/
+}
+
 .item {
+  display:block;
   color:#00333C;
 	cursor:pointer;
 	margin-bottom:25px;
-	width:300px;
+	width:275px;
 	float:left;
 }
 
@@ -363,14 +403,14 @@ nav.next-prev {
 	line-height:16px;
 	float:left;
 	margin-bottom:8px;
-	width:145px;
+	width:130px;
 }
 
 .item-author {
 	font-size:12px;
 	line-height:14px;
 	float:left;
-	width:145px;
+	width:130px;
 }
 
 #query {
