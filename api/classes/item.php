@@ -71,6 +71,7 @@ class Item extends F3instance {
             $request['sort'] = array($sort_field_and_dir[0] => array('order' => $sort_field_and_dir[1]));
         }
         
+        // We now have our built request, let's jsonify it and send it to ES
         $jsoned_request = json_encode($request);
         
         $url = $this->get('ELASTICSEARCH_URL') . '_search';
@@ -85,9 +86,93 @@ class Item extends F3instance {
         $results = curl_exec($ch);
         curl_close($ch);
         
-        $this->set('results', json_decode($results, true));
+        // We should have a response. Let's pull the docs out of it
+        $cleaned_results = $this->get_docs_from_es_response(json_decode($results, True));
+        
+        // We don't want dupes. Dedupe based on hollis_id
+        $deduped_docs = $this->dedupe_using_hollis_id($cleaned_results);
+        
+        $this->set('results', $deduped_docs);
         $path_to_template = 'api/templates/search_json.php';
         echo $this->render($path_to_template);
+    }
+    
+    function most_awesome() {
+        // Get the most awesomed (the items that have been awesomed 
+        // the greatest number of times)
+        
+        /* Start building our query with facet object. We want to end up here:
+        {
+            "query" : {
+                "match_all" : {  }
+            },
+            "size" : 0,
+            "facets" : {
+                "tag" : {
+                    "terms" : {
+                        "field" : "hollis_id",
+                        "size" : 100
+                    }
+                }
+            }
+        }
+        */
+        
+        $request = array();
+        $request['query'] = array("match_all" => new stdClass);
+    
+        $request['size'] = 0;
+    
+        $facets = array('tag' => array('terms' => array('field' => 'hollis_id')));
+
+        $request['facets'] = $facets;
+    
+        $jsoned_request = json_encode($request);
+        
+        $url = $this->get('ELASTICSEARCH_URL') . '_search';
+        $ch = curl_init();
+        $method = "GET";
+
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, strtoupper($method));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $jsoned_request);
+
+        $response = curl_exec($ch);
+        curl_close($ch);
+        $results = json_decode($response, True);
+
+        // At this point we have a list of most awesome items. Let's hit ES again for details on that list
+        $most_aweseome_hollis_ids = array();
+        foreach ($results['facets']['tag']['terms'] as $facet) {
+            $most_aweseomed_hollis_ids[] =  $facet['term'];
+        }
+        
+        $request = array();
+        $request['query']['terms']['hollis_id'] = $most_aweseomed_hollis_ids;
+        $request['size'] = 9;
+        
+        $jsoned_request = json_encode($request);
+        
+        $url = $this->get('ELASTICSEARCH_URL') . '_search';
+        $ch = curl_init();
+        $method = "GET";
+
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, strtoupper($method));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $jsoned_request);
+
+        $results = curl_exec($ch);
+        curl_close($ch);
+        
+        // We should have a response. Let's pull the docs out of it
+        $extracted_results = $this->get_docs_from_es_response(json_decode($results, True));
+        
+        $this->set('results', $extracted_results);
+        $path_to_template = 'api/templates/search_json.php';
+        echo $this->render($path_to_template);
+
     }
 
     function create() {
@@ -112,6 +197,10 @@ class Item extends F3instance {
         $incoming_hollis_id = $this->get('POST.hollis_id');
         if(!empty($incoming_hollis_id)) {
              $new_item['hollis_id'] = $incoming_hollis_id;
+        }
+        $incoming_library = $this->get('POST.library');
+        if(!empty($incoming_library)) {
+             $new_item['library'] = $incoming_library;
         }
         
         $new_item['id'] = $this->gen_uuid();
@@ -206,6 +295,58 @@ class Item extends F3instance {
             $isbn10 .= $checkDigit;
             
         return $isbn10;
+    }
+    
+    
+    // TODO: This is terribly inefficient. Find a better way to do this
+    // Use the hollis id to dedupe
+    function dedupe_using_hollis_id($docs) {
+        $deduped_docs = array();
+        foreach ($docs as $doc) {
+            $in_array = False;
+            foreach ($deduped_docs as $deduped_doc) {
+                if ($deduped_doc['hollis_id'] == $doc['hollis_id']) {
+                    $in_array= True;
+                }
+            }
+            if (!$in_array) {
+                $deduped_docs[] = $doc;
+            }
+        }
+        return $deduped_docs;
+    }
+    
+    function get_docs_from_es_response($es_response) {
+        // Let's pull our docs out of Elasticsearch response here
+
+        $docs = array();
+        if (!empty($es_response)) {
+            // Build the response to use our preferred vocab
+            foreach ($es_response['hits']['hits'] as $result) {
+                $doc = array();
+                if (!empty($result['_source']['title'])) {
+                    $doc['title'] = $result['_source']['title'];
+                }
+                if (!empty($result['_source']['creator'])) {
+                    $doc['creator'] = $result['_source']['creator'];
+                }
+                if (!empty($result['_source']['isbn'])) {
+                    $doc['isbn'] = $result['_source']['isbn'];
+                }
+                if (!empty($result['_source']['hollis_id'])) {
+                    $doc['hollis_id'] = $result['_source']['hollis_id'];
+                }
+                if (!empty($result['_source']['checked_in'])) {
+                    $doc['checked_in'] = $result['_source']['checked_in'];
+                }
+                if (!empty($result['_source']['id'])) {
+                    $doc['id'] = $result['_source']['id'];
+                }
+                array_push($docs, $doc);
+            }
+        }
+        
+        return $docs;
     }
 }
 ?>

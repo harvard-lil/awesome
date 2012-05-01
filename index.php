@@ -18,6 +18,7 @@ $f3->route('GET /api/item/@item_id', 'Item->get_single');
 $f3->route('POST /api/item', 'Item->create');
 $f3->route('GET /api/item', 'Item->create');
 $f3->route('GET /api/item/search', 'Item->search');
+$f3->route('GET /api/item/most-awesome', 'Item->most_awesome');
 
 // Service business
 $f3->route('POST /api/services/tweet', 'Services->tweet_new_item');
