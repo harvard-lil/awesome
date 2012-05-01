@@ -333,6 +333,9 @@ class Item extends F3instance {
                 if (!empty($result['_source']['isbn'])) {
                     $doc['isbn'] = $result['_source']['isbn'];
                 }
+                if (!empty($result['_source']['library'])) {
+                    $doc['library'] = $result['_source']['library'];
+                }
                 if (!empty($result['_source']['hollis_id'])) {
                     $doc['hollis_id'] = $result['_source']['hollis_id'];
                 }
