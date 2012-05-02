@@ -21,7 +21,7 @@ echo "<" . "?" . "xml version=\"1.0\" encoding=\"ISO-8859-1\"" . "?" . ">";
         
 <?php
 
-$url = "http://hlsl7.law.harvard.edu/dev/annie/awesome/api/item/search";
+$url = "http://hlsl7.law.harvard.edu/dev/annie/awesome/api/item/search?sort=checked_in%20desc";
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -36,7 +36,7 @@ $data = $data[docs];
 foreach($data as $item) {
 	echo"<item><title>".$item['title']."</title>";
 	echo"<link>http://hollis.harvard.edu/?itemid=|library/m/aleph|".$item['hollis_id']."</link>";
-    echo"<description>".$item['title']." by ".$item['creator']."</description>";
+    echo"<description>&lt;img src=\"http://covers.openlibrary.org/b/isbn/".$item['isbn']."-M.jpg\" /&gt;&lt;p/&gt;".$item['title']." by ".$item['creator']."&lt;/p/&gt;</description>";
     
     echo"<pubDate></pubDate></item>";
 }
