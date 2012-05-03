@@ -4,6 +4,7 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^api index.php [L,QSA]
 RewriteRule ^scan web/scan.html [L,QSA]
+RewriteRule ^feed web/feed.php [L,QSA]
 RewriteRule ^css\/(.*) web/css/$1 [L,QSA]
 RewriteRule ^images\/(.*) web/images/$1 [L,QSA]
 RewriteRule ^js\/(.*) web/js/$1 [L,QSA]
