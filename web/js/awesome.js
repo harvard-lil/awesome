@@ -1,6 +1,6 @@
 $(document).ready(function() {
 		
-	var recentUrl = "../api/item/recently-awesome";
+	var recentUrl = "api/item/recently-awesome";
 		
 	$.get(recentUrl, function(data) {
     	var source = $("#items-template").html();
@@ -8,7 +8,7 @@ $(document).ready(function() {
       $('#recent').html(template(data));
 	});
 	
-	var mostUrl = "../api/item/most-awesome";
+	var mostUrl = "api/item/most-awesome";
 	
 	$.get(mostUrl, function(data) {
     	var source = $("#items-template").html();
@@ -24,7 +24,7 @@ $(document).ready(function() {
 	
 	$('#search-awesome').submit(function() {
 		var query = $("#query").val();
-		$.get("../api/item/search?limit=45&filter=_all:" + query, function(data) {
+		$.get("api/item/search?limit=45&filter=_all:" + query, function(data) {
 		  showResults(data);
 		});
 		return false;
