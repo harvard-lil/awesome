@@ -1,11 +1,19 @@
 $(document).ready(function() {
 		
-	var url = "../api/item/search?limit=9&sort=checked_in desc";
+	var recentUrl = "../api/item/search?limit=9&sort=checked_in desc";
 		
-	$.get(url, function(data) {
+	$.get(recentUrl, function(data) {
     	var source = $("#items-template").html();
 		  var template = Handlebars.compile(source);
       $('#recent').html(template(data));
+	});
+	
+	var mostUrl = "../api/item/most-awesome";
+	
+	$.get(mostUrl, function(data) {
+    	var source = $("#items-template").html();
+		  var template = Handlebars.compile(source);
+      $('#most').html(template(data));
 	});
 
 	$('.item').live('click', function(event) {
