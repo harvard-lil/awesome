@@ -1,6 +1,6 @@
 $(document).ready(function() {
 		
-	var recentUrl = "../api/item/search?limit=9&sort=checked_in desc";
+	var recentUrl = "../api/item/recently-awesome";
 		
 	$.get(recentUrl, function(data) {
     	var source = $("#items-template").html();
