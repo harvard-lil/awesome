@@ -1,7 +1,10 @@
 RewriteEngine On
-#RewriteBase /awesome/
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
+
+#Strip the trailing slash
+RewriteRule ^(.+)/$ http://example.org/awesome/$1 [R=301,L]
+
 RewriteRule ^api index.php [L,QSA]
 RewriteRule ^scan web/scan.html [L,QSA]
 RewriteRule ^feed web/feed.php [L,QSA]
