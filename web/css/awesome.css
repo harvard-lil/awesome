@@ -404,6 +404,7 @@ nav.next-prev {
 .item-title {
   font-size:15px;
 	line-height:16px;
+	max-height:120px;
 	float:left;
 	margin-bottom:8px;
 	width:130px;

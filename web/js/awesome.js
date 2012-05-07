@@ -6,6 +6,7 @@ $(document).ready(function() {
     	var source = $("#items-template").html();
 		  var template = Handlebars.compile(source);
       $('#recent').html(template(data));
+      $(".item-title").dotdotdot();
 	});
 	
 	var mostUrl = "api/item/most-awesome";
@@ -14,6 +15,7 @@ $(document).ready(function() {
     	var source = $("#items-template").html();
 		  var template = Handlebars.compile(source);
       $('#most').html(template(data));
+      $(".item-title").dotdotdot();
 	});
 
 	$('.item').live('click', function(event) {
@@ -88,6 +90,7 @@ function showResults(data){
 	var template = Handlebars.compile(source);
 	Handlebars.registerPartial("items", $("#items-template").html());
   $('#search-results').html(template(data));
+  $(".item-title").dotdotdot();
   $("#search-results").jCarouselLite({
     btnNext: ".right",
     btnPrev: ".left",
