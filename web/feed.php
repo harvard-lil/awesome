@@ -21,7 +21,7 @@ echo "<" . "?" . "xml version=\"1.0\" encoding=\"ISO-8859-1\"" . "?" . ">";
         
 <?php
 
-$url = "http://hlsl7.law.harvard.edu/dev/annie/awesome/api/item/recently-awesome";
+$url = "http://librarycloud.org/awesome/";
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
