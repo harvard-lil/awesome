@@ -51,10 +51,10 @@ $(document).ready(function() {
           
           var url = "api/item";
       
-          /*$.post(url, {hollis_id: hollis, title: title, creator: creator, isbn: isbn, library: library}, function(data) {
+          $.post(url, {hollis_id: hollis, title: title, creator: creator, isbn: isbn, library: library}, function(data) {
               $('.alert-success').show();
               $('.added-title').html(title)
-          });*/
+          });
 
           $.post('api/services/tweet', {hollis_id: hollis, title: title, creator: creator, isbn: isbn});
 				}
