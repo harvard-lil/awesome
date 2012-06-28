@@ -18,7 +18,7 @@ $(document).ready(function() {
       }
       updateProgress();
     	var barcode = $('#barcode').val();
-    	$.getJSON('api/services/barcode-lookup/?barcode=' + barcode,
+    	$.getJSON('api/services/barcode-lookup', {barcode: barcode},
 			function (item) {
 			  $('.bar').css('width', '100%');
 			  $('.progress').hide();
@@ -51,11 +51,11 @@ $(document).ready(function() {
           
           var url = "api/item";
       
-          $.post(url, {hollis_id: hollis, title: title, creator: creator, isbn: isbn, library: library}, function(data) {
+          /*$.post(url, {hollis_id: hollis, title: title, creator: creator, isbn: isbn, library: library}, function(data) {
               $('.alert-success').show();
               $('.added-title').html(title)
-          });
-          
+          });*/
+
           $.post('api/services/tweet', {hollis_id: hollis, title: title, creator: creator, isbn: isbn});
 				}
 				else {
