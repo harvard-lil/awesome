@@ -170,7 +170,9 @@ nav.next-prev {
   clear:both;
 }
 	a.prev,
-	a.next{
+	a.next,
+	a.older,
+	a.newer{
 		display: block;
 		width: 15px;
 		height: 11px;
@@ -184,18 +186,18 @@ nav.next-prev {
 		height: 15px;
 		text-indent: -9999px;
 		}
-	a.prev {
+	a.prev, a.newer {
 		margin: 0 auto 5px auto;
 		background: transparent url('../images/scroll-arrow-up.png') 0 0 no-repeat;
 		}
-		a.prev:hover {
+		a.prev:hover, a.newer:hover {
 			background: transparent url('../images/scroll-arrow-up.png') 0 -11px no-repeat;
 			}
-	a.next {
+	a.next, a.older {
 		margin: 5px auto 0 auto;
 		background: transparent url('../images/scroll-arrow-down.png') -1px 0 no-repeat;
 		}
-		a.next:hover {
+		a.next:hover, a.older:hover {
 			background: transparent url('../images/scroll-arrow-down.png') -1px -11px no-repeat;
 			}
 	a.left {

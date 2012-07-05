@@ -106,8 +106,20 @@ class Item extends F3instance {
         // Match all items
         $request['query'] = array("match_all" => new stdClass);
         
+        // start parameter (elasticsearch calls this 'from')
+        $incoming_start = $this->get('GET.start');
+        if (!empty($incoming_start)) {
+            $request['from'] = $this->get('GET.start');
+        }
+        
         // limit parameter (elasticsearch calls this 'size')
         $request['size'] = 9;
+        
+        // limit parameter (elasticsearch calls this 'size')
+        $incoming_limit = $this->get('GET.limit');
+        if (!empty($incoming_limit)) {
+            $request['size'] = $this->get('GET.limit');
+        }
         
         // sort parameter
         $request['sort'] = array('last_modified' => array('order' => 'desc'));

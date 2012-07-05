@@ -9,6 +9,21 @@ $(document).ready(function() {
       $(".item-title").dotdotdot();
 	});
 	
+	$('.newer, .older').live('click', function(event) {
+		var start = $(this).attr('data-start');
+		if(start >= 0) {
+      $.get(recentUrl + '?start=' + start, function(data) {
+        var source = $("#items-template").html();
+        var template = Handlebars.compile(source);
+        $('#recent').html(template(data));
+        $(".item-title").dotdotdot();
+        $('.newer').attr('data-start', start*1 - 9);
+        $('.older').attr('data-start', start*1 + 9);
+      });
+	  }
+		event.preventDefault();
+	});
+	
 	var mostUrl = "api/item/most-awesome";
 	
 	$.get(mostUrl, function(data) {
