@@ -47,7 +47,9 @@ class Item extends F3instance {
         // TODO: We should allow for multiple filters.
         $key_and_val = explode(":", $this->get('GET.filter'));
         if (count($key_and_val) == 2 and !empty($key_and_val[0]) and !empty($key_and_val[1])) {
-            $request['query']['terms'] = array($key_and_val[0] => array($key_and_val[1]));
+            $request['query']['query_string']['fields'] = array($key_and_val[0]);
+            $request['query']['query_string']['query'] = $key_and_val[1];
+            $request['query']['query_string']['default_operator'] = 'AND';
         } else {
             $request['query'] = array("match_all" => new stdClass);
         }
