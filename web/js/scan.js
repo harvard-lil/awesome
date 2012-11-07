@@ -19,12 +19,13 @@ $(document).ready(function() {
       updateProgress();
     	var barcode = $('#barcode').val();
     	$.getJSON('api/services/barcode-lookup', {barcode: barcode},
+    	//$.getJSON('api/services/isbn-lookup', {barcode: barcode},
 			function (item) {
 			  $('.bar').css('width', '100%');
 			  $('.progress').hide();
 			  clearTimeout(timer);
 			  if(item) {
-          hollis = item.hollisId.substr(0, 9);
+          hollis = item.hollis;
           title = item.title;
           library = item.library;
           
@@ -37,12 +38,16 @@ $(document).ready(function() {
           if (isbn.indexOf(" ") != -1) {
             isbn = isbn.split(' ')[0];
           }
-          
-          if(item.authors.authorName) {
-            var authorName = item.authors.authorName;
-            if(authorName instanceof Array)
-              authorName = authorName[0];
-            creator = authorName.authorFirst.replace(/\.$/, "") + ' ' + authorName.authorLast;
+          if(item.creator) {
+            creator = item.creator;
+          }
+          else if(item.authors) {
+            if(item.authors.authorName) {
+              var authorName = item.authors.authorName;
+              if(authorName instanceof Array)
+                authorName = authorName[0];
+              creator = authorName.authorFirst.replace(/\.$/, "") + ' ' + authorName.authorLast;
+            }
           }
   
           $('#barcode').val('').focus();
@@ -59,7 +64,7 @@ $(document).ready(function() {
           $.post('api/services/tweet', {hollis_id: hollis, title: title, creator: creator, isbn: isbn});
 				}
 				else {
-				  $('.alert-error').text('The barcode lookup failed').fadeIn();;
+				  $('.alert-error').text('The barcode lookup failed').fadeIn();
 				}
 			});
 		return false;	

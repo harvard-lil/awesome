@@ -74,10 +74,12 @@ class Services extends F3instance {
         curl_close ($ch);
         
         $contents = json_decode($contents);
+
         $contents = $contents->rlistFormat->hollis;
-        
+
         // Get HOLLIS ID and grab the holding library
         $hollis = substr($contents->hollisId, 0, 9);
+        $contents->hollis = $hollis;
         $url = "http://hollis-coda.hul.harvard.edu/availability.ashx?hreciid=|library%2fm%2faleph|$hollis&output=xml";
 	
 				$ch = curl_init();
@@ -99,6 +101,53 @@ class Services extends F3instance {
         $contents = json_encode($contents);
         
         $this->set('contents', $contents);
+        
+        $path_to_template = 'api/templates/barcode_json.php';
+        echo $this->render($path_to_template);
+        
+        //print json_encode($contents);
+    }
+    
+    function isbn_lookup () {
+        // Given an isbn, get the item details
+        $isbn = $_REQUEST['barcode'];
+        $data = array();
+
+        $url = 'http://openlibrary.org/api/books?bibkeys=ISBN:' . $isbn . '&jscmd=data&format=json';
+
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, $url);
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+        $contents = curl_exec($ch);
+
+        curl_close ($ch);
+        
+        $contents = json_decode($contents, true);
+        $contents = $contents['ISBN:' . $isbn];
+        
+        //print_r($contents);
+        
+        $data['hollis'] = $contents['identifiers']['openlibrary'][0];
+        $data['isbn'] = '';
+        if(isset($contents['identifiers']['isbn_13']))
+          $data['isbn'] = $contents['identifiers']['isbn_13'];
+        if(isset($contents['identifiers']['isbn_10']))
+          $data['isbn'] = $contents['identifiers']['isbn_10'];
+        if(isset($contents['title']))
+          $data['title'] = $contents['title'];
+        if(isset($contents['authors'])) {
+          $data['creator'] = $contents['authors'][0]['name'];
+        }
+        $data['library'] = '';
+        
+        //print_r($data);
+        
+        $data = json_encode($data);
+        
+        $this->set('contents', $data);
         
         $path_to_template = 'api/templates/barcode_json.php';
         echo $this->render($path_to_template);
