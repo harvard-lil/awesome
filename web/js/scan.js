@@ -18,13 +18,13 @@ $(document).ready(function() {
       }
       updateProgress();
     	var barcode = $('#barcode').val();
-    	$.getJSON('api/services/barcode-lookup', {barcode: barcode},
-    	//$.getJSON('api/services/isbn-lookup', {barcode: barcode},
+    	//$.getJSON('api/services/barcode-lookup', {barcode: barcode},
+    	$.getJSON('api/services/isbn-lookup', {barcode: barcode},
 			function (item) {
 			  $('.bar').css('width', '100%');
 			  $('.progress').hide();
 			  clearTimeout(timer);
-			  if(item) {
+			  if(item && item.length > 0) {
           hollis = item.hollis;
           title = item.title;
           library = item.library;
@@ -66,6 +66,12 @@ $(document).ready(function() {
 				else {
 				  $('.alert-error').text('The barcode lookup failed').fadeIn();
 				}
+			})
+			.error(function() { 
+			  $('.alert-error').text('The barcode lookup failed').fadeIn(); 
+			  $('.bar').css('width', '100%');
+			  $('.progress').hide();
+			  clearTimeout(timer);
 			});
 		return false;	
 	});

@@ -58,6 +58,7 @@ class Services extends F3instance {
     function barcode_lookup () {
         // Given a barcode, get the item details
         $barcode = $_REQUEST['barcode'];
+        $empty = array();
 
         $url = 'http://webservices.lib.harvard.edu/rest/classic/barcode/cite/' . $barcode;
 
@@ -73,37 +74,45 @@ class Services extends F3instance {
 
         curl_close ($ch);
         
-        $contents = json_decode($contents);
-
-        $contents = $contents->rlistFormat->hollis;
-
-        // Get HOLLIS ID and grab the holding library
-        $hollis = substr($contents->hollisId, 0, 9);
-        $contents->hollis = $hollis;
-        $url = "http://hollis-coda.hul.harvard.edu/availability.ashx?hreciid=|library%2fm%2faleph|$hollis&output=xml";
-	
-				$ch = curl_init();
-
-				curl_setopt($ch, CURLOPT_URL, $url);
-
-				curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
-				$libraries = curl_exec ($ch);
-	
-				curl_close ($ch);
-	
-				$xml = simplexml_load_string($libraries);
-
-				$library = $xml->xpath("//xserverrawdata[@barcode='$barcode']/@sub-library");
-				$library = (string) $library[0]['sub-library'];
-
-				$contents->library = $library;
-        $contents = json_encode($contents);
+        if($contents) {
         
-        $this->set('contents', $contents);
-        
-        $path_to_template = 'api/templates/barcode_json.php';
-        echo $this->render($path_to_template);
+          $contents = json_decode($contents);
+  
+          $contents = $contents->rlistFormat->hollis;
+  
+          // Get HOLLIS ID and grab the holding library
+          $hollis = substr($contents->hollisId, 0, 9);
+          $contents->hollis = $hollis;
+          $url = "http://hollis-coda.hul.harvard.edu/availability.ashx?hreciid=|library%2fm%2faleph|$hollis&output=xml";
+    
+          $ch = curl_init();
+  
+          curl_setopt($ch, CURLOPT_URL, $url);
+  
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+  
+          $libraries = curl_exec ($ch);
+    
+          curl_close ($ch);
+          
+          if($libraries) {
+    
+            $xml = simplexml_load_string($libraries);
+    
+            $library = $xml->xpath("//xserverrawdata[@barcode='$barcode']/@sub-library");
+            $library = (string) $library[0]['sub-library'];
+    
+            $contents->library = $library;
+            $contents = json_encode($contents);
+            
+            $this->set('contents', $contents);
+            
+            $path_to_template = 'api/templates/barcode_json.php';
+            echo $this->render($path_to_template);
+          }
+          else $this->no_results();
+        }
+        else $this->no_results();
         
         //print json_encode($contents);
     }
@@ -126,33 +135,48 @@ class Services extends F3instance {
         curl_close ($ch);
         
         $contents = json_decode($contents, true);
-        $contents = $contents['ISBN:' . $isbn];
         
-        //print_r($contents);
+        if($contents && $contents['ISBN:' . $isbn]) {
         
-        $data['hollis'] = $contents['identifiers']['openlibrary'][0];
-        $data['isbn'] = '';
-        if(isset($contents['identifiers']['isbn_13']))
-          $data['isbn'] = $contents['identifiers']['isbn_13'];
-        if(isset($contents['identifiers']['isbn_10']))
-          $data['isbn'] = $contents['identifiers']['isbn_10'];
-        if(isset($contents['title']))
-          $data['title'] = $contents['title'];
-        if(isset($contents['authors'])) {
-          $data['creator'] = $contents['authors'][0]['name'];
+          $contents = $contents['ISBN:' . $isbn];
+          
+          //print_r($contents);
+          
+          $data['hollis'] = $contents['identifiers']['openlibrary'][0];
+          $data['isbn'] = '';
+          if(isset($contents['identifiers']['isbn_13']))
+            $data['isbn'] = $contents['identifiers']['isbn_13'];
+          if(isset($contents['identifiers']['isbn_10']))
+            $data['isbn'] = $contents['identifiers']['isbn_10'];
+          if(isset($contents['title']))
+            $data['title'] = $contents['title'];
+          if(isset($contents['authors'])) {
+            $data['creator'] = $contents['authors'][0]['name'];
+          }
+          $data['library'] = '';
+          
+          //print_r($data);
+          
+          $data = json_encode($data);
+          
+          $this->set('contents', $data);
+          
+          $path_to_template = 'api/templates/barcode_json.php';
+          echo $this->render($path_to_template);
         }
-        $data['library'] = '';
-        
-        //print_r($data);
-        
-        $data = json_encode($data);
-        
-        $this->set('contents', $data);
-        
-        $path_to_template = 'api/templates/barcode_json.php';
-        echo $this->render($path_to_template);
+        else $this->no_results();
         
         //print json_encode($contents);
+    }
+    
+    function no_results() {
+      $empty = array();
+      $contents = json_encode($empty);
+            
+      $this->set('contents', $contents);
+            
+      $path_to_template = 'api/templates/barcode_json.php';
+      echo $this->render($path_to_template);
     }
 }
 ?>
