@@ -18,13 +18,13 @@ $(document).ready(function() {
       }
       updateProgress();
     	var barcode = $('#barcode').val();
-    	//$.getJSON('api/services/barcode-lookup', {barcode: barcode},
-    	$.getJSON('api/services/isbn-lookup', {barcode: barcode},
+    	$.getJSON('api/services/barcode-lookup', {barcode: barcode},
+    	//$.getJSON('api/services/isbn-lookup', {barcode: barcode},
 			function (item) {
 			  $('.bar').css('width', '100%');
 			  $('.progress').hide();
 			  clearTimeout(timer);
-			  if(item && item.length > 0) {
+			  if(item && item.hollis) {
           hollis = item.hollis;
           title = item.title;
           library = item.library;
@@ -46,7 +46,10 @@ $(document).ready(function() {
               var authorName = item.authors.authorName;
               if(authorName instanceof Array)
                 authorName = authorName[0];
-              creator = authorName.authorFirst.replace(/\.$/, "") + ' ' + authorName.authorLast;
+              if(authorName.authorFirst.length > 0)
+                creator = authorName.authorFirst.replace(/\.$/, "") + ' ' + authorName.authorLast;
+              else
+                creator = authorName.authorLast;
             }
           }
   
@@ -56,7 +59,7 @@ $(document).ready(function() {
           
           var url = "api/item";
       
-          $.post(url, {hollis_id: hollis, title: title, creator: creator, isbn: isbn, library: library}, function(data) {
+          $.post(url, {hollis_id: hollis, title: title, creator: creator, isbn: isbn, library: library, format: item.format}, function(data) {
               $('.alert-success').show();
               $('.added-title').html(title)
           });
@@ -64,11 +67,12 @@ $(document).ready(function() {
           $.post('api/services/tweet', {hollis_id: hollis, title: title, creator: creator, isbn: isbn});
 				}
 				else {
-				  $('.alert-error').text('The barcode lookup failed').fadeIn();
+				console.log(item);
+				  $('.alert-error').text('The barcode lookup failed - no data').fadeIn();
 				}
 			})
 			.error(function() { 
-			  $('.alert-error').text('The barcode lookup failed').fadeIn(); 
+			  $('.alert-error').text('The barcode lookup failed - cannot connect').fadeIn(); 
 			  $('.bar').css('width', '100%');
 			  $('.progress').hide();
 			  clearTimeout(timer);

@@ -79,9 +79,32 @@ class Services extends F3instance {
           $contents = json_decode($contents);
   
           $contents = $contents->rlistFormat->hollis;
-  
+          
           // Get HOLLIS ID and grab the holding library
           $hollis = substr($contents->hollisId, 0, 9);
+          
+          $format_url = "http://librarylab.law.harvard.edu/platform/v0.03/api/item/?filter=id_inst:$hollis";
+          
+          $ch = curl_init();
+  
+          curl_setopt($ch, CURLOPT_URL, $format_url);
+  
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+  
+          $format = curl_exec ($ch);
+          
+          $format = json_decode($format, true);
+          
+          $contents->format = '';
+          if(count($format['docs']) > 0) {
+            $format = $format['docs'][0]['format'];
+            $format = str_replace('/', '', $format);
+            $format = str_replace(' ', '', $format);
+            $contents->format = strtolower($format);
+          }
+    
+          curl_close ($ch);
+  
           $contents->hollis = $hollis;
           $url = "http://hollis-coda.hul.harvard.edu/availability.ashx?hreciid=|library%2fm%2faleph|$hollis&output=xml";
     
@@ -154,6 +177,7 @@ class Services extends F3instance {
             $data['creator'] = $contents['authors'][0]['name'];
           }
           $data['library'] = '';
+          $data['format'] = 'book';
           
           //print_r($data);
           
