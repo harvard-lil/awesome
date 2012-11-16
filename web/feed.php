@@ -9,7 +9,7 @@ echo "<" . "?" . "xml version=\"1.0\" encoding=\"ISO-8859-1\"" . "?" . ">";
 <rss version="2.0"><channel>
 
 <title>Recently Awesome at the Harvard Library</title>
-<link>http://librarycloud.org/awesome</link>
+<link>http://librarylab.law.harvard.edu/awesome</link>
 <description>Keep up with the latest awesome items at the Harvard Library</description>
 
 <language>en-gb</language>
