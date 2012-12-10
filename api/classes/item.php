@@ -219,6 +219,10 @@ class Item extends F3instance {
         if(!empty($incoming_format)) {
              $new_item['format'] = $incoming_format;
         }
+        $incoming_poster = $this->get('POST.poster');
+        if(!empty($incoming_poster)) {
+             $new_item['poster'] = $incoming_poster;
+        }
         
         // This helps us get the recently awesome
         $now = time();
@@ -413,6 +417,9 @@ class Item extends F3instance {
                 }
                 if (!empty($result['_source']['format'])) {
                     $doc['format'] = $result['_source']['format'];
+                }
+                if (!empty($result['_source']['poster'])) {
+                    $doc['poster'] = $result['_source']['poster'];
                 }
                 if (!empty($result['_source']['hollis_id'])) {
                     $doc['hollis_id'] = $result['_source']['hollis_id'];

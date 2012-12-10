@@ -1,10 +1,17 @@
 $(document).ready(function() {
-		
+	
 	var recentUrl = "api/item/recently-awesome";
 		
 	$.get(recentUrl, function(data) {
+	  /*$.each(data.docs, function(key, value) { 
+      if(value.format == 'videofilm') {       $.get('http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=dte98e86zfhyvryb8r8epcp3&q=Toy+Story&page_limit=1&callback=?', function(data) {
+        console.log(data.movies[0].posters.profile);
+	        value.poster = data.movies[0].title;
+	      });
+      }
+    });*/
     	var source = $("#items-template").html();
-		  var template = Handlebars.compile(source);
+		  var template = Handlebars.compile(source);console.log(data);
       $('#recent').html(template(data));
       $(".item-title").dotdotdot();
 	});

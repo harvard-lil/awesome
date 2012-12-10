@@ -59,7 +59,7 @@ $(document).ready(function() {
           
           var url = "api/item";
       
-          $.post(url, {hollis_id: hollis, title: title, creator: creator, isbn: isbn, library: library, format: item.format}, function(data) {
+          $.post(url, {hollis_id: hollis, title: title, creator: creator, isbn: isbn, library: library, format: item.format, poster: item.poster}, function(data) {
               $('.alert-success').show();
               $('.added-title').html(title)
           });

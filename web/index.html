@@ -116,6 +116,8 @@
 					<p>Funded by the <a href="http://osc.hul.harvard.edu/liblab">Library Lab</a>, the Awesome Box allows the community to see what others have found helpful, entertaining, or mind-blowing.</p>
 					<br />
 					<p class="small">Contact us at <a href="mailto:lil@law.harvard.edu">lil@law.harvard.edu</a>
+					</p>
+					<p class="small">Movie images provided by <a href="http://www.flixster.com/">Flixster</a></p>
 					<nav class="next-prev">
 						<!--<a class="prev search" href="#search">Prev</a>-->
 					</nav>
@@ -165,7 +167,11 @@
         {{#docs}}
           <li class="item">
             <a href="http://hollis.harvard.edu/?itemid=|library/m/aleph|{{hollis_id}}" target="_blank" style="display:none;">{{title}}</a>
+            {{#if poster}}
+            <img class="item-cover" src="{{poster}}" alt="{{title}}" />
+            {{else}}
             <img class="item-cover" src="http://covers.openlibrary.org/b/isbn/{{isbn}}-M.jpg" alt="{{title}}" />
+            {{/if}}
             <div class="item-details">
               <span class="item-title">
                 {{title}}

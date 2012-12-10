@@ -104,6 +104,30 @@ class Services extends F3instance {
           }
     
           curl_close ($ch);
+          
+          $contents->poster = '';
+          if($contents->format == 'videofilm') {
+          
+            $title = urlencode($contents->title);
+            $poster_url = "http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=dte98e86zfhyvryb8r8epcp3&q=$title&page_limit=1";
+            
+            $ch = curl_init();
+    
+            curl_setopt($ch, CURLOPT_URL, $poster_url);
+    
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    
+            $poster = curl_exec ($ch);
+            
+            $poster = json_decode($poster, true);
+            
+            if(count($poster['movies']) > 0) {
+              $poster = (string) $poster['movies'][0]['posters']['profile'];
+              $contents->poster = $poster;
+            }
+      
+            curl_close ($ch);
+          }
   
           $contents->hollis = $hollis;
           $url = "http://hollis-coda.hul.harvard.edu/availability.ashx?hreciid=|library%2fm%2faleph|$hollis&output=xml";
@@ -178,6 +202,7 @@ class Services extends F3instance {
           }
           $data['library'] = '';
           $data['format'] = 'book';
+          $data['poster'] = '';
           
           //print_r($data);
           
