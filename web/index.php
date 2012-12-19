@@ -22,6 +22,7 @@
     <script src="js/awesome.js"></script>
 		<script src="http://use.typekit.com/vpi8egr.js"></script>
     <script >try{Typekit.load();}catch(e){}</script>
+
 	</head>
 
 	<body>

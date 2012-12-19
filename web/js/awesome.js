@@ -118,7 +118,7 @@ function showResults(data){
     btnPrev: ".left",
     speed: 600,
     circular: false,
-    scroll: 3
+    visible: 3
   });
 }
 
