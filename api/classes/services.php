@@ -82,6 +82,13 @@ class Services extends F3instance {
           
           // Get HOLLIS ID and grab the holding library
           $hollis = substr($contents->hollisId, 0, 9);
+          $hollis_length = strlen($hollis);
+          if($hollis_length < 9) {
+            $loop = 9 - $hollis_length;
+            for($j=0; $j<$loop; $j++){
+              $hollis = '0'.$hollis;
+            }
+          }
           
           $format_url = "http://librarylab.law.harvard.edu/platform/v0.03/api/item/?filter=id_inst:$hollis";
           
@@ -132,7 +139,7 @@ class Services extends F3instance {
           $contents->barcode = $barcode;
           $contents->hollis = $hollis;
           $url = "http://hollis-coda.hul.harvard.edu/availability.ashx?hreciid=|library%2fm%2faleph|$hollis&output=xml";
-    
+
           $ch = curl_init();
   
           curl_setopt($ch, CURLOPT_URL, $url);
@@ -142,12 +149,12 @@ class Services extends F3instance {
           $libraries = curl_exec ($ch);
     
           curl_close ($ch);
-          
+
           if($libraries) {
     
             $xml = simplexml_load_string($libraries);
     
-            $library = $xml->xpath("//xserverrawdata[@barcode='$barcode']/@sub-library");
+            $library = $xml->xpath("//xserverrawdata[@barcode='$barcode']/@sub-library"); 
             $library = (string) $library[0]['sub-library'];
     
             $contents->library = $library;
