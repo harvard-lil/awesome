@@ -20,6 +20,7 @@ $(document).ready(function() {
     	var barcode = $('#barcode').val();
     	$.getJSON('api/services/barcode-lookup', {barcode: barcode},
     	//$.getJSON('api/services/isbn-lookup', {barcode: barcode},
+    	//$.getJSON('api/services/wc-lookup', {barcode: barcode},
 			function (item) {
 			  $('.bar').css('width', '100%');
 			  $('.progress').hide();

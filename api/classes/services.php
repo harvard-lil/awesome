@@ -129,6 +129,7 @@ class Services extends F3instance {
             curl_close ($ch);
           }
   
+          $contents->barcode = $barcode;
           $contents->hollis = $hollis;
           $url = "http://hollis-coda.hul.harvard.edu/availability.ashx?hreciid=|library%2fm%2faleph|$hollis&output=xml";
     
@@ -168,6 +169,7 @@ class Services extends F3instance {
         // Given an isbn, get the item details
         $isbn = $_REQUEST['barcode'];
         $data = array();
+        $data['barcode'] = $isbn;
 
         $url = 'http://openlibrary.org/api/books?bibkeys=ISBN:' . $isbn . '&jscmd=data&format=json';
 
@@ -216,6 +218,70 @@ class Services extends F3instance {
         else $this->no_results();
         
         //print json_encode($contents);
+    }
+    
+    function wc_lookup () {
+        // Given an isbn, get the item details
+        $barcode = $_REQUEST['barcode'];
+        $data = array();
+        $data['barcode'] = $barcode;
+        $worldcat_key = $this->get('WORLDCAT_KEY');
+        
+        $url = "http://www.worldcat.org/webservices/catalog/search/sru?query=srw.sn%3D%22$barcode&wskey=$worldcat_key&servicelevel=full";
+        
+        //echo $url;
+
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, $url);
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+        $contents = curl_exec($ch);
+
+        curl_close ($ch);
+        
+        $pxml = new SimpleXMLElement($contents);
+        $pxml = $pxml->records->record;
+        
+        $data['isbn'] = '';
+        $data['creator'] = '';
+        $data['library'] = '';
+        $data['format'] = 'book';
+        $data['poster'] = '';
+        
+        $tag245 = $pxml->xpath("//*[@tag='245']");
+        $title = $tag245[0]->subfield[0];
+        $data['title'] = (string) $title;
+        
+        $tag001 = $pxml->xpath("//*[@tag='001']");
+        $data['hollis'] = "WC" . (string) $tag001[0];
+        
+        $tag300 = $pxml->xpath("//*[@tag='300']");
+        
+        foreach($tag300[0]->subfield as $format) {
+          if (strpos($format,'videodisc') !== false) {
+            $data['format'] = 'videofilm';
+          }
+          if (strpos($format,'sound disc') !== false) {
+            $data['format'] = 'soundrecording';
+          }
+        }
+        
+        $tag020 = $pxml->xpath("//*[@tag='020']");
+        if($tag020) {
+          $isbn = (string) $tag020[0]->subfield[0];
+          $isbn = explode(" ", $isbn);
+          $isbn = $isbn[0];
+          $data['isbn'] = $isbn;
+        }
+          
+        $data = json_encode($data);
+          
+        $this->set('contents', $data);
+          
+        $path_to_template = 'api/templates/barcode_json.php';
+        echo $this->render($path_to_template);
     }
     
     function no_results() {

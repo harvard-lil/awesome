@@ -25,6 +25,7 @@ $f3->route('GET /api/item/recently-awesome', 'Item->recently_awesome');
 $f3->route('POST /api/services/tweet', 'Services->tweet_new_item');
 $f3->route('GET /api/services/barcode-lookup', 'Services->barcode_lookup');
 $f3->route('GET /api/services/isbn-lookup', 'Services->isbn_lookup');
+$f3->route('GET /api/services/wc-lookup', 'Services->wc_lookup');
 
 // Web business
 $f3->route('GET /', 'web/index.html');
