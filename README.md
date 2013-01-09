@@ -6,9 +6,13 @@ This git repository contains the webapp used to receive and share things that ha
 
 ## Installation
 
-### Twitter and bitly
+### Twitter, bitly, and WorldCat accounts
 
-The Awesome Box tweets items that have been awesomed. You'll need to sign up for a [Twitter](http://twitter.com) account and a [bitly](https://bitly.com/) account. We'll come back to Twitter and bitly when we're configuring the Awesome Box installation.
+The Awesome Box tweets items that have been awesomed. You'll need to sign up for a [Twitter](http://twitter.com) account and a [bitly](https://bitly.com/) account.
+
+The Awesome Box uses to the [WorldCat API](http://oclc.org/developer/documentation/worldcat-basic-api/using-api) to retrieve metadata from barcodes. Sign up for a [WorldCat API key](http://oclc.org/developer/documentation/worldcat-basic-api/using-api).
+
+We'll come back to Twitter, bitly, and WorldCat when we're configuring the Awesome Box installation.
 
 ### elasticsearch
 
@@ -26,7 +30,7 @@ Serving up ShelfLife in [Apache](http://httpd.apache.org/) is probably the easie
 
 ### Getting the source
 
-Head on over to your web document root (in my Apache instance, I use /var/www/html) and use the git clone command to get the latest version of ShelfLife:
+Head on over to your web document root (in our Apache instance, we use /var/www/html) and use the git clone command to get the latest version of ShelfLife:
 
     cd /var/www/html
     git clone https://github.com/harvard-lil/awesome.git
@@ -39,6 +43,13 @@ You should now have Awesome Box installed. Let's configure it.
     cp master.cfg.example to master.cfg
 
 Edit the master.cfg config file with the keys and paths that we've created in the instructions above.
+
+### Setup .htaccess
+
+We use a .htaccess to route requests in the Awesome Box interface. An example is supplied, just copy it.
+
+    cd /var/www/html/awesome/
+    cp .htaccess.example .htaccess
 
 ### Success
 

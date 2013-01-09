@@ -1,3 +1,7 @@
+<?php
+    require_once('../etc/master.cfg');
+?>
+
 <!DOCTYPE html>
 
 <html>
@@ -19,10 +23,9 @@
 		<script src="js/jcarousellite.min.js"></script>
 		<script src="js/jquery.dotdotdot-1.4.0-packed.js"></script>
 		<script src="js/handlebars.js"></script>
-    <script src="js/awesome.js"></script>
+        <script src="js/awesome.js"></script>
 		<script src="http://use.typekit.com/vpi8egr.js"></script>
-    <script >try{Typekit.load();}catch(e){}</script>
-
+        <script >try{Typekit.load();}catch(e){}</script>
 	</head>
 
 	<body>
@@ -167,7 +170,7 @@
       <ul> 
         {{#docs}}
           <li class="item">
-            <a href="http://hollis.harvard.edu/?itemid=|library/m/aleph|{{hollis_id}}" target="_blank" style="display:none;">{{title}}</a>
+            <a href="<?php echo $CATALOG_LINK?>{{hollis_id}}" target="_blank" style="display:none;">{{title}}</a>
             {{#if poster}}
             <img class="item-cover" src="{{poster}}" alt="{{title}}" />
             {{else}}
