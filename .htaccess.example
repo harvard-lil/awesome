@@ -6,7 +6,7 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.+)/$ http://example.org/awesome/$1 [R=301,L]
 
 RewriteRule ^api index.php [L,QSA]
-RewriteRule ^scan web/scan.html [L,QSA]
+RewriteRule ^scan web/scan.php [L,QSA]
 RewriteRule ^widget.html web/widget.html [L,QSA]
 RewriteRule ^widget.php web/widget.php [L,QSA]
 RewriteRule ^feed web/feed.php [L,QSA]

@@ -18,7 +18,7 @@ $(document).ready(function() {
       }
       updateProgress();
     	var barcode = $('#barcode').val();
-    	$.getJSON('api/services/barcode-lookup', {barcode: barcode},
+    	$.getJSON('api/services/' + barcode_method + '-lookup', {barcode: barcode},
     	//$.getJSON('api/services/isbn-lookup', {barcode: barcode},
     	//$.getJSON('api/services/wc-lookup', {barcode: barcode},
 			function (item) {

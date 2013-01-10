@@ -14,7 +14,7 @@ class Services extends F3instance {
 
         $content = $connection->get('account/verify_credentials');
 
-        $hollis_link = 'http://discovery.lib.harvard.edu/?itemid=|library/m/aleph|'.$hollis_id;
+        $hollis_link = $this->get('CATALOG_URL') . $hollis_id;
          /* make a URL small */
         $format = 'xml';
         $version = '2.0.1';

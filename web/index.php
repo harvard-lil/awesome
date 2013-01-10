@@ -37,8 +37,8 @@
 			    <a href="feed.php" target="_blank">
             <img src="images/rss.png" class="rssIcon" alt="Awesome RSS" />
           </a> 
-          <a href="http://twitter.com/#!/HLAwesome" target="_blank">
-            <img src="images/twitter.png" class="twitterIcon" alt="Follow HLAwesome on Twitter" />
+          <a href="http://twitter.com/#!/<?php echo $master_config["TWITTER_USERNAME"]; ?>" target="_blank">
+            <img src="images/twitter.png" class="twitterIcon" alt="Follow <?php echo $master_config["TWITTER_USERNAME"]; ?> on Twitter" />
           </a>
         </span>
 				<h1>Awesome at the Harvard Library</h1>

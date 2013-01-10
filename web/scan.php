@@ -1,3 +1,7 @@
+<?php
+    $master_config = parse_ini_file("../etc/master.ini");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,7 +45,9 @@ h1 {
   width:10%;
 }
 </style>
-
+<script type="text/javascript">
+var barcode_method = "<?php echo $master_config["BARCODE_METHOD"]; ?>";
+</script>
 <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
 <script type="text/javascript" src="js/scan.js">
 </script>
