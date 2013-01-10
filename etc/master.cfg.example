@@ -8,5 +8,5 @@ TWITTER_OAUTH_TOKEN = topsecretinfogoeshere
 TWITTER_OAUTH_SECRET = topsecretinfogoeshere
 BITLY_KEY = topsecretinfogoeshere
 WORLDCAT_KEY = topsecretinfogoeshere
-GOOGLE_ANALYTICS = topsecretinfogoeshere
-CATALOG_URL = http://linktocatalogmachine.org/everythingbeforetheisbn
+GOOGLE_ANALYTICS = "UA-XXXXX-X"
+CATALOG_URL = "http://linktocatalogmachine.org/everythingbeforetheisbn"
