@@ -12,7 +12,9 @@ The Awesome Box tweets items that have been awesomed. You'll need to sign up for
 
 The Awesome Box uses to the [WorldCat API](http://oclc.org/developer/documentation/worldcat-basic-api/using-api) to retrieve metadata from barcodes. Sign up for a [WorldCat API key](http://oclc.org/developer/documentation/worldcat-basic-api/using-api).
 
-We'll come back to Twitter, bitly, and WorldCat when we're configuring the Awesome Box installation.
+The Awesome Box tracks visits to the site using [Google Analytics](http://www.google.com/analytics/). Sign up for a [Google Analytics](http://www.google.com/analytics/) account
+
+We'll come back to [Twitter](http://twitter.com), [bitly](https://bitly.com/), [WorldCat API](http://oclc.org/developer/documentation/worldcat-basic-api/using-api), [Google Analytics](http://www.google.com/analytics/) when we're configuring the Awesome Box installation.
 
 ### elasticsearch
 

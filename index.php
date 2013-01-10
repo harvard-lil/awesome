@@ -7,7 +7,7 @@ $f3 = require_once dirname(__FILE__) . '/lib/f3/base.php';
 $f3->set('DEBUG',3);
 
 // Load our config file
-$f3->config(dirname(__FILE__) . '/etc/master.cfg');
+$f3->config(dirname(__FILE__) . '/etc/master.ini');
 
 // Let F3 load our other things
 $autoload_path = "{$f3->get('AWESOME_HOME')}/api/classes/; {$f3->get('AWESOME_HOME')}/lib/;";

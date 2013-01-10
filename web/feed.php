@@ -1,5 +1,7 @@
 <?php
 
+$master_config = parse_ini_file("../etc/master.ini");
+
 
 header('Content-type: text/xml'); 
 echo "<" . "?" . "xml version=\"1.0\" encoding=\"ISO-8859-1\"" . "?" . ">";
@@ -34,11 +36,11 @@ $data = $data[docs];
 //print_r($data);
 		   
 foreach($data as $item) {
-	echo"<item><title>".$item['title']."</title>";
-	echo"<link>http://hollis.harvard.edu/?itemid=|library/m/aleph|".$item['hollis_id']."</link>";
-    echo"<description>&lt;img src=\"http://covers.openlibrary.org/b/isbn/".$item['isbn']."-M.jpg\" /&gt;&lt;p/&gt;".$item['title']." by ".$item['creator']."&lt;/p/&gt;</description>";
+	echo "<item><title>".$item['title']."</title>";
+	echo "<link>".$master_config['CATALOG_URL'].$item['hollis_id']."</link>";
+    echo "<description>&lt;img src=\"http://covers.openlibrary.org/b/isbn/".$item['isbn']."-M.jpg\" /&gt;&lt;p/&gt;".$item['title']." by ".$item['creator']."&lt;/p/&gt;</description>";
     
-    echo"<pubDate></pubDate></item>";
+    echo "<pubDate></pubDate></item>";
 }
 
 ?>

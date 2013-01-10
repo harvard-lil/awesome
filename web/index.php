@@ -1,5 +1,5 @@
 <?php
-    require_once('../etc/master.cfg');
+    $master_config = parse_ini_file("../etc/master.ini");
 ?>
 
 <!DOCTYPE html>
@@ -170,7 +170,7 @@
       <ul> 
         {{#docs}}
           <li class="item">
-            <a href="<?php echo $CATALOG_LINK?>{{hollis_id}}" target="_blank" style="display:none;">{{title}}</a>
+            <a href="<?php echo $master_config["CATALOG_URL"];?>{{hollis_id}}" target="_blank" style="display:none;">{{title}}</a>
             {{#if poster}}
             <img class="item-cover" src="{{poster}}" alt="{{title}}" />
             {{else}}
