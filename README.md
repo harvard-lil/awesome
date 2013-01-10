@@ -42,7 +42,7 @@ Head on over to your web document root (in our Apache instance, we use /var/www/
 You should now have Awesome Box installed. Let's configure it.
 
     cd /var/www/html/awesome/etc
-    cp master.cfg.example to master.cfg
+    cp master.ini.example to master.ini
 
 Edit the master.cfg config file with the keys and paths that we've created in the instructions above.
 
