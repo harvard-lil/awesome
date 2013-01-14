@@ -26,6 +26,11 @@ $(document).ready(function() {
 			  $('.progress').hide();
 			  clearTimeout(timer);
 			  if(item && item.hollis) {
+			    title = '',
+          creator = '',
+          hollis = '',
+          isbn = '',
+          library = '';
           hollis = item.hollis;
           title = item.title;
           library = item.library;

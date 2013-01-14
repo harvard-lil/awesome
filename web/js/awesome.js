@@ -11,7 +11,7 @@ $(document).ready(function() {
       }
     });*/
     	var source = $("#items-template").html();
-		  var template = Handlebars.compile(source);console.log(data);
+		  var template = Handlebars.compile(source);
       $('#recent').html(template(data));
       $(".item-title").dotdotdot();
 	});

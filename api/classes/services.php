@@ -43,7 +43,7 @@ class Services extends F3instance {
         $message = $title;
         //$creator_pieces = explode(",", $creator);
         //$creator = $creator_pieces[1]." ".$creator_pieces[0];
-        if($creator!= ' ')
+        if($creator!= ' ' && $creator != '')
         	$message.= " by $creator";
         $message = mb_substr($message, 0, 119);
 
