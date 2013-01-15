@@ -41,12 +41,19 @@ h1 {
 
 #scanning_library {
 	border: solid 1px #bee620;
-	font-size:24px;
+	font-size:18px;
 	width:125px;
 	padding:0px;
-	margin-top:25px;
-	height:35px;
+	height:28px;
 }
+
+#scanned_at {
+  margin: 25px auto 0;
+  font-size:14px;
+  width:205px;
+  padding-left:375px;
+}
+
 .added-title {
   margin-left:8px;
 }
@@ -66,15 +73,6 @@ var barcode_method = "<?php echo $master_config["BARCODE_METHOD"]; ?>";
 <div id="innerlay">
 	<h1>Awesome Box Barcode Scan</h1>
 	<form id="lookup">
-    <select id="scanning_library">
-      <?php 
-        foreach($master_config['LIBRARIES'] as $code => $library) {
-          if($scanning_library == $code) $selected = 'selected';
-          else $selected = '';
-          echo "<option value='$code' $selected>$library</option>";
-        }
-      ?>
-    </select>
     <input type="text" id="barcode" />
     <input type="submit" value="submit" id="submit" style="display:none;" />
   </form>
@@ -87,5 +85,17 @@ var barcode_method = "<?php echo $master_config["BARCODE_METHOD"]; ?>";
     <span class="label label-success"><i class="icon-ok-sign icon-white"></i> Added</span> <span class="added-title">
   </div>
 </div>
+<div id="scanned_at">
+    Scanned at 
+    <select id="scanning_library">
+      <?php 
+        foreach($master_config['LIBRARIES'] as $code => $library) {
+          if($scanning_library == $code) $selected = 'selected';
+          else $selected = '';
+          echo "<option value='$code' $selected>$library</option>";
+        }
+      ?>
+    </select>
+    </div>
 </body>
 </html>
