@@ -18,9 +18,8 @@ $(document).ready(function() {
       }
       updateProgress();
     	var barcode = $('#barcode').val();
+    	var scanned_at = $('#scanning_library').val();
     	$.getJSON('api/services/' + barcode_method + '-lookup', {barcode: barcode},
-    	//$.getJSON('api/services/isbn-lookup', {barcode: barcode},
-    	//$.getJSON('api/services/wc-lookup', {barcode: barcode},
 			function (item) {
 			  $('.bar').css('width', '100%');
 			  $('.progress').hide();
@@ -65,7 +64,7 @@ $(document).ready(function() {
           
           var url = "api/item";
       
-          $.post(url, {hollis_id: hollis, title: title, creator: creator, isbn: isbn, library: library, format: item.format, poster: item.poster}, function(data) {
+          $.post(url, {hollis_id: hollis, title: title, creator: creator, isbn: isbn, library: library, format: item.format, poster: item.poster, scanning_library: scanned_at}, function(data) {
               $('.alert-success').show();
               $('.added-title').html(title)
           });
@@ -73,7 +72,6 @@ $(document).ready(function() {
           $.post('api/services/tweet', {hollis_id: hollis, title: title, creator: creator, isbn: isbn});
 				}
 				else {
-				console.log(item);
 				  $('.alert-error').text('The barcode lookup failed - no data').fadeIn();
 				}
 			})

@@ -12,3 +12,6 @@ WORLDCAT_KEY = topsecretinfogoeshere
 GOOGLE_ANALYTICS = "UA-XXXXX-X"
 CATALOG_URL = "http://linktocatalogmachine.org/everythingbeforetheisbn"
 BARCODE_METHOD = "wc"
+LIBRARIES["lib1"] = "Main Library"
+LIBRARIES["lib2"] = "Branch One"
+LIBRARIES["lib3"] = "Branch Two"

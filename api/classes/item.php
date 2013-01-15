@@ -223,6 +223,10 @@ class Item extends F3instance {
         if(!empty($incoming_poster)) {
              $new_item['poster'] = $incoming_poster;
         }
+        $incoming_scanning_library = $this->get('POST.scanning_library');
+        if(!empty($incoming_scanning_library)) {
+             $new_item['scanning_library'] = $incoming_scanning_library;
+        }
         
         // This helps us get the recently awesome
         $now = time();
@@ -420,6 +424,9 @@ class Item extends F3instance {
                 }
                 if (!empty($result['_source']['poster'])) {
                     $doc['poster'] = $result['_source']['poster'];
+                }
+                if (!empty($result['_source']['scanning_library'])) {
+                    $doc['scanning_library'] = $result['_source']['scanning_library'];
                 }
                 if (!empty($result['_source']['hollis_id'])) {
                     $doc['hollis_id'] = $result['_source']['hollis_id'];

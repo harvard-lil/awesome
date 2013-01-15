@@ -1,5 +1,6 @@
 <?php
     $master_config = parse_ini_file("../etc/master.ini");
+    $scanning_library = $_REQUEST['library'];
 ?>
 
 <!DOCTYPE html>
@@ -37,6 +38,15 @@ h1 {
 	padding:10px;
 	margin-top:25px;
 }
+
+#scanning_library {
+	border: solid 1px #bee620;
+	font-size:24px;
+	width:125px;
+	padding:0px;
+	margin-top:25px;
+	height:35px;
+}
 .added-title {
   margin-left:8px;
 }
@@ -56,6 +66,15 @@ var barcode_method = "<?php echo $master_config["BARCODE_METHOD"]; ?>";
 <div id="innerlay">
 	<h1>Awesome Box Barcode Scan</h1>
 	<form id="lookup">
+    <select id="scanning_library">
+      <?php 
+        foreach($master_config['LIBRARIES'] as $code => $library) {
+          if($scanning_library == $code) $selected = 'selected';
+          else $selected = '';
+          echo "<option value='$code' $selected>$library</option>";
+        }
+      ?>
+    </select>
     <input type="text" id="barcode" />
     <input type="submit" value="submit" id="submit" style="display:none;" />
   </form>
