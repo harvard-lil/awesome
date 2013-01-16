@@ -74,8 +74,8 @@
           <div id="recent"></div>
   
 					<nav class="next-prev">
-					  <a class="newer" data-start="0">Prev</a>
-						<a class="older" data-start="9">Next</a>
+					  <a class="newer" data-start="0" alt="Prev">Prev</a>
+						<a class="older" data-start="9" alt="Next">Next</a>
 						<!--<a class="next most-awesome" href="#most-awesome">Next</a>-->
 					</nav>
 				</article>

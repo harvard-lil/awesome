@@ -124,28 +124,28 @@ p {
 nav#primary {
 	z-index: 5;
 	position: fixed;
-	top: 50%;
+	top: 30%;
 	right: 16px;
 	margin-top: -40px;
 }
 nav#primary li {
 	position: relative;
-	height: 20px;
+	height: 40px;
 }
 nav#primary a {
 	display: block;
-	width: 20px;
-	height: 20px;
+	width: 40px;
+	height: 40px;
 	text-indent: -9999px;
 	background: transparent url('../images/nav-dot.png') 4px 4px no-repeat;
 }
 nav#primary a:hover, nav#primary a.active {
-	background: transparent url('../images/nav-dot.png') 4px -16px no-repeat;
+	background: transparent url('../images/nav-dot.png') 4px -32px no-repeat;
 }
 nav#primary h1 {
 	position: absolute;
-	right: 22px;
-	top: -7px;
+	right: 38px;
+	top: 7px;
 	display: none;
 	padding: 4px 20px 4px 7px;;
 	color: #fff;
@@ -174,16 +174,16 @@ nav.next-prev {
 	a.older,
 	a.newer{
 		display: block;
-		width: 15px;
-		height: 11px;
+		width: 30px;
+		height: 22px;
 		text-indent: -9999px;
 		}
 	a.left,
 	a.right{
 		display: block;
 		float:left;
-		width: 11px;
-		height: 15px;
+		width: 22px;
+		height: 30px;
 		text-indent: -9999px;
 		}
 	a.prev, a.newer {
@@ -191,28 +191,28 @@ nav.next-prev {
 		background: transparent url('../images/scroll-arrow-up.png') 0 0 no-repeat;
 		}
 		a.prev:hover, a.newer:hover {
-			background: transparent url('../images/scroll-arrow-up.png') 0 -11px no-repeat;
+			background: transparent url('../images/scroll-arrow-up.png') 0 -22px no-repeat;
 			}
 	a.next, a.older {
 		margin: 5px auto 0 auto;
 		background: transparent url('../images/scroll-arrow-down.png') -1px 0 no-repeat;
 		}
 		a.next:hover, a.older:hover {
-			background: transparent url('../images/scroll-arrow-down.png') -1px -11px no-repeat;
+			background: transparent url('../images/scroll-arrow-down.png') -1px -22px no-repeat;
 			}
 	a.left {
 		margin: 5px auto 5px auto;
 		background: transparent url('../images/scroll-arrow-left.png') 0 0 no-repeat;
 		}
 		a.left:hover {
-			background: transparent url('../images/scroll-arrow-left.png') -12px 0 no-repeat;
+			background: transparent url('../images/scroll-arrow-left.png') -23px 0 no-repeat;
 			}
 	a.right {
 		margin: 6px auto 0 15px;
 		background: transparent url('../images/scroll-arrow-right.png') 0px 0 no-repeat;
 		}
 		a.right:hover {
-			background: transparent url('../images/scroll-arrow-right.png') -11px 0px no-repeat;
+			background: transparent url('../images/scroll-arrow-right.png') -22px 0px no-repeat;
 			}
 
 /* Parallax
@@ -234,7 +234,7 @@ nav.next-prev {
 		#most-awesome,
 		#search,
 		#about {
-			padding-top: 55px;
+			padding-top: 35px;
 			}
 		#recently-awesome {
 			position: absolute;
@@ -375,7 +375,7 @@ nav.next-prev {
   display:block;
   color:#00333C;
 	cursor:pointer;
-	margin-bottom:25px;
+	margin-bottom:15px;
 	width:275px;
 	float:left;
 	position:relative;
