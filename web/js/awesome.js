@@ -1,15 +1,9 @@
 $(document).ready(function() {
 	
 	var recentUrl = "api/item/recently-awesome";
+	var filter = '';
 		
 	$.get(recentUrl, function(data) {
-	  /*$.each(data.docs, function(key, value) { 
-      if(value.format == 'videofilm') {       $.get('http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=dte98e86zfhyvryb8r8epcp3&q=Toy+Story&page_limit=1&callback=?', function(data) {
-        console.log(data.movies[0].posters.profile);
-	        value.poster = data.movies[0].title;
-	      });
-      }
-    });*/
     	var source = $("#items-template").html();
 		  var template = Handlebars.compile(source);
       $('#recent').html(template(data));
@@ -19,7 +13,7 @@ $(document).ready(function() {
 	$('.newer, .older').live('click', function(event) {
 		var start = $(this).attr('data-start');
 		if(start >= 0) {
-      $.get(recentUrl + '?start=' + start, function(data) {
+      $.get('api/item/search?limit=9&sort=last_modified+desc&start=' + start + '&filter=format:' + filter, function(data) {
         var source = $("#items-template").html();
         var template = Handlebars.compile(source);
         $('#recent').html(template(data));
@@ -29,6 +23,26 @@ $(document).ready(function() {
       });
 	  }
 		event.preventDefault();
+	});
+	
+	$('.filter').live('click', function(event) {
+	  filter = $(this).attr('data-filter');
+	  var filterUrl = "api/item/search?limit=9&sort=last_modified+desc&filter=format:" + filter;
+	  if($(this).hasClass('selected')) {
+	    $('.selected').removeClass('selected');
+	    filter = '';
+	    filterUrl = recentUrl;
+	  }
+	  else { 
+	    $('.selected').removeClass('selected');
+		  $(this).addClass('selected');
+		}
+		$.get(filterUrl, function(data) {
+    	var source = $("#items-template").html();
+		  var template = Handlebars.compile(source);
+      $('#recent').html(template(data));
+      $(".item-title").dotdotdot();
+	  });
 	});
 	
 	var mostUrl = "api/item/most-awesome";

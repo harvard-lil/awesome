@@ -72,12 +72,19 @@
 					</header>
           
           <div id="recent"></div>
-  
+					
 					<nav class="next-prev">
 					  <a class="newer" data-start="0" alt="Prev">Prev</a>
 						<a class="older" data-start="9" alt="Next">Next</a>
 						<!--<a class="next most-awesome" href="#most-awesome">Next</a>-->
 					</nav>
+					
+					<nav class="filtering">
+					  <span class="filter" data-filter="book"><i class="icon-book"></i></span>
+					  <span class="filter" data-filter="videofilm"><i class="icon-videofilm"></i></span>
+					  <span class="filter" data-filter="soundrecording"><i class="icon-soundrecording"></i></span>
+					</nav>
+
 				</article>
 				
 				<article id="most-awesome">

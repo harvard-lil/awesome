@@ -102,7 +102,7 @@ class Services extends F3instance {
           
           $format = json_decode($format, true);
           
-          $contents->format = '';
+          $contents->format = 'book';
           if(count($format['docs']) > 0) {
             $format = $format['docs'][0]['format'];
             $format = str_replace('/', '', $format);

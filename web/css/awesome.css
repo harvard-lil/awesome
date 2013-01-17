@@ -153,9 +153,15 @@ nav#primary h1 {
 	background: transparent url('../images/nav-arrow.png') 100% 50% no-repeat;
 	}
 nav.next-prev {
-	margin: 20px 0 0 0;
+	margin: 10px 0 0 0;
 		clear:both;
+		float:left;
+		width: 50%;
 	}
+nav.filtering {
+  float:left;
+  margin-left:95px;
+}
 .left-right {
   float:left;
   display:block;
@@ -187,14 +193,14 @@ nav.next-prev {
 		text-indent: -9999px;
 		}
 	a.prev, a.newer {
-		margin: 0 auto 5px auto;
+		margin: 0 95% 5px;
 		background: transparent url('../images/scroll-arrow-up.png') 0 0 no-repeat;
 		}
 		a.prev:hover, a.newer:hover {
 			background: transparent url('../images/scroll-arrow-up.png') 0 -22px no-repeat;
 			}
 	a.next, a.older {
-		margin: 5px auto 0 auto;
+		margin: 5px 95% 0;
 		background: transparent url('../images/scroll-arrow-down.png') -1px 0 no-repeat;
 		}
 		a.next:hover, a.older:hover {
@@ -215,6 +221,22 @@ nav.next-prev {
 			background: transparent url('../images/scroll-arrow-right.png') -22px 0px no-repeat;
 			}
 
+  span.filter {
+    display:block;
+    margin: 10px 0 0 20px;
+    font-size:28px;
+    color:#00333c;
+    background: transparent url('../images/facet-dot.png') 0px -45px no-repeat;
+    float:left;
+    cursor:pointer;
+    height:45px;
+    width:45px;
+    padding:0 0 0 11px;
+  }
+  
+  span.filter:hover, span.filter.selected {
+    color:#007992;
+  }
 /* Parallax
 *****************************************************************/
 
