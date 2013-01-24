@@ -18,5 +18,5 @@ urlpatterns = patterns('',
     (r'^api/', include(v1_api.urls)),
     
     # Common Pages
-    url(r'^$', include('awesome.awesome_urls')),
+    url(r'^', include('awesome.awesome_urls')),
 )
