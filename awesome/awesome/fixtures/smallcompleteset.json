@@ -1,0 +1,81 @@
+[
+  {
+    "model": "awesome.organization",
+    "pk": 1,
+    "fields": {
+      "name": "Harvard"
+    }
+  },
+  {
+    "model": "awesome.branch",
+    "pk": 1,
+    "fields": {
+      "organization": 1,
+      "name": "Langdell, Law Library"
+    }
+  },
+  {
+    "model": "awesome.branch",
+    "pk": 2,
+    "fields": {
+      "organization": 1,
+      "name": "Widener"
+    }
+  },
+  {
+    "model": "awesome.item",
+    "pk": 1,
+    "fields": {
+      "branch": 1,
+      "title": "Houdini : the handcuff king / by Jason Lutes & Nick Bertozzi ; with an introduction by Glen David Gold.",
+      "creator": "Lutes, Jason.",
+      "isbn": "9780786839025",
+      "inst_id": "011449179",
+      "physical_format": "book"
+    }
+  },
+  {
+    "model": "awesome.item",
+    "pk": 2,
+    "fields": {
+      "branch": 1,
+      "title": "12 angry men",
+      "creator": "Henry Fonda",
+      "isbn": "0792849221",
+      "inst_id": "009175220",
+      "physical_format": "dvd"
+    }
+  },
+  {
+    "model": "awesome.checkin",
+    "pk": 1,
+    "fields": {
+      "item": 1,
+      "checked_in_time": "2010-01-03 03:17"
+    }
+  },
+  {
+    "model": "awesome.checkin",
+    "pk": 2,
+    "fields": {
+      "item": 2,
+      "checked_in_time": "2012-11-06 09:24"
+    }
+  },
+  {
+    "model": "awesome.checkin",
+    "pk": 3,
+    "fields": {
+      "item": 2,
+      "checked_in_time": "2012-11-04 16:14"
+    }
+  },
+  {
+    "model": "awesome.checkin",
+    "pk": 4,
+    "fields": {
+      "item": 2,
+      "checked_in_time": "2012-11-21 18:17"
+    }
+  }
+]
