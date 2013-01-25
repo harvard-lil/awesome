@@ -30,9 +30,9 @@ class Item(models.Model):
         # If we have an item with our unique_id, create a new checkin and update the existing item's latest_checkin and number of checkins
         # else, create a new item and a new checkin
         
-        items = Item.objects.filter(unique_id=self.unique_id)[:1]
+        items = Item.objects.filter(unique_id=self.unique_id, branch=self.branch)[:1]
         if len(items) > 0:
-            Item.objects.filter(unique_id=self.unique_id).update(latest_checkin = datetime.now(), number_checkins=items[0].number_checkins + 1)
+            Item.objects.filter(unique_id=self.unique_id, branch=self.branch).update(latest_checkin = datetime.now(), number_checkins=items[0].number_checkins + 1)
             checkin = Checkin(item=items[0])
             checkin.save()
         else:

@@ -16,8 +16,9 @@ $(document).ready(function() {
 		}
 		updateProgress();
 		var barcode = $('#barcode').val();
-				
-		$.post('/services/new-item/', {barcode: barcode}, function(data) {
+		var scanning_lib = $('#scanning_library option:selected').val();
+		
+		$.post('/services/new-item/', {barcode: barcode, branch: scanning_lib}, function(data) {
 			$('.alert-success').show();
 			$('.added-title').html(data);
 		});

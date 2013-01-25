@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	
-	var recentUrl = "api/item/recently-awesome";
+	var recentUrl = "/api/v1/item/?format=json&order_by=latest_checkin";
 		
 	$.get(recentUrl, function(data) {
 	  /*$.each(data.docs, function(key, value) { 
@@ -19,7 +19,8 @@ $(document).ready(function() {
 	$('.newer, .older').live('click', function(event) {
 		var start = $(this).attr('data-start');
 		if(start >= 0) {
-      $.get(recentUrl + '?start=' + start, function(data) {
+      $.get(recentUrl, function(data) {
+      console.log(data);
         var source = $("#items-template").html();
         var template = Handlebars.compile(source);
         $('#recent').html(template(data));
@@ -31,7 +32,7 @@ $(document).ready(function() {
 		event.preventDefault();
 	});
 	
-	var mostUrl = "api/item/most-awesome";
+	var mostUrl = "/api/v1/item/?format=json&order_by=number_checkins";
 	
 	$.get(mostUrl, function(data) {
     	var source = $("#items-template").html();

@@ -8,7 +8,7 @@ admin.autodiscover()
 urlpatterns = patterns('awesome.views',
 
     # Common Pages
-    url(r'^$', 'welcome.welcome', name='welcome'),
+    url(r'^$', 'landing.landing', name='landing'),
     url(r'^scan/$', 'scan.scan', name='scan'),
     url(r'^services/new-item/$', 'services.new_item', name='services_new_item'),
     

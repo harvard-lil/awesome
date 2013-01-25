@@ -8,6 +8,6 @@ def not_found(request):
     """The application-wide 404 page."""
     return render_to_response('404.html', {'user': request.user})
 
-def welcome(request):
+def landing(request):
     """The welcome page."""
-    return render_to_response('about.html', {'user': request.user})
+    return render_to_response('landing.html', {'user': request.user, 'organization': request.subdomain})

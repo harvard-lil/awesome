@@ -17,12 +17,13 @@ def new_item(request):
         return HttpResponse(status=400)
     
     barcode = request.POST["barcode"]
+    branch = request.POST["branch"]
         
     # We have the barcode, we need to determine if it's an isbn or an institution barcode or ... 
     
     
     # If we are using the harvard lookup system
-    _item_from_hollis('2342344')
+    _item_from_hollis('2342344', branch)
     
     
 
@@ -33,7 +34,7 @@ def new_item(request):
     
     return HttpResponse('respond here with title', status=200)
 
-def _item_from_hollis(barcode):
+def _item_from_hollis(barcode, branch):
     
     """
     url = 'http://webservices.lib.harvard.edu/rest/classic/barcode/cite/' + barcode;   
@@ -90,7 +91,7 @@ def _item_from_hollis(barcode):
     docs = jsoned_response['docs'][0]
     print docs['title']
     
-    branch = Branch.objects.get(id=1)
+    branch = Branch.objects.get(name=branch)
     item = Item(branch=branch,
                 title=docs['title'],
                 creator=docs['creator'][0],

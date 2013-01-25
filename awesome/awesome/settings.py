@@ -94,6 +94,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'awesome.middleware.SubdomainMiddleware',
 )
 
 ROOT_URLCONF = 'awesome.urls'
@@ -113,6 +114,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'awesome',
     'tastypie',
+    'templatetag_handlebars',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
