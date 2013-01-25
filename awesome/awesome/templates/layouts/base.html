@@ -1,0 +1,43 @@
+{% load static %}
+{% get_static_prefix as STATIC_PREFIX %}
+
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+
+<head>
+	<meta charset="utf-8">
+	<title>{% block title %}Shelf.io{% endblock title %}</title>
+	<link rel="icon" href="{{ STATIC_PREFIX }}images/favicon.ico" type="image/x-icon">
+	{% block styles %}
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet'>
+		<link rel="stylesheet" href="{{ STATIC_PREFIX }}stackview/jquery.stackview.css">
+		<link rel="stylesheet" href="{{ STATIC_PREFIX }}style/shelfio.css">
+	{% endblock styles %}
+	<script src="{{ STATIC_PREFIX }}script/modernizr.min.js"></script>
+	{% block extrahead %}{% endblock extrahead %}
+</head>
+
+<body>
+	<div id="container">
+		{% include "partials/header.html" %}
+		<div class="main">
+			{% block content %}{% endblock content %}
+		</div>
+		{% include "partials/footer.html" %}
+	</div>
+
+	
+	{% block templates %}{% endblock templates %}
+
+	{% block scripts %}
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+		<script>window.jQuery || document.write('<script src="{{ STATIC_PREFIX }}script/jquery.min.js"><\/script>')</script>
+		<script src="{{ STATIC_PREFIX }}script/jquery-ui-1.8.18.custom.min.js"></script>
+		<script src="{{ STATIC_PREFIX }}stackview/jquery.stackview.min.js"></script>
+	{% endblock scripts %}
+	{% block extrascripts %}{% endblock extrascripts %}
+</body>
+</html>

@@ -1,0 +1,9 @@
+{% extends "layouts/base.html" %}
+
+{% block content %}
+	<article class="login thin-centered">
+		<h2>You have been logged out.</h2>
+		
+		<p>Logged out a bit too soon? No worries, <a href="{% url auth_login %}">sign back in</a></p>
+	</article>
+{% endblock %}
