@@ -1,3 +1,4 @@
 .project
 .pydevproject
 *.pyc
+awesome/awesome/local_settings.py

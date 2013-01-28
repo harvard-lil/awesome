@@ -24,18 +24,23 @@ def process_register(request):
             
             supplied_org_name = request.POST.get('organization_name', '')
             supplied_org_slug = request.POST.get('organization_slug', '')
-            
+            supplied_service_lookup = request.POST.get('service_lookup', '')
+            supplied_catalog_base_url = request.POST.get('catalog_base_url', '')
+                        
             org = Organization(user=user,
                                name=supplied_org_name,
-                               slug=supplied_org_slug)
+                               slug=supplied_org_slug,
+                               service_lookup=supplied_service_lookup,
+                               catalog_base_url=supplied_catalog_base_url,)
             org.save()
             
             supplied_branch_name = request.POST.get('branch_name', '')
             supplied_branch_slug = request.POST.get('branch_slug', '')
+
             
             branch = Branch(organization=org,
                             name=supplied_branch_name,
-                            slug=supplied_branch_slug)
+                            slug=supplied_branch_slug,)
             branch.save()
             
             return HttpResponseRedirect(reverse('landing'))

@@ -14,6 +14,7 @@ class OrganizationResource(ModelResource):
         allowed_methods = ['get', 'post']
         authentication = Authentication()
         authorization = Authorization()
+        excludes = ['service_lookup']
 
 class BranchResource(ModelResource):
     organization = fields.ToOneField(OrganizationResource, 'organization', full = True )
@@ -36,18 +37,8 @@ class ItemResource(ModelResource):
         allowed_methods = ['get', 'post']
         authentication = Authentication()
         authorization = Authorization()
-    
-        #last_checkin = 'some date'
-        #bundle.data['last_checkin'] = last_checkin
-        #return bundle
 
-        #for checkins in bundle.obj.checkins.all():
-            #bundle.data['self.']
-    
-#        last_checkin = None
-        #for checkin in bundle.obj.checkins.all():
-            #bundle.data['last_checkin'] = checkin['checked_in_time']
-            
+
         
         
 class CheckinResource(ModelResource):

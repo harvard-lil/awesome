@@ -181,7 +181,7 @@
       <ul> 
         {{#objects}}
           <li class="item">
-            <a href="{{organization}}{{hollis_id}}" target="_blank" style="display:none;">{{title}}</a>
+            <a href="{{branch.organization.catalog_base_url}}{{catalog_id}}" target="_blank" style="display:none;">{{title}}</a>
             {{#if poster}}
             <img class="item-cover" src="{{poster}}" alt="{{title}}" />
             {{else}}

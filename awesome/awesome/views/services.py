@@ -1,9 +1,19 @@
-from awesome.models import Branch, Item
+from awesome.models import Branch, Item, Organization
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 import httplib
 import json
+import logging
 import urllib2
+from lxml import etree
+from StringIO import StringIO
+
+logger = logging.getLogger(__name__)
+
+try:
+    from awesome.local_settings import *
+except ImportError, e:
+    logger.error('Unable to load local_settings.py:', e)
 
 """
 Some services. These often times are translators between front end, AJAXy things, and our API/Model.
@@ -23,16 +33,23 @@ def new_item(request):
     
     
     # If we are using the harvard lookup system
-    _item_from_hollis(barcode, branch)
     
+    org = Organization.objects.get(slug=request.subdomain)
+    branch = Branch.objects.get(name=branch)
     
+    message_to_return = "No Title"
+    
+    if org.service_lookup == "worldcat":
+        message_to_return = _item_from_worldcat(barcode, branch)
+    if org.service_lookup == "hollis":
+        message_to_return = _item_from_hollis(barcode, branch)
 
 
     # get hollis id from presto
     # use hollis id to hit LC. from LC data, populate title, format, etc,
     # if videofilm get poster from RT 
     
-    return HttpResponse('respond here with title', status=200)
+    return HttpResponse(message_to_return, status=200)
 
 def _item_from_hollis(barcode, branch):
     
@@ -56,14 +73,12 @@ def _item_from_hollis(barcode, branch):
     except Exception:
         import traceback
         print('generic exception: ' + traceback.format_exc())
-        
-    #print response
     
     jsoned_response = json.loads(response)
     #print jsoned_response
     hollis_id = jsoned_response["rlistFormat"]["hollis"]["hollisId"]
     
-    massaged_hollis_id =  hollis_id[:9].zfill(9)
+    massaged_hollis_id = hollis_id[:9].zfill(9)
     
     print massaged_hollis_id;
     
@@ -93,7 +108,6 @@ def _item_from_hollis(barcode, branch):
     
     docs = jsoned_response['docs'][0]
     
-    branch = Branch.objects.get(name=branch)
     item = Item(branch=branch,
                 title=docs['title'],
                 creator=docs['creator'][0],
@@ -104,7 +118,62 @@ def _item_from_hollis(barcode, branch):
     
     item.save()
     
-def _worldcat_lookup(barcode, branch):
+    return docs['title']
+    
+def _item_from_worldcat(barcode, branch):
     """Given a barcode, get metadata from worldcat"""
     
+    url = "http://www.worldcat.org/webservices/catalog/search/sru?query=srw.sn%3D%22" + barcode + "&wskey=" + WORLDCAT["KEY"] + "&servicelevel=full";
+    req = urllib2.Request(url)
     
+    
+    response = None
+    
+    try: 
+        f = urllib2.urlopen(req)
+        response = f.read()
+        f.close()
+    except urllib2.HTTPError, e:
+        print('HTTPError = ' + str(e.code))
+    except urllib2.URLError, e:
+        print('URLError = ' + str(e.reason))
+    except httplib.HTTPException, e:
+        print('HTTPException')
+    except Exception:
+        import traceback
+        print('generic exception: ' + traceback.format_exc())
+        
+    #print response
+          
+    #tree = etree.parse(response)
+    
+    parser = etree.XMLParser(ns_clean=True, recover=True)
+    tree = etree.parse(StringIO(response), parser)
+    
+    unique_id = tree.xpath('//*[@tag="001"]/text()')[0]
+    title = tree.xpath('//*[@tag="245"]/*[@code="a"]/text()')[0]
+    creator = tree.xpath('//*[@tag="100"]/*[@code="a"]/text()')[0]
+    isbn = tree.xpath('//*[@tag="020"]/*[@code="a"]/text()')[0]
+    massaged_isbn = isbn.split()[0]
+    formats = tree.xpath('//*[@tag="020"]/*/text()')
+    
+    physical_format = 'book'
+    for format in formats:
+        if 'video' in format:
+            physical_format = 'videofilm'
+            break
+        elif 'sound' in format:
+            physical_format = 'soundrecording'
+            break
+    
+    item = Item(branch=branch,
+                title=title,
+                creator=creator,
+                unique_id=unique_id,
+                catalog_id=barcode,
+                isbn=massaged_isbn,
+                physical_format=physical_format,)
+    
+    item.save()
+    
+    return title

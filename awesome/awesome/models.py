@@ -7,6 +7,9 @@ class Organization(models.Model):
     user = models.ForeignKey(User)
     name = models.CharField(max_length=400)
     slug = models.CharField(max_length=400)
+    service_lookup = models.CharField(max_length=100, default="worldcat")
+    catalog_base_url = models.CharField(max_length=400)
+    #id to use for catalog lookup (in item)
     
     def __unicode__(self):
         return self.name

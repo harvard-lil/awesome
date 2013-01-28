@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	
-	var recentUrl = "/api/v1/item/?format=json&order_by=latest_checkin";
+	var recentUrl = "/api/v1/item/?format=json&order_by=-latest_checkin";
 		
 	$.get(recentUrl, function(data) {
 	  /*$.each(data.docs, function(key, value) { 
@@ -35,6 +35,7 @@ $(document).ready(function() {
 	var mostUrl = "/api/v1/item/?format=json&order_by=number_checkins";
 	
 	$.get(mostUrl, function(data) {
+	console.log(data);
     	var source = $("#items-template").html();
 		  var template = Handlebars.compile(source);
       $('#most').html(template(data));
