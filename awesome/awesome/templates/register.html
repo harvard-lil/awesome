@@ -9,7 +9,6 @@
 			<div>
 				<label for="id_username">Username</label>
 				<input id="id_username" type="text" name="username" maxlength="30" value="{{form.data.username}}">
-				<span id="input_preview"></span>
 				{{ form.username.errors }}
 			</div>
 			<p>
@@ -22,6 +21,28 @@
 				<input id="id_password" type="password" name="password" maxlength="30">
 				{{ form.password.errors }}
 			</p>
+			<p>
+				<label for="id_organization_name">Complete Organization Name</label>
+				<input id="id_organization_name" name="organization_name" maxlength="30">
+				{{ form.organization_name.errors }}
+			</p>
+			<p>
+				<label for="id_organization_slug">Web-friendly Organization Name</label>
+				<input id="id_organization_slug" name="organization_slug" maxlength="30">
+				<span id="input_preview"></span>
+				{{ form.organization_slug.errors }}
+			</p>
+			<p>
+				<label for="id_branch_name">Complete Branch Name</label>
+				<input id="id_branch_name" name="branch_name" maxlength="30">
+				{{ form.branch_name.errors }}
+			</p>
+			<p>
+				<label for="id_branch_slug">Web-friendly Branch Name</label>
+				<input id="id_branch_slug" name="branch_slug" maxlength="30">
+				{{ form.branch_slug.errors }}
+			</p>
+
 			<button type="submit" class="button positive icon-ok immediate">Create Account</button>
 		</form>
 	</article>
@@ -30,15 +51,15 @@
 {% block scripts %}
 {{ block.super }}
 <script type="text/javascript">	
-	$('input[name=username]').focus();
+	$('input[name=organization_slug]').focus();
 
- 	$('input[name=username]').on('propertychange keyup input paste', function() {
+ 	$('input[name=organization_slug]').on('propertychange keyup input paste', function() {
  		$('#input_preview').fadeIn("fast");
  	
-		// Show the user what the url of the shelfname will be
+		// Show the user what the url of the org will be
 		var user_url = $(this).val()
 		var slugged_user_url = user_url.replace(/\s+/g,'-').replace(/[^a-zA-Z0-9\-]/g,'').toLowerCase();
-    	$('#input_preview').html('http://shelf.io/' + slugged_user_url);
+    	$('#input_preview').html('http://' + slugged_user_url + '.awesomebox.io');
  	});
 </script>
 {% endblock scripts %}

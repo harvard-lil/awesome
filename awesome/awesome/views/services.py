@@ -23,7 +23,7 @@ def new_item(request):
     
     
     # If we are using the harvard lookup system
-    _item_from_hollis('2342344', branch)
+    _item_from_hollis(barcode, branch)
     
     
 
@@ -36,10 +36,10 @@ def new_item(request):
 
 def _item_from_hollis(barcode, branch):
     
-    """
-    url = 'http://webservices.lib.harvard.edu/rest/classic/barcode/cite/' + barcode;   
-    print url
+    url = 'http://webservices.lib.harvard.edu/rest/classic/barcode/cite/' + barcode;
+    
     req = urllib2.Request(url)
+    req.add_header("accept", "application/json")
     
     response = None
     
@@ -57,16 +57,19 @@ def _item_from_hollis(barcode, branch):
         import traceback
         print('generic exception: ' + traceback.format_exc())
         
-    print response
+    #print response
     
     jsoned_response = json.loads(response)
-    print jsoned_response
-    hits = jsoned_response['hits']
-    """
+    #print jsoned_response
+    hollis_id = jsoned_response["rlistFormat"]["hollis"]["hollisId"]
     
+    massaged_hollis_id =  hollis_id[:9].zfill(9)
     
+    print massaged_hollis_id;
+    
+        
      # Let's assume that the above works. I give it a barcode and it gives me a hollis id
-    url = 'http://librarycloud.harvard.edu/v1/api/item/?filter=id_inst:008490789';
+    url = 'http://librarycloud.harvard.edu/v1/api/item/?filter=id_inst:' + massaged_hollis_id;
     req = urllib2.Request(url)
     
     response = None
@@ -89,7 +92,6 @@ def _item_from_hollis(barcode, branch):
     jsoned_response = json.loads(response)
     
     docs = jsoned_response['docs'][0]
-    print docs['title']
     
     branch = Branch.objects.get(name=branch)
     item = Item(branch=branch,
@@ -100,5 +102,9 @@ def _item_from_hollis(barcode, branch):
                 isbn=docs['id_isbn'][0],
                 physical_format=docs['format'],)
     
-    
     item.save()
+    
+def _worldcat_lookup(barcode, branch):
+    """Given a barcode, get metadata from worldcat"""
+    
+    

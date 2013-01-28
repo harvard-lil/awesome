@@ -3,15 +3,10 @@ from django.contrib.auth.models import User
 from django.db import models
 from django import forms
 
-class UserProfile(models.Model):
-    user = models.OneToOneField(User)
-    display_welcome = models.BooleanField(default=True)
-    favorites_are_private = models.BooleanField(default=False)
-    gravatar_enabled = models.BooleanField(default=False)
-
 class Organization(models.Model):
-    owner = models.ForeignKey(User)
+    user = models.ForeignKey(User)
     name = models.CharField(max_length=400)
+    slug = models.CharField(max_length=400)
     
     def __unicode__(self):
         return self.name
@@ -19,6 +14,7 @@ class Organization(models.Model):
 class Branch(models.Model):
     organization = models.ForeignKey(Organization)
     name = models.CharField(max_length=400)
+    slug = models.CharField(max_length=400)
     
     def __unicode__(self):
         return self.name

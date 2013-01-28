@@ -3,7 +3,7 @@ from django.shortcuts import render_to_response
 from django.core.urlresolvers import reverse
 from django.core.context_processors import csrf
 from django.contrib import auth
-from awesome.models import UserRegForm
+from awesome.models import UserRegForm, Organization, Branch
 
 def process_register(request):
     """Register a new user"""
@@ -21,6 +21,22 @@ def process_register(request):
             supplied_password = request.POST.get('password', '')
             user = auth.authenticate(username=supplied_username, password=supplied_password)
             auth.login(request, user)
+            
+            supplied_org_name = request.POST.get('organization_name', '')
+            supplied_org_slug = request.POST.get('organization_slug', '')
+            
+            org = Organization(user=user,
+                               name=supplied_org_name,
+                               slug=supplied_org_slug)
+            org.save()
+            
+            supplied_branch_name = request.POST.get('branch_name', '')
+            supplied_branch_slug = request.POST.get('branch_slug', '')
+            
+            branch = Branch(organization=org,
+                            name=supplied_branch_name,
+                            slug=supplied_branch_slug)
+            branch.save()
             
             return HttpResponseRedirect(reverse('landing'))
         else:
