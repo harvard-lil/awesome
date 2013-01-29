@@ -9,7 +9,13 @@ class Organization(models.Model):
     slug = models.CharField(max_length=400)
     service_lookup = models.CharField(max_length=100, default="worldcat")
     catalog_base_url = models.CharField(max_length=400)
-    #id to use for catalog lookup (in item)
+    twitter_username = models.CharField(max_length=10, null=True, blank=True)
+    twitter_consumer_key = models.CharField(max_length=10, null=True, blank=True)
+    twitter_consumer_secret = models.CharField(max_length=10, null=True, blank=True)
+    twitter_oauth_token = models.CharField(max_length=10, null=True, blank=True)
+    twitter_oauth_secret = models.CharField(max_length=10, null=True, blank=True)
+    bitly_key = models.CharField(max_length=10, null=True, blank=True)
+    worldcat_key = models.CharField(max_length=10, null=True, blank=True)
     
     def __unicode__(self):
         return self.name
@@ -29,7 +35,8 @@ class Item(models.Model):
     unique_id = models.CharField(max_length=20, null=True, blank=True) #usually the institution id or worldcat
     catalog_id = models.CharField(max_length=20, null=True, blank=True) #the ID we use for linking. probably the institution id, isbn, upc 
     isbn = models.CharField(max_length=20, null=True, blank=True) # used to get the cover images
-    physical_format = models.CharField(max_length=20)
+    physical_format = models.CharField(max_length=20, default="book")
+    cover_art = models.CharField(max_length=400, null=True, blank=True)
     latest_checkin = models.DateTimeField(auto_now=True)
     number_checkins = models.PositiveIntegerField(default=1)
     

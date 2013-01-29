@@ -1,10 +1,14 @@
 $(document).ready(function() {
 	
-	var recentUrl = "/api/v1/item/?format=json&order_by=-latest_checkin";
-		
+	var recentUrl = "/api/v1/item/?format=json&order_by=-latest_checkin&branch__organization__slug=" + organization;
+	
+	if (branch) {
+	    recentUrl = recentUrl + "&branch__slug=" + branch;
+	}
+	
 	$.get(recentUrl, function(data) {
 	  /*$.each(data.docs, function(key, value) { 
-      if(value.format == 'videofilm') {       $.get('http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=dte98e86zfhyvryb8r8epcp3&q=Toy+Story&page_limit=1&callback=?', function(data) {
+      if(value.physical_format == 'videofilm') {       $.get('http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=dte98e86zfhyvryb8r8epcp3&q=Toy+Story&page_limit=1&callback=?', function(data) {
         console.log(data.movies[0].posters.profile);
 	        value.poster = data.movies[0].title;
 	      });
@@ -20,7 +24,6 @@ $(document).ready(function() {
 		var start = $(this).attr('data-start');
 		if(start >= 0) {
       $.get(recentUrl, function(data) {
-      console.log(data);
         var source = $("#items-template").html();
         var template = Handlebars.compile(source);
         $('#recent').html(template(data));
@@ -32,10 +35,13 @@ $(document).ready(function() {
 		event.preventDefault();
 	});
 	
-	var mostUrl = "/api/v1/item/?format=json&order_by=number_checkins";
+	var mostUrl = "/api/v1/item/?format=json&order_by=number_checkins&branch__organization__slug=" + organization;
+	
+	if (branch) {
+	    recentUrl = recentUrl + "&branch__slug=" + branch;
+	}
 	
 	$.get(mostUrl, function(data) {
-	console.log(data);
     	var source = $("#items-template").html();
 		  var template = Handlebars.compile(source);
       $('#most').html(template(data));
