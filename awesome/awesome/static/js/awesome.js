@@ -7,13 +7,6 @@ $(document).ready(function() {
 	}
 	
 	$.get(recentUrl, function(data) {
-	  /*$.each(data.docs, function(key, value) { 
-      if(value.physical_format == 'videofilm') {       $.get('http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=dte98e86zfhyvryb8r8epcp3&q=Toy+Story&page_limit=1&callback=?', function(data) {
-        console.log(data.movies[0].posters.profile);
-	        value.poster = data.movies[0].title;
-	      });
-      }
-    });*/
     	var source = $("#items-template").html();
 		  var template = Handlebars.compile(source);
       $('#recent').html(template(data));
@@ -21,7 +14,10 @@ $(document).ready(function() {
 	});
 	
 	$('.newer, .older').live('click', function(event) {
+	
 		var start = $(this).attr('data-start');
+		
+		recentUrl += '&limit=9&offset='+ start;
 		if(start >= 0) {
       $.get(recentUrl, function(data) {
         var source = $("#items-template").html();
@@ -40,10 +36,10 @@ $(document).ready(function() {
 	if (branch) {
 	    recentUrl = recentUrl + "&branch__slug=" + branch;
 	}
-	
+
 	$.get(mostUrl, function(data) {
-    	var source = $("#items-template").html();
-		  var template = Handlebars.compile(source);
+	  var source = $("#items-template").html();
+	  var template = Handlebars.compile(source);
       $('#most').html(template(data));
       $(".item-title").dotdotdot();
 	});
