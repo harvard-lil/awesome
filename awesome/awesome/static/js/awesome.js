@@ -1,40 +1,66 @@
 $(document).ready(function() {
 	
-	var recentUrl = "/api/v1/item/?format=json&order_by=-latest_checkin&branch__organization__slug=" + organization;
+	//////
+	// Start of recent items logic
+	//////
 	
-	if (branch) {
-	    recentUrl = recentUrl + "&branch__slug=" + branch;
+	var recentUrl = "/api/v1/item/";
+	
+	var recent_url_params = {
+		'format': 'json',
+		'order_by': '-latest_checkin',
+		'branch__organization__slug': organization,
+		'limit': 9,
+		'offset': 0
 	}
 	
-	$.get(recentUrl, function(data) {
-    	var source = $("#items-template").html();
-		  var template = Handlebars.compile(source);
-      $('#recent').html(template(data));
-      $(".item-title").dotdotdot();
-	});
+	if (branch) {
+	    recent_url_params.branch__slug = branch;
+	}
+
+	// Draw the recent items on load
+	draw_recent_items(recentUrl, recent_url_params);
 	
+	// Pagination buttons
 	$('.newer, .older').live('click', function(event) {
-	
 		var start = $(this).attr('data-start');
 		
-		recentUrl += '&limit=9&offset='+ start;
+		recent_url_params.offset = start;
 		if(start >= 0) {
-      $.get(recentUrl, function(data) {
-        var source = $("#items-template").html();
-        var template = Handlebars.compile(source);
-        $('#recent').html(template(data));
-        $(".item-title").dotdotdot();
-        $('.newer').attr('data-start', start*1 - 9);
-        $('.older').attr('data-start', start*1 + 9);
-      });
+			draw_recent_items(recentUrl, recent_url_params);	
+		    $('.newer').attr('data-start', start*1 - 9);
+        	$('.older').attr('data-start', start*1 + 9);
 	  }
 		event.preventDefault();
 	});
 	
+	
+	$('.filter').live('click', function(event) {
+		filter = $(this).attr('data-filter');
+	  
+	  
+		if($(this).hasClass('selected')) {
+	    	$('.selected').removeClass('selected');
+	    	delete recent_url_params['physical_format'];
+	  	}
+	  	else { 
+	    	$('.selected').removeClass('selected');
+		  	$(this).addClass('selected');
+		  	recent_url_params.physical_format = filter;
+		}
+		
+		draw_recent_items(recentUrl, recent_url_params);
+	});
+	
+	
+	//////
+	// End of recent items logic
+	//////
+	
 	var mostUrl = "/api/v1/item/?format=json&order_by=number_checkins&branch__organization__slug=" + organization;
 	
 	if (branch) {
-	    recentUrl = recentUrl + "&branch__slug=" + branch;
+	    mostUrl = mostUrl + "&branch__slug=" + branch;
 	}
 
 	$.get(mostUrl, function(data) {
@@ -152,4 +178,14 @@ function redrawDotNav(){
 		$('nav#primary a.about').addClass('active');
 	}
 	
+}
+
+function draw_recent_items(recentUrl, recent_url_params) {
+	/* Get data using our URL and URL params. Send it to Handlebars to draw to the DOM. */
+	$.get(recentUrl, recent_url_params).done( function(data) {
+		var source = $("#items-template").html();
+		var template = Handlebars.compile(source);
+		$('#recent').html(template(data));
+		$(".item-title").dotdotdot();
+	});
 }

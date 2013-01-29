@@ -39,8 +39,8 @@ class ItemResource(ModelResource):
     class Meta:
         queryset = Item.objects.all()
         resource_name = 'item'
-        filtering = {"branch": ALL_WITH_RELATIONS }
-        ordering = ['latest_checkin', 'number_checkins']
+        filtering = {"branch": ALL_WITH_RELATIONS,  'physical_format': ALL }
+        ordering = ['latest_checkin', 'number_checkins',]
         allowed_methods = ['get', 'post']
         authentication = Authentication()
         authorization = Authorization()
