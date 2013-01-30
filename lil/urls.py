@@ -1,10 +1,9 @@
-from django.conf.urls.defaults import patterns, url, include
-#from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-#from django.contrib.auth import views as auth_views
-from django.contrib import admin
-from awesome.api import OrganizationResource, BranchResource, ItemResource, CheckinResource
-from tastypie.api import Api
+from lil.awesome.api import OrganizationResource, BranchResource, ItemResource, CheckinResource
 
+from django.conf.urls.defaults import patterns, url, include
+from django.contrib import admin
+
+from tastypie.api import Api
 
 admin.autodiscover()
 

@@ -1,4 +1,5 @@
-from awesome.models import Organization, OrganizationForm
+from awesome.models import Organization
+from lil.awesome.forms import OrganizationForm
 from django.core.context_processors import csrf
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response

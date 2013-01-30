@@ -3,7 +3,8 @@ from django.shortcuts import render_to_response
 from django.core.urlresolvers import reverse
 from django.core.context_processors import csrf
 from django.contrib import auth
-from awesome.models import UserRegForm, Organization, Branch
+from awesome.models import Organization, Branch
+from lil.awesome.forms import UserRegForm
 
 def process_register(request):
     """Register a new user"""
