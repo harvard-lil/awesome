@@ -11,6 +11,8 @@ urlpatterns = patterns('awesome.views',
     url(r'^$', 'landing.landing', name='landing'),
     url(r'^scan/$', 'scan.scan', name='scan'),
     url(r'^feed/$', 'feed.feed', name='feed'),
+    url(r'^admin/$', 'useradmin.admin_home', name='admin_home'),
+    url(r'^admin/org/$', 'useradmin.org', name='useradmin_org'),
     url(r'^services/new-item/$', 'services.new_item', name='services_new_item'),
     
     # Session/account management

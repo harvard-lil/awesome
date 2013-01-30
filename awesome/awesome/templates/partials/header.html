@@ -1,10 +1,6 @@
-<header class="global-header">
-	<nav>
-		<h1>
-			<a href="{% url landing %}">Awesome Box</a>
-		</h1>
-		
-	</nav>
+<header id="branding">
+	<span id="feeds"></span>
+	<h1><a href="{% url landing %}">Awesome Box at {{organization.name}}</a></h1>
 </header>
 
 {% include "partials/messages.html" %}

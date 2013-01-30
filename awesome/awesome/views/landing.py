@@ -12,9 +12,12 @@ def not_found(request):
 def landing(request):
     """The welcome page."""
     
-    branch = request.GET.get('branch', '')
     
-    org = Organization(slug=request.subdomain)
+    if 'subdomain' in request.META:
+        branch = request.GET.get('branch', '')
+        org = Organization(slug=request.META['subdomain'])
     
-    return render_to_response('landing.html', {'user': request.user, 'organization': request.subdomain,
+        return render_to_response('landing_org.html', {'user': request.user, 'organization': request.META['subdomain'],
                                                'branch': branch, 'twitter_username': org.twitter_username})
+    else:
+        return render_to_response('landing_default.html')
