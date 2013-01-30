@@ -7,7 +7,7 @@ from django.core.urlresolvers import reverse
 def admin_home(request):
     """Admin landing page"""
     
-    org = Organization.objects.get(slug=request.subdomain)
+    org = Organization.objects.get(slug=request.META['subdomain'])
     
     context = {
             'user': request.user,
