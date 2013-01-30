@@ -12,10 +12,10 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'awesome_matt',                      # Or path to database file if using sqlite3.
-        'USER': 'awesome_matt',                      # Not used with sqlite3.
-        'PASSWORD': 'awesome_matt',                  # Not used with sqlite3.
-        'HOST': 'hlsl8.law.harvard.edu',                      # Set to empty string for localhost. Not used with sqlite3.
+        'NAME': 'db_name',                      # Or path to database file if using sqlite3.
+        'USER': 'db_user_name',                      # Not used with sqlite3.
+        'PASSWORD': 'db_password',                  # Not used with sqlite3.
+        'HOST': 'db_host',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '3306',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
@@ -79,7 +79,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = '4(ihj%sw9jxme#+7%tixnnb(5$k=pco=zo(rmgbvxos46)_7_m'
+SECRET_KEY = 'secret key here'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -94,10 +94,10 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'awesome.middleware.SubdomainMiddleware',
+    'lil.awesome.middleware.SubdomainMiddleware',
 )
 
-ROOT_URLCONF = 'awesome.urls'
+ROOT_URLCONF = 'lil.urls'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
@@ -112,7 +112,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'awesome',
+    'lil.awesome',
     'tastypie',
     'templatetag_handlebars',
     # Uncomment the next line to enable the admin:
@@ -171,8 +171,8 @@ EMAIL_PORT = 1025
 EMAIL_HOST_USER = ""
 EMAIL_HOST_PASSWORD = ""
 EMAIL_USE_TLS = False
-DEFAULT_FROM_EMAIL = "help@awesome.io"
+DEFAULT_FROM_EMAIL = "help@awesomebox.io"
 
 # Extend the user model with a user profile, https://docs.djangoproject.com/en/dev/topics/auth/#storing-additional-information-about-users
 
-AUTH_PROFILE_MODULE = 'shelfio.UserProfile'
+AUTH_PROFILE_MODULE = 'lil.awesome.UserProfile'
