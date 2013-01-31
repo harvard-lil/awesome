@@ -257,7 +257,7 @@ nav.filtering {
 		#most-awesome,
 		#search,
 		#about {
-			/*padding-top: 35px;*/
+			padding-top: 35px;
 			}
 		#recently-awesome {
 			position: absolute;

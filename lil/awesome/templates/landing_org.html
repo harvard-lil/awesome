@@ -23,7 +23,7 @@
 		</a>
 		{% endif %}
 	</span>
-	<h1>Awesome at the Harvard Library</h1>
+	<h1>Awesome at the {{ organization.slug }}</h1>
 </header>
 
 
@@ -138,7 +138,7 @@
 <script >try{Typekit.load();}catch(e){}</script>
 
 <script type="text/javascript">
-var organization = "{{organization}}";
+var organization = "{{organization.slug}}";
 var branch = "{{branch}}";        
 </script>
 {% endblock scripts %}
@@ -187,15 +187,15 @@ var branch = "{{branch}}";
 
 <script type="text/javascript">
 
-var _gaq  = _gaq || [];
-_gaq.push(['_setAccount'=, '<?php echo $master_config["GOOGLE_ANALYTICS"];?>']);
-_gaq.push(['_trackPageview']);
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-XXXXX-X']);
+  _gaq.push(['_trackPageview']);
 
-(function() {
-	var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-	ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-	})();
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
 
 </script>
 

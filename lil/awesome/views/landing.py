@@ -12,9 +12,9 @@ def landing(request):
     
     if 'subdomain' in request.META:
         branch = request.GET.get('branch', '')
-        org = Organization(slug=request.META['subdomain'])
+        org = Organization.objects.get(slug=request.META['subdomain'])
     
-        return render_to_response('landing_org.html', {'user': request.user, 'organization': request.META['subdomain'],
+        return render_to_response('landing_org.html', {'user': request.user, 'organization': org,
                                                'branch': branch, 'twitter_username': org.twitter_username})
     else:
         return render_to_response('landing_default.html')
