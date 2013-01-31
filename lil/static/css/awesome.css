@@ -62,7 +62,8 @@ body {
 	/*background: #00333c;*/
 	background: #ffffff;
 	overflow-x: hidden;
-	height: 4350px;
+	/*height: 4350px;*/
+	height: 3270px;
 	line-height: 1.5;
 	color: #000;
 	font-size: 14px;
@@ -256,7 +257,7 @@ nav.filtering {
 		#most-awesome,
 		#search,
 		#about {
-			padding-top: 35px;
+			/*padding-top: 35px;*/
 			}
 		#recently-awesome {
 			position: absolute;
@@ -280,7 +281,8 @@ nav.filtering {
 				}
 		#about {
 			position: absolute;
-			top: 3270px;
+			top: 2180px;
+    		/*top: 3270px;*/
 			}
 			#search p, #about p {
 			  font-size:28px;

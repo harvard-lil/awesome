@@ -164,17 +164,21 @@ function parallaxScroll(){
 function redrawDotNav(){
 	var section1Top =  0;
 	// The top of each section is offset by half the distance to the previous section.
-	var section2Top =  $('#most-awesome').offset().top - (($('#search').offset().top - $('#most-awesome').offset().top) / 2);
+	
+	
+	var section2Top =  $('#most-awesome').offset().top - (($('#about').offset().top - $('#most-awesome').offset().top) / 2);
+	var section3Top =  $('#about').offset().top - (($(document).height() - $('#about').offset().top) / 2);;
+	
+	
+/*	var section2Top =  $('#most-awesome').offset().top - (($('#search').offset().top - $('#most-awesome').offset().top) / 2);
 	var section3Top =  $('#search').offset().top - (($('#about').offset().top - $('#search').offset().top) / 2);
-	var section4Top =  $('#about').offset().top - (($(document).height() - $('#about').offset().top) / 2);;
+	var section4Top =  $('#about').offset().top - (($(document).height() - $('#about').offset().top) / 2);;*/
 	$('nav#primary a').removeClass('active');
 	if($(document).scrollTop() >= section1Top && $(document).scrollTop() < section2Top){
 		$('nav#primary a.recently-awesome').addClass('active');
 	} else if ($(document).scrollTop() >= section2Top && $(document).scrollTop() < section3Top){
 		$('nav#primary a.most-awesome').addClass('active');
-	} else if ($(document).scrollTop() >= section3Top && $(document).scrollTop() < section4Top){
-		$('nav#primary a.search').addClass('active');
-	} else if ($(document).scrollTop() >= section4Top){
+	} else if ($(document).scrollTop() >= section3Top){
 		$('nav#primary a.about').addClass('active');
 	}
 	
