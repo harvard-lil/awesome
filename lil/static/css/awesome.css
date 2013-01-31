@@ -470,6 +470,25 @@ nav.filtering {
 	margin-top:25px;
 }
 
+
+/* Start -- Control center page */
+
+.control h1 {
+    padding-top:35px;
+}
+
+.control p a {
+    font-size: 26px;
+    color: #000;
+}
+
+.control p a:hover { 
+	color:#07a8ce;
+}
+
+
+/* End -- Control center page */
+
 /*  Font Awesome
     the iconic font designed for use with Twitter Bootstrap
     -------------------------------------------------------

@@ -6,6 +6,7 @@
 {% block title %}Awesome Box at the {{organization.name}}{% endblock title %}
 
 {% block styles %}
+<link rel="stylesheet" href="{{ STATIC_PREFIX }}css/bootstrap.css" type="text/css" />
 <link rel="stylesheet" media="all" href="{{ STATIC_PREFIX }}css/awesome.css" />
 {% endblock styles %}
 
@@ -22,7 +23,7 @@
 		</a>
 		{% endif %}
 	</span>
-	<h1>Awesome at the {{ organization.slug }}</h1>
+	<h1>Awesome at the {{ organization.name }}</h1>
 </header>
 
 
