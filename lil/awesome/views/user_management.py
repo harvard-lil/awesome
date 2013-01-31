@@ -17,7 +17,6 @@ def process_register(request):
         form = UserRegForm(request.POST)
         if form.is_valid():
             new_user = form.save()
-            # Create a default shelf for the user
                         
             # Log the user in
             supplied_username = request.POST.get('username', '')

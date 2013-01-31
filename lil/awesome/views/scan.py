@@ -1,6 +1,6 @@
 from lil.awesome.models import Organization, Branch
 
-from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 
 
@@ -8,7 +8,7 @@ def scan(request):
     """Our scan page"""
     
     if not request.user.is_authenticated():
-        return HttpResponse('You need to authenticate to connect to this resource', status=401)
+        return HttpResponseRedirect(reverse('auth_login'))
     
     org_name = request.META['subdomain']
     branch = request.GET.get('branch')

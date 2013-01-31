@@ -242,5 +242,3 @@ def _get_rt_movie_poster(title):
         
 
     return poster_url
-    
-    

@@ -22,15 +22,13 @@ def org(request):
     """Users can control (admin) their org from here"""
 
     org = Organization.objects.get(slug=request.META['subdomain'])
-    print org
     
     if request.method == 'POST':
         submitted_form = OrganizationForm(request.POST, instance=org)
         
         if submitted_form.is_valid():
-            print 'is valid'
             submitted_form.save()
-            print 'saved'
+
             return HttpResponseRedirect(reverse('control_org'))
         else:
             context = {
