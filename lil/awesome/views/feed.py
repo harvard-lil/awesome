@@ -9,9 +9,9 @@ def feed(request):
     org = Organization.objects.get(slug=request.META['subdomain'])
     
     if len(branch) != 0:
-        items = Item.objects.filter(branch__slug=branch, branch__organization=org)[:20]
+        items = Item.objects.filter(branch__slug=branch, branch__organization=org).order_by('-latest_checkin')[:20]
     else:
-        items = Item.objects.filter(branch__organization=org)[:20]
+        items = Item.objects.filter(branch__organization=org).order_by('-latest_checkin')[:20]
         
 
     return render_to_response('feed.xml', {'user': request.user, 'organization': org,

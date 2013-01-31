@@ -10,3 +10,7 @@ DEV_SETTINGS = {
 ROTTEN_TOMATOES = {
     'KEY': 'your rt key here',
 }
+
+GOOGLE = {
+    'ANALYTICS_KEY': 'your GA key here',
+}
