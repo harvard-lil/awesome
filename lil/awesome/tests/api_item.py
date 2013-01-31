@@ -6,7 +6,7 @@ from django.test.client import Client
 from django.core.urlresolvers import reverse
 from django.db.models import Count
  
-from awesome.models import Organization, Branch, Item, Checkin
+from lil.awesome.models import Organization, Branch, Item, Checkin
 
 
 class ItemAPITestCase(TestCase):

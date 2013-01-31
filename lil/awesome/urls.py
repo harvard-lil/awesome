@@ -1,18 +1,19 @@
+from django.contrib import admin
 from django.conf.urls.defaults import patterns, url
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib.auth import views as auth_views
-from django.contrib import admin
+
 
 admin.autodiscover()
 
-urlpatterns = patterns('awesome.views',
+urlpatterns = patterns('lil.awesome.views',
 
     # Common Pages
     url(r'^$', 'landing.landing', name='landing'),
     url(r'^scan/$', 'scan.scan', name='scan'),
     url(r'^feed/$', 'feed.feed', name='feed'),
-    url(r'^admin/$', 'useradmin.admin_home', name='admin_home'),
-    url(r'^admin/org/$', 'useradmin.org', name='useradmin_org'),
+    url(r'^control/$', 'control.home', name='control_home'),
+    url(r'^control/org/$', 'control.org', name='control_org'),
     url(r'^services/new-item/$', 'services.new_item', name='services_new_item'),
     
     # Session/account management

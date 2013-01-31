@@ -1,12 +1,13 @@
-from awesome.models import Organization
+from lil.awesome.models import Organization
 from lil.awesome.forms import OrganizationForm
+
 from django.core.context_processors import csrf
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.core.urlresolvers import reverse
 
-def admin_home(request):
-    """Admin landing page"""
+def home(request):
+    """Control (user admin site) landing page"""
     
     org = Organization.objects.get(slug=request.META['subdomain'])
     
@@ -15,24 +16,32 @@ def admin_home(request):
             'organization': org,
         }
     
-    return render_to_response('admin.html', context)
+    return render_to_response('control.html', context)
 
 def org(request):
-    """Users can admin their org from here"""
-    
-    branch = request.GET.get('branch', '')
-    
-    org = Organization.objects.get(slug=request.subdomain)
-    
+    """Users can control (admin) their org from here"""
+
+    org = Organization.objects.get(slug=request.META['subdomain'])
+    print org
     
     if request.method == 'POST':
         submitted_form = OrganizationForm(request.POST, instance=org)
         
         if submitted_form.is_valid():
+            print 'is valid'
             submitted_form.save()
-            return HttpResponseRedirect(reverse('useradmin_org'))
+            print 'saved'
+            return HttpResponseRedirect(reverse('control_org'))
+        else:
+            context = {
+                'user': request.user,
+                'organization': org,
+                'form': submitted_form,
+            }
+            context.update(csrf(request))    
+            return render_to_response('control-org.html', context)
+            
     else:  
-        
         form = OrganizationForm(instance=org)
         context = {
             'user': request.user,
@@ -40,4 +49,4 @@ def org(request):
             'form': form,
         }
         context.update(csrf(request))    
-        return render_to_response('admin-org.html', context)
+        return render_to_response('control-org.html', context)

@@ -1,11 +1,12 @@
-from awesome.models import Organization, Item
+from lil.awesome.models import Organization, Item
+
 from django.shortcuts import render_to_response
 
 def feed(request):
     """The rss feed"""
     
     branch = request.GET.get('branch', '')    
-    org = Organization.objects.get(slug=request.subdomain)
+    org = Organization.objects.get(slug=request.META['subdomain'])
     
     if len(branch) != 0:
         items = Item.objects.filter(branch__slug=branch, branch__organization=org)[:20]

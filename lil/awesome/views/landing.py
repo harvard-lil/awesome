@@ -1,9 +1,7 @@
-from awesome.models import Organization
+from lil.awesome.models import Organization
+
 from django.shortcuts import render_to_response
 
-"""
-If it's a simple view, let's put it here
-"""
 
 def not_found(request):
     """The application-wide 404 page."""
@@ -11,7 +9,6 @@ def not_found(request):
 
 def landing(request):
     """The welcome page."""
-    
     
     if 'subdomain' in request.META:
         branch = request.GET.get('branch', '')

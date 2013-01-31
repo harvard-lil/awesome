@@ -1,18 +1,19 @@
+import httplib, json, logging, urllib2
 from StringIO import StringIO
-from awesome.models import Branch, Item, Organization
+
+from lil.awesome.models import Branch, Item, Organization
+
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.http import urlquote
+
 from lxml import etree
-import httplib
-import json
-import logging
-import urllib2
+
 
 logger = logging.getLogger(__name__)
 
 try:
-    from awesome.local_settings import *
+    from lil.awesome.local_settings import *
 except ImportError, e:
     logger.error('Unable to load local_settings.py:', e)
 
@@ -35,7 +36,7 @@ def new_item(request):
     
     # If we are using the harvard lookup system
     
-    org = Organization.objects.get(slug=request.subdomain)
+    org = Organization.objects.get(slug=request.META['subdomain'])
     branch = Branch.objects.get(name=branch)
     
     message_to_return = "No Title"

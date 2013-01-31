@@ -8,7 +8,7 @@ class SubdomainMiddleware:
         # thanks to http://thingsilearned.com/2009/01/05/using-subdomains-in-django/
         
         try:
-            from awesome.local_settings import *
+            from lil.awesome.local_settings import *
         except ImportError, e:
             logger.error('Unable to load local_settings.py:', e)
         

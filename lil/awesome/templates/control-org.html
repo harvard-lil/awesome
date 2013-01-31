@@ -1,0 +1,12 @@
+{% extends "layouts/base.html" %}
+
+{% block content %}
+<article class="register thin-centered">
+	<h1>Organization Admin</h1>
+	<form method="post" action="">
+		{% csrf_token %}
+		{{ form }}
+		<input type="submit" value="Submit Form"/>
+	</form>
+</article>
+{% endblock content %}
