@@ -17,7 +17,7 @@ This git repository contains the webapp used to receive and share things that ha
 ### Django
 
 ### Python-twitter
-pip python-twitter
+pip install python-twitter
 
 https://github.com/bear/python-twitter
 
