@@ -59,9 +59,11 @@ h1 {
   width:10%;
 }
 </style>
-<script type="text/javascript" src="{{ STATIC_PREFIX }}js/jquery-1.7.1.min.js"></script>
-<script type="text/javascript" src="{{ STATIC_PREFIX }}js/scan.js">
+<script type="text/javascript">
+	var CSRF_TOKEN = "{{ csrf_token }}";
 </script>
+<script type="text/javascript" src="{{ STATIC_PREFIX }}js/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_PREFIX }}js/scan.js"></script>
 </head>
 <body>
 <div id="innerlay">

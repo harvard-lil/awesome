@@ -8,6 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils.http import urlquote
 
 from lxml import etree
+import twitter
 
 
 logger = logging.getLogger(__name__)
@@ -21,9 +22,12 @@ except ImportError, e:
 Some services. These often times are translators between front end, AJAXy things, and our API/Model.
 """
 
-@csrf_exempt
+
 def new_item(request):
     """Something coming in from our scan page"""
+    
+    if not request.user.is_authenticated():
+        return HttpResponse(status=401)
     
     if 'barcode' not in request.POST:
         return HttpResponse(status=400)
@@ -130,6 +134,8 @@ def _item_from_hollis(barcode, branch):
     
     item.save()
     
+    _tweet_item(item)
+    
     return docs['title']
     
 def _item_from_worldcat(barcode, branch):
@@ -210,6 +216,8 @@ def _item_from_worldcat(barcode, branch):
     
     item.save()
     
+    _tweet_item(item)
+    
     return title
 
 def _get_rt_movie_poster(title):
@@ -235,10 +243,57 @@ def _get_rt_movie_poster(title):
         print('generic exception: ' + traceback.format_exc())
     
     jsoned_response = json.loads(response)
-    print jsoned_response
     
     if 'movies' in jsoned_response:
         poster_url = jsoned_response['movies'][0]['posters']['profile']
-        
 
     return poster_url
+    
+def _tweet_item(item):
+    """ Tweet the item """
+
+    org = item.branch.organization
+
+    # Let's check a couple of twitter config items before trying to tweet
+    if org.twitter_username and org.twitter_consumer_key:
+    
+        link_to_item = org.catalog_base_url + item.catalog_id
+    
+        # Get a short, bit.ly link to our catalog item
+        bitly_url = 'http://api.bit.ly/shorten?version=2.0.1&longUrl=' + urlquote(link_to_item) + '&login=' + BITLY['LOGIN'] + '&apiKey=' + BITLY['KEY'] + '&format=json';
+    
+        req = urllib2.Request(bitly_url)
+    
+        response = None
+    
+        try: 
+            f = urllib2.urlopen(req)
+            response = f.read()
+            f.close()
+        except urllib2.HTTPError, e:
+            print('HTTPError = ' + str(e.code))
+        except urllib2.URLError, e:
+            print('URLError = ' + str(e.reason))
+        except httplib.HTTPException, e:
+            print('HTTPException')
+        except Exception:
+            import traceback
+            print('generic exception: ' + traceback.format_exc())
+    
+        jsoned_response = json.loads(response)
+    
+        short_url = jsoned_response['results'][link_to_item]['shortUrl'];
+    
+    
+        #Tweet the item details and the short url
+    
+        twitter_message = item.title + ' by ' + item.creator
+        twitter_message = twitter_message[0:119] + ' ' + short_url
+    
+        api = twitter.Api()
+        api = twitter.Api(consumer_key = org.twitter_consumer_key,
+                              consumer_secret = org.twitter_consumer_secret,
+                              access_token_key = org.twitter_oauth_token,
+                              access_token_secret = org.twitter_oauth_secret)
+                          
+        api.PostUpdate(twitter_message)

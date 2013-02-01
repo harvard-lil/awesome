@@ -84,13 +84,15 @@
 		<header>
 			<h1>About Awesome</h1>
 		</header>
-		<p>Returning something awesome to the Harvard Library?</p>
+		<p>Returning something awesome to the {{organization.name}}?</p>
 		<br />
 		<p class="bold">Put it in the Awesome Box.</p>
 		<br />
-		<p>Funded by the <a href="http://osc.hul.harvard.edu/liblab">Library Lab</a>, the Awesome Box allows the community to see what others have found helpful, entertaining, or mind-blowing.</p>
+		<p>{{organization.about_page_blurb}}</p>
 		<br />
-		<p class="small">Contact us at <a href="mailto:lil@law.harvard.edu">lil@law.harvard.edu</a>
+		<p class="small">Find us online at <a href="{{organization.public_link}}">{{organization.public_link}}</a>
+		<br />
+		<p class="small">Contact us at <a href="mailto:{{organization.public_email}}">{{organization.public_email}}</a>
 		</p>
 		<p class="small">Movie images provided by <a href="http://www.flixster.com/">Flixster</a></p>
 		<nav class="next-prev">

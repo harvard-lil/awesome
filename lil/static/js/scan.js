@@ -18,7 +18,7 @@ $(document).ready(function() {
 		var barcode = $('#barcode').val();
 		var scanning_lib = $('#scanning_library option:selected').val();
 		
-		$.post('/services/new-item/', {barcode: barcode, branch: scanning_lib}, function(data) {
+		$.post('/services/new-item/', {barcode: barcode, branch: scanning_lib, csrfmiddlewaretoken: CSRF_TOKEN}, function(data) {
 			$('.alert-success').show();
 			$('.added-title').html(data);
 		});

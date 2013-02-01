@@ -1,3 +1,7 @@
+INTERNAL = {
+    'REG_KEY': 'our internal registration key'
+}
+
 WORLDCAT = {
     'KEY': 'your wc key here'
 }
@@ -13,4 +17,9 @@ ROTTEN_TOMATOES = {
 
 GOOGLE = {
     'ANALYTICS_KEY': 'your GA key here',
+}
+
+BITLY = {
+    'LOGIN': 'your bitly login here',
+    'KEY': 'your bitly key here'
 }

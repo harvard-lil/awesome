@@ -18,8 +18,9 @@ class Organization(models.Model):
     twitter_consumer_secret = models.CharField(max_length=200, null=True, blank=True)
     twitter_oauth_token = models.CharField(max_length=200, null=True, blank=True)
     twitter_oauth_secret = models.CharField(max_length=200, null=True, blank=True)
-    bitly_key = models.CharField(max_length=200, null=True, blank=True)
-    worldcat_key = models.CharField(max_length=200, null=True, blank=True)
+#    bitly_login = models.CharField(max_length=200, null=True, blank=True)
+#    bitly_key = models.CharField(max_length=200, null=True, blank=True)
+#    worldcat_key = models.CharField(max_length=200, null=True, blank=True)
     
     def __unicode__(self):
         return self.name

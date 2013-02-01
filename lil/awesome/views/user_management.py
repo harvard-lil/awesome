@@ -1,3 +1,5 @@
+import logging
+
 from lil.awesome.models import Organization, Branch
 from lil.awesome.forms import UserRegForm
 
@@ -7,6 +9,13 @@ from django.core.urlresolvers import reverse
 from django.core.context_processors import csrf
 from django.contrib import auth
 
+logger = logging.getLogger(__name__)
+
+try:
+    from lil.awesome.local_settings import *
+except ImportError, e:
+    logger.error('Unable to load local_settings.py:', e)
+
 
 def process_register(request):
     """Register a new user"""
@@ -14,6 +23,14 @@ def process_register(request):
     c.update(csrf(request))
 
     if request.method == 'POST':
+
+        reg_key = request.POST.get('reg_key', '')
+        
+        # We only want folks we know and trust with our key to create new AB accounts
+        if not reg_key or reg_key != INTERNAL['REG_KEY']:
+            return HttpResponseRedirect(reverse('landing'))
+        
+        
         form = UserRegForm(request.POST)
         if form.is_valid():
             new_user = form.save()
