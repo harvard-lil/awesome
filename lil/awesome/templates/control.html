@@ -14,16 +14,13 @@
 
 <header id="branding">
 	<span id="feeds">
-		<a href="feed" target="_blank">
-			<img src="{{ STATIC_PREFIX }}images/rss.png" class="rssIcon" alt="Awesome RSS" />
-		</a>
 		{% if twitter_username %}
 		<a href="http://twitter.com/#!/{{twitter_username}}" target="_blank">
 			<img src="{{ STATIC_PREFIX }}images/twitter.png" class="twitterIcon" alt="Follow {{twitter_username}} on Twitter" />
 		</a>
 		{% endif %}
 	</span>
-	<h1>Awesome at the {{ organization.name }}</h1>
+	<h1>Awesome Box at the {{ organization.name }}</h1>
 </header>
 <div id="content">
 	<article class="control thin-centered">
@@ -32,8 +29,8 @@
 			<h1>Control Center</h1>
 		</header>
 		
-		<p><a href="{% url control_org %}">Control organization's data</a></p>
-		<p><a href="{% url auth_password_change %}">Change your password</a></p>
+		<p class="control_list"><a href="{% url control_org %}">Control organization's data</a></p>
+		<p class="control_list"><a href="{% url auth_password_change %}">Change your password</a></p>
 	</article>
 </div>
 {% endblock content %}

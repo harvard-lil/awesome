@@ -471,18 +471,18 @@ nav.filtering {
 }
 
 
-/* Start -- Control center page */
+/* Start -- Control center and auth pages */
 
 .control h1 {
     padding-top:35px;
 }
 
-.control p a {
+.control_list a {
     font-size: 26px;
     color: #000;
 }
 
-.control p a:hover { 
+.control_list a:hover { 
 	color:#07a8ce;
 }
 
