@@ -12,10 +12,10 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'db_name',                      # Or path to database file if using sqlite3.
-        'USER': 'db_user_name',                      # Not used with sqlite3.
-        'PASSWORD': 'db_password',                  # Not used with sqlite3.
-        'HOST': 'db_host',                      # Set to empty string for localhost. Not used with sqlite3.
+        'NAME': 'dbname',                      # Or path to database file if using sqlite3.
+        'USER': 'dbuser',                      # Not used with sqlite3.
+        'PASSWORD': 'dbpass',                  # Not used with sqlite3.
+        'HOST': 'dbhost',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '3306',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
@@ -79,7 +79,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = 'secret key here'
+SECRET_KEY = 'secretkeyhere'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -171,7 +171,7 @@ EMAIL_PORT = 1025
 EMAIL_HOST_USER = ""
 EMAIL_HOST_PASSWORD = ""
 EMAIL_USE_TLS = False
-DEFAULT_FROM_EMAIL = "help@awesomebox.io"
+DEFAULT_FROM_EMAIL = "support@awesome.io"
 
 # Extend the user model with a user profile, https://docs.djangoproject.com/en/dev/topics/auth/#storing-additional-information-about-users
 
