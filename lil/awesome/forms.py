@@ -1,4 +1,4 @@
-from lil.awesome.models import Organization
+from lil.awesome.models import Organization, Branch
 
 from django import forms
 from django.contrib.auth.models import User
@@ -69,3 +69,9 @@ class OrganizationForm(forms.ModelForm):
     class Meta:
         model = Organization
         exclude = ('user', 'slug', 'service_lookup', )
+        
+class BranchForm(forms.ModelForm):
+
+    class Meta:
+        model = Branch
+        #exclude = ('organization', )

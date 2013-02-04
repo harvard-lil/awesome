@@ -8,6 +8,7 @@
 	<title>{% block title %}Awesome Box{% endblock title %}</title>
 	<link rel="icon" href="{{ STATIC_PREFIX }}images/favicon.ico" type="image/x-icon">
 	{% block styles %}{% endblock styles %}
+	{% block scripts %}{% endblock scripts %}
 	{% block extrahead %}{% endblock extrahead %}
 </head>
 
@@ -19,7 +20,6 @@
 
 	{% block templates %}{% endblock templates %}
 
-	{% block scripts %}{% endblock scripts %}
 	{% block extrascripts %}{% endblock extrascripts %}
 </body>
 </html>

@@ -14,6 +14,7 @@ urlpatterns = patterns('lil.awesome.views',
     url(r'^feed/$', 'feed.feed', name='feed'),
     url(r'^control/$', 'control.home', name='control_home'),
     url(r'^control/org/$', 'control.org', name='control_org'),
+    url(r'^control/branch/$', 'control.branch', name='control_branch'),
     url(r'^services/new-item/$', 'services.new_item', name='services_new_item'),
     
     # Session/account management
