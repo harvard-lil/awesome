@@ -4,35 +4,13 @@ The Awesome Box is an alternate returns box at your library. If you checked out 
 
 This git repository contains the webapp used to receive and share things that have been aweseomed.
 
+## Get your own Awesome Box
+
+The Harvard Library Innovation Lab offers hosted versions of the Awesome Box software. Find details at [the Awesome Box site](http://awesomebox.io/)
+
 ## Installation
 
-### Python
-
-### Apache
-
-### nginx
-
-### MySQL
-
-### Django
-
-### Python-twitter
-pip install python-twitter
-
-https://github.com/bear/python-twitter
-
-### lxml
-
-pip install lxml
-
-http://lxml.de/
-
-### django-templatetag-handlebars
-
-pip install django-templatetag-handlebars
-
-http://pypi.python.org/pypi/django-templatetag-handlebars
-
+If you don't want the hosted option, install your own using the installation notes in INSTALL.md 
 
 ## License
 
@@ -41,7 +19,7 @@ Dual licensed under the MIT license (below) and [GPL license](http://www.gnu.org
 <small>
 MIT License
 
-Copyright (c) 2012 The Harvard Library Innovation Lab
+Copyright (c) 2013 The Harvard Library Innovation Lab
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
