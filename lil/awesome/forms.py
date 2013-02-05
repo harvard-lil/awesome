@@ -71,7 +71,12 @@ class OrganizationForm(forms.ModelForm):
         exclude = ('user', 'slug', 'service_lookup', )
         
 class BranchForm(forms.ModelForm):
+    
+    def __init__(self, *args, **kwargs):
+            super(BranchForm, self).__init__(*args, **kwargs)
+            self.fields['slug'].label = "Web friendly name (letters, numbers, and hyphens)"
 
     class Meta:
         model = Branch
-        #exclude = ('organization', )
+        exclude = ('organization', )
+        

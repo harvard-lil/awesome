@@ -10,7 +10,7 @@
 {% endblock styles %}
 
 {% block content %}
-
+<body>
 <header id="branding">
 	<h1>Awesome Box</h1>
 </header>
@@ -30,7 +30,7 @@
 				{{ form.username.errors }}
 			</p>
 			<p>
-				<label for="id_email">Email address</label>
+				<label for="id_email">Admin Contact's Email address</label>
 				<input id="id_email" type="text" name="email" maxlength="30" value="{{form.data.email}}">
 				{{ form.email.errors }}
 			</p>
@@ -68,6 +68,14 @@
 				<input id="id_branch_slug" name="branch_slug" maxlength="30">
 				{{ form.branch_slug.errors }}
 			</p>
+			<p>
+				<label for="id_branch_lat">Branch latitude</label>
+				<input id="id_branch_lat" name="branch_lat" maxlength="30">
+			</p>
+			<p>
+				<label for="id_branch_long">Branch longitude</label>
+				<input id="id_branch_long" name="branch_long" maxlength="30">
+			</p>
 
 
 			<button type="submit" class="button positive icon-ok immediate">Create Account</button>
@@ -97,3 +105,4 @@
 </script>
 
 {% endblock scripts %}
+</body>

@@ -63,7 +63,6 @@ body {
 	background: #ffffff;
 	overflow-x: hidden;
 	/*height: 4350px;*/
-	height: 3270px;
 	line-height: 1.5;
 	color: #000;
 	font-size: 14px;
@@ -102,20 +101,32 @@ p {
 #branding {
 	width: 100%;
 	background: #bee620;
+}
+#branding h1 {
+	width: 940px;
+	padding: 10px 15px;
+	margin: 0 auto;
+	text-transform: uppercase;
+	font-size: 18px;
+	font-weight: bold;
 	}
-	#branding h1 {
-		width: 940px;
-		padding: 10px 15px;
-		margin: 0 auto;
-		text-transform: uppercase;
-		font-size: 18px;
-		font-weight: bold;
-		}
 #feeds img {
   position:relative;
   float:right;
   height:28px;
   margin:8px 8px 0 0;
+  z-index:6;
+}
+
+#feeds ul {
+  margin-right:6px;   
+}
+
+#feeds li {
+  position:relative;
+  float:right;
+  color: #11cbf7;
+  padding:10px 4px;
   z-index:6;
 }
 
@@ -240,6 +251,10 @@ nav.filtering {
   }
 /* Parallax
 *****************************************************************/
+
+.extra-long {
+	height: 3270px;
+}
 
 /* content */
 #content {
@@ -484,6 +499,24 @@ nav.filtering {
 
 .control_list a:hover { 
 	color:#07a8ce;
+}
+
+.common-table {
+    font-size:12px;
+    width:580px;
+    text-align:left;
+    border-collapse:collapse;
+    margin:50px 0px 60px 0;
+}
+
+.common-table th {
+    font-size:14px;
+    border-bottom:1px solid #bee620;
+
+}
+
+.common-table td {
+    padding:10px 2px 0;
 }
 
 

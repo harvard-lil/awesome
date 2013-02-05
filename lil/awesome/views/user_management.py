@@ -55,11 +55,15 @@ def process_register(request):
             
             supplied_branch_name = request.POST.get('branch_name', '')
             supplied_branch_slug = request.POST.get('branch_slug', '')
+            supplied_branch_lat = request.POST.get('branch_lat', '')
+            supplied_branch_long = request.POST.get('branch_long', '')
 
             
             branch = Branch(organization=org,
                             name=supplied_branch_name,
-                            slug=supplied_branch_slug,)
+                            slug=supplied_branch_slug,
+                            lat=supplied_branch_lat,
+                            long=supplied_branch_long)
             branch.save()
             
             return HttpResponseRedirect(reverse('landing'))

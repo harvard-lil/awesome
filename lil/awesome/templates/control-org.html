@@ -11,14 +11,12 @@
 {% endblock styles %}
 
 {% block content %}
-
+<body>
 <header id="branding">
 	<span id="feeds">
-		{% if twitter_username %}
-		<a href="http://twitter.com/#!/{{twitter_username}}" target="_blank">
-			<img src="{{ STATIC_PREFIX }}images/twitter.png" class="twitterIcon" alt="Follow {{twitter_username}} on Twitter" />
-		</a>
-		{% endif %}
+		<ul>
+			<li><a href="{% url auth_logout %}">Logout</a></li><li>|</li><li><a href="{% url control_home %}">Control Center</a></li>
+		</ul>
 	</span>
 	<h1>Awesome Box at the {{ organization.name }}</h1>
 </header>
@@ -55,20 +53,4 @@ var organization = "{{organization.slug}}";
 var branch = "{{branch}}";        
 </script>
 {% endblock scripts %}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</body>
