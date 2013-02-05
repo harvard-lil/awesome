@@ -50,7 +50,7 @@ Install the Apache mod_wsgi module:
 ## Install Python/Django pieces
 
     sudo apt-get install python-mysqldb
-    sudo pip python-twitter
+    sudo pip install python-twitter
     sudo apt-get install python-lxml
     sudo pip install django-templatetag-handlebars
     sudo pip install django-tastypie

@@ -1,13 +1,11 @@
+{% extends "layouts/base.html" %}
 {% load static %}
 {% get_static_prefix as STATIC_PREFIX %}
+{% load templatetag_handlebars %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+{% block title %}Scan | Awesome Box at the {{organization.name}}{% endblock title %}
 
-<title>Awesome Box Barcode Scan</title> 
-
+{% block styles %}
 <link rel="stylesheet" href="{{ STATIC_PREFIX }}css/bootstrap.css" type="text/css" />
 <style>
 body {
@@ -58,37 +56,94 @@ h1 {
 .bar {
   width:10%;
 }
+
+header, ul, li {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+	display: block;
+}
+
+#branding {
+	width: 100%;
+	height: 48px;
+	background: #bee620;
+}
+#branding h1 {
+	width: 940px;
+	padding: 15px;
+	margin: 0 auto;
+	text-transform: uppercase;
+	font-size: 18px;
+	font-weight: bold;
+	}
+#feeds img {
+  position:relative;
+  float:right;
+  height:28px;
+  margin:8px 8px 0 0;
+  z-index:6;
+}
+
+#feeds ul {
+  margin-right:6px;   
+}
+
+#feeds li {
+  position:relative;
+  float:right;
+  color: #11cbf7;
+  padding:10px 4px;
+  z-index:6;
+}
 </style>
+{% endblock styles %}
+
+{% block scripts %}
 <script type="text/javascript">
 	var CSRF_TOKEN = "{{ csrf_token }}";
 </script>
+<script src="{{ STATIC_PREFIX }}js/modernizr.custom.37797.js"></script> 
 <script type="text/javascript" src="{{ STATIC_PREFIX }}js/jquery-1.7.1.min.js"></script>
 <script type="text/javascript" src="{{ STATIC_PREFIX }}js/scan.js"></script>
-</head>
+{% endblock scripts %}
+
 <body>
-<div id="innerlay">
-	<h1>Awesome Box Barcode Scan</h1>
-	<form id="lookup">
-    <input type="text" id="barcode" />
-    <input type="submit" value="submit" id="submit" style="display:none;" />
-  </form>
-  <div class="progress" style="display:none;">
-    <div class="bar" style="width: 10%;"></div>
-  </div>
-  <div class="alert alert-error" style="display:none;"></div>
-  <div class="alert alert-success" style="display:none;">
-    <h4 class="alert-heading">Awesome!</h4>
-    <span class="label label-success"><i class="icon-ok-sign icon-white"></i> Added</span> <span class="added-title">
-  </div>
-</div>
-<div id="scanned_at">
-    Scanned at 
-    <select id="scanning_library">
-      {% for branch in branches %}
-		<option value='{{branch}}'>{{branch}}</option>
-      {% endfor %}
-      
-    </select>
-</div>
+{% block content %}
+	<header id="branding">
+		<span id="feeds">
+			<ul>
+				<li><a href="{% url auth_logout %}">Logout</a></li><li>|</li><li><a href="{% url control_home %}">Control Center</a></li>
+			</ul>
+		</span>
+		<h1>Awesome Box at the {{ organization.name }}</h1>
+	</header>
+	<div id="innerlay">
+		<h1>Awesome Box Barcode Scan</h1>
+		<form id="lookup">
+	    <input type="text" id="barcode" />
+	    <input type="submit" value="submit" id="submit" style="display:none;" />
+	  </form>
+	  <div class="progress" style="display:none;">
+	    <div class="bar" style="width: 10%;"></div>
+	  </div>
+	  <div class="alert alert-error" style="display:none;"></div>
+	  <div class="alert alert-success" style="display:none;">
+	    <h4 class="alert-heading">Awesome!</h4>
+	    <span class="label label-success"><i class="icon-ok-sign icon-white"></i> Added</span> <span class="added-title">
+	  </div>
+	</div>
+	<div id="scanned_at">
+	    Scanned at 
+	    <select id="scanning_library">
+	      {% for branch in branches %}
+			<option value='{{branch}}'>{{branch}}</option>
+	      {% endfor %}
+
+	    </select>
+	</div>
+{% endblock content %}
 </body>
-</html>
