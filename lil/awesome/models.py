@@ -10,17 +10,14 @@ class Organization(models.Model):
     slug = models.SlugField()
     service_lookup = models.CharField(max_length=100, default="worldcat")
     catalog_base_url = models.URLField(max_length=2000)
-    public_link = models.URLField(max_length=2000)
-    public_email = models.EmailField(max_length=254)
-    about_page_blurb = models.TextField(max_length=4000)
+    public_link = models.URLField(max_length=2000, null=True, blank=True)
+    public_email = models.EmailField(max_length=254, null=True, blank=True)
+    about_page_blurb = models.TextField(max_length=4000, default="Lorem ipsum dolor sit amet, consectetur adipiscing elit.")
     twitter_username = models.CharField(max_length=10, null=True, blank=True)
     twitter_consumer_key = models.CharField(max_length=200, null=True, blank=True)
     twitter_consumer_secret = models.CharField(max_length=200, null=True, blank=True)
     twitter_oauth_token = models.CharField(max_length=200, null=True, blank=True)
     twitter_oauth_secret = models.CharField(max_length=200, null=True, blank=True)
-#    bitly_login = models.CharField(max_length=200, null=True, blank=True)
-#    bitly_key = models.CharField(max_length=200, null=True, blank=True)
-#    worldcat_key = models.CharField(max_length=200, null=True, blank=True)
     
     def __unicode__(self):
         return self.name
