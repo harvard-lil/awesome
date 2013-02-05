@@ -56,7 +56,7 @@ table {
 *****************************************************************/
 
 html { 
-	overflow-y: scroll; /* always force a scrollbar in non-IE */
+	/* overflow-y: scroll; always force a scrollbar in non-IE */
 	}
 body {
 	/*background: #00333c;*/
@@ -126,7 +126,7 @@ p {
   position:relative;
   float:right;
   color: #11cbf7;
-  padding:10px 4px;
+  padding:12px 4px;
   z-index:6;
 }
 
@@ -253,6 +253,7 @@ nav.filtering {
 *****************************************************************/
 
 .extra-long {
+	overflow-y: scroll; /* always force a scrollbar in non-IE */
 	height: 3270px;
 }
 
