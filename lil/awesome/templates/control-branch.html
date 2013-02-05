@@ -12,50 +12,51 @@
 
 {% block content %}
 <body>
-<header id="branding">
-	<span id="feeds">
-		<ul>
-			<li><a href="{% url auth_logout %}">Logout</a></li><li>|</li><li><a href="{% url control_home %}">Control Center</a></li>
-		</ul>
-	</span>
-	<h1>Awesome Box at the {{ organization.name }}</h1>
-</header>
-<div id="content">
+<div id="wrapper">
+	<header id="branding">
+		<span id="feeds">
+			<ul>
+				<li><a href="{% url auth_logout %}">Logout</a></li><li>|</li><li><a href="{% url control_home %}">Control Center</a></li>
+			</ul>
+		</span>
+		<h1>Awesome Box at the {{ organization.name }}</h1>
+	</header>
+	<div id="content">
 	
-	<article class="control thin-centered">
-		<header>
-			<h1>Manage Branches</h1>
-		</header>
+		<article class="control thin-centered">
+			<header>
+				<h1>Manage Branches</h1>
+			</header>
 
-		{% if branches %}
-		<table class="common-table">
-			<tr>
-				<th>Branch Name</th>
-				<th>Web Friendly Name</th>
-				<th>Latitude</th>
-				<th>Longitude</th>
-			</tr>
-		{% for branch in branches %}
-			<tr>
-				<td>{{branch.name}}</td>
-				<td>{{branch.slug}}</td>
-				<td>{{branch.lat}}</td>
-				<td>{{branch.long}}</td>
-			</tr>
-		{% endfor %}
-		</table>
-		{% endif %}
+			{% if branches %}
+			<table class="common-table">
+				<tr>
+					<th>Branch Name</th>
+					<th>Web Friendly Name</th>
+					<th>Latitude</th>
+					<th>Longitude</th>
+				</tr>
+			{% for branch in branches %}
+				<tr>
+					<td>{{branch.name}}</td>
+					<td>{{branch.slug}}</td>
+					<td>{{branch.lat}}</td>
+					<td>{{branch.long}}</td>
+				</tr>
+			{% endfor %}
+			</table>
+			{% endif %}
 		
 
-		<form method="post" action="">
-			{% csrf_token %}
-			{{ form }}
-			<br />
-			<input type="submit" value="Add New Branch"/>
-		</form>
-	</article>
-	
-</div>
+			<form method="post" action="">
+				{% csrf_token %}
+				{{ form }}
+				<br />
+				<input type="submit" value="Add New Branch"/>
+			</form>
+		</article>
+	</div><!-- end content -->
+</div> <!-- end wrapper -->
 {% endblock content %}
 
 {% block scripts %}
@@ -73,4 +74,3 @@ var organization = "{{organization.slug}}";
 var branch = "{{branch}}";        
 </script>
 {% endblock scripts %}
-</body>

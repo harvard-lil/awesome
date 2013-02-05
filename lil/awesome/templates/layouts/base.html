@@ -12,13 +12,12 @@
 	{% block extrahead %}{% endblock extrahead %}
 </head>
 
-	<div id="wrapper">
-		{% block content %}{% endblock content %}
-	</div>
+	{% block content %}{% endblock content %}
+
 	{% include "partials/footer.html" %}
 
 	{% block templates %}{% endblock templates %}
 
 	{% block extrascripts %}{% endblock extrascripts %}
-
+	</body>
 </html>

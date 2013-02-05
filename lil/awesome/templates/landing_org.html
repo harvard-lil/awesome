@@ -12,94 +12,97 @@
 
 {% block content %}
 <body class="extra-long">
-<header id="branding">
-	<span id="feeds">
-		<a href="feed" target="_blank">
-			<img src="{{ STATIC_PREFIX }}images/rss.png" class="rssIcon" alt="Awesome RSS" />
-		</a>
-		{% if twitter_username %}
-		<a href="http://twitter.com/#!/{{twitter_username}}" target="_blank">
-			<img src="{{ STATIC_PREFIX }}images/twitter.png" class="twitterIcon" alt="Follow {{twitter_username}} on Twitter" />
-		</a>
-		{% endif %}
-	</span>
-	<h1>Awesome at the {{ organization.name }}</h1>
-</header>
+<div id="wrapper">
+	
+	<header id="branding">
+		<span id="feeds">
+			<a href="feed" target="_blank">
+				<img src="{{ STATIC_PREFIX }}images/rss.png" class="rssIcon" alt="Awesome RSS" />
+			</a>
+			{% if twitter_username %}
+			<a href="http://twitter.com/#!/{{twitter_username}}" target="_blank">
+				<img src="{{ STATIC_PREFIX }}images/twitter.png" class="twitterIcon" alt="Follow {{twitter_username}} on Twitter" />
+			</a>
+			{% endif %}
+		</span>
+		<h1>Awesome at the {{ organization.name }}</h1>
+	</header>
 
 
-<nav id="primary">
-	<ul>
-		<li>
-			<h1>Recently Awesome</h1>
-			<a class="recently-awesome" href="#recently-awesome">View</a>
-		</li>
-		<li>
-			<h1>Most Awesome</h1>
-			<a class="most-awesome" href="#most-awesome">View</a>
-		</li>
-		<li>
-			<h1>About Awesome</h1>
-			<a class="about" href="#about">View</a>
-		</li>
-	</ul>
-</nav>
+	<nav id="primary">
+		<ul>
+			<li>
+				<h1>Recently Awesome</h1>
+				<a class="recently-awesome" href="#recently-awesome">View</a>
+			</li>
+			<li>
+				<h1>Most Awesome</h1>
+				<a class="most-awesome" href="#most-awesome">View</a>
+			</li>
+			<li>
+				<h1>About Awesome</h1>
+				<a class="about" href="#about">View</a>
+			</li>
+		</ul>
+	</nav>
 
-<div id="content">
-	<article id="recently-awesome">
-		<header>
-			<h1>Recently Awesome</h1>
-		</header>
+	<div id="content">
+		<article id="recently-awesome">
+			<header>
+				<h1>Recently Awesome</h1>
+			</header>
 
-		<div id="recent"></div>
+			<div id="recent"></div>
 
-		<nav class="next-prev">
-			<a class="newer" data-start="0" alt="Prev">Prev</a>
-			<a class="older" data-start="9" alt="Next">Next</a>
-			<!--<a class="next most-awesome" href="#most-awesome">Next</a>-->
-		</nav>
+			<nav class="next-prev">
+				<a class="newer" data-start="0" alt="Prev">Prev</a>
+				<a class="older" data-start="9" alt="Next">Next</a>
+				<!--<a class="next most-awesome" href="#most-awesome">Next</a>-->
+			</nav>
 
-		<nav class="filtering">
-			<span class="filter" data-filter="book"><i class="icon-book"></i></span>
-			<span class="filter" data-filter="videofilm"><i class="icon-videofilm"></i></span>
-			<span class="filter" data-filter="soundrecording"><i class="icon-soundrecording"></i></span>
-		</nav>
+			<nav class="filtering">
+				<span class="filter" data-filter="book"><i class="icon-book"></i></span>
+				<span class="filter" data-filter="videofilm"><i class="icon-videofilm"></i></span>
+				<span class="filter" data-filter="soundrecording"><i class="icon-soundrecording"></i></span>
+			</nav>
 
-	</article>
+		</article>
 
-	<article id="most-awesome">
-		<header>
-			<h1>Most Awesome</h1>
-		</header>
+		<article id="most-awesome">
+			<header>
+				<h1>Most Awesome</h1>
+			</header>
 
-		<div id="most"></div>
+			<div id="most"></div>
 
-		<nav class="next-prev">
-			<!--<a class="prev recently-awesome" href="#recently-awesome">Prev</a>
-			<a class="next search" href="#search">Next</a>-->
-		</nav>
-	</article>
+			<nav class="next-prev">
+				<!--<a class="prev recently-awesome" href="#recently-awesome">Prev</a>
+				<a class="next search" href="#search">Next</a>-->
+			</nav>
+		</article>
 
 
-	<article id="about">
-		<header>
-			<h1>About Awesome</h1>
-		</header>
-		<p>Returning something awesome to the {{organization.name}}?</p>
-		<br />
-		<p class="bold">Put it in the Awesome Box.</p>
-		<br />
-		<p>{{organization.about_page_blurb}}</p>
-		<br />
-		<p class="small">Find us online at <a href="{{organization.public_link}}">{{organization.public_link}}</a>
-		<br />
-		<p class="small">Contact us at <a href="mailto:{{organization.public_email}}">{{organization.public_email}}</a>
-		</p>
-		<p class="small">Movie images provided by <a href="http://www.flixster.com/">Flixster</a></p>
-		<nav class="next-prev">
-			<!--<a class="prev search" href="#search">Prev</a>-->
-		</nav>
-	</article>
-</div>
+		<article id="about">
+			<header>
+				<h1>About Awesome</h1>
+			</header>
+			<p>Returning something awesome to the {{organization.name}}?</p>
+			<br />
+			<p class="bold">Put it in the Awesome Box.</p>
+			<br />
+			<p>{{organization.about_page_blurb}}</p>
+			<br />
+			<p class="small">Find us online at <a href="{{organization.public_link}}">{{organization.public_link}}</a>
+			<br />
+			<p class="small">Contact us at <a href="mailto:{{organization.public_email}}">{{organization.public_email}}</a>
+			</p>
+			<p class="small">Movie images provided by <a href="http://www.flixster.com/">Flixster</a></p>
+			<nav class="next-prev">
+				<!--<a class="prev search" href="#search">Prev</a>-->
+			</nav>
+		</article>
+	</div><!-- end content -->
+</div> <!-- end wrapper -->
 
 <!-- Parallax foreground -->
 <div id="parallax-bg3">
@@ -200,4 +203,3 @@ var branch = "{{branch}}";
 
 </script>
 {% endblock extrascripts %}
-</body>

@@ -11,77 +11,79 @@
 
 {% block content %}
 <body>
-<header id="branding">
-	<h1>Awesome Box</h1>
-</header>
-<div id="content">
-	<article class="register thin-centered">
-		<h1>Create an Account</h1>
+<div id="wrapper">	
+	<header id="branding">
+		<h1>Awesome Box</h1>
+	</header>
+	<div id="content">
+		<article class="register thin-centered">
+			<h1>Create an Account</h1>
 
-		<form action="." method="post">
-			{% csrf_token %}
-			<p>
-				<label for="id_reg_key">Registration Key</label>
-				<input id="id_reg_key" type="text" name="reg_key" maxlength="30">
-			</p>
-			<p>
-				<label for="id_username">Username</label>
-				<input id="id_username" type="text" name="username" maxlength="30" value="{{form.data.username}}">
-				{{ form.username.errors }}
-			</p>
-			<p>
-				<label for="id_email">Admin Contact's Email address</label>
-				<input id="id_email" type="text" name="email" maxlength="30" value="{{form.data.email}}">
-				{{ form.email.errors }}
-			</p>
-			<p>
-				<label for="id_password">Password</label>
-				<input id="id_password" type="password" name="password" maxlength="30">
-				{{ form.password.errors }}
-			</p>
-			<p>
-				<label for="id_organization_name">Complete Organization Name</label>
-				<input id="id_organization_name" name="organization_name" maxlength="30">
-			</p>
-			<p>
-				<label for="id_organization_slug">Web-friendly Organization Name</label>
-				<input id="id_organization_slug" name="organization_slug" maxlength="30">
-				<span id="input_preview"></span>
-			</p>
-			<p>
-				<label for="id_service_lookup">Lookup service</label>
-				<select id="id_service_lookup" name="service_lookup">
-					<option selected value="worldcat">worldcat</option>
-					<option value="hollis">hollis</option>
-    			</select>
-			</p>
-			<p>
-				<label for="id_catalog_base_url">Base Catalog URL</label>
-				<input id="id_catalog_base_url" name="catalog_base_url" maxlength="300"
-			</p>
-			<p>
-				<label for="id_branch_name">Complete Branch Name</label>
-				<input id="id_branch_name" name="branch_name" maxlength="30">
-			</p>
-			<p>
-				<label for="id_branch_slug">Web-friendly Branch Name</label>
-				<input id="id_branch_slug" name="branch_slug" maxlength="30">
-				{{ form.branch_slug.errors }}
-			</p>
-			<p>
-				<label for="id_branch_lat">Branch latitude</label>
-				<input id="id_branch_lat" name="branch_lat" maxlength="30">
-			</p>
-			<p>
-				<label for="id_branch_long">Branch longitude</label>
-				<input id="id_branch_long" name="branch_long" maxlength="30">
-			</p>
+			<form action="." method="post">
+				{% csrf_token %}
+				<p>
+					<label for="id_reg_key">Registration Key</label>
+					<input id="id_reg_key" type="text" name="reg_key" maxlength="30">
+				</p>
+				<p>
+					<label for="id_username">Username</label>
+					<input id="id_username" type="text" name="username" maxlength="30" value="{{form.data.username}}">
+					{{ form.username.errors }}
+				</p>
+				<p>
+					<label for="id_email">Admin Contact's Email address</label>
+					<input id="id_email" type="text" name="email" maxlength="30" value="{{form.data.email}}">
+					{{ form.email.errors }}
+				</p>
+				<p>
+					<label for="id_password">Password</label>
+					<input id="id_password" type="password" name="password" maxlength="30">
+					{{ form.password.errors }}
+				</p>
+				<p>
+					<label for="id_organization_name">Complete Organization Name</label>
+					<input id="id_organization_name" name="organization_name" maxlength="30">
+				</p>
+				<p>
+					<label for="id_organization_slug">Web-friendly Organization Name</label>
+					<input id="id_organization_slug" name="organization_slug" maxlength="30">
+					<span id="input_preview"></span>
+				</p>
+				<p>
+					<label for="id_service_lookup">Lookup service</label>
+					<select id="id_service_lookup" name="service_lookup">
+						<option selected value="worldcat">worldcat</option>
+						<option value="hollis">hollis</option>
+	    			</select>
+				</p>
+				<p>
+					<label for="id_catalog_base_url">Base Catalog URL</label>
+					<input id="id_catalog_base_url" name="catalog_base_url" maxlength="300"
+				</p>
+				<p>
+					<label for="id_branch_name">Complete Branch Name</label>
+					<input id="id_branch_name" name="branch_name" maxlength="30">
+				</p>
+				<p>
+					<label for="id_branch_slug">Web-friendly Branch Name</label>
+					<input id="id_branch_slug" name="branch_slug" maxlength="30">
+					{{ form.branch_slug.errors }}
+				</p>
+				<p>
+					<label for="id_branch_lat">Branch latitude</label>
+					<input id="id_branch_lat" name="branch_lat" maxlength="30">
+				</p>
+				<p>
+					<label for="id_branch_long">Branch longitude</label>
+					<input id="id_branch_long" name="branch_long" maxlength="30">
+				</p>
 
 
-			<button type="submit" class="button positive icon-ok immediate">Create Account</button>
-		</form>
-	</article>
-</div>
+				<button type="submit" class="button positive icon-ok immediate">Create Account</button>
+			</form>
+		</article>
+	</div><!-- end content -->
+</div> <!-- end wrapper -->
 {% endblock content %}
 
 {% block scripts %}
@@ -105,4 +107,3 @@
 </script>
 
 {% endblock scripts %}
-</body>

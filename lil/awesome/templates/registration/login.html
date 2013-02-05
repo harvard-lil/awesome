@@ -11,33 +11,37 @@
 
 {% block content %}
 <body>
-<header id="branding">
-	<span id="feeds">
-		{% if twitter_username %}
-		<a href="http://twitter.com/#!/{{twitter_username}}" target="_blank">
-			<img src="{{ STATIC_PREFIX }}images/twitter.png" class="twitterIcon" alt="Follow {{twitter_username}} on Twitter" />
-		</a>
-		{% endif %}
-	</span>
-	<h1>Awesome Box</h1>
-</header>
-<div id="content">
-	<article class="control thin-centered">
-		<h1>Login</h1>
+<div id="wrapper">
+	<header id="branding">
+		<span id="feeds">
+			{% if twitter_username %}
+			<a href="http://twitter.com/#!/{{twitter_username}}" target="_blank">
+				<img src="{{ STATIC_PREFIX }}images/twitter.png" class="twitterIcon" alt="Follow {{twitter_username}} on Twitter" />
+			</a>
+			{% endif %}
+		</span>
+		<h1>Awesome Box</h1>
+	</header>
+	<div id="content">
+		<article class="control thin-centered">
+			<h1>Login</h1>
 		
-		{% if next %}
-			<form method="post" action="?next={{ next }}">
-		{% else %}
-			<form method="post" action=".">
-		{% endif %}
-			{% csrf_token %}
-			{{ form.as_p }}
-			<button type="submit" class="button positive icon-ok immediate">Login</button>
-		</form>
-		<p>Can't remember your password? No problem, we can help you <a href="{% url auth_password_reset %}">create a new one.</a></p>
-	</article>
-</div>
+			{% if next %}
+				<form method="post" action="?next={{ next }}">
+			{% else %}
+				<form method="post" action=".">
+			{% endif %}
+				{% csrf_token %}
+				{{ form.as_p }}
+				<button type="submit" class="button positive icon-ok immediate">Login</button>
+			</form>
+			<br />
+			<p>Can't remember your password? No problem, we can help you <a href="{% url auth_password_reset %}">create a new one.</a></p>
+		</article>
+	</div><!-- end content -->
+</div> <!-- end wrapper -->
 {% endblock content %}
+
 
 {% block scripts %}
 <script src="{{ STATIC_PREFIX }}js/modernizr.custom.37797.js"></script> 
@@ -53,4 +57,3 @@
 	$('input[name=username]').focus();
 </script>
 {% endblock scripts %}
-</body>
