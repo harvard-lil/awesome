@@ -118,6 +118,11 @@ p {
     z-index:6;
 }
 
+#branding a:hover {
+	color:#11cbf7;
+	text-decoration:none;
+}
+
 #feeds ul {
     margin-right:6px;   
 }
@@ -495,7 +500,8 @@ p.bold {
 }
 
 .control_list a {
-    font-size: 26px;
+    margin-left:15px;
+    font-size: 22px;
     color: #000;
 }
 
@@ -519,6 +525,10 @@ p.bold {
 
 .common-table td {
     padding:10px 2px 0;
+}
+
+.errorlist {
+    color: #ec2d79;
 }
 
 

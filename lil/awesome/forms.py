@@ -74,7 +74,7 @@ class BranchForm(forms.ModelForm):
     
     def __init__(self, *args, **kwargs):
             super(BranchForm, self).__init__(*args, **kwargs)
-            self.fields['slug'].label = "Web friendly name (letters, numbers, and hyphens)"
+            self.fields['slug'].label = "Web friendly name (letters, numbers, underscores or hyphens)"
 
     class Meta:
         model = Branch
