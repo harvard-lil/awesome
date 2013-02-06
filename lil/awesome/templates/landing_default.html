@@ -1,9 +1,61 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-  </head>
+{% extends "layouts/base.html" %}
+{% load static %}
+{% get_static_prefix as STATIC_PREFIX %}
+{% load templatetag_handlebars %}
 
-  <body>
-  </body>
-</html>
+{% block title %}Awesome Box{% endblock title %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ STATIC_PREFIX }}css/bootstrap.css" type="text/css" />
+<link rel="stylesheet" media="all" href="{{ STATIC_PREFIX }}css/landing.css" />
+{% endblock styles %}
+
+{% block content %}
+<body>
+<div class="container">
+	
+	<div class="row span8 offset2">
+    <div class="text-block opening-row">
+			<h1>Sometimes things are<br/><span class="awesome">Awesome.</span></h1>
+		</div>
+			
+    <img class="awesome-image" src="{{ STATIC_PREFIX }}images/awesome_action.jpg"/>
+  </div><!--row-->
+  <div class="row">
+    <div class="span5 offset2">
+      <p class="text-block">Checked out something awesome from the library?</p>
+      <p class="text-block">Return it to the awesome box</p>
+    </div>
+    <div class="span5">
+      <form method="post" action="">
+        <p class="text-block">Learn how to get an awesome box</p>
+        <input type="text" class="input_large" placeholder="Your email" />
+			  <input type="submit" value="Yes please"/>
+		  </form>
+    </div>	
+  </div>
+	<footer>
+    <div class="row span8 offset2">
+      			
+      <hr>
+      <a href="http://librarylab.law.harvard.edu/"><img class="left stamp" src="{{ STATIC_PREFIX }}images/liblabstamp.png"/></a>
+      <p>Copyright &copy; 2013 The President and Fellows of Harvard College<br><a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a></p>
+      		
+    </div><!--row-->
+  </footer>
+</div>
+{% endblock content %}
+
+{% block scripts %}
+<!-- Grab Google CDN's jQuery. fall back to local if necessary --> 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+<script src="{{ STATIC_PREFIX }}js/jcarousellite.min.js"></script>
+<script src="{{ STATIC_PREFIX }}js/handlebars.js"></script>
+<script src="{{ STATIC_PREFIX }}js/landing.js"></script>
+
+<script type="text/javascript">
+       
+</script>
+{% endblock scripts %}
+</body>
