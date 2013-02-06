@@ -297,6 +297,11 @@ span.filter:hover, span.filter.selected {
     font-weight:bold;
     line-height: 65px;
 }
+#content h2 {
+    margin-top:20px;
+    font-size: 30px;
+    
+}
 #about {
     position: absolute;
     top: 2180px;
@@ -514,7 +519,7 @@ p.bold {
     width:580px;
     text-align:left;
     border-collapse:collapse;
-    margin:50px 0px 60px 0;
+    margin:10px 0px 30px 0;
 }
 
 .common-table th {

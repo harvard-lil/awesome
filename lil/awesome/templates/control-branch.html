@@ -29,6 +29,7 @@
 			</header>
 
 			{% if branches %}
+			<h2>Existing Branches</h2>
 			<table class="common-table">
 				<tr>
 					<th>Branch Name</th>
@@ -47,7 +48,7 @@
 			</table>
 			{% endif %}
 		
-
+			<h2>Create a New Branch</h2>
 			<form method="post" action="">
 				{% csrf_token %}
 				{{ form }}

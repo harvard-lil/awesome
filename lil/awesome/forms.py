@@ -70,6 +70,12 @@ class OrganizationForm(forms.ModelForm):
         model = Organization
         exclude = ('user', 'slug', 'service_lookup', )
         
+class OrganizationFormRegistration(forms.ModelForm):
+            
+    class Meta:
+        model = Organization
+        exclude = ('user')
+        
 class BranchForm(forms.ModelForm):
     
     def __init__(self, *args, **kwargs):
@@ -79,4 +85,3 @@ class BranchForm(forms.ModelForm):
     class Meta:
         model = Branch
         exclude = ('organization', )
-        

@@ -11,8 +11,8 @@ def home(request):
     
     if not request.user.is_authenticated():
         return HttpResponseRedirect(reverse('auth_login'))
-    
-    org = Organization.objects.get(slug=request.META['subdomain'])
+
+    org = Organization.objects.get(user=request.user)
     
     context = {
             'user': request.user,
@@ -27,7 +27,7 @@ def org(request):
     if not request.user.is_authenticated():
         return HttpResponseRedirect(reverse('auth_login'))
 
-    org = Organization.objects.get(slug=request.META['subdomain'])
+    org = Organization.objects.get(user=request.user)
     
     if request.method == 'POST':
         submitted_form = OrganizationForm(request.POST, instance=org)
@@ -61,7 +61,7 @@ def branch(request):
     if not request.user.is_authenticated():
         return HttpResponseRedirect(reverse('auth_login'))
 
-    org = Organization.objects.get(slug=request.META['subdomain'])
+    org = Organization.objects.get(user=request.user)
 
     if request.method == 'POST':
         submitted_form = BranchForm(request.POST,)

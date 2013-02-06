@@ -13,9 +13,8 @@ def scan(request):
         return HttpResponseRedirect(reverse('auth_login'))
     
     
-    org_name = request.META['subdomain']
     branch = request.GET.get('branch')
-    org = Organization.objects.get(slug=org_name)
+    org = Organization.objects.get(user=request.user)
     branches = Branch.objects.filter(organization=org)
 
     context = {'user': request.user,
