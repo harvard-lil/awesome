@@ -74,14 +74,14 @@ def _item_from_hollis(barcode, branch):
         response = f.read()
         f.close()
     except urllib2.HTTPError, e:
-        print('HTTPError = ' + str(e.code))
+        logger.warn('Item from Hollis, HTTPError = ' + str(e.code))
     except urllib2.URLError, e:
-        print('URLError = ' + str(e.reason))
+        logger.warn('Item from Hollis, URLError = ' + str(e.reason))
     except httplib.HTTPException, e:
-        print('HTTPException')
+        logger.warn('Item from Hollis, HTTPException')
     except Exception:
         import traceback
-        print('generic exception: ' + traceback.format_exc())
+        logger.warn('Item from Hollis, generic exception: ' + traceback.format_exc())
     
     jsoned_response = json.loads(response)
     
@@ -101,14 +101,14 @@ def _item_from_hollis(barcode, branch):
         response = f.read()
         f.close()
     except urllib2.HTTPError, e:
-        print('HTTPError = ' + str(e.code))
+        logger.warn('Item from LibraryCloud, HTTPError = ' + str(e.code))
     except urllib2.URLError, e:
-        print('URLError = ' + str(e.reason))
+        logger.warn('Item from LibraryCloud, URLError = ' + str(e.reason))
     except httplib.HTTPException, e:
-        print('HTTPException')
+        logger.warn('Item from LibraryCloud, HTTPException')
     except Exception:
         import traceback
-        print('generic exception: ' + traceback.format_exc())
+        logger.warn('Item from LibraryCloud, generic exception: ' + traceback.format_exc())
         
        
     jsoned_response = json.loads(response)
@@ -151,14 +151,14 @@ def _item_from_worldcat(barcode, branch):
         response = f.read()
         f.close()
     except urllib2.HTTPError, e:
-        print('HTTPError = ' + str(e.code))
+        logger.warn('Item from WorldCat, HTTPError = ' + str(e.code))
     except urllib2.URLError, e:
-        print('URLError = ' + str(e.reason))
+        logger.warn('Item from WorldCat, URLError = ' + str(e.reason))
     except httplib.HTTPException, e:
-        print('HTTPException')
+        logger.warn('Item from WorldCat, HTTPException')
     except Exception:
         import traceback
-        print('generic exception: ' + traceback.format_exc())
+        logger.warn('Item from WorldCat, generic exception: ' + traceback.format_exc())
     
     
     parser = etree.XMLParser(ns_clean=True, recover=True)
@@ -233,14 +233,14 @@ def _get_rt_movie_poster(title):
         response = f.read()
         f.close()
     except urllib2.HTTPError, e:
-        print('HTTPError = ' + str(e.code))
+        logger.warn('Item from Rotten Tomatoes, HTTPError = ' + str(e.code))
     except urllib2.URLError, e:
-        print('URLError = ' + str(e.reason))
+        logger.warn('Item from Rotten Tomatoes, URLError = ' + str(e.reason))
     except httplib.HTTPException, e:
-        print('HTTPException')
+        logger.warn('Item from Rotten Tomatoes, HTTPException')
     except Exception:
         import traceback
-        print('generic exception: ' + traceback.format_exc())
+        logger.warn('Item from Rotten Tomatoes, generic exception: ' + traceback.format_exc())
     
     jsoned_response = json.loads(response)
     
@@ -271,14 +271,14 @@ def _tweet_item(item):
             response = f.read()
             f.close()
         except urllib2.HTTPError, e:
-            print('HTTPError = ' + str(e.code))
+            logger.warn('Item from Bitly, HTTPError = ' + str(e.code))
         except urllib2.URLError, e:
-            print('URLError = ' + str(e.reason))
+            logger.warn('Item from Bitly, URLError = ' + str(e.reason))
         except httplib.HTTPException, e:
-            print('HTTPException')
+            logger.warn('Item from Bitly, HTTPException')
         except Exception:
             import traceback
-            print('generic exception: ' + traceback.format_exc())
+            logger.warn('Item from Bitly, generic exception: ' + traceback.format_exc())
     
         jsoned_response = json.loads(response)
     
