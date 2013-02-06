@@ -1,5 +1,6 @@
 import httplib, json, logging, urllib2
 from StringIO import StringIO
+from threading import Thread
 
 from lil.awesome.models import Branch, Item, Organization
 
@@ -147,7 +148,9 @@ def _item_from_hollis(barcode, branch):
     
     item.save()
     
-    _tweet_item(item)
+    current = ThreadedTweet(item)
+    current.start()
+    
     
     return docs['title']
     
@@ -229,7 +232,10 @@ def _item_from_worldcat(barcode, branch):
     
     item.save()
     
-    _tweet_item(item)
+    current = ThreadedTweet(item)
+    current.start()
+    
+    #_tweet_item(item)
     
     return title
 
@@ -310,3 +316,59 @@ def _tweet_item(item):
                               access_token_secret = org.twitter_oauth_secret)
                           
         api.PostUpdate(twitter_message)
+        
+
+class ThreadedTweet(Thread):
+   def __init__ (self,item):
+      Thread.__init__(self)
+      self.item = item
+      
+   def run(self):
+       """ Tweet the item """
+
+       org = self.item.branch.organization
+
+       # Let's check a couple of twitter config items before trying to tweet
+       if org.twitter_username and org.twitter_consumer_key:
+
+           link_to_item = org.catalog_base_url + self.item.catalog_id
+
+           # Get a short, bit.ly link to our catalog item
+           bitly_url = 'http://api.bit.ly/shorten?version=2.0.1&longUrl=' + urlquote(link_to_item) + '&login=' + BITLY['LOGIN'] + '&apiKey=' + BITLY['KEY'] + '&format=json';
+
+           req = urllib2.Request(bitly_url)
+
+           response = None
+
+           try: 
+               f = urllib2.urlopen(req)
+               response = f.read()
+               f.close()
+           except urllib2.HTTPError, e:
+               logger.warn('Item from Bitly, HTTPError = ' + str(e.code))
+           except urllib2.URLError, e:
+               logger.warn('Item from Bitly, URLError = ' + str(e.reason))
+           except httplib.HTTPException, e:
+               logger.warn('Item from Bitly, HTTPException')
+           except Exception:
+               import traceback
+               logger.warn('Item from Bitly, generic exception: ' + traceback.format_exc())
+
+           jsoned_response = json.loads(response)
+
+           short_url = jsoned_response['results'][link_to_item]['shortUrl'];
+
+
+           #Tweet the item details and the short url
+
+           twitter_message = self.item.title + ' by ' + self.item.creator
+           twitter_message = twitter_message[0:119] + ' ' + short_url
+
+           api = twitter.Api()
+           api = twitter.Api(consumer_key = org.twitter_consumer_key,
+                                 consumer_secret = org.twitter_consumer_secret,
+                                 access_token_key = org.twitter_oauth_token,
+                                 access_token_secret = org.twitter_oauth_secret)
+
+           api.PostUpdate(twitter_message)
+       

@@ -48,17 +48,4 @@
 <script>!window.jQuery && document.write('<script src="{{ STATIC_PREFIX }}/js/jquery-1.7.1.min.js"><\/script>')</script>
 
 
-<script type="text/javascript">	
-	$('input[name=organization_slug]').focus();
-
- 	$('input[name=organization_slug]').on('propertychange keyup input paste', function() {
- 		$('#input_preview').fadeIn("fast");
- 	
-		// Show the user what the url of the org will be
-		var user_url = $(this).val()
-		var slugged_user_url = user_url.replace(/\s+/g,'-').replace(/[^a-zA-Z0-9\-]/g,'').toLowerCase();
-    	$('#input_preview').html('http://' + slugged_user_url + '.awesomebox.io');
- 	});
-</script>
-
 {% endblock scripts %}

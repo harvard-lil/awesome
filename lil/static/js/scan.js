@@ -7,6 +7,8 @@ $(document).ready(function() {
 		$('.alert').hide();
 		$('.progress').show();
 	
+	    var val = 0;
+	
 		function updateProgress() {
 			val += 10;
 			$('.bar').css('width', val + '%');
@@ -18,12 +20,15 @@ $(document).ready(function() {
 		var barcode = $('#barcode').val();
 		var scanning_lib = $('#scanning_library option:selected').val();
 		
-		$.post('/services/new-item/', {barcode: barcode, branch: scanning_lib, csrfmiddlewaretoken: CSRF_TOKEN}, function(data) {
+		$.post('/services/new-item/', {barcode: barcode, branch: scanning_lib, csrfmiddlewaretoken: CSRF_TOKEN}).done(function(data) {
+		    console.log( data)
 			$('.alert-success').show();
+			$('.progress').hide();
 			$('.added-title').html(data);
-		});
-			
-		//$('.alert-error').text('The barcode lookup failed - no data').fadeIn();
+		}).fail(function(data) {
+    			$('.progress').hide();
+    			$('.alert-error').text('The barcode lookup failed - no data').fadeIn();
+    		});
 		
 		return false;
 	});

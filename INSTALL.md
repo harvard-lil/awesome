@@ -43,7 +43,7 @@ Install the Apache mod_wsgi module:
 
 ## Create a database for awesome
 
-    create database awesome;
+    create database awesome CHARACTER SET utf8;
     grant all on awesome.* to someusername@'localhost' identified by 'somepass';
 
 
