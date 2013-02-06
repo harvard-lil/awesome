@@ -11,23 +11,25 @@
 
 {% block content %}
 <body>
-<header id="branding">
-	<span id="feeds">
-		{% if twitter_username %}
-		<a href="http://twitter.com/#!/{{twitter_username}}" target="_blank">
-			<img src="{{ STATIC_PREFIX }}images/twitter.png" class="twitterIcon" alt="Follow {{twitter_username}} on Twitter" />
-		</a>
-		{% endif %}
-	</span>
-	<h1>Awesome Box</h1>
-</header>
-<div id="content">
-	<article class="control thin-centered">
-		<h1>You have been logged out.</h1>
+<div id="wrapper">		
+	<header id="branding">
+		<span id="feeds">
+			{% if twitter_username %}
+			<a href="http://twitter.com/#!/{{twitter_username}}" target="_blank">
+				<img src="{{ STATIC_PREFIX }}images/twitter.png" class="twitterIcon" alt="Follow {{twitter_username}} on Twitter" />
+			</a>
+			{% endif %}
+		</span>
+		<h1>Awesome Box</h1>
+	</header>
+	<div id="content">
+		<article class="control thin-centered">
+			<h1>You have been logged out.</h1>
 		
-		<p>Logged out a bit too soon? No worries, <a href="{% url auth_login %}">sign back in</a></p>
-	</article>
-</div>
+			<p>Logged out a bit too soon? No worries, <a href="{% url auth_login %}">sign back in</a></p>
+		</article>
+	</div><!-- end content -->
+</div> <!-- end wrapper -->
 {% endblock content %}
 
 {% block scripts %}
@@ -40,4 +42,3 @@
 <script src="{{ STATIC_PREFIX }}js/handlebars.js"></script>
 <script src="{{ STATIC_PREFIX }}js/awesome.js"></script>
 {% endblock scripts %}
-</body>

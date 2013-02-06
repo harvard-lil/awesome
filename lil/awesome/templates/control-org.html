@@ -12,30 +12,33 @@
 
 {% block content %}
 <body>
-<header id="branding">
-	<span id="feeds">
-		<ul>
-			<li><a href="{% url auth_logout %}">Logout</a></li><li>|</li><li><a href="{% url control_home %}">Control Center</a></li>
-		</ul>
-	</span>
-	<h1>Awesome Box at the {{ organization.name }}</h1>
-</header>
-<div id="content">
+<div id="wrapper">
 	
-	<article class="control thin-centered">
-		<header>
-			<h1>Control Organization</h1>
-		</header>
+	<header id="branding">
+		<span id="feeds">
+			<ul>
+				<li><a href="{% url auth_logout %}">Logout</a></li><li>|</li><li><a href="{% url control_home %}">Control Center</a></li>
+			</ul>
+		</span>
+		<h1><a href="{% url landing %}">Awesome Box at the {{ organization.name }}</a></h1>
+	</header>
+	<div id="content">
+	
+		<article class="control thin-centered">
+			<header>
+				<h1>Control Organization</h1>
+			</header>
 
-		<form method="post" action="">
-			{% csrf_token %}
-			{{ form }}
-			<br />
-			<input type="submit" value="Submit Form"/>
-		</form>
-	</article>
+			<form method="post" action="">
+				{% csrf_token %}
+				{{ form }}
+				<br />
+				<input type="submit" value="Submit Form"/>
+			</form>
+		</article>
 	
-</div>
+	</div><!-- end content -->
+</div> <!-- end wrapper -->
 {% endblock content %}
 
 {% block scripts %}
@@ -53,4 +56,3 @@ var organization = "{{organization.slug}}";
 var branch = "{{branch}}";        
 </script>
 {% endblock scripts %}
-</body>

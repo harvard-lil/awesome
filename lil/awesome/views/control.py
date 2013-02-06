@@ -73,9 +73,12 @@ def branch(request):
 
             return HttpResponseRedirect(reverse('control_branch'))
         else:
+            branches = Branch.objects.filter(organization=org)
+            
             context = {
                 'user': request.user,
                 'organization': org,
+                'branches': branches,
                 'form': submitted_form,
             }
             context.update(csrf(request))    
