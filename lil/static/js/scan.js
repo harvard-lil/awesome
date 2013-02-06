@@ -3,6 +3,27 @@ var timer;
 
 $(document).ready(function() {
 	$('#barcode').focus();
+	
+	
+	
+	function getURLParameter(name) {
+        return decodeURI(
+            (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]
+        );
+    }
+
+    var branch = getURLParameter('branch');
+    
+    if (branch) {
+        $("select option").each(function(){
+            console.log($(this).val());
+        if ($(this).val() == branch)
+            $(this).attr("selected","selected");
+        });
+    }
+
+    
+	
 	$('#lookup').submit(function() {
 		$('.alert').hide();
 		$('.progress').show();

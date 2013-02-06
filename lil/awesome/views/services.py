@@ -43,7 +43,7 @@ def new_item(request):
     # If we are using the harvard lookup system
     
     org = Organization.objects.get(user=request.user)
-    branch = Branch.objects.get(name=branch)
+    branch = Branch.objects.get(slug=branch)
     
     message_to_return = "No Title"
     
@@ -70,7 +70,7 @@ def learn_how(request):
         
     #send_mail('Interested in awesome box', 'My library needs more awesome!', email, ['somethign@law.harvard.edu', 'something@law.harvard.edu'], fail_silently=False)
     
-    message = datetime.datetime.now().strftime("%I:%M%p on %B %d, %Y") + email
+    message = datetime.datetime.now().strftime("%I:%M%p on %B %d, %Y") + email+ "\n"
     
     with open("/srv/www/awesome/lil/int-emails.txt", "a") as email_file:
         email_file.write(message)

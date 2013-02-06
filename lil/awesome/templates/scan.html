@@ -152,7 +152,7 @@ header, ul, li {
 	    Scanned at 
 	    <select id="scanning_library">
 	      {% for branch in branches %}
-			<option value='{{branch}}'>{{branch}}</option>
+			<option value='{{branch.slug}}'>{{branch.name}}</option>
 	      {% endfor %}
 
 	    </select>
