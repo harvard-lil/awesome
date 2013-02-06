@@ -1,4 +1,4 @@
-import httplib, json, logging, urllib2, re
+import httplib, json, logging, urllib2, re, datetime
 from StringIO import StringIO
 from threading import Thread
 
@@ -66,9 +66,14 @@ def learn_how(request):
     """Something coming in from our landing page"""
     
     
-    #email = request.POST["email"]
+    email = request.POST["email"]
         
-    #send_mail('Interested in awesome box', 'My library needs more awesome!', email, ['acain@law.harvard.edu', 'mphillips@law.harvard.edu'], fail_silently=False)
+    #send_mail('Interested in awesome box', 'My library needs more awesome!', email, ['somethign@law.harvard.edu', 'something@law.harvard.edu'], fail_silently=False)
+    
+    message = datetime.datetime.now().strftime("%I:%M%p on %B %d, %Y") + email
+    
+    with open("/srv/www/awesome/lil/int-emails.txt", "a") as email_file:
+        email_file.write(message)
     
     message_to_return = "Mail sent"
     
