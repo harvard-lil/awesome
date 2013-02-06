@@ -6,6 +6,7 @@ from lil.awesome.models import Branch, Item, Organization
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.http import urlquote
+from django.core.mail import send_mail
 
 from lxml import etree
 import twitter
@@ -57,6 +58,18 @@ def new_item(request):
         except NameError:
             return HttpResponse("Something went wonky", status=500)
 
+    
+    return HttpResponse(message_to_return, status=200)
+    
+def learn_how(request):
+    """Something coming in from our landing page"""
+    
+    
+    #email = request.POST["email"]
+        
+    #send_mail('Interested in awesome box', 'My library needs more awesome!', email, ['acain@law.harvard.edu', 'mphillips@law.harvard.edu'], fail_silently=False)
+    
+    message_to_return = "Mail sent"
     
     return HttpResponse(message_to_return, status=200)
 

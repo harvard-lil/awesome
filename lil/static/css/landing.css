@@ -20,29 +20,9 @@ h5 a:hover {
 	color:#09f
 }
 
-.title {
-	margin-top:-60px;
-}
-
-.title h1 {
-	font-size:36px;
-	font-weight:normal;
-}
-
-.title2 {
-	height:300px;
-	margin-top:0px;
-}
-
-.title2 h1 {
-	font-size:68px;
-	line-height:72px;
-}
-
-
 .stamp {
-	width:80px;
-	margin-bottom:-44px;
+	width:50px;
+	margin-bottom:-54px;
 }
 
 .stamp2 {
@@ -61,7 +41,7 @@ h5 a:hover {
 
 
 footer p {
-	color:#ccc;
+	color:#aaa;
 	text-shadow: 1px 1px 0px #fff;
 	text-align:right;
 	margin:0px -10px;
@@ -70,7 +50,7 @@ footer p {
 }
 
 footer p a {
-	color:#aaa;
+	color:#ccc;
 }
 
 h3 a, h3 {
@@ -141,6 +121,19 @@ h3.type-leading{
 	line-height:24px;
 	color:#fb5b0e;
 	text-decoration:underline;
+}
+
+a.already {
+  display:inline-block;
+  margin-right:55px;
+  margin-left:15px;
+  color:#236CBB;
+  font-size:18px;
+}
+
+a.already:hover {
+  text-decoration:none;
+  color:#1b5390;
 }
 
 h3 a {
@@ -241,6 +234,15 @@ margin-left: 5px;
 
 li {
 	line-height:20px;
+}
+
+#learn-how {
+  height:75px;
+}
+
+#signed-up {
+  margin-top:8px;
+  color:#9cbe15;
 }
 
 /*///////////////////Formalize, courtesy of Nathan Smith
