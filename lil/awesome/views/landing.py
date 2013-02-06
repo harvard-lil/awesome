@@ -3,6 +3,7 @@ import logging
 from lil.awesome.models import Organization
 
 from django.shortcuts import render_to_response
+from django.core.context_processors import csrf
 
 logger = logging.getLogger(__name__)
 
@@ -27,4 +28,7 @@ def landing(request):
                                                'branch': branch, 'twitter_username': org.twitter_username,
                                                'ga_key': GOOGLE['ANALYTICS_KEY']})
     else:
-        return render_to_response('landing_default.html', {'ga_key': GOOGLE['ANALYTICS_KEY']})
+        context = {'ga_key': GOOGLE['ANALYTICS_KEY']}
+               
+        context.update(csrf(request))
+        return render_to_response('landing_default.html', context)

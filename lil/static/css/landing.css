@@ -20,26 +20,6 @@ h5 a:hover {
 	color:#09f
 }
 
-.title {
-	margin-top:-60px;
-}
-
-.title h1 {
-	font-size:36px;
-	font-weight:normal;
-}
-
-.title2 {
-	height:300px;
-	margin-top:0px;
-}
-
-.title2 h1 {
-	font-size:68px;
-	line-height:72px;
-}
-
-
 .stamp {
 	width:50px;
 	margin-bottom:-54px;
@@ -254,6 +234,15 @@ margin-left: 5px;
 
 li {
 	line-height:20px;
+}
+
+#learn-how {
+  height:75px;
+}
+
+#signed-up {
+  margin-top:8px;
+  color:#9cbe15;
 }
 
 /*///////////////////Formalize, courtesy of Nathan Smith

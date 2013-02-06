@@ -16,6 +16,7 @@ urlpatterns = patterns('lil.awesome.views',
     url(r'^control/org/$', 'control.org', name='control_org'),
     url(r'^control/branch/$', 'control.branch', name='control_branch'),
     url(r'^services/new-item/$', 'services.new_item', name='services_new_item'),
+    url(r'^services/learn-how/$', 'services.learn_how', name='services_learn_how'),
     
     # Session/account management
     url(r'^password/change/$', auth_views.password_change, {'template_name': 'registration/password_change_form.html'}, name='auth_password_change'),
