@@ -36,7 +36,7 @@ class Branch(models.Model):
 class Item(models.Model):
     branch = models.ForeignKey(Branch)
     title = models.CharField(max_length=400)
-    creator = models.CharField(max_length=400)
+    creator = models.CharField(max_length=400, null=True, blank=True)
     unique_id = models.CharField(max_length=100, null=True, blank=True) #usually the institution id or worldcat
     catalog_id = models.CharField(max_length=200, null=True, blank=True) #the ID we use for linking. probably the institution id, isbn, upc 
     isbn = models.CharField(max_length=20, null=True, blank=True) # used to get the cover images
@@ -50,7 +50,7 @@ class Item(models.Model):
         # else, create a new item and a new checkin
 
         items = Item.objects.filter(unique_id=self.unique_id, branch=self.branch)[:1]
-        print len(items)
+        
         if len(items) > 0:
             Item.objects.filter(unique_id=self.unique_id, branch=self.branch).update(latest_checkin = datetime.now(), number_checkins=items[0].number_checkins + 1)
             checkin = Checkin(item=items[0])

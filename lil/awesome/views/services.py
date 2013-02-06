@@ -1,4 +1,4 @@
-import httplib, json, logging, urllib2
+import httplib, json, logging, urllib2, re
 from StringIO import StringIO
 from threading import Thread
 
@@ -139,8 +139,8 @@ def _item_from_hollis(barcode, branch):
     
     
     item = Item(branch=branch,
-                title=docs['title'],
-                creator=docs['creator'][0],
+                title=_simple_massage_text(docs['title']),
+                creator=_simple_massage_text(docs['creator'][0]),
                 unique_id=docs['id_inst'],
                 catalog_id=docs['id_inst'],
                 isbn=docs['id_isbn'][0],
@@ -152,7 +152,7 @@ def _item_from_hollis(barcode, branch):
     current.start()
     
     
-    return docs['title']
+    return _simple_massage_text(docs['title'])
     
 def _item_from_worldcat(barcode, branch):
     """Given a barcode, get metadata from worldcat"""
@@ -190,12 +190,12 @@ def _item_from_worldcat(barcode, branch):
     title = 'No title'
     title_list = tree.xpath('//*[@tag="245"]/*[@code="a"]/text()')
     if title_list:
-        title = title_list[0]
+        title = unicode(title_list[0])
     
-    creator = 'No creator'
+    creator = ''
     creator_list = tree.xpath('//*[@tag="100"]/*[@code="a"]/text()')
     if creator_list:
-        creator = creator_list[0]
+        creator = unicode(creator_list[0])
         
     massaged_isbn = None
     isbn_list = tree.xpath('//*[@tag="020"]/*[@code="a"]/text()')
@@ -218,11 +218,10 @@ def _item_from_worldcat(barcode, branch):
             elif 'sound' in format:
                 physical_format = 'soundrecording'
                 break
-
-   
+                
     item = Item(branch=branch,
-                title=title,
-                creator=creator,
+                title=_simple_massage_text(title),
+                creator=_simple_massage_text(creator),
                 unique_id=unique_id,
                 catalog_id=barcode,
                 isbn=massaged_isbn,
@@ -235,9 +234,7 @@ def _item_from_worldcat(barcode, branch):
     current = ThreadedTweet(item)
     current.start()
     
-    #_tweet_item(item)
-    
-    return title
+    return _simple_massage_text(title)
 
 def _get_rt_movie_poster(title):
     """Try to get a poster url from rottent tomatoes"""
@@ -268,56 +265,6 @@ def _get_rt_movie_poster(title):
 
     return poster_url
     
-def _tweet_item(item):
-    """ Tweet the item """
-
-    org = item.branch.organization
-
-    # Let's check a couple of twitter config items before trying to tweet
-    if org.twitter_username and org.twitter_consumer_key:
-    
-        link_to_item = org.catalog_base_url + item.catalog_id
-    
-        # Get a short, bit.ly link to our catalog item
-        bitly_url = 'http://api.bit.ly/shorten?version=2.0.1&longUrl=' + urlquote(link_to_item) + '&login=' + BITLY['LOGIN'] + '&apiKey=' + BITLY['KEY'] + '&format=json';
-    
-        req = urllib2.Request(bitly_url)
-    
-        response = None
-    
-        try: 
-            f = urllib2.urlopen(req)
-            response = f.read()
-            f.close()
-        except urllib2.HTTPError, e:
-            logger.warn('Item from Bitly, HTTPError = ' + str(e.code))
-        except urllib2.URLError, e:
-            logger.warn('Item from Bitly, URLError = ' + str(e.reason))
-        except httplib.HTTPException, e:
-            logger.warn('Item from Bitly, HTTPException')
-        except Exception:
-            import traceback
-            logger.warn('Item from Bitly, generic exception: ' + traceback.format_exc())
-    
-        jsoned_response = json.loads(response)
-    
-        short_url = jsoned_response['results'][link_to_item]['shortUrl'];
-    
-    
-        #Tweet the item details and the short url
-    
-        twitter_message = item.title + ' by ' + item.creator
-        twitter_message = twitter_message[0:119] + ' ' + short_url
-    
-        api = twitter.Api()
-        api = twitter.Api(consumer_key = org.twitter_consumer_key,
-                              consumer_secret = org.twitter_consumer_secret,
-                              access_token_key = org.twitter_oauth_token,
-                              access_token_secret = org.twitter_oauth_secret)
-                          
-        api.PostUpdate(twitter_message)
-        
-
 class ThreadedTweet(Thread):
    def __init__ (self,item):
       Thread.__init__(self)
@@ -361,7 +308,10 @@ class ThreadedTweet(Thread):
 
            #Tweet the item details and the short url
 
-           twitter_message = self.item.title + ' by ' + self.item.creator
+           twitter_message = self.item.title
+           if self.item.creator:
+               twitter_message = twitter_message + ' by ' + self.item.creator
+               
            twitter_message = twitter_message[0:119] + ' ' + short_url
 
            api = twitter.Api()
@@ -372,3 +322,8 @@ class ThreadedTweet(Thread):
 
            api.PostUpdate(twitter_message)
        
+def _simple_massage_text(to_be_massaged):
+    if not to_be_massaged:
+        return to_be_massaged
+    
+    return re.sub(r'[^\w^\d^.]*$', r'',to_be_massaged)
