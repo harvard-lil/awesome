@@ -41,8 +41,8 @@ h5 a:hover {
 
 
 .stamp {
-	width:80px;
-	margin-bottom:-44px;
+	width:50px;
+	margin-bottom:-54px;
 }
 
 .stamp2 {
@@ -61,7 +61,7 @@ h5 a:hover {
 
 
 footer p {
-	color:#ccc;
+	color:#aaa;
 	text-shadow: 1px 1px 0px #fff;
 	text-align:right;
 	margin:0px -10px;
@@ -70,7 +70,7 @@ footer p {
 }
 
 footer p a {
-	color:#aaa;
+	color:#ccc;
 }
 
 h3 a, h3 {
@@ -141,6 +141,19 @@ h3.type-leading{
 	line-height:24px;
 	color:#fb5b0e;
 	text-decoration:underline;
+}
+
+a.already {
+  display:inline-block;
+  margin-right:55px;
+  margin-left:15px;
+  color:#236CBB;
+  font-size:18px;
+}
+
+a.already:hover {
+  text-decoration:none;
+  color:#1b5390;
 }
 
 h3 a {
