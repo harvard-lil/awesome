@@ -4,7 +4,7 @@ var timer;
 $(document).ready(function() {
 	$('#barcode').focus();
 	
-	
+    var branch = getURLParameter('branch');
 	
 	function getURLParameter(name) {
         return decodeURI(
@@ -12,16 +12,16 @@ $(document).ready(function() {
         );
     }
 
-    var branch = getURLParameter('branch');
-    
-    if (branch) {
+    function set_selected(branch) {
         $("select option").each(function(){
         if ($(this).val() == branch)
             $(this).attr("selected","selected");
         });
     }
 
-    
+    if (branch) {
+        set_selected(branch);
+    }    
 	
 	$('#lookup').submit(function() {
 		$('.alert').hide();
@@ -48,6 +48,8 @@ $(document).ready(function() {
     			$('.progress').hide();
     			$('.alert-error').text('The barcode lookup failed - no data').fadeIn();
     		});
+		
+		set_selected(branch);
 		
 		return false;
 	});
