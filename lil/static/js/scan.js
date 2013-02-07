@@ -4,8 +4,7 @@ var timer;
 $(document).ready(function() {
 	$('#barcode').focus();
 	
-    var branch = getURLParameter('branch');
-	
+
 	function getURLParameter(name) {
         return decodeURI(
             (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]
@@ -18,6 +17,8 @@ $(document).ready(function() {
             $(this).attr("selected","selected");
         });
     }
+
+    var branch = getURLParameter('branch');
 
     if (branch) {
         set_selected(branch);
@@ -49,7 +50,6 @@ $(document).ready(function() {
     			$('.alert-error').text('The barcode lookup failed - no data').fadeIn();
     		});
 		
-		set_selected(branch);
 		
 		return false;
 	});

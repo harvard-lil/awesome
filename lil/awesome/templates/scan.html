@@ -149,13 +149,11 @@ header, ul, li {
 	</div>
 	<div id="scanned_at">
 	    Scanned at
-	<form>
 	    <select id="scanning_library">
 	      {% for branch in branches %}
 			<option value='{{branch.slug}}'>{{branch.name}}</option>
 	      {% endfor %}
 	    </select>
-	</form>
 	</div>
 {% endblock content %}
 </body>
