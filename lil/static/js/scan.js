@@ -16,7 +16,6 @@ $(document).ready(function() {
     
     if (branch) {
         $("select option").each(function(){
-            console.log($(this).val());
         if ($(this).val() == branch)
             $(this).attr("selected","selected");
         });
@@ -42,7 +41,6 @@ $(document).ready(function() {
 		var scanning_lib = $('#scanning_library option:selected').val();
 		
 		$.post('/services/new-item/', {barcode: barcode, branch: scanning_lib, csrfmiddlewaretoken: CSRF_TOKEN}).done(function(data) {
-		    console.log( data)
 			$('.alert-success').show();
 			$('.progress').hide();
 			$('.added-title').html(data);
