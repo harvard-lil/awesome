@@ -45,9 +45,11 @@ $(document).ready(function() {
 			$('.alert-success').show();
 			$('.progress').hide();
 			$('.added-title').html(data);
+			return false;
 		}).fail(function(data) {
     			$('.progress').hide();
     			$('.alert-error').text('The barcode lookup failed - no data').fadeIn();
+    			return false;
     		});
 		
 		
