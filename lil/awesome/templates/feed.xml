@@ -1,4 +1,4 @@
-<xml version="1.0" encoding="ISO-8859-1>
+<?xml version="1.0"?>
 <rss version="2.0">
     <channel>    
 	    <title>Recently Awesome at {{organization.name}}</title>
@@ -12,12 +12,13 @@
 		<ttl>0</ttl>
 
 		{% for item in items %}		
-		<item>{{item.title}}</title>
+		<item>
+		  <title>{{item.title}}</title>
 			<link>{{organization.catalog_base_url}}{{item.catalog_id}}</link>
 			{% if item.cover_art %}
-			<description><img class="item-cover" src="{{ item.cover_art }}">{{item.title}} by {{item.creator}}></description>
+			<description><img class="item-cover" src="{{ item.cover_art }}" />{{item.title}} by {{item.creator}}></description>
 			{% else %}
-			<description><img src="http://covers.openlibrary.org/b/isbn/{{item.isbn}}-M.jpg">{{item.title}} by {{item.creator}}></description>
+			<description><img src="http://covers.openlibrary.org/b/isbn/{{item.isbn}}-M.jpg" />{{item.title}} by {{item.creator}}></description>
 			{% endif %}
 			<pubDate></pubDate> 
 		</item>
