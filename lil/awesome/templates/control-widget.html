@@ -16,7 +16,7 @@
 	<header id="branding">
 		<span id="feeds">
 			<ul>
-				<li><a href="{% url auth_logout %}">Logout</a></li>
+				<li><a href="{% url auth_logout %}">Logout</a></li><li>|</li><li><a href="{% url control_home %}">Control Center</a></li>
 			</ul>
 		</span>
 		<h1><a href="{% url landing %}">Awesome Box at the {{ organization.name }}</a></h1>
@@ -25,13 +25,12 @@
 		<article class="control thin-centered">
 		
 			<header>
-				<h1>Control Center</h1>
+				<h1>Get a Widget</h1>
 			</header>
-			<p class="control_list"><a href="{% url scan %}">Scan an item</a></p>		
-			<p class="control_list"><a href="{% url control_org %}">Update your organization's data</a></p>
-			<p class="control_list"><a href="{% url control_branch %}">Add a branch</a></p>
-			<!--<p class="control_list"><a href="{% url control_widget %}">Get a widget</a></p>-->
-			<p class="control_list"><a href="{% url auth_password_change %}">Change your password</a></p>
+			<h3>Embed the following widget anywhere</h3>		
+			<div class="widget-sample"><script src="{% url widget %}"></script></div>
+			<label for="widget-code">Copy and paste the code into the HTML of your site</label>
+			<textarea id="widget-code"><script src="http://{{organization.slug}}.{{awesome_domain}}{% url widget %}"></script></textarea>
 		</article>
 	</div><!-- end content -->
 </div> <!-- end wrapper -->
@@ -42,13 +41,15 @@
 <!-- Grab Google CDN's jQuery. fall back to local if necessary --> 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script>!window.jQuery && document.write('<script src="{{ STATIC_PREFIX }}/js/jquery-1.7.1.min.js"><\/script>')</script>
-<script src="{{ STATIC_PREFIX }}js/jcarousellite.min.js"></script>
-<script src="{{ STATIC_PREFIX }}js/jquery.dotdotdot-1.4.0-packed.js"></script>
-<script src="{{ STATIC_PREFIX }}js/handlebars.js"></script>
-<script src="{{ STATIC_PREFIX }}js/awesome.js"></script>
 
 <script type="text/javascript">
 var organization = "{{organization.slug}}";
-var branch = "{{branch}}";        
+var branch = "{{branch}}";    
+$(function () {
+  $("#content #widget-code").on("click", function(event){
+    var $this = $(this);
+    $this.select();
+  });
+});
 </script>
 {% endblock scripts %}

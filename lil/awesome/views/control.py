@@ -5,6 +5,7 @@ from django.core.context_processors import csrf
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.core.urlresolvers import reverse
+from django.contrib.sites.models import Site
 
 def home(request):
     """Control (user admin site) landing page"""
@@ -97,3 +98,20 @@ def branch(request):
         }
         context.update(csrf(request))    
         return render_to_response('control-branch.html', context)
+        
+def widget(request):
+    """Users can grab widget code here"""
+    
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect(reverse('auth_login'))
+
+    org = Organization.objects.get(user=request.user)
+    awesome_domain = Site.objects.get_current().domain
+    
+    context = {
+            'user': request.user,
+            'organization': org,
+            'awesome_domain': awesome_domain,
+        }
+    
+    return render_to_response('control-widget.html', context)

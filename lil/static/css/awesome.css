@@ -510,8 +510,21 @@ p.bold {
     color: #000;
 }
 
+.control h3 {
+  font-size:24px;
+}
+
 .control_list a:hover { 
     color:#07a8ce;
+}
+
+.widget-sample {
+  margin-top:25px;
+  margin-bottom:25px;
+}
+
+#widget-code {
+  width: 315px;
 }
 
 .common-table {
