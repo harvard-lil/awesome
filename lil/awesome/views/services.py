@@ -43,7 +43,7 @@ def new_item(request):
     # If we are using the harvard lookup system
     
     org = Organization.objects.get(user=request.user)
-    branch = Branch.objects.get(slug=branch)
+    branch = Branch.objects.get(slug=branch, organization=org)
     
     message_to_return = "No Title"
     
