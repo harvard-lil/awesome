@@ -28,7 +28,7 @@ $(document).ready(function() {
 		$('.alert').hide();
 		$('.progress').show();
 	
-	    var val = 0;
+	    	var val = 0;
 	
 		function updateProgress() {
 			val += 10;
@@ -45,13 +45,10 @@ $(document).ready(function() {
 			$('.alert-success').show();
 			$('.progress').hide();
 			$('.added-title').html(data);
-			return false;
 		}).fail(function(data) {
     			$('.progress').hide();
     			$('.alert-error').text('The barcode lookup failed - no data').fadeIn();
-    			return false;
     		});
-		
 		
 		return false;
 	});
