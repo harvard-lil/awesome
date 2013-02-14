@@ -45,10 +45,10 @@ h1 {
 }
 
 #scanned_at {
-  margin: 25px auto 0;
   font-size:14px;
   width:350px;
-  padding-left:350px;
+  padding-left:310px;
+  margin-top: 20px;
 }
 
 .added-title {
@@ -136,6 +136,14 @@ header, ul, li {
 		<h1>Awesome Box Barcode Scan</h1>
 		<form id="lookup">
 	    <input type="text" id="barcode" />
+	<div id="scanned_at">
+	    Scanned at
+	    <select id="scanning_library">
+	      {% for branch in branches %}
+			<option value='{{branch.slug}}'>{{branch.name}}</option>
+	      {% endfor %}
+	    </select>
+	</div>
 	    <input type="submit" value="submit" id="submit" style="display:none;" />
 	  </form>
 	  <div class="progress" style="display:none;">
@@ -146,14 +154,6 @@ header, ul, li {
 	    <h4 class="alert-heading">Awesome!</h4>
 	    <span class="label label-success"><i class="icon-ok-sign icon-white"></i> Added</span> <span class="added-title">
 	  </div>
-	</div>
-	<div id="scanned_at">
-	    Scanned at
-	    <select id="scanning_library">
-	      {% for branch in branches %}
-			<option value='{{branch.slug}}'>{{branch.name}}</option>
-	      {% endfor %}
-	    </select>
 	</div>
 {% endblock content %}
 </body>
