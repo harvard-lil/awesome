@@ -9,6 +9,8 @@
 
 .aw-widget-list {
   padding: 5px 0 15px 10px;
+  margin:0;
+  vertical-align:baseline;
 }
 
 .aw-widget-item {
@@ -17,10 +19,16 @@
   background: rgb(255, 255, 255);
   background: rgba(255, 255, 255, 0.75);
   margin:8px 0 0 0;
+  padding:0;
+  vertical-align: baseline;
+  line-height: 18px;
 }
 
 .aw-widget-item a {
   font-size:14px;
+  vertical-align: baseline;
+  margin: 0;
+  padding:0;
 }
 
 .aw-widget a, .aw-widget a:link,
@@ -39,19 +47,22 @@
   color:#07a8ce;
 }
 
-.aw-widget-creator {
+span.aw-widget-creator {
   display:block;
-  margin-top:-4px;
+  margin:0;
+  line-height: 18px;
   font-size:12px;
+  padding:0;
+  vertical-align:baseline;
 }
 
-.aw-widget-title {
+h4.aw-widget-title {
   margin-top:-225px;
   background: none repeat scroll 0 0 #BEE620;
   padding:10px;
 }
 
-.aw-widget-title a {
+h4.aw-widget-title a {
   color:#11CBF7;
   background: none repeat scroll 0 0 #BEE620;
   font-size:18px;
@@ -61,6 +72,7 @@
   line-height:1.1em;
 }
 
-.aw-widget-arrow {
+img.aw-widget-arrow {
   padding-left:225px;
+  display:block;
 }
