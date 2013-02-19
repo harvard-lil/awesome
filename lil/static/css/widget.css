@@ -57,7 +57,7 @@ span.aw-widget-creator {
 }
 
 h4.aw-widget-title {
-  margin-top:-225px;
+  margin:-225px 0 0 0;
   background: none repeat scroll 0 0 #BEE620;
   padding:10px;
 }
