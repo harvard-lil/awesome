@@ -20,4 +20,4 @@
  
 ## Advertisements
  
-* [awesome_ad.jpg](awesome_ad.jpg)
+* [awesome-ad.jpg](awesome-ad.jpg)
