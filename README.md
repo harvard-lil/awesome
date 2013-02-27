@@ -18,6 +18,6 @@
  * [awesome-clean-med.jpg](awesome-clean-med.jpg)
  * [awesome-clean-large.jpg](awesome-clean-large.jpg)
  
- ## Advertisements
+## Advertisements
  
 * [awesome_ad.jpg](awesome_ad.jpg)
