@@ -28,7 +28,7 @@ Download it and install it:
 
 Awesome Box is written in PHP. PHP 5.3 or later is recommended.
 
-Serving up ShelfLife in [Apache](http://httpd.apache.org/) is probably the easiest way to get started. ShelfLife relies on rewrite rules in .htaccess. Be sure you're allowing for .htaccess in your httpd configuration and that you have mod_php and mod_rewrite installed.
+Serving up Awesome Box in [Apache](http://httpd.apache.org/) is probably the easiest way to get started. Awesome Box relies on rewrite rules in .htaccess. Be sure you're allowing for .htaccess in your httpd configuration and that you have mod_php and mod_rewrite installed.
 
 ### Getting the source
 
