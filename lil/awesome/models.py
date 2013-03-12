@@ -12,6 +12,7 @@ class Organization(models.Model):
     catalog_base_url = models.URLField(max_length=2000)
     public_link = models.URLField(max_length=2000, null=True, blank=True)
     public_email = models.EmailField(max_length=254, null=True, blank=True)
+    logo_link = models.URLField(max_length=2000, null=True, blank=True)
     about_page_blurb = models.TextField(max_length=4000, default="Lorem ipsum dolor sit amet, consectetur adipiscing elit.")
     twitter_username = models.CharField(max_length=10, null=True, blank=True)
     twitter_consumer_key = models.CharField(max_length=200, null=True, blank=True)

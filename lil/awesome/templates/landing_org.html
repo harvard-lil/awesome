@@ -91,6 +91,10 @@
 			<p class="bold">Put it in the Awesome Box.</p>
 			<br />
 			<p>{{organization.about_page_blurb}}</p>
+			{% if organization.logo_link %}
+			<br />
+			<p><img src="{{organization.logo_link}}" alt="{{organization.name}} logo"></p>
+			{% endif %}
 			{% if organization.public_link %}
 			<br />
 			<p class="small">Find us online at <a href="{{organization.public_link}}">{{organization.public_link}}</a>
