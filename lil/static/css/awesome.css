@@ -321,6 +321,11 @@ p.bold {
     font-size:18px;
 }
 
+#about img.org-logo {
+  max-width: 550px;
+  max-height: 150px;
+}
+
 #about p.tiny {
     font-size:12px;
 }
