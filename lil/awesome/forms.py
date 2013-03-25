@@ -85,3 +85,7 @@ class BranchForm(forms.ModelForm):
     class Meta:
         model = Branch
         exclude = ('organization', )
+
+class AnalyticsForm(forms.Form):
+    start_date = forms.DateField()
+    end_date = forms.DateField()
