@@ -31,6 +31,11 @@
 			<div class="widget-sample"><script src="{% url widget %}"></script></div>
 			<label for="widget-code">Copy and paste the code into the HTML of your site</label>
 			<textarea id="widget-code"><script src="http://{{organization.slug}}.{{awesome_domain}}{% url widget %}"></script></textarea>
+			<br><br>
+			<h3>Don't like the colors?  Embed this plain widget and style it yourself.</h3>		
+			<div class="widget-sample"><script src="{% url widget %}?style=none"></script></div>
+			<label for="widget-code">Copy and paste the code into the HTML of your site</label>
+			<textarea id="widget-code"><script src="http://{{organization.slug}}.{{awesome_domain}}{% url widget %}?style=none"></script></textarea>
 		</article>
 	</div><!-- end content -->
 </div> <!-- end wrapper -->
