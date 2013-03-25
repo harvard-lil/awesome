@@ -538,7 +538,7 @@ p.bold {
     width:580px;
     text-align:left;
     border-collapse:collapse;
-    margin:10px 0px 30px 0;
+    margin:10px 0px 90px 0;
 }
 
 .common-table th {
@@ -553,6 +553,51 @@ p.bold {
 
 .errorlist {
     color: #ec2d79;
+}
+
+#ui-datepicker-div {
+    font-size: 82.5%;
+}
+
+#ui-datepicker-div select {
+    height: 100%;
+}
+
+#analytics-query-from {
+    margin-top:10px;
+    margin-bottom:40px;
+}
+
+#analytics-query-from label {
+    display: inline;
+    margin-right:6px;
+}
+
+#analytics-query-from input {
+    width: 100px;
+}
+
+#analytics-query-from input[type=text] {
+    margin-right: 20px;
+}
+
+#analytics-query-from ul, ul li {
+    margin-right: 5px;
+    display: inline;
+}
+
+.query_table  {
+    width:360px;
+}
+
+.query_table .name_col {
+    min-width:200px;
+    max-width:300px;
+}
+
+.query_table .num_awe_col {
+    min-width:150px;
+    max-width:250px;
 }
 
 
