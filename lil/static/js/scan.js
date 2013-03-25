@@ -44,6 +44,7 @@ $(document).ready(function() {
 		$.post('/services/new-item/', {barcode: barcode, branch: scanning_lib, csrfmiddlewaretoken: CSRF_TOKEN}).done(function(data) {
 			$('.alert-success').show();
 			$('.progress').hide();
+			$('#barcode').val('').focus();
 			$('.added-title').html(data);
 		}).fail(function(data) {
     			$('.progress').hide();
