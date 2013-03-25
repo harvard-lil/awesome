@@ -6,7 +6,8 @@ from django.shortcuts import render_to_response
 def widget(request):
     """The widget"""
     
-    branch = request.GET.get('branch', '')    
+    branch = request.GET.get('branch', '')
+    style = request.GET.get('style', '') 
     org = Organization.objects.get(slug=request.META['subdomain'])
     awesome_domain = Site.objects.get_current().domain
     
@@ -17,4 +18,4 @@ def widget(request):
         
 
     return render_to_response('widget.js', {'awesome_domain': awesome_domain, 'user': request.user, 'organization': org,
-                              'branch': branch, 'items':items}, mimetype='Content-type: text/javascript')
+                              'branch': branch, 'items':items, 'style': style}, mimetype='Content-type: text/javascript')
