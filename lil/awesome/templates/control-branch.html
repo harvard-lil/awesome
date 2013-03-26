@@ -36,6 +36,8 @@
 					<th>Web Friendly Name</th>
 					<th>Latitude</th>
 					<th>Longitude</th>
+					<th>Delete</th>
+					<th>Edit</th>
 				</tr>
 			{% for branch in branches %}
 				<tr>
@@ -43,6 +45,8 @@
 					<td>{{branch.slug}}</td>
 					<td>{{branch.lat}}</td>
 					<td>{{branch.long}}</td>
+					<td><a href="{% url control_branch_delete %}?branch-id={{branch.id}}">Delete</a></td>
+					<td><a href="{% url control_branch_edit %}?branch-id={{branch.id}}">Edit</a></td>
 				</tr>
 			{% endfor %}
 			</table>

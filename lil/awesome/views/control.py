@@ -101,6 +101,88 @@ def branch(request):
         return render_to_response('control-branch.html', context)
         
         
+def branch_edit(request):
+    """Users can edit branches here"""
+
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect(reverse('auth_login'))
+
+    org = Organization.objects.get(user=request.user)
+
+    if request.method == 'POST':
+        submitted_form = BranchForm(request.POST,)
+
+        branch = Branch.objects.get(organization=org, id=request.POST.get('branch-id'))
+
+        if submitted_form.is_valid():
+            
+            form = BranchForm(request.POST, instance=branch)
+            form.save()
+
+            return HttpResponseRedirect(reverse('control_branch'))
+        else:
+            context = {
+                'user': request.user,
+                'organization': org,
+                'form': submitted_form,
+                'branch': branch,
+            }
+            context.update(csrf(request))    
+            return render_to_response('control-branch-edit.html', context)
+
+    else:
+        branch = Branch.objects.get(id=request.GET.get('branch-id'), organization=org)
+        
+        form = BranchForm(instance=branch)
+
+        context = {
+            'user': request.user,
+            'organization': org,
+            'form': form,
+            'branch': branch    
+        }
+        context.update(csrf(request))    
+        return render_to_response('control-branch-edit.html', context)
+        
+def branch_delete(request):
+    """Users are presented with the option to delete a branch here"""
+
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect(reverse('auth_login'))
+
+    org = Organization.objects.get(user=request.user)
+
+    branch = Branch.objects.get(id= request.GET.get('branch-id'), organization=org)
+
+    item_count = len(Item.objects.filter(branch=branch))
+
+    context = {
+        'user': request.user,
+        'organization': org,
+        'item_count': item_count,
+        'branch': branch,
+    }
+
+    return render_to_response('control-branch-delete.html', context)
+    
+def branch_delete_confirm(request):
+    """A user has confirmed delete. We delete the branch and all related awesomes here"""
+
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect(reverse('auth_login'))
+
+    org = Organization.objects.get(user=request.user)
+
+    branch = Branch.objects.filter(id=request.GET.get('branch-id'), organization=org)
+    
+    # Delete the branch
+    branch.delete()
+
+
+    
+    return HttpResponseRedirect(reverse('control_branch'))
+
+
 def analytics(request):
     """Users get counts of awesome things here"""
 

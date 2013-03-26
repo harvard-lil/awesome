@@ -16,23 +16,26 @@
 	<header id="branding">
 		<span id="feeds">
 			<ul>
-				<li><a href="{% url auth_logout %}">Logout</a></li>
+				<li><a href="{% url auth_logout %}">Logout</a></li><li>|</li><li><a href="{% url control_home %}">Control Center</a></li>
 			</ul>
 		</span>
 		<h1><a href="{% url landing %}">Awesome Box at the {{ organization.name }}</a></h1>
 	</header>
 	<div id="content">
+	
 		<article class="control thin-centered">
-		
 			<header>
-				<h1>Control Center</h1>
+				<h1>Manage Branches</h1>
 			</header>
-			<p class="control_list"><a href="{% url scan %}">Scan an item</a></p>		
-			<p class="control_list"><a href="{% url control_org %}">Update your organization's data</a></p>
-			<p class="control_list"><a href="{% url control_branch %}">Branch management</a></p>
-			<p class="control_list"><a href="{% url control_analytics %}">Branch analytics</a></p>
-			<p class="control_list"><a href="{% url control_widget %}">Get a widget</a></p>
-			<p class="control_list"><a href="{% url auth_password_change %}">Change your password</a></p>
+		
+			<h2>Edit a Branch</h2>
+			<form method="post" action="">
+				{% csrf_token %}
+				{{ form }}
+				<input type="hidden" name="branch-id" id="branch-id" value="{{branch.id}}" />
+				<br />
+				<input type="submit" value="Make changes"/>
+			</form>
 		</article>
 	</div><!-- end content -->
 </div> <!-- end wrapper -->

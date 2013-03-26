@@ -16,23 +16,25 @@
 	<header id="branding">
 		<span id="feeds">
 			<ul>
-				<li><a href="{% url auth_logout %}">Logout</a></li>
+				<li><a href="{% url auth_logout %}">Logout</a></li><li>|</li><li><a href="{% url control_home %}">Control Center</a></li>
 			</ul>
 		</span>
 		<h1><a href="{% url landing %}">Awesome Box at the {{ organization.name }}</a></h1>
 	</header>
 	<div id="content">
+	
 		<article class="control thin-centered">
-		
 			<header>
-				<h1>Control Center</h1>
+				<h1>Delete the Branch</h1>
 			</header>
-			<p class="control_list"><a href="{% url scan %}">Scan an item</a></p>		
-			<p class="control_list"><a href="{% url control_org %}">Update your organization's data</a></p>
-			<p class="control_list"><a href="{% url control_branch %}">Branch management</a></p>
-			<p class="control_list"><a href="{% url control_analytics %}">Branch analytics</a></p>
-			<p class="control_list"><a href="{% url control_widget %}">Get a widget</a></p>
-			<p class="control_list"><a href="{% url auth_password_change %}">Change your password</a></p>
+		
+			<h2>Really delete {{ branch.name }}?</h2>
+			<br/>
+			<p>Deleting the {{ branch.name }} branch will erase it forever. You will not be able to get it back. Are you sure you want to remove the {{ branch.name }} branch?</p>
+			<br/>
+			<p><a href="{% url control_branch_delete_confirm %}?branch-id={{ branch.id }}">Delete the {{ branch.name }} branch</a></p>
+			<br/>
+			<p><a href="{% url control_branch %}">Do not delete the {{ branch.name }} branch</a></p>
 		</article>
 	</div><!-- end content -->
 </div> <!-- end wrapper -->
