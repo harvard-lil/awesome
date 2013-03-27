@@ -141,9 +141,9 @@ def branch_edit(request):
             'form': form,
             'branch': branch    
         }
-        context.update(csrf(request))    
+        context.update(csrf(request))
         return render_to_response('control-branch-edit.html', context)
-        
+
 def branch_delete(request):
     """Users are presented with the option to delete a branch here"""
 
@@ -152,36 +152,37 @@ def branch_delete(request):
 
     org = Organization.objects.get(user=request.user)
 
-    branch = Branch.objects.get(id= request.GET.get('branch-id'), organization=org)
 
-    item_count = len(Item.objects.filter(branch=branch))
+    if request.method == 'POST':
+        submitted_form = BranchForm(request.POST,)
 
-    context = {
-        'user': request.user,
-        'organization': org,
-        'item_count': item_count,
-        'branch': branch,
-    }
+        branch = Branch.objects.get(organization=org, id=request.POST.get('branch-id'))
+        try:
+            transfer_branch = Branch.objects.get(organization=org, id=request.POST.get('transfer-branch'))
+        except Branch.DoesNotExist:
+            transfer_branch = None
 
-    return render_to_response('control-branch-delete.html', context)
+        if transfer_branch:
+            Item.objects.filter(branch=branch).update(branch=transfer_branch)
+        
+        branch.delete()
+        
+        return HttpResponseRedirect(reverse('control_branch'))
+
+    else:
+
+        branch = Branch.objects.get(id=request.GET.get('branch-id'), organization=org)
     
-def branch_delete_confirm(request):
-    """A user has confirmed delete. We delete the branch and all related awesomes here"""
+        transfer_branches = Branch.objects.filter(organization=org).exclude(id=branch.id)
 
-    if not request.user.is_authenticated():
-        return HttpResponseRedirect(reverse('auth_login'))
-
-    org = Organization.objects.get(user=request.user)
-
-    branch = Branch.objects.filter(id=request.GET.get('branch-id'), organization=org)
-    
-    # Delete the branch
-    branch.delete()
-
-
-    
-    return HttpResponseRedirect(reverse('control_branch'))
-
+        context = {
+            'user': request.user,
+            'organization': org,
+            'branch': branch,
+            'transfer_branches': transfer_branches,
+        }
+        context.update(csrf(request))
+        return render_to_response('control-branch-delete.html', context)
 
 def analytics(request):
     """Users get counts of awesome things here"""

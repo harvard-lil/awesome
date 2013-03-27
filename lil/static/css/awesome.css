@@ -600,7 +600,16 @@ p.bold {
     max-width:250px;
 }
 
+.delete-confirm select {
 
+    margin-right:15px;
+}
+
+.delete-confirm input[type=submit]{
+    background-color: #f63527;
+    color: white;
+    border: none;
+}
 /* End -- Control center page */
 
 /*  Font Awesome

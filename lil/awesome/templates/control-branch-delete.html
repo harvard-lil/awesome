@@ -27,14 +27,25 @@
 			<header>
 				<h1>Delete the Branch</h1>
 			</header>
-		
-			<h2>Really delete {{ branch.name }}?</h2>
+		<br/>
+		<br/>
+			<p>Deleting the {{ branch.name }} branch will erase it forever. You will not be able to get it back.</p>
 			<br/>
-			<p>Deleting the {{ branch.name }} branch will erase it forever. You will not be able to get it back. Are you sure you want to remove the {{ branch.name }} branch?</p>
-			<br/>
-			<p><a href="{% url control_branch_delete_confirm %}?branch-id={{ branch.id }}">Delete the {{ branch.name }} branch</a></p>
-			<br/>
-			<p><a href="{% url control_branch %}">Do not delete the {{ branch.name }} branch</a></p>
+			<form method="post" class="delete-confirm" action="">
+				{% csrf_token %}
+				
+				{% if transfer_branches %}
+				<select id="transfer-branch"  name="transfer-branch" >
+					{% for transfer_branch in transfer_branches %}
+					<option value="{{transfer_branch.id}}">{{transfer_branch.name}}</option>
+					{% endfor %}
+				</select>
+				<input type="submit" value="Delete {{branch.name}} and transfer items to selected branch"/>
+				{% else %}
+				<input type="submit" value="Delete {{branch.name}}"/>								
+				{% endif %}
+				<input type="hidden" name="branch-id" id="branch-id" value="{{branch.id}}" />
+			</form>
 		</article>
 	</div><!-- end content -->
 </div> <!-- end wrapper -->
