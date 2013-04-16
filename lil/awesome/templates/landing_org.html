@@ -93,7 +93,7 @@
 			<p>{{organization.about_page_blurb}}</p>
 			{% if organization.logo_link %}
 			<br />
-			<p><img src="{{organization.logo_link}}" alt="{{organization.name}} logo" class="org-logo"></p>
+			<p><a href="{{organization.public_link}}" target="_blank"><img src="{{organization.logo_link}}" alt="{{organization.name}} logo" class="org-logo"></a></p>
 			{% endif %}
 			{% if organization.public_link %}
 			<br />
