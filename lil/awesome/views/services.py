@@ -281,7 +281,7 @@ class ThreadedTweet(Thread):
        org = self.item.branch.organization
 
        # Let's check a couple of twitter config items before trying to tweet
-       if org.twitter_username and org.twitter_consumer_key:
+       if org.twitter_oauth_token and org.twitter_oauth_secret:
 
            link_to_item = org.catalog_base_url + self.item.catalog_id
 
@@ -320,8 +320,8 @@ class ThreadedTweet(Thread):
            twitter_message = twitter_message[0:119] + ' ' + short_url
 
            api = twitter.Api()
-           api = twitter.Api(consumer_key = org.twitter_consumer_key,
-                                 consumer_secret = org.twitter_consumer_secret,
+           api = twitter.Api(consumer_key = TWITTER['CONSUMER_KEY'],
+                                 consumer_secret = TWITTER['CONSUMER_SECRET'],
                                  access_token_key = org.twitter_oauth_token,
                                  access_token_secret = org.twitter_oauth_secret)
 

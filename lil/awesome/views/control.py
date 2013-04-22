@@ -1,13 +1,23 @@
 from lil.awesome.models import Organization, Branch, Item, Checkin
 from lil.awesome.forms import OrganizationForm, BranchForm, AnalyticsForm
 
-import datetime
+import datetime, logging, urlparse
+
+import oauth2 as oauth
 
 from django.core.context_processors import csrf
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.core.urlresolvers import reverse
 from django.contrib.sites.models import Site
+
+logger = logging.getLogger(__name__)
+
+try:
+    from lil.awesome.local_settings import *
+except ImportError, e:
+    logger.error('Unable to load local_settings.py:', e)
+
 
 def home(request):
     """Control (user admin site) landing page"""
@@ -242,13 +252,105 @@ def analytics(request):
             return render_to_response('control-analytics.html', context)
         else:
             context['form'] = submitted_form
-            context.update(csrf(request))    
+            context.update(csrf(request))   
             return render_to_response('control-analytics.html', context)
     else:
         
         context['form'] = AnalyticsForm()
         context.update(csrf(request))    
         return render_to_response('control-analytics.html', context)
+
+
+def twitter_config(request):
+    """Users can authorize AB to tweet for them here
+    
+    In this method and twitter_callback, we manage the three-legged twitter oauth process
+    
+    Many thanks to https://github.com/simplegeo/python-oauth2 for the example
+    """
+    
+    
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect(reverse('auth_login'))
+
+    if request.method == 'POST':
+        # A user is reqeusting twitter to auth. we need to get a token here and then redirect
+        request_token_url = 'https://api.twitter.com/oauth/request_token'
+        authorize_url = 'https://api.twitter.com/oauth/authorize'
+        
+        consumer = oauth.Consumer(TWITTER['CONSUMER_KEY'], TWITTER['CONSUMER_SECRET'])
+        client = oauth.Client(consumer)
+        resp, content = client.request(request_token_url, "GET")
+        if resp['status'] != '200':
+            raise Exception("Invalid response %s." % resp['status'])
+
+        request_token = dict(urlparse.parse_qsl(content))
+        
+        request.session['request_token'] = request_token['oauth_token']
+        request.session['request_token_secret'] = request_token['oauth_token_secret']
+        
+        return HttpResponseRedirect("%s?oauth_token=%s" % (authorize_url, request_token['oauth_token']))
+        
+    else:
+        org = Organization.objects.get(user=request.user)
+
+        context = {
+            'user': request.user,
+            'organization': org,
+            'existing_config': False,
+        }
+
+        if org.twitter_oauth_token and org.twitter_oauth_secret:
+            context['existing_config'] = True;
+
+        context.update(csrf(request))
+        return render_to_response('control-twitter-config.html', context)
+        
+def twitter_callback(request):
+    """Twitter will redirect the user to this method after they auth us to tweet
+    
+        If the redirect contains oauth_token and oauth_token_secret, the user authed us to tweet
+        if we don't see these two things, the user cancelled or something went wrong. We should give them that message.
+    
+    """
+
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect(reverse('auth_login'))
+
+
+    access_token_url = 'https://api.twitter.com/oauth/access_token'
+
+    request_token = request.session['request_token']
+    request_token_secret = request.session['request_token_secret']
+    
+    token = oauth.Token(request_token, request_token_secret)
+    token.set_verifier(request.GET.get('oauth_verifier'))
+    consumer = oauth.Consumer(TWITTER['CONSUMER_KEY'], TWITTER['CONSUMER_SECRET'])
+    client = oauth.Client(consumer, token)
+
+    resp, content = client.request(access_token_url, "POST")
+    access_token = dict(urlparse.parse_qsl(content))
+
+    org = Organization.objects.get(user=request.user)
+
+    context = {
+        'user': request.user,
+        'organization': org,
+        'twitter_success': True,
+    }
+    
+    if 'oauth_token' in access_token and 'oauth_token_secret' in access_token:
+        org.twitter_username = access_token['screen_name']
+        org.twitter_oauth_token = access_token['oauth_token']
+        org.twitter_oauth_secret = access_token['oauth_token_secret']
+        org.save()
+        
+    else:
+        context['twitter_success'] = False
+
+    return render_to_response('control-twitter-confirm.html', context)
+
+
 
 def widget(request):
     """Users can grab widget code here"""

@@ -68,7 +68,7 @@ class OrganizationForm(forms.ModelForm):
 
     class Meta:
         model = Organization
-        exclude = ('user', 'slug', 'service_lookup', )
+        exclude = ('user', 'slug', 'service_lookup', 'twitter_username', 'twitter_oauth_token', 'twitter_oauth_secret',)
         
 class OrganizationFormRegistration(forms.ModelForm):
             

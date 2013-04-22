@@ -20,6 +20,8 @@ urlpatterns = patterns('lil.awesome.views',
     url(r'^control/branch/delete/$', 'control.branch_delete', name='control_branch_delete'),
     url(r'^control/analytics/$', 'control.analytics', name='control_analytics'),
     url(r'^control/widget$', 'control.widget', name='control_widget'),
+    url(r'^control/twitter/config$', 'control.twitter_config', name='control_twitter_config'),
+    url(r'^control/twitter/callback$', 'control.twitter_callback', name='control_twitter_callback'),
     url(r'^services/new-item/$', 'services.new_item', name='services_new_item'),
     url(r'^services/learn-how/$', 'services.learn_how', name='services_learn_how'),
     

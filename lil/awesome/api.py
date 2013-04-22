@@ -12,8 +12,6 @@ class OrganizationResource(ModelResource):
         allowed_methods = ['get', 'post']
         filtering = {"slug": ALL }
         excludes = ['service_lookup',
-                    'twitter_consumer_key',
-                    'twitter_consumer_secret',
                     'twitter_oauth_secret',
                     'twitter_oauth_token',
                     'worldcat_key',]

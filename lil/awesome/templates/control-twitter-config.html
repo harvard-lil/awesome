@@ -3,7 +3,7 @@
 {% get_static_prefix as STATIC_PREFIX %}
 {% load templatetag_handlebars %}
 
-{% block title %}Controls | Awesome Box at the {{organization.name}}{% endblock title %}
+{% block title %}Controls | Twitter Config{% endblock title %}
 
 {% block styles %}
 <link rel="stylesheet" href="{{ STATIC_PREFIX }}css/bootstrap.css" type="text/css" />
@@ -13,28 +13,36 @@
 {% block content %}
 <body>
 <div id="wrapper">
+	
 	<header id="branding">
 		<span id="feeds">
 			<ul>
-				<li><a href="{% url auth_logout %}">Logout</a></li>
+				<li><a href="{% url auth_logout %}">Logout</a></li><li>|</li><li><a href="{% url control_home %}">Control Center</a></li>
 			</ul>
 		</span>
 		<h1><a href="{% url landing %}">Awesome Box at the {{ organization.name }}</a></h1>
 	</header>
 	<div id="content">
+	
 		<article class="control thin-centered">
-		
 			<header>
-				<h1>Control Center</h1>
+				<h1>Awesome meet Twitter</h1>
 			</header>
-			<p class="control_list"><a href="{% url scan %}">Scan an item</a></p>		
-			<p class="control_list"><a href="{% url control_org %}">Update your organization's data</a></p>
-			<p class="control_list"><a href="{% url control_branch %}">Branch management</a></p>
-			<p class="control_list"><a href="{% url control_analytics %}">Branch analytics</a></p>
-			<p class="control_list"><a href="{% url control_twitter_config %}">Manage Twitter integration</a></p>
-			<p class="control_list"><a href="{% url control_widget %}">Get a widget</a></p>
-			<p class="control_list"><a href="{% url auth_password_change %}">Change your password</a></p>
+			
+			{% if existing_config %}
+			<p>You have already configured Awesome Box to tweet new items to <a href="http://twitter.com/{{organization.twitter_username}}">your Twitter account</a>. If you do not want to tweet your returns, head on over to <a href="http://twitter.com/{{organization.twitter_username}}">Twitter</a> and disable the Awesome Box application.</p>
+			<br />
+			<p>If things aren't working as expected, setup Twitter again.</p>
+			{% else %}
+			<p>The Awesome Box can send returns to your Twitter feed if you'd like.</p>
+			{% endif %}
+			<form method="POST" action="">
+				{% csrf_token %}
+				<br />
+				<input type="submit" value="Allow Awesome Box to tweet returns"/>
+			</form>
 		</article>
+	
 	</div><!-- end content -->
 </div> <!-- end wrapper -->
 {% endblock content %}
@@ -45,8 +53,4 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script>!window.jQuery && document.write('<script src="{{ STATIC_PREFIX }}/js/jquery-1.7.1.min.js"><\/script>')</script>
 
-<script type="text/javascript">
-var organization = "{{organization.slug}}";
-var branch = "{{branch}}";        
-</script>
 {% endblock scripts %}

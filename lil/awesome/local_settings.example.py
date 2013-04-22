@@ -23,3 +23,8 @@ BITLY = {
     'LOGIN': 'your bitly login here',
     'KEY': 'your bitly key here'
 }
+
+TWITTER = {
+    'CONSUMER_KEY': 'your twitter consumer key here',
+    'CONSUMER_SECRET': 'your twitter consumer secret here'
+}
