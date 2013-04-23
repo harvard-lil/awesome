@@ -13,29 +13,60 @@
 {% block content %}
 <body>
 <div id="wrapper">
+	
 	<header id="branding">
 		<span id="feeds">
 			<ul>
-				<li><a href="{% url auth_logout %}">Logout</a></li>
+				<li><a href="{% url auth_logout %}">Logout</a></li><li>|</li><li><a href="{% url control_home %}">Control Center</a></li>
 			</ul>
 		</span>
 		<h1><a href="{% url landing %}">Awesome Box at the {{ organization.name }}</a></h1>
 	</header>
 	<div id="content">
+	
 		<article class="control thin-centered">
-		
 			<header>
-				<h1>Control Center</h1>
+				<h1>Delete an item</h1>
 			</header>
-			<p class="control_list"><a href="{% url scan %}">Scan an item</a></p>		
-			<p class="control_list"><a href="{% url control_item_delete %}">Delete an item</a></p>
-			<p class="control_list"><a href="{% url control_org %}">Update your organization's data</a></p>
-			<p class="control_list"><a href="{% url control_branch %}">Branch management</a></p>
-			<p class="control_list"><a href="{% url control_analytics %}">Branch analytics</a></p>
-			<p class="control_list"><a href="{% url control_twitter_config %}">Manage Twitter integration</a></p>
-			<p class="control_list"><a href="{% url control_widget %}">Get a widget</a></p>
-			<p class="control_list"><a href="{% url auth_password_change %}">Change your password</a></p>
+			<form method="get" action="" id="filter_by_branch">
+					Showing 100 most recent items from
+				    <select name="filtered_branch">
+				      {% for branch in branches %}
+						<option value='{{branch.id}}' {% if filter_branch_id == branch.id %}selected{% endif %}>{{branch.name}}</option>
+				      {% endfor %}
+				    </select>
+				<input type="submit" value="Filter"/>
+			</form>
+
+			{% if items %}
+
+			<form method="post" action="" id="delete_items">
+				<fieldset>
+				{% for item in items %}
+				<div>
+					<input type="checkbox" name="items" id="option{{item.id}}" value="{{item.id}}">
+					<label for="option{{item.id}}"><span class="title">{{item.title}} </span>
+						<br />
+						<span class="creator">
+						{% if item.creator%}
+							{{item.creator}}
+						{% endif %}
+						</span>
+						<span class="checked_in">Last checked in on {{ item.latest_checkin }} at {{item.branch.name}}</span>
+						
+					</label>
+				</div>
+				{% endfor %}
+				</fieldset>
+				{% csrf_token %}
+				<input type="submit" class="delete-confirm" value="Permanently delete selected items"/>
+			</form>
+			{% else %}
+			<p>No items in branch</p>
+			
+			{% endif %}
 		</article>
+	
 	</div><!-- end content -->
 </div> <!-- end wrapper -->
 {% endblock content %}

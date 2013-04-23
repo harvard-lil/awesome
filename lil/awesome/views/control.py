@@ -345,11 +345,66 @@ def twitter_callback(request):
         org.twitter_oauth_secret = access_token['oauth_token_secret']
         org.save()
         
+        del request.session['request_token']
+        del request.session['request_token_secret']
+        request.session.modified = True
+        
     else:
         context['twitter_success'] = False
 
     return render_to_response('control-twitter-confirm.html', context)
+    
+def item_delete(request):
+    """
+    Occasionally folks want to delete items. We handle that here.
+    
+    Dump 100 items to the screen each with a delete button. That delete button makes a 
+    post back here. We delete the item and then send redirect them back to this view. Crud but works.
+    """
 
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect(reverse('auth_login'))
+
+
+    org = Organization.objects.get(user=request.user)
+
+    if request.method == 'POST':
+        # if post, look for identifier. delete that identifier and its related checkins
+        selected_items = request.POST.getlist('items')
+        
+        for selected_item in selected_items:
+            item = Item.objects.get(id=selected_item,branch__organization=org)
+            item.delete()
+
+        return HttpResponseRedirect(reverse('control_item_delete'))
+        
+    else:
+        # get branch from GET params
+        # get 100 most recent items from specified branch
+        
+        passed_in_branch_id = request.GET.get('filtered_branch')
+        
+        org = Organization.objects.get(user=request.user)
+        branches = Branch.objects.filter(organization=org)
+        
+        filter_branch = branches[0]
+        
+        if passed_in_branch_id:
+            filter_branch = Branch.objects.get(id=passed_in_branch_id)
+        
+        items = Item.objects.filter(branch=filter_branch, branch__organization=org).order_by('-latest_checkin')[:100]
+
+    context = {
+        'user': request.user,
+        'organization': org,
+        'branches': branches,
+        'filter_branch_id': filter_branch.id,
+        'items': items,
+    }
+    
+    context.update(csrf(request))
+
+    return render_to_response('delete-item.html', context)
 
 
 def widget(request):

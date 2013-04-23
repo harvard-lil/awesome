@@ -610,6 +610,53 @@ p.bold {
     color: white;
     border: none;
 }
+
+/*Start -- delete item view */
+
+#delete_items fieldset{
+    width:  100%;
+    margin-bottom: 35px;
+}
+
+#delete_items fieldset div{
+    margin-bottom: 15px;
+}
+
+#delete_items input[type=checkbox] {
+    float:left;
+    margin-right: 12px;
+}
+
+#delete_items input[type=submit]{
+    background-color: #f63527;
+    color: white;
+    border: none;
+}
+
+#delete_items fieldset .title {
+     font-size: 140%;
+     line-height: 100%;
+}
+
+#delete_items fieldset .creator {
+    margin-left: 25px;
+    margin-right: 10px;
+}
+#delete_items fieldset .creator, .checked_in {
+    color: #919191;
+}
+
+#filter_by_branch {
+    margin-bottom:40px;
+}
+
+#filter_by_branch select {
+    width:auto;
+    margin-right:3px;
+}
+/*End -- delete item view */
+
+
 /* End -- Control center page */
 
 /*  Font Awesome
