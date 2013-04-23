@@ -23,7 +23,7 @@ echo "<" . "?" . "xml version=\"1.0\" encoding=\"ISO-8859-1\"" . "?" . ">";
         
 <?php
 
-$url = "http://librarylab.law.harvard.edu/awesome/api/item/recently-awesome";
+$url = "http://hlsl10.law.harvard.edu/awesome/api/item/recently-awesome";
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
