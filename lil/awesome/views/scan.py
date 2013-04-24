@@ -10,7 +10,8 @@ def scan(request):
     """Our scan page"""
     
     if not request.user.is_authenticated():
-        return HttpResponseRedirect(reverse('auth_login'))
+        url = "%s?next=%s" % (reverse('auth_login'), request.path)
+        return HttpResponseRedirect(url)
     
     
     branch = request.GET.get('branch')
