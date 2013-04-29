@@ -1,6 +1,6 @@
 <?php
 $filter = $_REQUEST['filter'];
-$url = "http://librarylab.law.harvard.edu/awesome/api/item/search?limit=5&filter=$filter";
+$url = "http://hlsl10.law.harvard.edu/awesome/api/item/search?limit=5&filter=$filter";
 
 $ch = curl_init();
 
