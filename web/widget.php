@@ -1,6 +1,6 @@
 <?php
 $filter = $_REQUEST['filter'];
-$url = "http://hlsl10.law.harvard.edu/awesome/api/item/search?limit=5&filter=$filter";
+$url = "http://hlsl10.law.harvard.edu/awesome/api/item/search?limit=5&filter=$filter&sort=last_modified%20desc";
 
 $ch = curl_init();
 
