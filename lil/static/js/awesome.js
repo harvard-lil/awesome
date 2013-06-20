@@ -135,6 +135,13 @@ $(document).ready(function() {
 			$(this).prev('h1').hide();
 		}
     );	
+    
+    Handlebars.registerHelper('catalogQuery', function(object) {
+      if(object.branch.organization.catalog_query == 'isbn')
+        return object.catalog_id;
+      else if(object.branch.organization.catalog_query == 'title')
+        return object.title;
+  });
 });
 
 function showResults(data){ 

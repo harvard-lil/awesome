@@ -443,7 +443,7 @@ p.bold {
     margin:0 15px 15px 0;
     background-image:url('../images/faceUp-icons.png');
     background-repeat: no-repeat;
-    height:160px;
+    max-height:160px;
     width:110px;
     background-position: -170px -4px;
     padding:0;

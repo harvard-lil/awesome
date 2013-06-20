@@ -174,7 +174,7 @@ var branch = "{{branch}}";
 <ul> 
 	{{#objects}}
 	<li class="item">
-		<a href="{{branch.organization.catalog_base_url}}{{catalog_id}}" target="_blank" style="display:none;">{{title}}</a>
+		<a href="{{branch.organization.catalog_base_url}}{{catalogQuery this}}" target="_blank" style="display:none;">{{title}}</a>
 		{{#if cover_art}}
 		<img class="item-cover" src="{{cover_art}}" alt="{{title}}" />
 		{{else}}
