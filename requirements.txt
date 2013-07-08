@@ -1,0 +1,8 @@
+Django==1.4
+MySQL-python==1.2.4
+django-tastypie==0.9.15
+django-templatetag-handlebars==1.2.0
+lxml==3.2.1
+oauth2==1.5.211
+python-twitter==1.0
+wsgiref==0.1.2

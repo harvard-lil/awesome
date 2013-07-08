@@ -17,6 +17,15 @@
 
     sudo pip install Django
 
+## Install required libraries
+
+    sudo pip install requirements.txt
+
+If python-msyqldb choke, or if python-lxml chokes, install with apt-get
+
+    sudo apt-get install python-mysqldb
+    sudo apt-get install python-lxml
+
 
 ## Install Apache and related bits
 
@@ -47,15 +56,6 @@ Install the Apache mod_wsgi module:
     grant all on awesome.* to someusername@'localhost' identified by 'somepass';
 
 
-## Install Python/Django pieces
-
-    sudo apt-get install python-mysqldb
-    sudo pip install python-twitter
-    sudo apt-get install python-lxml
-    sudo pip install django-templatetag-handlebars
-    sudo pip install django-tastypie
-
-
 ## Install the Awesome codebase
 
     cd /srv; sudo mkdir www;
@@ -81,10 +81,19 @@ edit local_settings.py, installing your keys.
     cd /srv/www/awesome/lil; sudo python manage.py syncdb
 
 
+### Load some test data
+
+If you're working on the Awesome Box codebase, you might want to get started by loading a test library and a test branch
+
+    python manage.py loaddata awesome/tests/fixtures/org_plus_branch.json
+
+Your login will be test-library with the password of pass
+	
 ### Awesome will sometimes write to a log. Create it and give it perms:
 
     sudo touch /tmp/awesome.log
     sudo chmod 777 /tmp/awesome.log 
+
 
 ## Configure Apache/WSGI
 
