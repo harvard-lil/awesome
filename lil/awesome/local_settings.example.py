@@ -9,7 +9,7 @@ WORLDCAT = {
 DEV_SETTINGS = {
     'TEST_HOME': False,
     'TEST_THIRD_LEVEL_DOMAIN': False,
-    'THIRD_LELVEL_DOMAIN': 'org-name', # http://orgname.awesomebox.io
+    'THIRD_LELVEL_DOMAIN': 'test-library', # http://test-library.awesomebox.io, use the password of pass if loading from test fixture, org_plus_branch.json
 }
 
 ROTTEN_TOMATOES = {

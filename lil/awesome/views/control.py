@@ -23,7 +23,7 @@ def home(request):
     """Control (user admin site) landing page"""
     
     if not request.user.is_authenticated():
-        return HttpResponseRedirect(reverse('auth_login'))
+        return HttpResponseRedirect(reverse('auth_loginin'))
 
     org = Organization.objects.get(user=request.user)
     
@@ -281,13 +281,17 @@ def twitter_config(request):
         consumer = oauth.Consumer(TWITTER['CONSUMER_KEY'], TWITTER['CONSUMER_SECRET'])
         client = oauth.Client(consumer)
         resp, content = client.request(request_token_url, "GET")
+
         if resp['status'] != '200':
+            logger.warn('Unable to get a 200 response from twitter for oauth integration.')
+            logger.warn("Invalid response %s." % resp['status'])
             raise Exception("Invalid response %s." % resp['status'])
 
         request_token = dict(urlparse.parse_qsl(content))
         
         request.session['request_token'] = request_token['oauth_token']
         request.session['request_token_secret'] = request_token['oauth_token_secret']
+        request.session.modified = True
         
         return HttpResponseRedirect("%s?oauth_token=%s" % (authorize_url, request_token['oauth_token']))
         

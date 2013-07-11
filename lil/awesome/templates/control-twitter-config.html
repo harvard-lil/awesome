@@ -36,7 +36,7 @@
 			{% else %}
 			<p>The Awesome Box can send returns to your Twitter feed if you'd like.</p>
 			{% endif %}
-			<form method="POST" action="">
+			<form method="POST">
 				{% csrf_token %}
 				<br />
 				<input type="submit" value="Allow Awesome Box to tweet returns"/>

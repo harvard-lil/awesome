@@ -122,6 +122,9 @@ INSTALLED_APPS = (
 )
 
 # A sample logging configuration. The only tangible logging
+SESSION_COOKIE_DOMAIN = '.awesomebox.io'
+
+# A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error.
 # See http://docs.djangoproject.com/en/dev/topics/logging for
