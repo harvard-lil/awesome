@@ -1,18 +1,39 @@
+from django.contrib.syndication.views import Feed
 from lil.awesome.models import Organization, Item
 
-from django.shortcuts import render_to_response
+from django.shortcuts import get_object_or_404
 
-def feed(request):
-    """The rss feed"""
+from django.http import HttpRequest
+
+class LatestEntriesFeed(Feed):
     
-    branch = request.GET.get('branch', '')    
-    org = Organization.objects.get(slug=request.META['subdomain'])
-    
-    if len(branch) != 0:
-        items = Item.objects.filter(branch__slug=branch, branch__organization=org).order_by('-latest_checkin')[:20]
-    else:
-        items = Item.objects.filter(branch__organization=org).order_by('-latest_checkin')[:20]
+    def get_object(self, request):
+        return get_object_or_404(Organization, slug=request.META['subdomain'])
         
+    def link(self, obj):
+    		return 'http://' + org.slug + '.awesomebox.io'
+        
+    def title(self, obj):
+        return 'Recently Awesome at ' + obj.name
+        
+    def description(self, obj):
+    		return 'Keep up with the latest awesome items at ' + obj.name
+        
+    def link(self, obj):
+        return 'http://' + obj.slug + '.awesomebox.io/'
 
-    return render_to_response('feed.xml', {'user': request.user, 'organization': org,
-                              'branch': branch, 'items':items}, mimetype='Content-type: text/xml')
+    def items(self, obj):
+        return Item.objects.filter(branch__organization=obj).order_by('-latest_checkin')[:15]
+
+    def item_title(self, item):
+        return item.title
+
+    def item_description(self, item):
+    	if item.cover_art:
+    		return '<img class="item-cover" src="' + item.cover_art + '" />' + item.title + ' by ' + item.creator
+    	else:
+    		return '<img src="http://covers.openlibrary.org/b/isbn/' + item.isbn + '-M.jpg" />' + item.title + ' by ' + item.creator
+
+    # item_link is only needed if NewsItem has no get_absolute_url method.
+    def item_link(self, item):
+        return 'http://awesomebox.io'
