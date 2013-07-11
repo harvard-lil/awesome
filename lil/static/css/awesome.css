@@ -433,6 +433,7 @@ p.bold {
     cursor:pointer;
     margin-bottom:15px;
     width:275px;
+    height:175px;
     float:left;
     position:relative;
 }
@@ -443,7 +444,7 @@ p.bold {
     margin:0 15px 15px 0;
     background-image:url('../images/faceUp-icons.png');
     background-repeat: no-repeat;
-    max-height:160px;
+    height:160px;
     width:110px;
     background-position: -170px -4px;
     padding:0;
