@@ -1,7 +1,6 @@
 {% extends "layouts/base.html" %}
 {% load static %}
 {% get_static_prefix as STATIC_PREFIX %}
-{% load templatetag_handlebars %}
 
 {% block title %}Awesome Box at the {{organization.name}}{% endblock title %}
 
@@ -158,7 +157,10 @@ var branch = "{{branch}}";
 
 {% block templates %}
 
-{% tplhandlebars "search-template" %}
+
+{% verbatim %}
+
+<script id="search-template" type="text/x-handlebars-template">
 
 <p class="num-found">{{num_found}} results</p>
 <span class="left-right">
@@ -167,9 +169,13 @@ var branch = "{{branch}}";
 </span>
 {{>items}}
 
-{% endtplhandlebars %}
+</script>
 
-{% tplhandlebars "items-template" %}
+{% endverbatim %}
+
+
+{% verbatim %}
+<script id="items-template" type="text/x-handlebars-template">
 
 <ul> 
 	{{#objects}}
@@ -190,8 +196,9 @@ var branch = "{{branch}}";
 	</li>
 	{{/objects}}
 </ul>
+</script>
 
-{% endtplhandlebars %}
+{% endverbatim %}
 
 
 {% endblock templates %}

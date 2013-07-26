@@ -1,15 +1,11 @@
 {% extends "layouts/base.html" %}
 {% load static %}
 {% get_static_prefix as STATIC_PREFIX %}
-{% load templatetag_handlebars %}
-
 
 {% block styles %}
 <link rel="stylesheet" href="{{ STATIC_PREFIX }}css/bootstrap.css" type="text/css" />
 <link rel="stylesheet" media="all" href="{{ STATIC_PREFIX }}css/awesome.css" />
 {% endblock styles %}
-
-
 
 {% block scripts %}
 <script src="{{ STATIC_PREFIX }}js/modernizr.custom.37797.js"></script> 
