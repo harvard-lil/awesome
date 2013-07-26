@@ -1,5 +1,5 @@
 .project
 .pydevproject
 *.pyc
-lil/awesome/local_settings.py
-lil/settings.py
+django/awesome/local_settings.py
+django/awesome/settings.py
