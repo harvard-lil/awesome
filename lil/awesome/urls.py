@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.conf.urls.defaults import patterns, url
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib.auth import views as auth_views
-from lil.awesome.views.true_feed import LatestEntriesFeed
+from lil.awesome.views.feed import LatestEntriesFeed
 
 
 admin.autodiscover()
@@ -26,6 +26,7 @@ urlpatterns = patterns('lil.awesome.views',
     url(r'^control/twitter/callback$', 'control.twitter_callback', name='control_twitter_callback'),
     url(r'^services/new-item/$', 'services.new_item', name='services_new_item'),
     url(r'^services/learn-how/$', 'services.learn_how', name='services_learn_how'),
+    url(r'^services/hollis-count/(?P<unique_id>[0-9A-Za-z]+)$', 'services.unique_id_awesome_count', name='services_unique_id_awesome_count'),
     
     # Session/account management
     url(r'^password/change/$', auth_views.password_change, {'template_name': 'registration/password_change_form.html'}, name='auth_password_change'),

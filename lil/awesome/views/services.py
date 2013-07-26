@@ -8,6 +8,7 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.http import urlquote
 from django.core.mail import send_mail
+from django.shortcuts import get_object_or_404
 
 from lxml import etree
 import twitter
@@ -332,3 +333,23 @@ def _simple_massage_text(to_be_massaged):
         return to_be_massaged
     
     return re.sub(r'[^\w^\d^.]*$', r'',to_be_massaged)
+    
+
+def unique_id_awesome_count(request, unique_id):
+    """
+    This is small service that takes in the institution id and produces an awesome count
+    for that id.
+    
+    (At Harvard we offer a feature in the OPAC that allows the user how many
+    times something has been awesomed. Here we take the hollis id and return a count)
+    """
+    
+    print request.META['subdomain']
+    
+    org = get_object_or_404(Organization, slug=request.META['subdomain'])
+    item_count = Item.objects.filter(unique_id=unique_id, branch__organization=org).count()
+    
+    response = {'count': item_count}
+    jsoned_response = json.dumps(response)
+    
+    return HttpResponse(jsoned_response, mimetype='application/json')
