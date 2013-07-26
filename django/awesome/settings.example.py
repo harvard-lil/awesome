@@ -1,9 +1,8 @@
-# Django settings for lil project.
+# Django settings for awesome project.
 
 import os
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__name__))
-
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -26,7 +25,7 @@ DATABASES = {
 }
 
 
-SESSION_COOKIE_DOMAIN = '.awesomebox.io'
+#SESSION_COOKIE_DOMAIN = '.awesomebox.io'
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -35,6 +34,9 @@ SESSION_COOKIE_DOMAIN = '.awesomebox.io'
 # timezone as the operating system.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
+
+USE_TZ = True
+
 TIME_ZONE = 'America/New_York'
 
 # Language code for this installation. All choices can be found here:
@@ -105,7 +107,7 @@ MIDDLEWARE_CLASSES = (
     'awesome.middleware.SubdomainMiddleware',
 )
 
-ROOT_URLCONF = 'lil.urls'
+ROOT_URLCONF = 'urls'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
@@ -142,6 +144,11 @@ LOGGING = {
             'format': '%(asctime)s [%(levelname)s] %(filename)s %(lineno)d: %(message)s'
         },
     },
+    'filters': {
+         'require_debug_false': {
+             '()': 'django.utils.log.RequireDebugFalse'
+         }
+     },
     'handlers': {
         'default': {
             'level':'INFO',
@@ -153,6 +160,7 @@ LOGGING = {
         },
         'mail_admins': {
             'level': 'ERROR',
+            'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
         }
     },
@@ -171,7 +179,7 @@ LOGGING = {
 }
 
 LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/control'
 
 # Email business
 EMAIL_HOST = "localhost"
@@ -179,7 +187,7 @@ EMAIL_PORT = 1025
 EMAIL_HOST_USER = ""
 EMAIL_HOST_PASSWORD = ""
 EMAIL_USE_TLS = False
-DEFAULT_FROM_EMAIL = "support@awesome.io"
+DEFAULT_FROM_EMAIL = "support@awesomebox.io"
 
 # Extend the user model with a user profile, https://docs.djangoproject.com/en/dev/topics/auth/#storing-additional-information-about-users
 

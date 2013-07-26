@@ -16,10 +16,10 @@
 	<header id="branding">
 		<span id="feeds">
 			<ul>
-				<li><a href="{% url auth_logout %}">Logout</a></li>
+				<li><a href="{% url 'auth_logout' %}">Logout</a></li>
 			</ul>
 		</span>
-		<h1><a href="{% url landing %}">Awesome Box at the {{ organization.name }}</a></h1>
+		<h1><a href="{% url 'landing' %}">Awesome Box at the {{ organization.name }}</a></h1>
 	</header>
 	<div id="content">
 		<article class="control thin-centered">
@@ -27,14 +27,14 @@
 			<header>
 				<h1>Control Center</h1>
 			</header>
-			<p class="control_list"><a href="{% url scan %}">Scan an item</a></p>		
-			<p class="control_list"><a href="{% url control_item_delete %}">Delete an item</a></p>
-			<p class="control_list"><a href="{% url control_org %}">Update your organization's data</a></p>
-			<p class="control_list"><a href="{% url control_branch %}">Branch management</a></p>
-			<p class="control_list"><a href="{% url control_analytics %}">Branch analytics</a></p>
-			<p class="control_list"><a href="{% url control_twitter_config %}">Manage Twitter integration</a></p>
-			<p class="control_list"><a href="{% url control_widget %}">Get a widget</a></p>
-			<p class="control_list"><a href="{% url auth_password_change %}">Change your password</a></p>
+			<p class="control_list"><a href="{% url 'scan' %}">Scan an item</a></p>		
+			<p class="control_list"><a href="{% url 'control_item_delete' %}">Delete an item</a></p>
+			<p class="control_list"><a href="{% url 'control_org' %}">Update your organization's data</a></p>
+			<p class="control_list"><a href="{% url 'control_branch' %}">Branch management</a></p>
+			<p class="control_list"><a href="{% url 'control_analytics' %}">Branch analytics</a></p>
+			<p class="control_list"><a href="{% url 'control_twitter_config' %}">Manage Twitter integration</a></p>
+			<p class="control_list"><a href="{% url 'control_widget' %}">Get a widget</a></p>
+			<p class="control_list"><a href="{% url 'auth_password_change' %}">Change your password</a></p>
 		</article>
 	</div><!-- end content -->
 </div> <!-- end wrapper -->
