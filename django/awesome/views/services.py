@@ -2,7 +2,7 @@ import httplib, json, logging, urllib2, re, datetime
 from StringIO import StringIO
 from threading import Thread
 
-from lil.awesome.models import Branch, Item, Organization
+from awesome.models import Branch, Item, Organization
 
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -17,7 +17,7 @@ import twitter
 logger = logging.getLogger(__name__)
 
 try:
-    from lil.awesome.local_settings import *
+    from awesome.local_settings import *
 except ImportError, e:
     logger.error('Unable to load local_settings.py:', e)
 

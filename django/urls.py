@@ -1,4 +1,4 @@
-from lil.awesome.api import OrganizationResource, BranchResource, ItemResource, CheckinResource
+from awesome.api import OrganizationResource, BranchResource, ItemResource, CheckinResource
 
 from django.conf.urls.defaults import patterns, url, include
 from django.contrib import admin
@@ -17,5 +17,5 @@ urlpatterns = patterns('',
     (r'^api/', include(v1_api.urls)),
     
     # Common Pages
-    url(r'^', include('lil.awesome.urls')),
+    url(r'^', include('awesome.urls')),
 )

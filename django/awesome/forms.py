@@ -1,4 +1,4 @@
-from lil.awesome.models import Organization, Branch
+from awesome.models import Organization, Branch
 
 from django import forms
 from django.contrib.auth.models import User

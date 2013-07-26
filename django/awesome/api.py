@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from lil.awesome.models import Organization, Branch, Item, Checkin
+from awesome.models import Organization, Branch, Item, Checkin
 
 from tastypie import fields
 from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS

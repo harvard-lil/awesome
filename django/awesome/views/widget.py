@@ -1,4 +1,4 @@
-from lil.awesome.models import Organization, Item
+from awesome.models import Organization, Item
 from django.contrib.sites.models import Site
 
 from django.shortcuts import render_to_response

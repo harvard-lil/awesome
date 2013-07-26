@@ -1,6 +1,6 @@
 import logging
 
-from lil.awesome.models import Organization
+from awesome.models import Organization
 
 from django.shortcuts import render_to_response
 from django.core.context_processors import csrf
@@ -16,7 +16,7 @@ def landing(request):
     """The welcome page."""
     
     try:
-        from lil.awesome.local_settings import *
+        from awesome.local_settings import *
     except ImportError, e:
         logger.error('Unable to load local_settings.py:', e)
     

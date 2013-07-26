@@ -1,5 +1,5 @@
 from django.contrib.syndication.views import Feed
-from lil.awesome.models import Organization, Item
+from awesome.models import Organization, Item
 
 from django.shortcuts import get_object_or_404
 

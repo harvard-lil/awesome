@@ -1,4 +1,4 @@
-from lil.awesome.models import Organization, Branch
+from awesome.models import Organization, Branch
 
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response

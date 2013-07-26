@@ -1,5 +1,5 @@
-from lil.awesome.models import Organization, Branch, Item, Checkin
-from lil.awesome.forms import OrganizationForm, BranchForm, AnalyticsForm
+from awesome.models import Organization, Branch, Item, Checkin
+from awesome.forms import OrganizationForm, BranchForm, AnalyticsForm
 
 import datetime, logging, urlparse
 
@@ -14,7 +14,7 @@ from django.contrib.sites.models import Site
 logger = logging.getLogger(__name__)
 
 try:
-    from lil.awesome.local_settings import *
+    from awesome.local_settings import *
 except ImportError, e:
     logger.error('Unable to load local_settings.py:', e)
 

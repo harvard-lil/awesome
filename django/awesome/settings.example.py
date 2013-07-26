@@ -94,7 +94,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'lil.awesome.middleware.SubdomainMiddleware',
+    'awesome.middleware.SubdomainMiddleware',
 )
 
 ROOT_URLCONF = 'lil.urls'
@@ -112,7 +112,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'lil.awesome',
+    'awesome',
     'tastypie',
     'templatetag_handlebars',
     # Uncomment the next line to enable the admin:
@@ -178,4 +178,4 @@ DEFAULT_FROM_EMAIL = "support@awesome.io"
 
 # Extend the user model with a user profile, https://docs.djangoproject.com/en/dev/topics/auth/#storing-additional-information-about-users
 
-AUTH_PROFILE_MODULE = 'lil.awesome.UserProfile'
+AUTH_PROFILE_MODULE = 'awesome.UserProfile'
