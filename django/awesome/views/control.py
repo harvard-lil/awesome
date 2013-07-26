@@ -23,7 +23,7 @@ def home(request):
     """Control (user admin site) landing page"""
     
     if not request.user.is_authenticated():
-        return HttpResponseRedirect(reverse('auth_loginin'))
+        return HttpResponseRedirect(reverse('auth_login'))
 
     org = Organization.objects.get(user=request.user)
     

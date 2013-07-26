@@ -1,5 +1,10 @@
 # Django settings for lil project.
 
+import os
+
+PROJECT_ROOT = os.path.abspath(os.path.dirname(__name__))
+
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -19,6 +24,9 @@ DATABASES = {
         'PORT': '3306',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
+
+
+SESSION_COOKIE_DOMAIN = '.awesomebox.io'
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -120,9 +128,6 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
-
-# A sample logging configuration. The only tangible logging
-SESSION_COOKIE_DOMAIN = '.awesomebox.io'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
