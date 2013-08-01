@@ -73,7 +73,7 @@ def learn_how(request):
         
     #send_mail('Interested in awesome box', 'My library needs more awesome!', email, ['somethign@law.harvard.edu', 'something@law.harvard.edu'], fail_silently=False)
     
-    message = datetime.datetime.now().strftime("%I:%M%p on %B %d, %Y") + email+ "\n"
+    message = datetime.datetime.now().strftime("%I:%M%p on %B %d, %Y") + " " + email+ "\n"
     
     with open(settings.PROJECT_ROOT + os.path.sep + "int-emails.txt", "a") as email_file:
         email_file.write(message)
