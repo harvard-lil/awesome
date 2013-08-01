@@ -126,7 +126,9 @@
 
 {% block templates %}
 
-{% tplhandlebars "items-template" %}
+{% verbatim %}
+
+<script id="items-template" type="text/x-handlebars-template">
 
 <ul> 
 	{{#objects}}
@@ -144,7 +146,7 @@
 	</li>
 	{{/objects}}
 </ul>
-
-{% endtplhandlebars %}
+</script>
+{% endverbatim %}
 {% endblock templates %}
 </body>
