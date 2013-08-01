@@ -1,4 +1,4 @@
-import httplib, json, logging, urllib2, re, datetime
+import httplib, json, logging, urllib2, re, datetime, os
 from StringIO import StringIO
 from threading import Thread
 
@@ -9,6 +9,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils.http import urlquote
 from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404
+from django.conf import settings
+
 
 from lxml import etree
 import twitter
@@ -73,7 +75,7 @@ def learn_how(request):
     
     message = datetime.datetime.now().strftime("%I:%M%p on %B %d, %Y") + email+ "\n"
     
-    with open("/srv/www/awesome/lil/int-emails.txt", "a") as email_file:
+    with open(settings.PROJECT_ROOT + os.path.sep + "int-emails.txt", "a") as email_file:
         email_file.write(message)
     
     message_to_return = "Mail sent"
@@ -343,8 +345,6 @@ def unique_id_awesome_count(request, unique_id):
     (At Harvard we offer a feature in the OPAC that allows the user how many
     times something has been awesomed. Here we take the hollis id and return a count)
     """
-    
-    print request.META['subdomain']
     
     org = get_object_or_404(Organization, slug=request.META['subdomain'])
     item_count = Item.objects.filter(unique_id=unique_id, branch__organization=org).count()
