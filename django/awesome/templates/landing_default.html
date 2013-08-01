@@ -1,6 +1,7 @@
 {% extends "layouts/base.html" %}
 {% load static %}
 {% get_static_prefix as STATIC_PREFIX %}
+{% load templatetag_handlebars %}
 
 {% block title %}Awesome Box{% endblock title %}
 
@@ -13,7 +14,7 @@
 <body>
 <div class="container">
 	
-	<div class="row span8 offset2">
+	<div class="row span12 center">
     <div class="text-block opening-row">
 			<h1>Sometimes things are<br/><span class="awesome">Awesome.</span></h1>
 		</div>
@@ -21,9 +22,8 @@
     <img class="awesome-image" src="{{ STATIC_PREFIX }}images/awesome_action.jpg"/>
   </div><!--row-->
   <div class="row">
-    <div class="span4 offset2">
-      <p class="text-block">Checked out something awesome from the library? Return it to the awesome box. These libraries are already awesome.</p>
-      <a href="http://hvrd.me/awesomebox" class="already">Harvard</a><a href="http://somerville.awesomebox.io" class="already">Somerville</a>
+    <div class="span5 offset1">
+      <p class="text-block">Checked out something awesome from the library? Return it to the awesome box.</p>
     </div>
     <div class="span5 offset1">
       <form method="post" action="" id="learn-how">
@@ -34,10 +34,73 @@
 		  </form>
     </div>	
   </div>
-	<footer>
-    <div class="row span8 offset2">
-      			
+  <!--<div class="row offerings">
+    <div class="span9 offset1">
+      <h3>Wait, what is it?</h3>
+      <p class="text-block">Awesome Box is an alternate library returns box for items that your community thought were helpful, entertaining, or mind-blowing.</p>
+      <img src="{{ STATIC_PREFIX }}images/awesome-split.jpg"/>
+      <p class="text-block">Interested?  All you need is a box of some kind and a free account.</p>
+    </div>
+    <div class="span9 offset1">
+      <h3>How does the free account help me?</h3>
+      <p class="text-block">An account takes care of all the technology</p>
+    </div>
+  </div>
+  <div class="row offerings">
+    <div class="span5 offset1">
+      <h4>Website</h4>
+      <p class="text-block">You'll get a home page just like this</p>
+      <p class="text-block">That can be found at <strong>yourlibrary.awesomebox.io</strong></p>
+    </div>
+    <div class="span6">
+      <img class="screenshot" src="{{ STATIC_PREFIX }}images/awesome-home.jpg"/>
+    </div>
+    <div class="span11 offset1">
       <hr>
+    </div>
+  </div>
+  <div class="row offerings">
+    <div class="span6 offset1">
+      <img class="screenshot" src="{{ STATIC_PREFIX }}images/awesome-scan.jpg"/>
+    </div>
+    <div class="span4 offset1">
+      <h4>Easy scanning</h4>
+      <p class="text-block">This page will be waiting to receive a barcode scan</p>
+      <p class="text-block">Just aim at the UPC/ISBN code</p>
+    </div>
+        <div class="span11 offset1">
+      <hr>
+    </div>
+  </div>
+  <div class="row offerings">
+    <div class="span5 offset1">
+      <h4>Widget</h4>
+      <p class="text-block">You'll also get a widget that can be plonked anywhere</p>
+      <p class="text-block">On your library's website or blog or anywhere else</p>
+      <p class="text-block">This is a real live widget</p>
+    </div>
+    <div class="span4 offset1">
+      <script src="http://cambridge.awesomebox.io/widget/"></script>
+    </div>
+        <div class="span11 offset1">
+      <hr>
+    </div>
+  </div>-->
+  <div class="row">
+    <div class="span11 offset1">
+      <!--<p class="text-block-inverse center">These libraries are already awesome.<br >With a lot of awesome items.</p>-->
+      <p class="text-block already">These libraries are already awesome</p>
+      <a href="http://hvrd.me/awesomebox" class="already" target="_blank">Harvard</a><a href="http://somerville.awesomebox.io" class="already" target="_blank">Somerville</a>
+      <a href="http://cambridge.awesomebox.io" class="already" target="_blank">Cambridge</a>
+      <a href="http://arlington.awesomebox.io" class="already" target="_blank">Arlington</a>
+      <a href="http://awesome.mhl.org/" class="already" target="_blank">Memorial Hall</a>
+      <a href="http://robinsonmusiclibrary.awesomebox.io" class="already" target="_blank">Robinson Music</a>
+      <!--<div id="recent"></div>
+      <p class="text-block" id="awesome-counter"><span></span> items Awesomed so far</div>-->
+    </div>
+  </div>
+	<footer>
+    <div class="row span8 offset2">	
       <a href="http://librarylab.law.harvard.edu/"><img class="left stamp" src="{{ STATIC_PREFIX }}images/liblabstamp.png"/></a>
       <p>Copyright &copy; 2013 The President and Fellows of Harvard College<br><a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a></p>
       		
@@ -61,4 +124,28 @@
        
 </script>
 {% endblock scripts %}
+
+{% block templates %}
+
+{% tplhandlebars "items-template" %}
+
+<ul> 
+	{{#objects}}
+	<li class="item">
+		<a href="{{branch.organization.catalog_base_url}}{{catalogQuery this}}" target="_blank" >
+		{{#if cover_art}}
+		<img class="item-cover" src="{{cover_art}}" alt="{{title}}" />
+		{{else}}
+		<img class="item-cover" src="http://covers.openlibrary.org/b/isbn/{{isbn}}-M.jpg" alt="{{title}}" />
+		{{/if}}
+			<p class="item-title">
+				{{title}}
+			</p>
+			</a>
+	</li>
+	{{/objects}}
+</ul>
+
+{% endtplhandlebars %}
+{% endblock templates %}
 </body>
