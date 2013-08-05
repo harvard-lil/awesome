@@ -32,7 +32,10 @@ class LatestEntriesFeed(Feed):
     	if item.cover_art:
     		return '<img class="item-cover" src="' + item.cover_art + '" />' + item.title + ' by ' + item.creator
     	else:
-    		return '<img src="http://covers.openlibrary.org/b/isbn/' + item.isbn + '-M.jpg" />' + item.title + ' by ' + item.creator
+    	  if item.isbn:
+    	    return '<img src="http://covers.openlibrary.org/b/isbn/' + item.isbn + '-M.jpg" />' + item.title + ' by ' + item.creator
+    	  else:
+    	    return item.title + ' by' + item.creator
 
     # item_link is only needed if NewsItem has no get_absolute_url method.
     def item_link(self, item):
