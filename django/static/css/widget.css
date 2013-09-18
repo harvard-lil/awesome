@@ -5,6 +5,7 @@
   border: solid 1px #bee620;
   width:325px;
   position:relative;
+  text-align:left;
 }
 
 .aw-widget .aw-widget-list {
