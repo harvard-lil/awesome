@@ -23,7 +23,13 @@ class LatestEntriesFeed(Feed):
         return 'http://' + obj.slug + '.awesomebox.io/'
 
     def items(self, obj):
-        return Item.objects.filter(branch__organization=obj).order_by('-latest_checkin')[:15]
+        result = Item.objects.filter(branch__organization=obj).order_by('-latest_checkin')[:15]
+        for entry in result:
+            entry.slug = obj.slug
+        return result
+        
+    def get_org(self, obj):
+        return self
 
     def item_title(self, item):
         return item.title
@@ -39,4 +45,10 @@ class LatestEntriesFeed(Feed):
 
     # item_link is only needed if NewsItem has no get_absolute_url method.
     def item_link(self, item):
-        return 'http://awesomebox.io'
+        library = get_object_or_404(Organization, slug=item.slug)
+        value = ''
+        if library.catalog_query == 'isbn':
+          value = item.catalog_id
+        elif library.catalog_query == 'title':
+          value = item.title
+        return library.catalog_base_url + value

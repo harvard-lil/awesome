@@ -267,9 +267,11 @@ def _get_rt_movie_poster(title):
         logger.warn('Item from Rotten Tomatoes, generic exception: ' + traceback.format_exc())
     
     jsoned_response = json.loads(response)
+    poster_url = None
     
     if 'movies' in jsoned_response:
-        poster_url = jsoned_response['movies'][0]['posters']['profile']
+    	if len(jsoned_response['movies']) > 0:
+    		poster_url = jsoned_response['movies'][0]['posters']['profile']
 
     return poster_url
     
