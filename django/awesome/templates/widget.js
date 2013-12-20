@@ -19,6 +19,12 @@ else {
 document.write('<h4 class="aw-widget-title"><a href="http://{{organization.slug}}.{{awesome_domain}}">Awesome at {{organization}}</a></h4>');
 document.write('<div class="aw-widget-list">');
 {% for item in items %}		
-	document.write('<p class="aw-widget-item"><a href="{{organization.catalog_base_url}}{{item.catalog_id}}" target="_blank">{{item.title}}</a> <span class="aw-widget-creator">{{item.creator}}</span></p>');
+    var catalogQuery = '';
+    if('{{organization.catalog_query}}' == 'isbn') {
+        catalogQuery = '{{organization.catalog_base_url}}{{item.catalog_id}}';
+    }
+    else if('{{organization.catalog_query}}' == 'title')
+        catalogQuery = '{{organization.catalog_base_url}}{{item.title}}';
+	document.write('<p class="aw-widget-item"><a href="' + catalogQuery + '" target="_blank">{{item.title}}</a> <span class="aw-widget-creator">{{item.creator}}</span></p>');
 {% endfor %}
 document.write('</div></div>');
