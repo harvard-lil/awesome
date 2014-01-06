@@ -287,50 +287,55 @@ class ThreadedTweet(Thread):
 
        # Let's check a couple of twitter config items before trying to tweet
        if org.twitter_oauth_token and org.twitter_oauth_secret:
+       
+            if org.catalog_query == 'isbn':
+                link_to_item_id = self.item.catalog_id
+            elif org.catalog_query == 'title':
+                link_to_item_id = self.item.title
+                
+            link_to_item = org.catalog_base_url + link_to_item_id
 
-           link_to_item = org.catalog_base_url + self.item.catalog_id
+            # Get a short, bit.ly link to our catalog item
+            bitly_url = 'http://api.bit.ly/shorten?version=2.0.1&longUrl=' + urlquote(link_to_item) + '&login=' + BITLY['LOGIN'] + '&apiKey=' + BITLY['KEY'] + '&format=json';
 
-           # Get a short, bit.ly link to our catalog item
-           bitly_url = 'http://api.bit.ly/shorten?version=2.0.1&longUrl=' + urlquote(link_to_item) + '&login=' + BITLY['LOGIN'] + '&apiKey=' + BITLY['KEY'] + '&format=json';
+            req = urllib2.Request(bitly_url)
 
-           req = urllib2.Request(bitly_url)
+            response = None
 
-           response = None
+            try: 
+                f = urllib2.urlopen(req)
+                response = f.read()
+                f.close()
+            except urllib2.HTTPError, e:
+                logger.warn('Item from Bitly, HTTPError = ' + str(e.code))
+            except urllib2.URLError, e:
+                logger.warn('Item from Bitly, URLError = ' + str(e.reason))
+            except httplib.HTTPException, e:
+                logger.warn('Item from Bitly, HTTPException')
+            except Exception:
+                import traceback
+                logger.warn('Item from Bitly, generic exception: ' + traceback.format_exc())
 
-           try: 
-               f = urllib2.urlopen(req)
-               response = f.read()
-               f.close()
-           except urllib2.HTTPError, e:
-               logger.warn('Item from Bitly, HTTPError = ' + str(e.code))
-           except urllib2.URLError, e:
-               logger.warn('Item from Bitly, URLError = ' + str(e.reason))
-           except httplib.HTTPException, e:
-               logger.warn('Item from Bitly, HTTPException')
-           except Exception:
-               import traceback
-               logger.warn('Item from Bitly, generic exception: ' + traceback.format_exc())
+            jsoned_response = json.loads(response)
 
-           jsoned_response = json.loads(response)
-
-           short_url = jsoned_response['results'][link_to_item]['shortUrl'];
+            short_url = jsoned_response['results'][link_to_item]['shortUrl'];
 
 
-           #Tweet the item details and the short url
+            #Tweet the item details and the short url
 
-           twitter_message = self.item.title
-           if self.item.creator:
-               twitter_message = twitter_message + ' by ' + self.item.creator
+            twitter_message = self.item.title
+            if self.item.creator:
+                twitter_message = twitter_message + ' by ' + self.item.creator
                
-           twitter_message = twitter_message[0:119] + ' ' + short_url
+            twitter_message = twitter_message[0:119] + ' ' + short_url
 
-           api = twitter.Api()
-           api = twitter.Api(consumer_key = TWITTER['CONSUMER_KEY'],
+            api = twitter.Api()
+            api = twitter.Api(consumer_key = TWITTER['CONSUMER_KEY'],
                                  consumer_secret = TWITTER['CONSUMER_SECRET'],
                                  access_token_key = org.twitter_oauth_token,
                                  access_token_secret = org.twitter_oauth_secret)
 
-           api.PostUpdate(twitter_message)
+            api.PostUpdate(twitter_message)
        
 def _simple_massage_text(to_be_massaged):
     if not to_be_massaged:
