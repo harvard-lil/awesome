@@ -38,6 +38,7 @@ def new_item(request):
         return HttpResponse(status=400)
     
     barcode = request.POST["barcode"]
+    barcode = barcode.replace('-', '')
     branch = request.POST["branch"]
         
     # We have the barcode, we need to determine if it's an isbn or an institution barcode or ... 
