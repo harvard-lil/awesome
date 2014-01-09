@@ -8,8 +8,9 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.http import urlquote
 from django.core.mail import send_mail
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render_to_response
 from django.conf import settings
+from django.contrib.sites.models import Site
 
 
 from lxml import etree
@@ -275,6 +276,7 @@ def _get_rt_movie_poster(title):
     		poster_url = jsoned_response['movies'][0]['posters']['profile']
 
     return poster_url
+    
     
 class ThreadedTweet(Thread):
    def __init__ (self,item):
