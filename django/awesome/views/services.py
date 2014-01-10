@@ -363,3 +363,20 @@ def unique_id_awesome_count(request, unique_id):
     jsoned_response = json.dumps(response)
     
     return HttpResponse(jsoned_response, mimetype='application/json')
+    
+def isbn_awesome_count(request, isbn):
+    """
+    This is small service that takes in the isbn and produces an awesome count
+    for that id.
+    
+    (At Harvard we offer a feature in the OPAC that allows the user how many
+    times something has been awesomed. Here we take the isbn and return a count)
+    """
+    
+    org = get_object_or_404(Organization, slug=request.META['subdomain'])
+    item_count = Item.objects.filter(isbn=isbn, branch__organization=org).count()
+    
+    response = {'count': item_count}
+    jsoned_response = json.dumps(response)
+    
+    return HttpResponse(jsoned_response, mimetype='application/json')
