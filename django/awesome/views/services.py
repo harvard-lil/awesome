@@ -325,12 +325,15 @@ class ThreadedTweet(Thread):
 
 
             #Tweet the item details and the short url
-
-            twitter_message = self.item.title
-            if self.item.creator:
-                twitter_message = twitter_message + ' by ' + self.item.creator
+            if org.twitter_show_title:
+                twitter_message = org.twitter_intro + ' ' + self.item.title
+                twitter_message = twitter_message.strip()
+                if self.item.creator:
+                    twitter_message = twitter_message + ' by ' + self.item.creator
+            else:
+                twitter_message = org.twitter_intro
                
-            twitter_message = twitter_message[0:119] + ' ' + short_url
+            twitter_message = twitter_message[0:117] + ' ' + short_url
 
             api = twitter.Api()
             api = twitter.Api(consumer_key = TWITTER['CONSUMER_KEY'],

@@ -1,5 +1,10 @@
 from awesome.models import Organization, Branch, Item, Checkin
-from awesome.forms import OrganizationForm, BranchForm, AnalyticsForm
+from awesome.forms import (
+    OrganizationForm, 
+    BranchForm, 
+    AnalyticsForm, 
+    TwitterSettingsForm,
+)
 
 import datetime, logging, urlparse
 
@@ -297,11 +302,13 @@ def twitter_config(request):
         
     else:
         org = Organization.objects.get(user=request.user)
+        settings_form = TwitterSettingsForm(instance=org)
 
         context = {
             'user': request.user,
             'organization': org,
             'existing_config': False,
+            'settings_form': settings_form,
         }
 
         if org.twitter_oauth_token and org.twitter_oauth_secret:
@@ -357,6 +364,41 @@ def twitter_callback(request):
         context['twitter_success'] = False
 
     return render_to_response('control-twitter-confirm.html', context)
+    
+
+def twitter_settings(request):
+
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect(reverse('auth_login'))
+
+    org = Organization.objects.get(user=request.user)
+    
+    if request.method == 'POST':
+        submitted_form = TwitterSettingsForm(request.POST, instance=org)
+        
+        if submitted_form.is_valid():
+            submitted_form.save()
+
+            return HttpResponseRedirect(reverse('control_twitter_config'))
+        else:
+            context = {
+                'user': request.user,
+                'organization': org,
+                'settings_form': submitted_form,
+            }
+            context.update(csrf(request))    
+            return render_to_response('control-twitter-config.html', context)
+            
+    else:  
+        form = TwitterSettingsForm(instance=org)
+        context = {
+            'user': request.user,
+            'organization': org,
+            'settings_form': form,
+        }
+        context.update(csrf(request))    
+        return render_to_response('control-twitter-config.html', context)
+
     
 def item_delete(request):
     """

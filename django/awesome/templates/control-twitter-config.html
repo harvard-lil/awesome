@@ -31,6 +31,18 @@
 			{% if existing_config %}
 			<p>You have already configured Awesome Box to tweet new items to <a href="http://twitter.com/{{organization.twitter_username}}">your Twitter account</a>. If you do not want to tweet your returns, head on over to <a href="http://twitter.com/{{organization.twitter_username}}">Twitter</a> and disable the Awesome Box application.</p>
 			<br />
+            <form method="post" action="{% url 'control_twitter_settings' %}">
+                        {% csrf_token %}
+                <h3>Your Awesome Twitter Settings</h3>
+                <label>Tweet intro text</label>
+                {{ settings_form.twitter_intro }}
+                <label class="checkbox">
+                {{ settings_form.twitter_show_title }} Include title and author in Tweet
+                </label>
+                <br/>
+                <input type="submit" value="Save settings"/>
+            </form>
+			<br />
 			<p>If things aren't working as expected, setup Twitter again.</p>
 			{% else %}
 			<p>The Awesome Box can send returns to your Twitter feed if you'd like.</p>

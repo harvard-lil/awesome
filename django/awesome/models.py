@@ -5,12 +5,16 @@ from django.db import models
 
 
 class Organization(models.Model):
+    CATALOG_QUERY_CHOICES = (
+        ('isbn', 'ISBN'),
+        ('title', 'Title'),
+    )
     user = models.ForeignKey(User)
     name = models.CharField(max_length=400)
     slug = models.SlugField()
     service_lookup = models.CharField(max_length=100, default="worldcat")
     catalog_base_url = models.URLField(max_length=2000)
-    catalog_query = models.CharField(max_length=100, default="isbn")
+    catalog_query = models.CharField(max_length=100, choices=CATALOG_QUERY_CHOICES, default="isbn")
     public_link = models.URLField(max_length=2000, null=True, blank=True)
     public_email = models.EmailField(max_length=254, null=True, blank=True)
     logo_link = models.URLField(max_length=2000, null=True, blank=True)
@@ -20,6 +24,8 @@ class Organization(models.Model):
     twitter_consumer_secret = models.CharField(max_length=200, null=True, blank=True)
     twitter_oauth_token = models.CharField(max_length=200, null=True, blank=True)
     twitter_oauth_secret = models.CharField(max_length=200, null=True, blank=True)
+    twitter_intro = models.CharField(max_length=35, null=True, blank=True)
+    twitter_show_title = models.BooleanField(default=True)
     
     def __unicode__(self):
         return self.name
