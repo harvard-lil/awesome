@@ -11,7 +11,7 @@ class Organization(models.Model):
     )
     user = models.ForeignKey(User)
     name = models.CharField(max_length=400)
-    slug = models.SlugField()
+    slug = models.SlugField(unique=True)
     service_lookup = models.CharField(max_length=100, default="worldcat")
     catalog_base_url = models.URLField(max_length=2000)
     catalog_query = models.CharField(max_length=100, choices=CATALOG_QUERY_CHOICES, default="isbn")

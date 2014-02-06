@@ -41,7 +41,7 @@
 				</select>
 				<input type="submit" value="Delete {{branch.name}} and transfer items to selected branch"/>
 				{% else %}
-				<input type="submit" value="Delete {{branch.name}}"/>								
+				<input type="submit" value="Delete {{branch.name}}" class="btn btn-danger" />								
 				{% endif %}
 				<input type="hidden" name="branch-id" id="branch-id" value="{{branch.id}}" />
 			</form>

@@ -43,7 +43,7 @@
 			{% endif %}
 				{% csrf_token %}
 				{{ form.as_p }}
-				<button type="submit" class="button positive icon-ok immediate">Login</button>
+				<button type="submit" class="btn"><i class="icon-ok"></i> Login</button>
 			</form>
 			<br />
 			<p>Can't remember your password? No problem, we can help you <a href="{% url 'auth_password_reset' %}">create a new one.</a></p>

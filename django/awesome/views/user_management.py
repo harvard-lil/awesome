@@ -1,7 +1,12 @@
 import logging
 
 from awesome.models import Organization, Branch
-from awesome.forms import UserRegForm, BranchForm, OrganizationFormRegistration
+from awesome.forms import (
+    UserRegForm, 
+    BranchForm, 
+    OrganizationFormRegistration, 
+    OrganizationFormSelfRegistration
+)
 
 from django.http import  HttpResponseRedirect
 from django.shortcuts import render_to_response
@@ -66,3 +71,41 @@ def process_register(request):
                   'org_form': org_form,
                   'branch_form': branch_form})
         return render_to_response("register.html", c)
+        
+        
+def process_self_register(request):
+    """A new user registers"""
+    c = {}
+    c.update(csrf(request))
+
+    if request.method == 'POST':
+ 
+        user_reg_form = UserRegForm(request.POST, prefix = "a")
+        org_form = OrganizationFormSelfRegistration(request.POST, prefix = "b")
+        
+        if user_reg_form.is_valid() and org_form.is_valid():
+            new_user = user_reg_form.save()
+            new_org = org_form.save(commit=False)
+        
+            new_org.user = new_user
+            new_org.save()
+            new_branch = Branch.objects.create(organization=new_org, name="Main", slug="main")
+            new_branch.save()
+
+            new_user.backend='django.contrib.auth.backends.ModelBackend'
+            auth.login(request, new_user)
+            
+            return HttpResponseRedirect(reverse('landing'))
+        
+        else:
+            c.update({'user_reg_form': user_reg_form,
+                      'org_form': org_form})
+                      
+            return render_to_response('self_register.html', c)
+    else:
+        user_reg_form = UserRegForm(prefix = "a")
+        org_form = OrganizationFormSelfRegistration(prefix = "b")
+        
+        c.update({'user_reg_form': user_reg_form,
+                  'org_form': org_form})
+        return render_to_response("self_register.html", c)

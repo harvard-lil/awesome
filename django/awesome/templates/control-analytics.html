@@ -51,10 +51,10 @@
 			</table>
 
 			<h2>You choose the range</h2>
-			<form method="post" action="" id="analytics-query-from">
+			<form method="post" action="" id="analytics-query-from" class="form-inline">
 				{% csrf_token %}
 				{{ form }}
-				<input type="submit" value="Get analytics"/>
+				<input type="submit" value="Get analytics" class="btn" />
 			</form>
 			
 			{% if query_branch %}

@@ -27,14 +27,14 @@
 			<header>
 				<h1>Delete an item</h1>
 			</header>
-			<form method="get" action="" id="filter_by_branch">
+			<form method="get" action="" id="filter_by_branch" class="form-inline">
 					Showing 100 most recent items from
 				    <select name="filtered_branch">
 				      {% for branch in branches %}
 						<option value='{{branch.id}}' {% if filter_branch_id == branch.id %}selected{% endif %}>{{branch.name}}</option>
 				      {% endfor %}
 				    </select>
-				<input type="submit" value="Filter"/>
+				<input type="submit" value="Filter" class="btn" />
 			</form>
 
 			{% if items %}
@@ -58,7 +58,7 @@
 				{% endfor %}
 				</fieldset>
 				{% csrf_token %}
-				<input type="submit" class="delete-confirm" value="Permanently delete selected items"/>
+				<input type="submit" class="btn btn-danger" value="Permanently delete selected items"/>
 			</form>
 			{% else %}
 			<p>No items in branch</p>

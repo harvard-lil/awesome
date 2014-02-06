@@ -82,7 +82,36 @@ class OrganizationFormRegistration(forms.ModelForm):
             
     class Meta:
         model = Organization
-        exclude = ('user')
+        exclude = ('user', 'twitter_username', 'twitter_oauth_token', 'twitter_oauth_secret', 'twitter_consumer_key', 'twitter_consumer_secret','twitter_show_title', 'twitter_intro')
+        
+        
+class OrganizationFormSelfRegistration(forms.ModelForm):
+
+    error_messages = {
+        'duplicate_slug': "Somebody already claimed that domain.",
+    }
+            
+    class Meta:
+        model = Organization
+        fields = ("name", "slug", "catalog_base_url", "public_link")
+        
+    def clean_slug(self):
+        # Since slug is unique, this check is redundant,
+        # but it sets a nicer error message than the ORM. See #13147.
+        slug = self.cleaned_data["slug"]
+        try:
+            Organization.objects.get(slug=slug)
+        except Organization.DoesNotExist:
+            return slug
+        raise forms.ValidationError(self.error_messages['duplicate_slug'])
+        
+    def __init__(self, *args, **kwargs):
+            super(OrganizationFormSelfRegistration, self).__init__(*args, **kwargs)
+            self.fields['slug'].label = "Your Awesome Box address (SOMETHING.awesomebox.io)"
+            self.fields['name'].label = "Name of your library"
+            self.fields['public_link'].label = "Your library website"
+            self.fields['catalog_base_url'].label = "Link to your catalog"
+        
         
 class BranchForm(forms.ModelForm):
     

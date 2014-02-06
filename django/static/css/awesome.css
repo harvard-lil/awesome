@@ -458,7 +458,7 @@ p.bold {
     background: rgb(255, 255, 255);
     background: rgba(255, 255, 255, 0.75);
     border-radius:4px;
-    height:153px;
+    height:160px;
     z-index:13;
     border: solid 1px #bee620;
     margin-right:10px;
@@ -609,12 +609,6 @@ p.bold {
     margin-right:15px;
 }
 
-.delete-confirm input[type=submit]{
-    background-color: #f63527;
-    color: white;
-    border: none;
-}
-
 /*Start -- delete item view */
 
 #delete_items fieldset{
@@ -629,12 +623,6 @@ p.bold {
 #delete_items input[type=checkbox] {
     float:left;
     margin-right: 12px;
-}
-
-#delete_items input[type=submit]{
-    background-color: #f63527;
-    color: white;
-    border: none;
 }
 
 #delete_items fieldset .title {
