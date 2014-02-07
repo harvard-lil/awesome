@@ -8,6 +8,7 @@ class Organization(models.Model):
     CATALOG_QUERY_CHOICES = (
         ('isbn', 'ISBN'),
         ('title', 'Title'),
+        ('landing', 'Landing'),
     )
     user = models.ForeignKey(User)
     name = models.CharField(max_length=400)

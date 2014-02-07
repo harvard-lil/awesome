@@ -51,4 +51,6 @@ class LatestEntriesFeed(Feed):
           value = item.catalog_id
         elif library.catalog_query == 'title':
           value = item.title
+        elif library.catalog_query == 'landing':
+            value = ''
         return library.catalog_base_url + value

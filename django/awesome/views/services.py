@@ -295,6 +295,8 @@ class ThreadedTweet(Thread):
                 link_to_item_id = self.item.catalog_id
             elif org.catalog_query == 'title':
                 link_to_item_id = self.item.title
+            elif org.catalog_query == 'landing':
+                link_to_item_id = ''
                 
             link_to_item = org.catalog_base_url + link_to_item_id
 
