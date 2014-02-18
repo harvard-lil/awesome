@@ -15,18 +15,16 @@ class UserRegForm(forms.ModelForm):
     }
     username = forms.RegexField(label="Username", max_length=30,
         regex=r'^[\w.@+-]+$',
-        help_text = "30 characters or fewer. Letters, digits and "
-                      "@/./+/-/_ only.",
+        help_text = "Used to sign into your account",
         error_messages = {
-            'invalid': "This value may contain only letters, numbers and "
-                         "@/./+/-/_ characters."})
+            'invalid': "30 characters or fewer. Letters, digits and "
+                      "@/./+/-/_ only."})
     
     email = forms.RegexField(label="Email", required=True, max_length=254,
         regex=r'^[\w.@+-]+$',
-        help_text = "Letters, digits and @/./+/-/_ only. 254 characters or fewer.",
+        help_text = "So we can contact you about your account",
         error_messages = {
-            'invalid': "This value may contain only letters, numbers and "
-                         "@/./+/-/_ characters."})
+            'invalid': "Letters, digits and @/./+/-/_ only. 254 characters or fewer."})
     
     
     password = forms.CharField(label="Password", widget=forms.PasswordInput)
