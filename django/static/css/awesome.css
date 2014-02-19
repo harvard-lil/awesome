@@ -59,7 +59,7 @@ html {
 }
 body {
     /*background: #00333c;*/
-    background: #ffffff;
+    background: #e7fafe;
     overflow-x: hidden;
     /*height: 4350px;*/
     line-height: 1.5;
@@ -303,6 +303,8 @@ span.filter:hover, span.filter.selected {
 #content h2 {
     margin-top:20px;
     font-size: 30px;
+    font-weight:bold;
+    color:#333;
     
 }
 #about {
@@ -505,6 +507,32 @@ p.bold {
     height:200px;
     margin-top:25px;
 }
+
+/* Start signup form */
+
+.signup p {
+    font-size:22px;
+    color:#00333c;
+    margin: 25px 0 8px 0;
+    font-weight:bold;
+}
+
+.signup input {
+    width:275px;
+}
+
+.signup label {
+ font-weight:bold;
+ color:#333;
+ margin-top:8px;
+}
+
+.signup-intro {
+    color:#666;
+    margin-bottom:20px;
+}
+
+/* End signup form */
 
 
 /* Start -- Control center and auth pages */

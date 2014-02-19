@@ -105,10 +105,16 @@ class OrganizationFormSelfRegistration(forms.ModelForm):
         
     def __init__(self, *args, **kwargs):
             super(OrganizationFormSelfRegistration, self).__init__(*args, **kwargs)
-            self.fields['slug'].label = "Your Awesome Box address (SOMETHING.awesomebox.io)"
+            self.fields['slug'].label = "Your Awesome Box address"
+            self.fields['slug'].help_text = ".awesomebox.io"
             self.fields['name'].label = "Name of your library"
             self.fields['public_link'].label = "Your library website"
             self.fields['catalog_base_url'].label = "Link to your catalog"
+            self.fields.keyOrder = [
+            'name',
+            'public_link',
+            'catalog_base_url',
+            'slug']
         
         
 class BranchForm(forms.ModelForm):

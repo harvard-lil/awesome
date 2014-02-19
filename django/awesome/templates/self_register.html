@@ -15,24 +15,11 @@
 	</header>
 	<div id="content">
 		<article class="register thin-centered">
-			<h1>Create an Account</h1>
-
-			<form action="." method="post">
+			<h2>Get ready to be awesome</h2>
+			<p class="signup-intro">Create a FREE account so your library can be awesome today</p>
+			<form action="." method="post" class="signup">
 				{% csrf_token %}
-				<h2>User Account</h2>
-				<fieldset>
-                    <span class="text-error">{{ user_reg_form.non_field_errors }}</span>
-                      {% for field in user_reg_form %}
-                        <label for="id_{{ field.name }}">{{ field.label }}</label>
-                        {{ field }}
-                        {% if field.errors %}
-                          {% for error in field.errors %}<span class="text-error">{{ error }}</span>{% endfor %}
-                        {%elif field.help_text %}
-                          <span class="help-inline">{{ field.help_text }}</span>
-                        {% endif %}
-                    {% endfor %}  
-                </fieldset>
-				<h2>Your Library Details</h2>
+				<p>First build your Awesome Box website</p>
 				<fieldset>
                     <span class="text-error">{{ org_form.non_field_errors }}</span>
                       {% for field in org_form %}
@@ -45,8 +32,21 @@
                         {% endif %}
                     {% endfor %}  
                 </fieldset>
+                <p>Now create an admin account</p>
+                <fieldset>
+                    <span class="text-error">{{ user_reg_form.non_field_errors }}</span>
+                      {% for field in user_reg_form %}
+                        <label for="id_{{ field.name }}">{{ field.label }}</label>
+                        {{ field }}
+                        {% if field.errors %}
+                          {% for error in field.errors %}<span class="text-error">{{ error }}</span>{% endfor %}
+                        {%elif field.help_text %}
+                          <span class="help-inline">{{ field.help_text }}</span>
+                        {% endif %}
+                    {% endfor %}  
+                </fieldset>
 				<br />
-				<button type="submit" class="btn"><i class="icon-ok"></i> Create Account</button>
+				<button type="submit" class="btn btn-large"><i class="icon-ok"></i> Create Account</button>
 			</form>
 			<br />
 		</article>
@@ -59,6 +59,7 @@
 <!-- Grab Google CDN's jQuery. fall back to local if necessary --> 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script>!window.jQuery && document.write('<script src="{{ STATIC_PREFIX }}/js/jquery-1.7.1.min.js"><\/script>')</script>
+<script src="{{ STATIC_PREFIX }}js/signup.js"></script> 
 
 
 {% endblock scripts %}
