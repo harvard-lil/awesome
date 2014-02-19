@@ -13,6 +13,7 @@ from django.shortcuts import render_to_response
 from django.core.urlresolvers import reverse
 from django.core.context_processors import csrf
 from django.contrib import auth
+from django.contrib.sites.models import Site
 
 logger = logging.getLogger(__name__)
 
@@ -77,6 +78,7 @@ def process_self_register(request):
     """A new user registers"""
     c = {}
     c.update(csrf(request))
+    awesome_domain = Site.objects.get_current().domain
 
     if request.method == 'POST':
  
@@ -107,6 +109,6 @@ def process_self_register(request):
         user_reg_form = UserRegForm(prefix = "a")
         org_form = OrganizationFormSelfRegistration(prefix = "b")
         
-        c.update({'user_reg_form': user_reg_form,
+        c.update({'awesome_domain': awesome_domain, 'user_reg_form': user_reg_form,
                   'org_form': org_form})
         return render_to_response("self_register.html", c)
