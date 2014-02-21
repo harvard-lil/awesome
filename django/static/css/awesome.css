@@ -59,7 +59,8 @@ html {
 }
 body {
     /*background: #00333c;*/
-    background: #e7fafe;
+    /*background: #e7fafe;*/
+    background: #fff;
     overflow-x: hidden;
     /*height: 4350px;*/
     line-height: 1.5;
