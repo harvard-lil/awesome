@@ -81,6 +81,12 @@ edit local_settings.py, installing your keys.
     cd /srv/www/awesome/lil; sudo python manage.py syncdb
 
 
+### Load first South migration
+
+Awesome Box uses South to manage database changes. After the syncdb command, you'll need to apply existing migrations
+
+    python manage.py migrate awesome
+
 ### Load some test data
 
 If you're working on the Awesome Box codebase, you might want to get started by loading a test library and a test branch
@@ -88,117 +94,9 @@ If you're working on the Awesome Box codebase, you might want to get started by 
     python manage.py loaddata awesome/tests/fixtures/org_plus_branch.json
 
 Your login will be test-library with the password of pass
-	
+
+
 ### Awesome will sometimes write to a log. Create it and give it perms:
 
     sudo touch /tmp/awesome.log
-    sudo chmod 777 /tmp/awesome.log 
-
-
-## Configure Apache/WSGI
-
-Create /etc/apache2/sites-available/awesome with these contents
-
-
-	<VirtualHost *:8200>
- 
-	    ServerName awesome.djangoserver
-	    DocumentRoot /srv/www/awesome/lil
- 
-	    <Directory /srv/www/awesome/lil>
-	        Order allow,deny
-	        Allow from all
-	    </Directory>
- 
-	    WSGIDaemonProcess shelfio.djangoserver processes=2 threads=15 display-name=%{GROUP}
-	    WSGIProcessGroup shelfio.djangoserver
- 
-	    WSGIScriptAlias / /srv/www/awesome/lil/apache/django.wsgi
- 
-	</VirtualHost>
-
-
-
-Enable the site using a symlink:
-
-    cd ../sites-enabled; sudo ln -s ../sites-available/awesome awesome;
-
-You probably also want to disable the default:
-
-    sudo rm 000-default
-
-
-Verify that your wsgi config looks right:
-
-    cat /srv/www/awesome/lil/apache/django.wsgi
-
-Edit apache's startup port. It was 80, but nginx will take traffic on 80. Set it to 8200:
-
-    etc/apache2$ sudo vi ports.conf
-
-
-Apache should be set now.
-
-## Configure nginx
-
-    cd /etc/nginx;
-
-Create a new file at /etc/nginx/sites-available/awesome with this content:
-
-	upstream awesomeapache {
-	        #The upstream apache server. You can have many of these and weight them accordingly,
-	        server 127.0.0.1:8200 weight=1 fail_timeout=120s;
-	}
-
-
-	server {
-	        listen 80;
-	        server_name awesomebox.io www.awesomebox.io;
-	        #root /var/www/testdir;
-
-	        # Set the real IP.
-	        proxy_set_header X-Real-IP  $remote_addr;
-
-	        # Set the hostname
-	        proxy_set_header Host $host;
-
-	        #Set the forwarded-for header.
-	        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-
-	        location / {
-	                proxy_pass http://awesomeapache;
-	                #auth_basic "Restricted";
-	                #auth_basic_user_file /var/www/testdir/.htpasswd;
-	        }
-
-	        location /static/ {
-	            autoindex on;
-	            root   /srv/www/awesome/lil/;
-	         }
-
-	        location /awesome/ {
-	            autoindex on;
-	            root   /srv/www/;
-	         }
-
-	        # No access to .htaccess files.
-	        location ~ /\.ht {
-	                deny  all;
-	        }
-	}
-
-Enable the site:
-
-	cd ../sites-enabled; sudo ln -s ../sites-available/awesome awesome
-
-You probably want to remove the default:
-
-	sudo rm default
-
-
-Things should be configured.
-
-## Start things up
-
-	sudo /etc/init.d/apache2 restart
-	sudo /etc/init.d/nginx restart
+    sudo chmod 777 /tmp/awesome.log
