@@ -144,6 +144,15 @@ $(document).ready(function() {
       else if(object.branch.organization.catalog_query == 'landing')
         return '';
   });
+  
+  Handlebars.registerHelper('coverURL', function(object) {
+      if(object.branch.organization.cover_service == 'openlibrary')
+        return "http://covers.openlibrary.org/b/isbn/" + object.isbn + "-M.jpg";
+      else if(object.branch.organization.cover_service == 'syndetic')
+        return "http://www.syndetics.com/index.php?isbn=" + object.isbn + "/mc.gif&client=" + object.branch.organization.cover_user_id;
+      else if(object.branch.organization.cover_service == 'contentcafe')
+        return "http://contentcafe2.btol.com/ContentCafe/Jacket.aspx?&userID=" + object.branch.organization.cover_user_id + "&password=" + object.branch.organization.cover_password + "&Value=" + object.isbn + "&content=M&Return=1&Type=M";
+  });
 });
 
 function showResults(data){ 

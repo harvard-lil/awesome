@@ -184,7 +184,8 @@ var branch = "{{branch}}";
 		{{#if cover_art}}
 		<img class="item-cover" src="{{cover_art}}" alt="{{title}}" />
 		{{else}}
-		<img class="item-cover" src="http://covers.openlibrary.org/b/isbn/{{isbn}}-M.jpg" alt="{{title}}" />
+		<!--<img class="item-cover" src="http://covers.openlibrary.org/b/isbn/{{isbn}}-M.jpg" alt="{{title}}" />-->
+		<img class="item-cover" src="{{coverURL this}}" alt="{{title}}" />
 		{{/if}}
 		<div class="item-details">
 			<span class="item-title">

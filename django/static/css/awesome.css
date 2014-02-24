@@ -536,6 +536,17 @@ p.bold {
 /* End signup form */
 
 
+/* Control forms */
+
+.control-form label {
+ font-weight:bold;
+ color:#333;
+ margin-top:8px;
+}
+
+/* End control forms */
+
+
 /* Start -- Control center and auth pages */
 
 .control h1 {

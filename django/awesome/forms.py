@@ -66,7 +66,12 @@ class OrganizationForm(forms.ModelForm):
 
     class Meta:
         model = Organization
-        exclude = ('user', 'slug', 'service_lookup', 'twitter_username', 'twitter_oauth_token', 'twitter_oauth_secret', 'twitter_show_title', 'twitter_intro',)
+        exclude = ('user', 'slug', 'service_lookup', 'twitter_username', 'twitter_oauth_token', 'twitter_oauth_secret', 'twitter_show_title', 'twitter_intro')
+        
+    def __init__(self, *args, **kwargs):
+        super(OrganizationForm, self).__init__(*args, **kwargs)
+        self.fields['cover_user_id'].help_text = "'client' for Syndetic Solutions, 'userID' for Content Cafe"
+        self.fields['cover_service'].help_text = "Be sure your terms of service allow use of cover images on this website"
     
 
 class TwitterSettingsForm(forms.ModelForm):

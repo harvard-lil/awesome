@@ -10,6 +10,11 @@ class Organization(models.Model):
         ('title', 'Title'),
         ('landing', 'Landing'),
     )
+    COVER_QUERY_CHOICES = (
+        ('openlibrary', 'Open Library'),
+        ('syndetic', 'Syndetic Solutions'),
+        ('contentcafe', 'Content Cafe'),
+    )
     user = models.ForeignKey(User)
     name = models.CharField(max_length=400)
     slug = models.SlugField(unique=True)
@@ -25,6 +30,10 @@ class Organization(models.Model):
     twitter_oauth_secret = models.CharField(max_length=200, null=True, blank=True)
     twitter_intro = models.CharField(max_length=35, null=True, blank=True)
     twitter_show_title = models.BooleanField(default=True)
+    cover_service = models.CharField(max_length=100, choices=COVER_QUERY_CHOICES, default="openlibrary")
+    cover_user_id = models.CharField(max_length=35, null=True, blank=True)
+    cover_password = models.CharField(max_length=35, null=True, blank=True)
+
     
     def __unicode__(self):
         return self.name
