@@ -66,7 +66,7 @@ class OrganizationForm(forms.ModelForm):
 
     class Meta:
         model = Organization
-        exclude = ('user', 'slug', 'service_lookup', 'twitter_username', 'twitter_oauth_token', 'twitter_oauth_secret', 'twitter_consumer_key', 'twitter_consumer_secret','twitter_show_title', 'twitter_intro',)
+        exclude = ('user', 'slug', 'service_lookup', 'twitter_username', 'twitter_oauth_token', 'twitter_oauth_secret', 'twitter_show_title', 'twitter_intro',)
     
 
 class TwitterSettingsForm(forms.ModelForm):
@@ -80,7 +80,7 @@ class OrganizationFormRegistration(forms.ModelForm):
             
     class Meta:
         model = Organization
-        exclude = ('user', 'twitter_username', 'twitter_oauth_token', 'twitter_oauth_secret', 'twitter_consumer_key', 'twitter_consumer_secret','twitter_show_title', 'twitter_intro')
+        exclude = ('user', 'twitter_username', 'twitter_oauth_token', 'twitter_oauth_secret', 'twitter_show_title', 'twitter_intro')
         
         
 class OrganizationFormSelfRegistration(forms.ModelForm):

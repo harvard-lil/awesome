@@ -21,8 +21,6 @@ class Organization(models.Model):
     logo_link = models.URLField(max_length=2000, null=True, blank=True)
     about_page_blurb = models.TextField(max_length=4000, default="The Awesome Box is a collaboration with the Harvard Library Innovation Lab. It allows the community to see what others have found helpful, entertaining, or mind-blowing.")
     twitter_username = models.CharField(max_length=15, null=True, blank=True)
-    twitter_consumer_key = models.CharField(max_length=200, null=True, blank=True)
-    twitter_consumer_secret = models.CharField(max_length=200, null=True, blank=True)
     twitter_oauth_token = models.CharField(max_length=200, null=True, blank=True)
     twitter_oauth_secret = models.CharField(max_length=200, null=True, blank=True)
     twitter_intro = models.CharField(max_length=35, null=True, blank=True)
