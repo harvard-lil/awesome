@@ -328,7 +328,10 @@ class ThreadedTweet(Thread):
 
             #Tweet the item details and the short url
             if org.twitter_show_title:
-                twitter_message = org.twitter_intro + ' ' + self.item.title
+                if org.twitter_intro:
+                    twitter_message = org.twitter_intro + ' ' + self.item.title
+                else:
+                    twitter_message = self.item.title
                 twitter_message = twitter_message.strip()
                 if self.item.creator:
                     twitter_message = twitter_message + ' by ' + self.item.creator
