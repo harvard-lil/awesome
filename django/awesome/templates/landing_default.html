@@ -96,8 +96,51 @@
       <a href="http://robinsonmusiclibrary.awesomebox.io" class="already" target="_blank">Robinson Music</a>
       <!--<div id="recent"></div>
       <p class="text-block" id="awesome-counter"><span></span> items Awesomed so far</div>-->
+      <p class="text-block already">And over <strong>100</strong> more...</p>
     </div>
   </div>
+  <div class="row">
+    <div class="span11 offset1">
+  <div id="plot-map-container"></div>
+  </div>
+  </div>
+
+  <script type="text/javascript" charset="utf-8">
+    // BIG
+    //var map, paper, pageWidth=3800;
+    var map, paper, pageWidth=800;
+
+    var drawIt = function() {
+      paper = new ScaleRaphael('plot-map-container', 950, 650);
+      map = paper.USMap();
+      paper.scaleAll(pageWidth/map.width);
+
+      var points = [
+[-36.725942, 174.698313, "Albany Senior High School Library"],[-33.700535, 151.097403, "Hornsby Shire Library & Information Service"],[-33.700535, 151.097403, "Hornsby Shire Library & Information Service"],[-23.558567, -46.710404, "Biblioteca da ECA"],[26.723395, -80.112531, "Oxbridge iCommons"],[28.265057, -82.27504, "Watergrass Elementary School"],[29.385056, -95.105142, "Mae S. Bruce Library"],[30.438751, -91.134245, "Southeast Middle School Library"],[32.595401, -82.307089, "East Georgia State College Library"],[32.667477, -97.014371, "Grand Prairie Public Library System"],[32.737914, -97.018261, "Grand Prairie Public Library System"],[32.755296, -96.963054, "Grand Prairie Public Library System"],[32.839038, -97.093291, "Euless Public Library"],[33.678102, -116.299403, "La Quinta Public Library"],[34.722809, -86.58967, "Huntsville-Madison County Public Library"],[35.494968, -97.544104, "Oklahoma City University Law Library"],[37.263911, -121.996613, "Marshall Lane Elementary Library"],[37.873273, -84.57568, "Jessamine County Public Library"],[38.556446, -76.587884, "Calvert Middle School Library"],[38.658111, -121.494149, "Natomas Charter School Library"],[38.658253, -90.396141, "McCulloch Library"],[38.669193, -84.334434, "Pendleton County Public Library"],[38.873597, -94.399104, "Lee's Summit West High School Library"],[38.881751, -94.817579, "Olathe Public Library"],[38.945859, -94.348837, "BCMS Library"],[39.756051, -86.540505, "Danville Community High School Library"],[39.915868, -75.066704, "Collingswood Public Library"],[39.9652, -74.9417, "Moorestown Friends School Library "],[40.064756, -74.837407, "Burlington Township High School Media Center"],[40.0882, -74.6856, "NBC High School Media Center"],[40.095788, -75.122173, "Abington Friends School"],[40.333162, -78.754819, "Forest Hills High School Library"],[40.362056, -75.91154, "Albright College Library"],[40.370036, -80.232861, "South Fayette Middle School Library"],[40.503896, -74.899378, "Hunterdon County Library"],[40.536393, -74.470622, "Piscataway Public Library"],[40.568398, -74.457087, "Piscataway Public Library"],[40.642697, -74.385456, "Fanwood Memorial Library"],[40.804052, -73.360262, "Half Hollow Hills Community Library"],[40.923805, -73.053768, "Comsewogue Public Library"],[40.980327, -90.407256, "Carl Sandburg College Library"],[41.002588, -79.324721, "Redbank Valley Public Library"],[41.049987, -73.616445, "GCDS Upper School Library"],[41.154889, -73.773082, "Chappaqua Library"],[41.33535, -75.552186, "Lackawanna County Library System"],[41.379578, -75.717884, "Lackawanna County Library System"],[41.383019, -72.904974, "Hamden Public Library"],[41.407748, -75.667768, "Lackawanna County Library System"],[41.411014, -75.659307, "Lackawanna County Library System"],[41.411039, -75.659324, "Lackawanna County Library System"],[41.426857, -75.646879, "Lackawanna County Library System"],[41.459436, -70.603804, "Vineyard Haven Public Library"],[41.482605, -75.580155, "Lackawanna County Library System"],[41.48852, -75.718659, "Lackawanna County Library System"],[41.512402, -81.608849, "Robinson Music Library"],[41.534178, -75.735435, "Lackawanna County Library System"],[41.580525, -75.500847, "Lackawanna County Library System"],[41.685755, -72.925012, "Bristol Eastern High School"],[41.74876, -71.190002, "Swansea Public Library"],[41.77239, -71.416285, "Park View Middle School Library"],[41.790166, -87.920563, "Oak School Media Resource Center"],[42.010342, -87.831764, "Park Ridge Public Library"],[42.046782, -70.684477, "Duxbury Free Library"],[42.090721, -76.806015, "Chemung County Library District"],[42.110953, -71.663577, "Whitinsville Social Library"],[42.184458, -87.796851, "Highland Park Public Library"],[42.186632, -71.305147, "Medfield Memorial Public Library"],[42.205815, -71.684482, "Grafton Public Library"],[42.26054, -71.463292, "Ashland Public Library"],[42.267789, -71.61548, "Westborough Public Library"],[42.279434, -85.570686, "Kalamazoo Public Library"],[42.289613, -85.584659, "Kalamazoo Public Library"],[42.293969, -85.691149, "Kalamazoo Public Library"],[42.296607, -71.290585, "Wellesley Free Library"],[42.302116, -71.150169, "The Public Library of Brookline"],[42.302194, -85.545906, "Kalamazoo Public Library"],[42.303837, -85.598001, "Kalamazoo Public Library"],[42.334296, -71.121953, "The Public Library of Brookline"],[42.343639, -71.119483, "The Public Library of Brookline"],[42.345874, -71.554577, "Marlborough Public Library "],[42.353824, -71.734462, "Boylston Public Library"],[42.367337, -71.186916, "Watertown Free Public Library"],[42.373433, -71.119512, "Library Innovation Lab"],[42.373653, -71.110597, "Cambridge Public Library"],[42.3737, -71.1164, "Library Innovation Lab"],[42.376352, -71.239488, "Waltham Public Library"],[42.377767, -71.028539, "East Boston Branch Library"],[42.385577, -71.094477, "Somerville Public Library"],[42.387859, -71.083614, "Somerville Public Library"],[42.394955, -71.21649, "Gann Academy "],[42.398096, -71.121733, "Somerville Public Library"],[42.415653, -71.154807, "Robbins Library and Fox Library"],[42.434173, -71.452012, "Maynard Public Library"],[42.452182, -71.134206, "Winchester Public Library"],[42.455013, -71.395381, "Concord Free Public Library"],[42.459188, -71.353309, "Concord Free Public Library"],[42.460638, -70.943845, "North Shore Community College"],[42.492049, -71.283669, "Bedford Free Public Library "],[42.526166, -71.110374, "Reading Public Library"],[42.528821, -71.348156, "Gleason Public Library (Carlisle)"],[42.533595, -92.445491, "Cedar Falls Public Library"],[42.542362, -71.48038, "Reuben Hoar Library"],[42.546517, -88.106522, "Community Library"],[42.588185, -72.598666, "Greenfield Public Library"],[42.590266, -70.967872, "North Shore Community College"],[42.590266, -70.967872, "North Shore Community College"],[42.648598, -71.133061, "Oliver Wendell Holmes Library"],[42.662725, -70.997813, "Boxford Town Library"],[42.730134, -71.189594, "Nevins Memorial Library"],[42.745495, -73.576676, "Brunswick Community Library"],[42.978801, -88.101756, "New Berlin Public Library"],[43.00161, -89.424884, "Fitchburg Public Library"],[43.027412, -74.988881, "MidYork Library System"],[43.047722, -75.384282, "MidYork Library System"],[43.051565, -78.867616, "North Tonawanda Public Library"],[43.077392, -96.175472, "Sioux Center Public Library"],[43.078455, -75.755555, "MidYork Library System"],[43.094126, -75.257187, "MidYork Library System"],[43.100073, -76.150205, "Salina Library"],[43.218516, -75.453762, "MidYork Library System"],[43.274857, -89.72092, "Sauk City Public Library"],[43.699828, -72.28608, "Howe Library"],[43.723487, -70.23617, "Falmouth Memorial Library"],[43.989248, -72.447646, "Chelsea Public Library"],[44.021886, -92.460837, "Rochester Public Library"],[44.327256, -93.966408, "St. Peter Middle and High School Library"],[44.464035, -72.684601, "Stowe Free Library"],[44.799948, -70.296194, "Mt Abram High School Library"],[44.803784, -68.771302, "Bangor Public Library"],[44.889194, -87.872836, "Farnsworth Public Library"],[44.896876, -89.595564, "DCEverest Senior High IMC"],[44.944139, -93.096964, "Saint Paul Public Library"],[45.408683, -92.644836, "St. Croix Falls Public Library"],[46.470958, -117.598922, "Denny Ashby Library"],[46.994416, 6.938921, "Documentation Center Migrations"],[46.994416, 6.938921, "Documentation Center Migrations"],[47.635, -122.521, "Kitsap Regional Library"],[47.721178, -116.777467, "CHS Viking Library Media Center"],[51.759241, -1.260994, "Oxford University Language Centre"],[58.384955, -134.640283, "UAS Egan Library"]
+      ]
+      for(var i = 0; i < points.length; i++){
+        //map.plot(points[i][0], points[i][1], points[i][2]);
+        //map.darkenState(points[i][3], 0.07);
+        map.plot(points[i][0], points[i][1], points[i][2]);
+      }
+
+
+ // This is for downloading
+ /*$("svg").attr({ version: '1.1' , xmlns:"http://www.w3.org/2000/svg"});
+
+ var svg = $("#svggroup").html();
+ var b64 = btoa(svg); // or use btoa if supported
+
+ // Works in recent Webkit(Chrome)
+ open("data:image/svg+xml," + encodeURIComponent(svg));*/
+ // End of downloading
+
+    };
+
+    document.onload = drawIt();
+    
+    
+  </script>
 	<footer>
     <div class="row span8 offset2">	
       <a href="http://librarylab.law.harvard.edu/"><img class="left stamp" src="{{ STATIC_PREFIX }}images/liblabstamp.png"/></a>
@@ -114,7 +157,10 @@
 </script>
 <!-- Grab Google CDN's jQuery. fall back to local if necessary --> 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-
+<script src='{{ STATIC_PREFIX }}js/raphael.js'></script>
+<script src='{{ STATIC_PREFIX }}js/raphael.scale.js'></script>
+<script src='{{ STATIC_PREFIX }}js/g.raphael.js'></script>
+<script src='{{ STATIC_PREFIX }}js/usmap.js'></script>
 <script src="{{ STATIC_PREFIX }}js/jcarousellite.min.js"></script>
 <script src="{{ STATIC_PREFIX }}js/handlebars.js"></script>
 <script src="{{ STATIC_PREFIX }}js/landing.js"></script>
