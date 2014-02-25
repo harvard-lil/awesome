@@ -101,8 +101,8 @@
   </div>
   <div class="row">
     <div class="span11 offset1">
-  <div id="plot-map-container"></div>
-  </div>
+        <div id="plot-map-container"></div>
+    </div>
   </div>
 
   <script type="text/javascript" charset="utf-8">
@@ -141,6 +141,20 @@
     
     
   </script>
+  <div class="row">
+    <div class="span5 offset1">
+    <h3>Top Awesome Items</h3>
+    {% for item in items %}
+        <p class="text-block">{{item.title}}</p>
+    {% endfor %}
+    </div>
+    <div class="span5 offset1">
+    <h3>Top Awesome Authors</h3>
+    {% for creator in creators %}
+        <p class="text-block">{{creator.creator}}</p>
+    {% endfor %}
+    </div>
+  </div>
 	<footer>
     <div class="row span8 offset2">	
       <a href="http://librarylab.law.harvard.edu/"><img class="left stamp" src="{{ STATIC_PREFIX }}images/liblabstamp.png"/></a>
