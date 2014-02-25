@@ -12,7 +12,7 @@ from django.http import  HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.core.urlresolvers import reverse
 from django.core.context_processors import csrf
-from django.contrib import auth
+from django.contrib import auth, messages
 from django.contrib.sites.models import Site
 
 logger = logging.getLogger(__name__)
@@ -98,7 +98,8 @@ def process_self_register(request):
             new_user.backend='django.contrib.auth.backends.ModelBackend'
             auth.login(request, new_user)
             
-            return HttpResponseRedirect(reverse('landing'))
+            messages.add_message(request, messages.INFO, 'Success! Time to get more Awesome.')
+            return HttpResponseRedirect(reverse('auth_login'))
         
         else:
             c.update({'user_reg_form': user_reg_form,

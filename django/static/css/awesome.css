@@ -544,6 +544,11 @@ p.bold {
  margin-top:8px;
 }
 
+.control-message {
+    margin-top:25px;
+    margin-bottom:0px;
+}
+
 /* End control forms */
 
 
