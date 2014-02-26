@@ -7,6 +7,14 @@
 {% block styles %}
 <link rel="stylesheet" href="{{ STATIC_PREFIX }}css/bootstrap.css" type="text/css" />
 <link rel="stylesheet" media="all" href="{{ STATIC_PREFIX }}css/landing.css" />
+<style>
+    .collage {
+        padding:20px;
+    }
+    .collage-container {
+        margin-left:-20px;
+    }
+    </style>
 {% endblock styles %}
 
 {% block content %}
@@ -33,58 +41,6 @@
 		  </form>
     </div>	
   </div>
-  <!--<div class="row offerings">
-    <div class="span9 offset1">
-      <h3>Wait, what is it?</h3>
-      <p class="text-block">Awesome Box is an alternate library returns box for items that your community thought were helpful, entertaining, or mind-blowing.</p>
-      <img src="{{ STATIC_PREFIX }}images/awesome-split.jpg"/>
-      <p class="text-block">Interested?  All you need is a box of some kind and a free account.</p>
-    </div>
-    <div class="span9 offset1">
-      <h3>How does the free account help me?</h3>
-      <p class="text-block">An account takes care of all the technology</p>
-    </div>
-  </div>
-  <div class="row offerings">
-    <div class="span5 offset1">
-      <h4>Website</h4>
-      <p class="text-block">You'll get a home page just like this</p>
-      <p class="text-block">That can be found at <strong>yourlibrary.awesomebox.io</strong></p>
-    </div>
-    <div class="span6">
-      <img class="screenshot" src="{{ STATIC_PREFIX }}images/awesome-home.jpg"/>
-    </div>
-    <div class="span11 offset1">
-      <hr>
-    </div>
-  </div>
-  <div class="row offerings">
-    <div class="span6 offset1">
-      <img class="screenshot" src="{{ STATIC_PREFIX }}images/awesome-scan.jpg"/>
-    </div>
-    <div class="span4 offset1">
-      <h4>Easy scanning</h4>
-      <p class="text-block">This page will be waiting to receive a barcode scan</p>
-      <p class="text-block">Just aim at the UPC/ISBN code</p>
-    </div>
-        <div class="span11 offset1">
-      <hr>
-    </div>
-  </div>
-  <div class="row offerings">
-    <div class="span5 offset1">
-      <h4>Widget</h4>
-      <p class="text-block">You'll also get a widget that can be plonked anywhere</p>
-      <p class="text-block">On your library's website or blog or anywhere else</p>
-      <p class="text-block">This is a real live widget</p>
-    </div>
-    <div class="span4 offset1">
-      <script src="http://cambridge.awesomebox.io/widget/"></script>
-    </div>
-        <div class="span11 offset1">
-      <hr>
-    </div>
-  </div>-->
   <div class="row">
     <div class="span11 offset1">
       <!--<p class="text-block-inverse center">These libraries are already awesome.<br >With a lot of awesome items.</p>-->
@@ -142,17 +98,94 @@
     
   </script>
   <div class="row">
+    <div class="span11 offset1">
+        <h3>Most Awesome of All</h3>
+    </div>
+  </div>
+  <div class="row">
     <div class="span5 offset1">
-    <h3>Top Awesome Items</h3>
+    <table class="table table-bordered">
+    <thead>
+        <tr>
+            <th class="small-th">CURRENT RANK</th>
+            <th>TITLES</th>
+            <th class="small-th">NUMBER AWESOMES</th>
+        </tr>
+    </thead>
+    <tbody>
     {% for item in items %}
-        <p class="text-block">{{item.title}}</p>
+        <!--<p class="text-block">{{item.title}}</p>-->
+        <tr><td class="rank-td">{{forloop.counter}}</td><td>{{item.title}}</td><td class="awesomes-td">{{item.total_checkins}}</td></tr>
     {% endfor %}
+    </tbody>
+    </table>
     </div>
     <div class="span5 offset1">
-    <h3>Top Awesome Authors</h3>
+        <table class="table table-bordered">
+    <thead>
+        <tr>
+            <th class="small-th">CURRENT RANK</th>
+            <th>AUTHORS</th>
+            <th class="small-th">NUMBER AWESOMES</th>
+        </tr>
+    </thead>
+    <tbody>
     {% for creator in creators %}
-        <p class="text-block">{{creator.creator}}</p>
+        <!--<p class="text-block">{{item.title}}</p>-->
+        <tr><td class="rank-td">{{forloop.counter}}</td><td>{{creator.creator}}</td><td class="awesomes-td">{{creator.total_checkins}}</td></tr>
     {% endfor %}
+    </tbody>
+    </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span11 offset1">
+        <p class="text-block already">Sign up to find out the most Awesome at your libary</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span11 offset1">
+        <h3>You're in charge of the box</h3>
+        <p class="text-block already">We provide some design building blocks that you can choose to use or not.</p>
+        <div class="collage collage-container"></div>
+        <script type="text/javascript">
+var  html = '', limitItem = 28;
+			for (var i = 1; i < limitItem; ++i) {
+			    var name = 100 + i;
+				html += "<img src='{{ STATIC_PREFIX }}images/box-images/ab_" + name + ".jpg' class='cell'>";
+			}
+			$(".collage").html(html);
+    // All images need to be loaded for this plugin to work so
+    // we end up waiting for the whole window to load in this example
+    $(window).load(function () {
+        $(document).ready(function(){
+            collage();
+        });
+    });
+
+
+    // Here we apply the actual CollagePlus plugin
+    function collage() {
+        $('.collage').collagePlus(
+            {
+                'fadeSpeed'     : 2000,
+                'targetHeight'  : 170,
+                'allowPartialLastRow' : true
+            }
+        );
+    };
+
+    // This is just for the case that the browser window is resized
+    var resizeTimer = null;
+    $(window).bind('resize', function() {
+        // hide all the images until we resize them
+        $('.collage .Image_Wrapper').css("opacity", 0);
+        // set a timer to re-apply the plugin
+        if (resizeTimer) clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(collage, 200);
+    });
+
+    </script>
     </div>
   </div>
 	<footer>
@@ -175,13 +208,9 @@
 <script src='{{ STATIC_PREFIX }}js/raphael.scale.js'></script>
 <script src='{{ STATIC_PREFIX }}js/g.raphael.js'></script>
 <script src='{{ STATIC_PREFIX }}js/usmap.js'></script>
-<script src="{{ STATIC_PREFIX }}js/jcarousellite.min.js"></script>
+<script src="{{ STATIC_PREFIX }}js/jquery.collagePlus.js"></script>
 <script src="{{ STATIC_PREFIX }}js/handlebars.js"></script>
 <script src="{{ STATIC_PREFIX }}js/landing.js"></script>
-
-<script type="text/javascript">
-       
-</script>
 {% endblock scripts %}
 
 {% block templates %}

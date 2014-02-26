@@ -29,8 +29,8 @@ def landing(request):
                                                'branch': branch, 'twitter_username': org.twitter_username,
                                                'ga_key': GOOGLE['ANALYTICS_KEY']})
     else:
-        items = Item.objects.values('title').annotate(total_checkins=Sum('number_checkins')).order_by('-total_checkins')[:5]
-        creators = Item.objects.values('creator').annotate(total_checkins=Sum('number_checkins')).order_by('-total_checkins')[:5]
+        items = Item.objects.values('title').annotate(total_checkins=Sum('number_checkins')).order_by('-total_checkins')[:10]
+        creators = Item.objects.values('creator').annotate(total_checkins=Sum('number_checkins')).order_by('-total_checkins').exclude(creator='')[:10]
         logger.debug(items)
         context = {'ga_key': GOOGLE['ANALYTICS_KEY'], 'items': items, 'creators': creators}
                
