@@ -27,7 +27,11 @@
 			<header>
 				<h1>Control Organization</h1>
 			</header>
-
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-success control-message">{% if 'safe' in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}</div>
+                {% endfor %}
+            {% endif %}
 			<form method="post" action="" class="control-form">
 				{% csrf_token %}
 				<fieldset>

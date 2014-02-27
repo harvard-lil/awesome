@@ -34,6 +34,11 @@
 	</header>
 	<div id="content">
 		<article class="control thin-centered">
+		    {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-success control-message">{% if 'safe' in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}</div>
+                {% endfor %}
+            {% endif %}
 			<h1>Login</h1>
 		
 			{% if next %}
@@ -46,7 +51,7 @@
 				<button type="submit" class="btn"><i class="icon-ok"></i> Login</button>
 			</form>
 			<br />
-			<p>Can't remember your password? No problem, we can help you <a href="{% url 'auth_password_reset' %}">create a new one.</a></p>
+			<p>Can't remember your password? No problem, we can help you <a href="{% url 'auth_password_reset' %}">create a new one</a>.</p>
 		</article>
 	</div><!-- end content -->
 </div> <!-- end wrapper -->

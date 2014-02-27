@@ -34,6 +34,11 @@
             <form method="post" action="{% url 'control_twitter_settings' %}">
                         {% csrf_token %}
                 <h3>Your Awesome Twitter Settings</h3>
+                {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-success control-message">{% if 'safe' in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}</div>
+                {% endfor %}
+            {% endif %}
                 <label>Tweet intro text</label>
                 {{ settings_form.twitter_intro }}
                 <label class="checkbox">

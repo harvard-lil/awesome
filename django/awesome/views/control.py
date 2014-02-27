@@ -12,8 +12,10 @@ import oauth2 as oauth
 
 from django.core.context_processors import csrf
 from django.http import HttpResponseRedirect
+from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.core.urlresolvers import reverse
+from django.contrib import messages
 from django.contrib.sites.models import Site
 
 logger = logging.getLogger(__name__)
@@ -53,6 +55,7 @@ def org(request):
         if submitted_form.is_valid():
             submitted_form.save()
 
+            messages.add_message(request, messages.SUCCESS, 'Changes saved.')
             return HttpResponseRedirect(reverse('control_org'))
         else:
             context = {
@@ -60,7 +63,7 @@ def org(request):
                 'organization': org,
                 'form': submitted_form,
             }
-            context.update(csrf(request))    
+            context = RequestContext(request, context)    
             return render_to_response('control-org.html', context)
             
     else:  
@@ -70,7 +73,7 @@ def org(request):
             'organization': org,
             'form': form,
         }
-        context.update(csrf(request))    
+        context = RequestContext(request, context)   
         return render_to_response('control-org.html', context)
         
 def branch(request):
@@ -314,7 +317,7 @@ def twitter_config(request):
         if org.twitter_oauth_token and org.twitter_oauth_secret:
             context['existing_config'] = True;
 
-        context.update(csrf(request))
+        context = RequestContext(request, context)
         return render_to_response('control-twitter-config.html', context)
         
 def twitter_callback(request):
@@ -379,6 +382,7 @@ def twitter_settings(request):
         if submitted_form.is_valid():
             submitted_form.save()
 
+            messages.add_message(request, messages.SUCCESS, 'Changes saved.')
             return HttpResponseRedirect(reverse('control_twitter_config'))
         else:
             context = {
@@ -386,7 +390,7 @@ def twitter_settings(request):
                 'organization': org,
                 'settings_form': submitted_form,
             }
-            context.update(csrf(request))    
+            context = RequestContext(request, context)   
             return render_to_response('control-twitter-config.html', context)
             
     else:  
@@ -396,7 +400,7 @@ def twitter_settings(request):
             'organization': org,
             'settings_form': form,
         }
-        context.update(csrf(request))    
+        context = RequestContext(request, context)     
         return render_to_response('control-twitter-config.html', context)
 
     
