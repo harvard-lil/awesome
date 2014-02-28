@@ -188,6 +188,9 @@ h3 a:hover {
 	margin-top:10px;
 }
 
+.opening-row h1 {
+    	font-weight:bold;
+}
 
 .underline {
 	text-decoration:underline;
