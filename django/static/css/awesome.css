@@ -568,8 +568,15 @@ p.bold {
   font-size:24px;
 }
 
-.control_list a:hover { 
+.control_list a:hover, .control_list_export a:hover { 
     color:#07a8ce;
+}
+
+.control_list_export a {
+    display:block;
+    margin-top:25px;
+    margin-left:15px;
+    color:#000;
 }
 
 .widget-sample {

@@ -6,17 +6,18 @@ from awesome.forms import (
     TwitterSettingsForm,
 )
 
-import datetime, logging, urlparse
+import datetime, logging, urlparse, csv
 
 import oauth2 as oauth
 
 from django.core.context_processors import csrf
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.core.urlresolvers import reverse
 from django.contrib import messages
 from django.contrib.sites.models import Site
+from django.utils.encoding import smart_str
 
 logger = logging.getLogger(__name__)
 
@@ -473,3 +474,43 @@ def widget(request):
         }
     
     return render_to_response('control-widget.html', context)
+    
+    
+def csv_export(request):
+
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect(reverse('auth_login'))
+
+    passed_in_branch_id = request.GET.get('filtered_branch')
+        
+    org = Organization.objects.get(user=request.user)
+    branches = Branch.objects.filter(organization=org)
+        
+    filter_branch = branches[0]
+        
+    if passed_in_branch_id:
+        filter_branch = Branch.objects.get(id=passed_in_branch_id)
+        
+    items = Item.objects.filter(branch=filter_branch, branch__organization=org).order_by('-latest_checkin')[:1000]
+    # Create the HttpResponse object with the appropriate CSV header.
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="awesome_list.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow([
+        smart_str(u"Title"),
+        smart_str(u"Author"),
+        smart_str(u"ISBN"),
+        smart_str(u"Awesome Count"),
+        smart_str(u"Last Awesome"),
+    ])
+    for obj in items:
+        writer.writerow([
+            smart_str(obj.title),
+            smart_str(obj.creator),
+            smart_str('[{isbn}]'.format(isbn=obj.isbn)),
+            smart_str(obj.number_checkins),
+            smart_str(obj.latest_checkin.strftime("%Y-%m-%d %H:%M")),
+        ])
+    return response
+csv_export.short_description = u"Export CSV"
