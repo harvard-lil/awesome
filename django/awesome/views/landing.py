@@ -1,6 +1,6 @@
 import logging
 
-from awesome.models import Organization, Item
+from awesome.models import Organization, Item, Branch
 
 from django.shortcuts import render_to_response
 from django.core.context_processors import csrf
@@ -31,7 +31,6 @@ def landing(request):
     else:
         items = Item.objects.values('title').annotate(total_checkins=Sum('number_checkins')).order_by('-total_checkins')[:10]
         creators = Item.objects.values('creator').annotate(total_checkins=Sum('number_checkins')).order_by('-total_checkins').exclude(creator='')[:10]
-        logger.debug(items)
         context = {'ga_key': GOOGLE['ANALYTICS_KEY'], 'items': items, 'creators': creators}
                
         context.update(csrf(request))
