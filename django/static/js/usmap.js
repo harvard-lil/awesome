@@ -11,8 +11,8 @@ Raphael.fn.USMap = function(){
     drawnStates: new Array(50),
     stateStyle: {
       //"fill": "#d3d3d3",
-      "fill": "#00333c",
-      "fill-opacity": ".25",
+      "fill": "#D0D6E4",
+      "fill-opacity": "1",
       "stroke": "#fff",
       "stroke-opacity": "1",
       "stroke-linejoin": "round",

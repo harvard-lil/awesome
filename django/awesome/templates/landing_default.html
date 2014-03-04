@@ -33,12 +33,7 @@
       <p class="text-block">Checked out something awesome from the library? Return it to the awesome box.</p>
     </div>
     <div class="col-md-5 col-md-offset-1">
-      <form method="post" action="" id="learn-how">
-        <p class="text-block">Learn how to get one at your library</p>
-        <input type="text" class="input_large" placeholder="Your email" id="email" />
-			  <input type="submit" value="Yes please"/>
-			  <p id="signed-up" style="display:none;"></p>
-		  </form>
+      <a href="{% url 'process_self_register' %}" type="button" class="btn btn-custom btn-lg">Get one at your library</a>
     </div>	
   </div>
   <div class="row">
@@ -104,7 +99,7 @@
     
   </script>
   <div class="row offerings">
-    <div class="col-md-10 col-md-offset-1">
+    <div class="col-md-6 col-md-offset-1">
         <h3>Most Awesome of All</h3>
         <p class="text-block already">Of all the items dropped in an awesome box at one of those libraries, these are the most awesome of all</p>
     </div>
@@ -146,15 +141,19 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-10 col-md-offset-1">
-        <p class="text-block already"><a href="{% url 'process_self_register' %}" type="button" class="btn btn-primary btn-lg">Sign up</a> to discover the most Awesome items at your libary</p>
+    <div class="col-md-16 col-md-offset-1">
+        <p class="text-block already"><a href="{% url 'process_self_register' %}" type="button" class="btn btn-custom btn-lg">Sign up</a> to discover what's Awesome at your libary</p>
         
     </div>
   </div>
   <div class="row offerings">
-    <div class="col-md-10 col-md-offset-1">
+    <div class="col-md-6 col-md-offset-1">
         <h3>Create a box, you're in charge</h3>
         <p class="text-block already">We provide some design building blocks that you can choose to use or not</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
         <div class="collage collage-container"></div>
         <script type="text/javascript">
 var  html = '', limitItem = 28;
