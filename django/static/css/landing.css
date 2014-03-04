@@ -52,7 +52,7 @@ h4 {
 
 .text-block {
 	color:#444;
-	line-height: 20px;
+	line-height: 24px;
 	font-size: 22px;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -114,7 +114,7 @@ h4 {
 }
 
 .row.offerings {
-  margin-top:35px;
+  margin-top:55px;
   margin-bottom:40px;
 }
 
@@ -142,13 +142,42 @@ a.already {
   display:inline-block;
   margin-right:45px;
   margin-bottom:15px;
-  color:#11CBF7;
+  color:#51ADE1;
   font-size:18px;
 }
 
 a.already:hover {
   text-decoration:none;
   color:#07A8CE;
+}
+
+.btn-custom {
+  background-color: #51ADE1;
+  border-color: #51ADE1;
+  color:#fff;
+}
+.btn-custom:hover,
+.btn-custom:focus,
+.btn-custom:active,
+.btn-custom.active {
+  background-color: #3ba3dd;
+  border-color: #2699da;
+  color:#fff;
+}
+.btn-custom.disabled:hover,
+.btn-custom.disabled:focus,
+.btn-custom.disabled:active,
+.btn-custom.disabled.active,
+.btn-custom[disabled]:hover,
+.btn-custom[disabled]:focus,
+.btn-custom[disabled]:active,
+.btn-custom[disabled].active,
+fieldset[disabled] .btn-custom:hover,
+fieldset[disabled] .btn-custom:focus,
+fieldset[disabled] .btn-custom:active,
+fieldset[disabled] .btn-custom.active {
+  background-color: #51ADE1;
+  border-color: #51ADE1;
 }
 
 li.item {
@@ -188,6 +217,9 @@ h3 a:hover {
 	margin-top:10px;
 }
 
+.opening-row h1 {
+    	font-weight:bold;
+}
 
 .underline {
 	text-decoration:underline;
@@ -254,6 +286,28 @@ li {
 #signed-up {
   margin-top:8px;
   color:#9cbe15;
+}
+
+.table th {
+    font-size:24px;
+}
+
+.table th.small-th {
+    font-size:8px;
+    width:35px;
+    line-height:10px;
+    text-align:center;
+    padding-bottom:14px;
+}
+
+.table td.rank-td {
+    font-size:18px;
+    text-align:center;
+    color:#D73840;
+}
+
+.table td.awesomes-td {
+    text-align:right;
 }
 
 /*///////////////////Formalize, courtesy of Nathan Smith

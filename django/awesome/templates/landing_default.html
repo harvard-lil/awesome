@@ -5,88 +5,39 @@
 {% block title %}Awesome Box{% endblock title %}
 
 {% block styles %}
-<link rel="stylesheet" href="{{ STATIC_PREFIX }}css/bootstrap.css" type="text/css" />
+<link rel="stylesheet" href="{{ STATIC_PREFIX }}css/bootstrap.min.css" type="text/css" />
 <link rel="stylesheet" media="all" href="{{ STATIC_PREFIX }}css/landing.css" />
+<style>
+    .collage {
+        padding:10px;
+    }
+    .collage-container {
+        margin-left:-10px;
+    }
+    </style>
 {% endblock styles %}
 
 {% block content %}
 <body>
 <div class="container">
 	
-	<div class="row span12 center">
-    <div class="text-block opening-row">
+	<div class="row center">
+    <div class="text-block opening-row col-md-12">
 			<h1>Sometimes things are<br/><span class="awesome">Awesome.</span></h1>
 		</div>
 			
     <img class="awesome-image" src="{{ STATIC_PREFIX }}images/awesome_action.jpg"/>
   </div><!--row-->
   <div class="row">
-    <div class="span5 offset1">
+    <div class="col-md-5 col-md-offset-1">
       <p class="text-block">Checked out something awesome from the library? Return it to the awesome box.</p>
     </div>
-    <div class="span5 offset1">
-      <form method="post" action="" id="learn-how">
-        <p class="text-block">Learn how to get one at your library</p>
-        <input type="text" class="input_large" placeholder="Your email" id="email" />
-			  <input type="submit" value="Yes please"/>
-			  <p id="signed-up" style="display:none;"></p>
-		  </form>
+    <div class="col-md-5 col-md-offset-1">
+      <a href="{% url 'process_self_register' %}" type="button" class="btn btn-custom btn-lg">Get one at your library</a>
     </div>	
   </div>
-  <!--<div class="row offerings">
-    <div class="span9 offset1">
-      <h3>Wait, what is it?</h3>
-      <p class="text-block">Awesome Box is an alternate library returns box for items that your community thought were helpful, entertaining, or mind-blowing.</p>
-      <img src="{{ STATIC_PREFIX }}images/awesome-split.jpg"/>
-      <p class="text-block">Interested?  All you need is a box of some kind and a free account.</p>
-    </div>
-    <div class="span9 offset1">
-      <h3>How does the free account help me?</h3>
-      <p class="text-block">An account takes care of all the technology</p>
-    </div>
-  </div>
-  <div class="row offerings">
-    <div class="span5 offset1">
-      <h4>Website</h4>
-      <p class="text-block">You'll get a home page just like this</p>
-      <p class="text-block">That can be found at <strong>yourlibrary.awesomebox.io</strong></p>
-    </div>
-    <div class="span6">
-      <img class="screenshot" src="{{ STATIC_PREFIX }}images/awesome-home.jpg"/>
-    </div>
-    <div class="span11 offset1">
-      <hr>
-    </div>
-  </div>
-  <div class="row offerings">
-    <div class="span6 offset1">
-      <img class="screenshot" src="{{ STATIC_PREFIX }}images/awesome-scan.jpg"/>
-    </div>
-    <div class="span4 offset1">
-      <h4>Easy scanning</h4>
-      <p class="text-block">This page will be waiting to receive a barcode scan</p>
-      <p class="text-block">Just aim at the UPC/ISBN code</p>
-    </div>
-        <div class="span11 offset1">
-      <hr>
-    </div>
-  </div>
-  <div class="row offerings">
-    <div class="span5 offset1">
-      <h4>Widget</h4>
-      <p class="text-block">You'll also get a widget that can be plonked anywhere</p>
-      <p class="text-block">On your library's website or blog or anywhere else</p>
-      <p class="text-block">This is a real live widget</p>
-    </div>
-    <div class="span4 offset1">
-      <script src="http://cambridge.awesomebox.io/widget/"></script>
-    </div>
-        <div class="span11 offset1">
-      <hr>
-    </div>
-  </div>-->
   <div class="row">
-    <div class="span11 offset1">
+    <div class="col-md-11 col-md-offset-1">
       <!--<p class="text-block-inverse center">These libraries are already awesome.<br >With a lot of awesome items.</p>-->
       <p class="text-block already">These libraries are already awesome</p>
       <a href="http://librarylab.law.harvard.edu/awesome" class="already" target="_blank">Harvard</a><a href="http://somerville.awesomebox.io" class="already" target="_blank">Somerville</a>
@@ -96,6 +47,152 @@
       <a href="http://robinsonmusiclibrary.awesomebox.io" class="already" target="_blank">Robinson Music</a>
       <!--<div id="recent"></div>
       <p class="text-block" id="awesome-counter"><span></span> items Awesomed so far</div>-->
+      <p class="text-block already">And over <strong>100</strong> more...</p>
+    </div>
+  </div>
+  <div class="row offerings">
+    <div class="col-md-10 col-md-offset-1">
+        <div id="plot-map-container"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript" charset="utf-8">
+    // BIG
+    //var map, paper, pageWidth=3800;
+    var map, paper, branches = [];
+    var pageWidth=$('#plot-map-container').parent().width();
+
+    var drawIt = function() {
+      paper = new ScaleRaphael('plot-map-container', 950, 650);
+      map = paper.USMap();
+      paper.scaleAll(pageWidth/map.width);
+      function resizePaper(){
+        var newWidth = $("#plot-map-container").parent().width();
+        paper.scaleAll(newWidth/map.width);
+     }
+    $(window).resize(resizePaper); 
+      $.get("api/v1/branch/?format=json&limit=200&offset=0&callback=?", function(data) {
+        branches = data.objects;
+        drawPoints(branches);
+        });
+        function drawPoints(branches) {
+            for(var i = 0; i < branches.length; i++){
+            //map.plot(points[i][0], points[i][1], points[i][2]);
+            //map.darkenState(points[i][3], 0.07);
+                map.plot(branches[i]['lat'], branches[i]['long'], branches[i]['organization']['name']);
+            }
+        }
+
+ // This is for downloading
+ /*$("svg").attr({ version: '1.1' , xmlns:"http://www.w3.org/2000/svg"});
+
+ var svg = $("#svggroup").html();
+ var b64 = btoa(svg); // or use btoa if supported
+
+ // Works in recent Webkit(Chrome)
+ open("data:image/svg+xml," + encodeURIComponent(svg));*/
+ // End of downloading
+
+    };
+
+    document.onload = drawIt();
+    
+  </script>
+  <div class="row offerings">
+    <div class="col-md-6 col-md-offset-1">
+        <h3>Most Awesome of All</h3>
+        <p class="text-block already">Of all the items dropped in an awesome box at one of those libraries, these are the most awesome of all</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4 col-md-offset-1">
+    <table class="table table-bordered">
+    <thead>
+        <tr>
+            <th class="small-th">CURRENT RANK</th>
+            <th>TITLES</th>
+            <th class="small-th">NUMBER AWESOMES</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for item in items %}
+        <!--<p class="text-block">{{item.title}}</p>-->
+        <tr><td class="rank-td">{{forloop.counter}}</td><td>{{item.title}}</td><td class="awesomes-td">{{item.total_checkins}}</td></tr>
+    {% endfor %}
+    </tbody>
+    </table>
+    </div>
+    <div class="col-md-4 col-md-offset-1">
+        <table class="table table-bordered">
+    <thead>
+        <tr>
+            <th class="small-th">CURRENT RANK</th>
+            <th>AUTHORS</th>
+            <th class="small-th">NUMBER AWESOMES</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for creator in creators %}
+        <!--<p class="text-block">{{item.title}}</p>-->
+        <tr><td class="rank-td">{{forloop.counter}}</td><td>{{creator.creator}}</td><td class="awesomes-td">{{creator.total_checkins}}</td></tr>
+    {% endfor %}
+    </tbody>
+    </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-16 col-md-offset-1">
+        <p class="text-block already"><a href="{% url 'process_self_register' %}" type="button" class="btn btn-custom btn-lg">Sign up</a> to discover what's Awesome at your libary</p>
+        
+    </div>
+  </div>
+  <div class="row offerings">
+    <div class="col-md-6 col-md-offset-1">
+        <h3>Create a box, you're in charge</h3>
+        <p class="text-block already">We provide some design building blocks that you can choose to use or not</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="collage collage-container"></div>
+        <script type="text/javascript">
+var  html = '', limitItem = 28;
+			for (var i = 1; i < limitItem; ++i) {
+			    var name = 100 + i;
+				html += "<img src='{{ STATIC_PREFIX }}images/box-images/ab_" + name + ".jpg' class='cell'>";
+			}
+			$(".collage").html(html);
+    // All images need to be loaded for this plugin to work so
+    // we end up waiting for the whole window to load in this example
+    $(window).load(function () {
+        $(document).ready(function(){
+            collage();
+        });
+    });
+
+
+    // Here we apply the actual CollagePlus plugin
+    function collage() {
+        $('.collage').collagePlus(
+            {
+                'fadeSpeed'     : 2000,
+                'targetHeight'  : 170,
+                'allowPartialLastRow' : true
+            }
+        );
+    };
+
+    // This is just for the case that the browser window is resized
+    var resizeTimer = null;
+    $(window).bind('resize', function() {
+        // hide all the images until we resize them
+        $('.collage .Image_Wrapper').css("opacity", 0);
+        // set a timer to re-apply the plugin
+        if (resizeTimer) clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(collage, 200);
+    });
+
+    </script>
     </div>
   </div>
 	<footer>
@@ -114,14 +211,13 @@
 </script>
 <!-- Grab Google CDN's jQuery. fall back to local if necessary --> 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-
-<script src="{{ STATIC_PREFIX }}js/jcarousellite.min.js"></script>
+<script src='{{ STATIC_PREFIX }}js/raphael.js'></script>
+<script src='{{ STATIC_PREFIX }}js/raphael.scale.js'></script>
+<script src='{{ STATIC_PREFIX }}js/g.raphael.js'></script>
+<script src='{{ STATIC_PREFIX }}js/usmap.js'></script>
+<script src="{{ STATIC_PREFIX }}js/jquery.collagePlus.js"></script>
 <script src="{{ STATIC_PREFIX }}js/handlebars.js"></script>
 <script src="{{ STATIC_PREFIX }}js/landing.js"></script>
-
-<script type="text/javascript">
-       
-</script>
 {% endblock scripts %}
 
 {% block templates %}
