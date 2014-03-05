@@ -104,7 +104,7 @@ p {
 }
 #branding {
     width: 100%;
-    background: #51ADE1;
+    background: #5BA09F;
 }
 #branding h1 {
     width: 940px;
@@ -516,9 +516,14 @@ p.bold {
 
 /* Start signup form */
 
+.exclamation {
+    margin-right:350px;
+    margin-top:5px;
+}
+
 .signup p {
     font-size:22px;
-    color:#51ADE1;
+    color:#5BA09F;
     margin: 45px 0 8px 0;
     font-weight:bold;
 }
