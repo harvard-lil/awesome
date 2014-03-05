@@ -7,14 +7,6 @@
 {% block styles %}
 <link rel="stylesheet" href="{{ STATIC_PREFIX }}css/bootstrap.min.css" type="text/css" />
 <link rel="stylesheet" media="all" href="{{ STATIC_PREFIX }}css/landing.css" />
-<style>
-    .collage {
-        padding:10px;
-    }
-    .collage-container {
-        margin-left:-10px;
-    }
-    </style>
 {% endblock styles %}
 
 {% block content %}
@@ -145,55 +137,6 @@
     <div class="col-md-16 col-md-offset-1">
         <p class="text-block already"><a href="{% url 'process_self_register' %}" type="button" class="btn btn-custom btn-lg">Sign up</a> to discover what's Awesome at your libary</p>
         
-    </div>
-  </div>
-  <div class="row offerings">
-    <div class="col-md-6 col-md-offset-1">
-        <h3>Create a box, you're in charge</h3>
-        <p class="text-block already">We provide some design building blocks that you can choose to use or not</p>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-10 col-md-offset-1">
-        <div class="collage collage-container"></div>
-        <script type="text/javascript">
-var  html = '', limitItem = 28;
-			for (var i = 1; i < limitItem; ++i) {
-			    var name = 100 + i;
-				html += "<img src='{{ STATIC_PREFIX }}images/box-images/ab_" + name + ".jpg' class='cell'>";
-			}
-			$(".collage").html(html);
-    // All images need to be loaded for this plugin to work so
-    // we end up waiting for the whole window to load in this example
-    $(window).load(function () {
-        $(document).ready(function(){
-            collage();
-        });
-    });
-
-
-    // Here we apply the actual CollagePlus plugin
-    function collage() {
-        $('.collage').collagePlus(
-            {
-                'fadeSpeed'     : 2000,
-                'targetHeight'  : 170,
-                'allowPartialLastRow' : true
-            }
-        );
-    };
-
-    // This is just for the case that the browser window is resized
-    var resizeTimer = null;
-    $(window).bind('resize', function() {
-        // hide all the images until we resize them
-        $('.collage .Image_Wrapper').css("opacity", 0);
-        // set a timer to re-apply the plugin
-        if (resizeTimer) clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(collage, 200);
-    });
-
-    </script>
     </div>
   </div>
 	<footer>
