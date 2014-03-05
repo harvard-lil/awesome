@@ -72,7 +72,14 @@ body {
 h1 a, h1 a:link,
 h1 a:active,
 h1 a:visited,
-h1 a:hover {
+h1 a:hover,
+#branding a, #branding a:link,
+#branding a:active,
+#branding a:visited,
+#branding a:hover,
+a.btn-custom,
+a:link.btn-custom,
+a:visited.btn-custom{
     color:#fff;
 }
 a, a:link,
@@ -135,7 +142,7 @@ p {
 #feeds li {
     position:relative;
     float:right;
-    color: #11cbf7;
+    color: #EBEEA0;
     padding:12px 4px;
     z-index:6;
 }
@@ -300,9 +307,9 @@ span.filter:hover, span.filter.selected {
 }
 #content h1 {
     /*color:#bee620;*/
-    color: #11cbf7;
+    color: #595959;
     margin: 0 0 25px 0;
-    font-size: 60px;
+    font-size: 48px;
     font-weight:bold;
     line-height: 65px;
 }
@@ -311,7 +318,6 @@ span.filter:hover, span.filter.selected {
     font-size: 30px;
     font-weight:bold;
     color:#595959;
-    
 }
 #about {
     position: absolute;
@@ -570,17 +576,33 @@ p.bold {
 }
 
 .control_list a {
-    margin-left:15px;
     font-size: 22px;
-    color: #000;
 }
 
 .control h3 {
-  font-size:24px;
+  font-size:18px;
+    color:#595959;
 }
 
-.control_list a:hover { 
+.control_list a:hover, .control_list_export a:hover { 
     color:#07a8ce;
+}
+
+.control_list_export a {
+    display:block;
+    margin-top:25px;
+}
+
+.color-block {
+    display:block;
+    width:70px;
+    height:70px;
+    margin-right:10px;
+}
+
+.color-blocks li {
+    display:block;
+    float:left;
 }
 
 .widget-sample {
@@ -603,7 +625,7 @@ p.bold {
 
 .common-table th {
     font-size:14px;
-    border-bottom:1px solid #bee620;
+    border-bottom:1px solid #5BA09F;
 
 }
 

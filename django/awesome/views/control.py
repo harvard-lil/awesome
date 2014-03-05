@@ -41,6 +41,23 @@ def home(request):
         }
     
     return render_to_response('control.html', context)
+    
+    
+def supplies(request):
+    """Control (user admin site) supplies page"""
+    
+    if not request.user.is_authenticated():
+        return HttpResponseRedirect(reverse('auth_login'))
+
+    org = Organization.objects.get(user=request.user)
+    
+    context = {
+            'user': request.user,
+            'organization': org,
+        }
+    
+    return render_to_response('control-supplies.html', context)
+    
 
 def org(request):
     """Users can control (admin) their org from here"""

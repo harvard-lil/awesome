@@ -6,7 +6,7 @@
 
 {% block styles %}
 <link rel="stylesheet" href="{{ STATIC_PREFIX }}css/bootstrap.css" type="text/css" />
-<link rel="stylesheet" media="all" href="{{ STATIC_PREFIX }}css/awesome.css" />
+<link rel="stylesheet" media="all" href="{{ STATIC_PREFIX }}css/awesome-newlook.css" />
 {% endblock styles %}
 
 {% block content %}
@@ -45,7 +45,7 @@
                 {{ settings_form.twitter_show_title }} Include title and author in Tweet
                 </label>
                 <br/>
-                <input type="submit" value="Save settings" class="btn"/>
+                <input type="submit" value="Save settings" class="btn btn-custom"/>
             </form>
 			<br />
 			<p>If things aren't working as expected, setup Twitter again.</p>
@@ -55,7 +55,7 @@
 			<form method="POST">
 				{% csrf_token %}
 				<br />
-				<input type="submit" value="Allow Awesome Box to tweet returns" class="btn"/>
+				<input type="submit" value="Allow Awesome Box to tweet returns" class="btn btn-custom"/>
 			</form>
 		</article>
 	

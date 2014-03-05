@@ -6,7 +6,7 @@
 
 {% block styles %}
 <link rel="stylesheet" href="{{ STATIC_PREFIX }}css/bootstrap.min.css" type="text/css" />
-<link rel="stylesheet" media="all" href="{{ STATIC_PREFIX }}css/awesome.css" />
+<link rel="stylesheet" media="all" href="{{ STATIC_PREFIX }}css/awesome-newlook.css" />
 {% endblock styles %}
 
 {% block content %}
@@ -33,8 +33,9 @@
 			<p class="control_list"><a href="{% url 'control_analytics' %}">Branch analytics</a></p>
 			<p class="control_list"><a href="{% url 'control_twitter_config' %}">Manage Twitter integration</a></p>
 			<p class="control_list"><a href="{% url 'control_widget' %}">Get a widget</a></p>
+			<p class="control_list"><a href="{% url 'control_supplies' %}">Supplies to make boxes and signs</a></p>
 			<p class="control_list"><a href="{% url 'auth_password_change' %}">Change your password</a></p>
-			<p class="control_list_export"><a href="{% url 'control_csv_export' %}"><i class="icon-list-alt"></i> Export your Awesome items as CSV</a></p>
+			<p class="control_list_export"><a href="{% url 'control_csv_export' %}">Export your Awesome items as CSV</a></p>
 		</article>
 	</div><!-- end content -->
 </div> <!-- end wrapper -->

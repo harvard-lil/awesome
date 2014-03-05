@@ -1,0 +1,146 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% get_static_prefix as STATIC_PREFIX %}
+
+{% block title %}Controls | Awesome Box at the {{organization.name}}{% endblock title %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ STATIC_PREFIX }}css/bootstrap.css" type="text/css" />
+<link rel="stylesheet" media="all" href="{{ STATIC_PREFIX }}css/awesome-newlook.css" />
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+<style>
+    .collage {
+        padding:10px;
+    }
+    .collage-container {
+        margin-left:-10px;
+    }
+    </style>
+{% endblock styles %}
+
+{% block content %}
+<body>
+<div id="wrapper">
+	<header id="branding">
+		<span id="feeds">
+			<ul>
+				<li><a href="{% url 'auth_logout' %}">Logout</a></li><li>|</li><li><a href="{% url 'control_home' %}">Control Center</a></li>
+			</ul>
+		</span>
+		<h1><a href="{% url 'landing' %}">Awesome Box at the {{ organization.name }}</a></h1>
+	</header>
+	<div id="content">
+	
+		<article class="control thin-centered">
+			<header>
+				<h1>Supplies</h1>
+			</header>
+				<h2>Graphics</h2>
+				<p>Use these in print and online to decorate boxes, make signs & bookmarks and anything else you want to use to promote your Awesome Box.  Use and remix however you'd like.</p>
+				<br>
+				<p><a href="https://github.com/harvard-lil/awesome/tree/develop/django/static/supplies" class="btn btn-lg btn-custom">Awesome Box graphics</a></p>
+				<h2>Colors</h2>
+				<h3>Main colors</h3>
+				<ul class="color-blocks">
+				<li><span class="color-block" style="background-color:#51ADE1;"></span>#51ADE1
+				</li>
+				<li><span class="color-block" style="background-color:#91CDE1;"></span>#91CDE1
+				</li>
+				<li><span class="color-block" style="background-color:#B9DDE8;"></span>#B9DDE8
+				</li>
+				</ul>
+				<div style="clear:both;"></div>
+				<br><br>
+				<h3>Accent colors</h3>
+				<ul class="color-blocks">
+				<li><span class="color-block" style="background-color:#E6BDB6;"></span>#E6BDB6
+				</li>
+				<li><span class="color-block" style="background-color:#D73840;"></span>#D73840
+				</li>
+				<li><span class="color-block" style="background-color:#EA9B3A;"></span>#EA9B3A
+				</li>
+				<li><span class="color-block" style="background-color:#EFD13A;"></span>#EFD13A
+				</li>
+				<li><span class="color-block" style="background-color:#EBEEA0;"></span>#EBEEA0
+				</li>
+				</ul>
+				<div style="clear:both;"></div>
+				<br>
+				<ul class="color-blocks">
+				<li><span class="color-block" style="background-color:#5BA09F;"></span>#5BA09F
+				</li>
+				<li><span class="color-block" style="background-color:#66B562;"></span>#66B562
+				</li>
+				<li><span class="color-block" style="background-color:#557DBA;"></span>#557DBA
+				</li>
+				<li><span class="color-block" style="background-color:#737493;"></span>#737493
+				</li>
+				</ul>
+				<div style="clear:both;"></div>
+				<br>
+				<ul class="color-blocks">
+				<li><span class="color-block" style="background-color:#D0D6E4;"></span>#D0D6E4
+				</li>
+				<li><span class="color-block" style="background-color:#AEB1B8;"></span>#AEB1B8
+				</li>
+				<li><span class="color-block" style="background-color:#E8DCC3;"></span>#E8DCC3
+				</li>
+				<li><span class="color-block" style="background-color:#CDB589;"></span>#CDB589
+				</li>
+				</ul>
+				<div style="clear:both;"></div>
+				<h2>Wall of inspiration</h2>
+				<p>Create a box, you're in charge.  Here are some great examples. (These are using our old design, but you can see the possibilities.)</p>
+				<div class="collage collage-container"></div>
+            <script type="text/javascript">
+var  html = '', limitItem = 28;
+			for (var i = 1; i < limitItem; ++i) {
+			    var name = 100 + i;
+				html += "<img src='{{ STATIC_PREFIX }}images/box-images/ab_" + name + ".jpg' class='cell'>";
+			}
+			$(".collage").html(html);
+    // All images need to be loaded for this plugin to work so
+    // we end up waiting for the whole window to load in this example
+    $(window).load(function () {
+        $(document).ready(function(){
+            collage();
+        });
+    });
+
+
+    // Here we apply the actual CollagePlus plugin
+    function collage() {
+        $('.collage').collagePlus(
+            {
+                'fadeSpeed'     : 2000,
+                'targetHeight'  : 170,
+                'allowPartialLastRow' : true
+            }
+        );
+    };
+
+    // This is just for the case that the browser window is resized
+    var resizeTimer = null;
+    $(window).bind('resize', function() {
+        // hide all the images until we resize them
+        $('.collage .Image_Wrapper').css("opacity", 0);
+        // set a timer to re-apply the plugin
+        if (resizeTimer) clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(collage, 200);
+    });
+
+    </script>
+		</article>
+	</div><!-- end content -->
+</div> <!-- end wrapper -->
+{% endblock content %}
+
+{% block scripts %}
+<script src="{{ STATIC_PREFIX }}js/modernizr.custom.37797.js"></script> 
+<!-- Grab Google CDN's jQuery. fall back to local if necessary --> 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script>!window.jQuery && document.write('<script src="{{ STATIC_PREFIX }}/js/jquery-1.7.1.min.js"><\/script>')</script>
+<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+<script src="{{ STATIC_PREFIX }}js/jquery.collagePlus.js"></script>
+
+{% endblock scripts %}

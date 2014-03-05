@@ -6,7 +6,7 @@
 
 {% block styles %}
 <link rel="stylesheet" href="{{ STATIC_PREFIX }}css/bootstrap.css" type="text/css" />
-<link rel="stylesheet" media="all" href="{{ STATIC_PREFIX }}css/awesome.css" />
+<link rel="stylesheet" media="all" href="{{ STATIC_PREFIX }}css/awesome-newlook.css" />
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
 
 {% endblock styles %}
@@ -54,7 +54,7 @@
 			<form method="post" action="" id="analytics-query-from" class="form-inline">
 				{% csrf_token %}
 				{{ form }}
-				<input type="submit" value="Get analytics" class="btn" />
+				<input type="submit" value="Get analytics" class="btn btn-custom" />
 			</form>
 			
 			{% if query_branch %}

@@ -4,7 +4,7 @@
 
 {% block styles %}
 <link rel="stylesheet" href="{{ STATIC_PREFIX }}css/bootstrap.css" type="text/css" />
-<link rel="stylesheet" media="all" href="{{ STATIC_PREFIX }}css/awesome.css" />
+<link rel="stylesheet" media="all" href="{{ STATIC_PREFIX }}css/awesome-newlook.css" />
 {% endblock styles %}
 
 {% block scripts %}
@@ -48,7 +48,7 @@
 			{% endif %}
 				{% csrf_token %}
 				{{ form.as_p }}
-				<button type="submit" class="btn"><i class="icon-ok"></i> Login</button>
+				<button type="submit" class="btn btn-custom">Login</button>
 			</form>
 			<br />
 			<p>Can't remember your password? No problem, we can help you <a href="{% url 'auth_password_reset' %}">create a new one</a>.</p>
