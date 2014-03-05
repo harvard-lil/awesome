@@ -98,6 +98,12 @@ h4 {
 	padding:15px 0px;
 }
 
+.convince {
+    margin-left:8px;
+    margin-top:15px;
+    display:block;
+}
+
 #awesome-counter {
   font-size:18px;
 }
