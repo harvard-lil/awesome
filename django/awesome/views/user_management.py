@@ -12,8 +12,10 @@ from django.http import  HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.core.urlresolvers import reverse
 from django.core.context_processors import csrf
+from django.core.mail import send_mail
 from django.contrib import auth, messages
 from django.contrib.sites.models import Site
+from django.conf import settings
 
 logger = logging.getLogger(__name__)
 
@@ -94,6 +96,32 @@ def process_self_register(request):
             new_org.save()
             new_branch = Branch.objects.create(organization=new_org, name="Main", slug="main")
             new_branch.save()
+            
+            host = request.get_host()
+
+            if settings.DEBUG == False:
+              host = settings.HOST
+        
+            content = '''Welcome to Awesome Box!  To login into your account, visit your login page.
+        
+            http://{slug}.{host}/login
+            
+            For help getting started, visit the help page.
+            
+            http://{slug}.{host}/control/help
+            
+            Happy Awesome-ing!
+        
+            '''.format(slug=new_org.slug, host=host)
+        
+            logger.debug(content)
+        
+            send_mail(
+                "Your library is about to get more Awesome",
+                content,
+                settings.DEFAULT_FROM_EMAIL,
+                [new_user.email], fail_silently=False
+            )
 
             new_user.backend='django.contrib.auth.backends.ModelBackend'
             auth.login(request, new_user)
