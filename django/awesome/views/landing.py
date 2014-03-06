@@ -24,8 +24,10 @@ def landing(request):
     if 'subdomain' in request.META:
         branch = request.GET.get('branch', '')
         org = Organization.objects.get(slug=request.META['subdomain'])
+        
+        template = 'landing_org_{theme}.html'.format(theme = org.theme)
     
-        return render_to_response('landing_org.html', {'user': request.user, 'organization': org,
+        return render_to_response(template, {'user': request.user, 'organization': org,
                                                'branch': branch, 'twitter_username': org.twitter_username,
                                                'ga_key': GOOGLE['ANALYTICS_KEY']})
     else:

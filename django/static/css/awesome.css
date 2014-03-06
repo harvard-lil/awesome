@@ -154,10 +154,10 @@ nav#primary a {
     width: 40px;
     height: 40px;
     text-indent: -9999px;
-    background: transparent url('../images/nav-dot.png') 4px 4px no-repeat;
+    background: transparent url('../images/nav-dot-old.png') 4px 4px no-repeat;
 }
 nav#primary a:hover, nav#primary a.active {
-    background: transparent url('../images/nav-dot.png') 4px -32px no-repeat;
+    background: transparent url('../images/nav-dot-old.png') 4px -32px no-repeat;
 }
 nav#primary h1 {
     position: absolute;
@@ -167,7 +167,7 @@ nav#primary h1 {
     padding: 4px 20px 4px 7px;;
     color: #fff;
     white-space: nowrap;
-    background: transparent url('../images/nav-arrow.png') 100% 50% no-repeat;
+    background: transparent url('../images/nav-arrow-old.png') 100% 50% no-repeat;
 }
 nav.next-prev {
     margin: 10px 0 0 0;
@@ -211,31 +211,31 @@ a.right{
 }
 a.prev, a.newer {
     margin: 0 95% 5px;
-    background: transparent url('../images/scroll-arrow-up.png') 0 0 no-repeat;
+    background: transparent url('../images/scroll-arrow-up-old.png') 0 0 no-repeat;
 }
 a.prev:hover, a.newer:hover {
-    background: transparent url('../images/scroll-arrow-up.png') 0 -22px no-repeat;
+    background: transparent url('../images/scroll-arrow-up-old.png') 0 -22px no-repeat;
 }
 a.next, a.older {
     margin: 5px 95% 0;
-    background: transparent url('../images/scroll-arrow-down.png') -1px 0 no-repeat;
+    background: transparent url('../images/scroll-arrow-down-old.png') -1px 0 no-repeat;
 }
 a.next:hover, a.older:hover {
-    background: transparent url('../images/scroll-arrow-down.png') -1px -22px no-repeat;
+    background: transparent url('../images/scroll-arrow-down-old.png') -1px -22px no-repeat;
 }
 a.left {
     margin: 5px auto 5px auto;
-    background: transparent url('../images/scroll-arrow-left.png') 0 0 no-repeat;
+    background: transparent url('../images/scroll-arrow-left-old.png') 0 0 no-repeat;
 }
 a.left:hover {
-    background: transparent url('../images/scroll-arrow-left.png') -23px 0 no-repeat;
+    background: transparent url('../images/scroll-arrow-left-old.png') -23px 0 no-repeat;
 }
 a.right {
     margin: 6px auto 0 15px;
-    background: transparent url('../images/scroll-arrow-right.png') 0px 0 no-repeat;
+    background: transparent url('../images/scroll-arrow-right-old.png') 0px 0 no-repeat;
 }
 a.right:hover {
-    background: transparent url('../images/scroll-arrow-right.png') -22px 0px no-repeat;
+    background: transparent url('../images/scroll-arrow-right-old.png') -22px 0px no-repeat;
 }
 
 span.filter {
@@ -243,7 +243,7 @@ span.filter {
     margin: 10px 0 0 20px;
     font-size:28px;
     color:#00333c;
-    background: transparent url('../images/facet-dot.png') 0px -45px no-repeat;
+    background: transparent url('../images/facet-dot-old.png') 0px -45px no-repeat;
     float:left;
     cursor:pointer;
     height:45px;
@@ -448,7 +448,7 @@ p.bold {
     float:left;
     border:0px solid #999;
     margin:0 15px 15px 0;
-    background-image:url('../images/faceUp-icons.png');
+    background-image:url('../images/faceUp-icons-old.png');
     background-repeat: no-repeat;
     height:160px;
     width:110px;

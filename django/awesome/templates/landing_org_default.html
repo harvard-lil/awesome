@@ -6,26 +6,30 @@
 
 {% block styles %}
 <link rel="stylesheet" href="{{ STATIC_PREFIX }}css/bootstrap.min.css" type="text/css" />
-<link rel="stylesheet" media="all" href="{{ STATIC_PREFIX }}css/awesome.css" />
+<link rel="stylesheet" media="all" href="{{ STATIC_PREFIX }}css/awesome-newlook.css" />
 {% endblock styles %}
 
 {% block content %}
 <body class="extra-long">
-<div id="wrapper">
-	
-	<header id="branding">
-		<span id="feeds">
+<header>
+    <div class="container">
+    <div class="logo row">
+        <div class="col-md-8 col-md-offset-1">
+							<h1>Awesome at the {{ organization.name }}</h1>
+		</div>
+					<div class="col-md-2 col-md-offset-1" id="feeds">
 			<a href="feed" target="_blank">
-				<img src="{{ STATIC_PREFIX }}images/rss.png" class="rssIcon" alt="Awesome RSS" />
+				<img src="{{ STATIC_PREFIX }}images/rss-flat.png" class="rssIcon" alt="Awesome RSS" />
 			</a>
 			{% if twitter_username %}
 			<a href="http://twitter.com/#!/{{twitter_username}}" target="_blank">
-				<img src="{{ STATIC_PREFIX }}images/twitter.png" class="twitterIcon" alt="Follow {{twitter_username}} on Twitter" />
+				<img src="{{ STATIC_PREFIX }}images/twitter-flat.png" class="twitterIcon" alt="Follow {{twitter_username}} on Twitter" />
 			</a>
 			{% endif %}
-		</span>
-		<h1>Awesome at the {{ organization.name }}</h1>
-	</header>
+		</div>
+			</div>
+			</div>
+		</header>
 
 
 	<nav id="primary">
@@ -45,11 +49,10 @@
 		</ul>
 	</nav>
 
-	<div id="content">
-		<article id="recently-awesome">
-			<header>
-				<h1>Recently Awesome</h1>
-			</header>
+	    <div class="container" id="recently-awesome">
+	        <div class="row">
+	        <div class="col-md-10 col-md-offset-1">
+				<h2>Recently Awesome</h2>
 
 			<div id="recent"></div>
 
@@ -65,12 +68,12 @@
 				<span class="filter" data-filter="soundrecording"><i class="icon-soundrecording"></i></span>
 			</nav>
 
-		</article>
+		</div></div></div>
 
-		<article id="most-awesome">
-			<header>
-				<h1>Most Awesome</h1>
-			</header>
+		<div class="container" id="most-awesome">
+	        <div class="row">
+	        <div class="col-md-10 col-md-offset-1">
+				<h2>Most Awesome</h2>
 
 			<div id="most"></div>
 
@@ -78,12 +81,14 @@
 				<!--<a class="prev recently-awesome" href="#recently-awesome">Prev</a>
 				<a class="next search" href="#search">Next</a>-->
 			</nav>
-		</article>
+		</div></div></div>
 
 
-		<article id="about">
+		<div class="container" id="about">
+		    <div class="row">
+		        <div class="col-md-10 col-md-offset-1">
 			<header>
-				<h1>About Awesome</h1>
+				<h2>About Awesome</h2>
 			</header>
 			<p>Returning something awesome to the {{organization.name}}?</p>
 			<br />
@@ -107,17 +112,11 @@
 			<nav class="next-prev">
 				<!--<a class="prev search" href="#search">Prev</a>-->
 			</nav>
-		</article>
-	</div><!-- end content -->
-</div> <!-- end wrapper -->
+		</div></div></div>
+
 
 <!-- Parallax foreground -->
-<div id="parallax-bg3">
-	<img id="bg3-1" src="{{ STATIC_PREFIX }}images/awesome.png" width="529" height="757" alt="awesome"/>
-	<img id="bg3-2" src="{{ STATIC_PREFIX }}images/awesome2.png" width="377" height="789" alt="awesome"/>
-	<img id="bg3-3" src="{{ STATIC_PREFIX }}images/awesome3.png" width="600" height="745" alt="awesome"/>
-	<img id="bg3-4" src="{{ STATIC_PREFIX }}images/ground.png" width="1100" height="753" alt="awesome"/>
-</div>
+
 
 <!-- Parallax midground clouds -->
 <div id="parallax-bg2">
@@ -146,8 +145,6 @@
 <script src="{{ STATIC_PREFIX }}js/jquery.dotdotdot-1.4.0-packed.js"></script>
 <script src="{{ STATIC_PREFIX }}js/handlebars.js"></script>
 <script src="{{ STATIC_PREFIX }}js/awesome.js"></script>
-<script src="http://use.typekit.com/vpi8egr.js"></script>
-<script >try{Typekit.load();}catch(e){}</script>
 
 <script type="text/javascript">
 var organization = "{{organization.slug}}";

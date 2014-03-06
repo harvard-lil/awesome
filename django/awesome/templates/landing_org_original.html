@@ -1,0 +1,218 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% get_static_prefix as STATIC_PREFIX %}
+
+{% block title %}Awesome Box at the {{organization.name}}{% endblock title %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ STATIC_PREFIX }}css/bootstrap.min.css" type="text/css" />
+<link rel="stylesheet" media="all" href="{{ STATIC_PREFIX }}css/awesome.css" />
+{% endblock styles %}
+
+{% block content %}
+<body class="extra-long">
+<div id="wrapper">
+	
+	<header id="branding">
+		<span id="feeds">
+			<a href="feed" target="_blank">
+				<img src="{{ STATIC_PREFIX }}images/rss.png" class="rssIcon" alt="Awesome RSS" />
+			</a>
+			{% if twitter_username %}
+			<a href="http://twitter.com/#!/{{twitter_username}}" target="_blank">
+				<img src="{{ STATIC_PREFIX }}images/twitter.png" class="twitterIcon" alt="Follow {{twitter_username}} on Twitter" />
+			</a>
+			{% endif %}
+		</span>
+		<h1>Awesome at the {{ organization.name }}</h1>
+	</header>
+
+
+	<nav id="primary">
+		<ul>
+			<li>
+				<h1>Recently Awesome</h1>
+				<a class="recently-awesome" href="#recently-awesome">View</a>
+			</li>
+			<li>
+				<h1>Most Awesome</h1>
+				<a class="most-awesome" href="#most-awesome">View</a>
+			</li>
+			<li>
+				<h1>About Awesome</h1>
+				<a class="about" href="#about">View</a>
+			</li>
+		</ul>
+	</nav>
+
+	<div id="content">
+		<article id="recently-awesome">
+			<header>
+				<h1>Recently Awesome</h1>
+			</header>
+
+			<div id="recent"></div>
+
+			<nav class="next-prev">
+				<a class="newer" data-start="0" alt="Prev">Prev</a>
+				<a class="older" data-start="9" alt="Next">Next</a>
+				<!--<a class="next most-awesome" href="#most-awesome">Next</a>-->
+			</nav>
+
+			<nav class="filtering">
+				<span class="filter" data-filter="book"><i class="icon-book"></i></span>
+				<span class="filter" data-filter="videofilm"><i class="icon-videofilm"></i></span>
+				<span class="filter" data-filter="soundrecording"><i class="icon-soundrecording"></i></span>
+			</nav>
+
+		</article>
+
+		<article id="most-awesome">
+			<header>
+				<h1>Most Awesome</h1>
+			</header>
+
+			<div id="most"></div>
+
+			<nav class="next-prev">
+				<!--<a class="prev recently-awesome" href="#recently-awesome">Prev</a>
+				<a class="next search" href="#search">Next</a>-->
+			</nav>
+		</article>
+
+
+		<article id="about">
+			<header>
+				<h1>About Awesome</h1>
+			</header>
+			<p>Returning something awesome to the {{organization.name}}?</p>
+			<br />
+			<p class="bold">Put it in the Awesome Box.</p>
+			<br />
+			<p>{{organization.about_page_blurb}}</p>
+			{% if organization.logo_link %}
+			<br />
+			<p><a href="{{organization.public_link}}" target="_blank"><img src="{{organization.logo_link}}" alt="{{organization.name}} logo" class="org-logo"></a></p>
+			{% endif %}
+			{% if organization.public_link %}
+			<br />
+			<p class="small">Find us online at <a href="{{organization.public_link}}">{{organization.public_link}}</a>
+			{% endif %}
+			{% if organization.public_email %}
+			<br />
+			<p class="small">Contact us at <a href="mailto:{{organization.public_email}}">{{organization.public_email}}</a>
+			</p>
+			{% endif %}
+			<p class="tiny">Movie images provided by <a href="http://www.flixster.com/">Flixster</a></p>
+			<nav class="next-prev">
+				<!--<a class="prev search" href="#search">Prev</a>-->
+			</nav>
+		</article>
+	</div><!-- end content -->
+</div> <!-- end wrapper -->
+
+<!-- Parallax foreground -->
+<div id="parallax-bg3">
+	<img id="bg3-1" src="{{ STATIC_PREFIX }}images/awesome.png" width="529" height="757" alt="awesome"/>
+	<img id="bg3-2" src="{{ STATIC_PREFIX }}images/awesome2.png" width="377" height="789" alt="awesome"/>
+	<img id="bg3-3" src="{{ STATIC_PREFIX }}images/awesome3.png" width="600" height="745" alt="awesome"/>
+	<img id="bg3-4" src="{{ STATIC_PREFIX }}images/ground.png" width="1100" height="753" alt="awesome"/>
+</div>
+
+<!-- Parallax midground clouds -->
+<div id="parallax-bg2">
+	<img id="bg2-1" src="{{ STATIC_PREFIX }}images/blue-exclamation-old.png" alt="cloud"/>
+	<img id="bg2-2" src="{{ STATIC_PREFIX }}images/blue-exclamation-old.png" alt="cloud"/>
+	<img id="bg2-3" src="{{ STATIC_PREFIX }}images/blue-exclamation-old.png" alt="cloud"/>
+	<img id="bg2-4" src="{{ STATIC_PREFIX }}images/blue-exclamation-old.png" alt="cloud"/>
+	<img id="bg2-5" src="{{ STATIC_PREFIX }}images/blue-exclamation-old.png" alt="cloud"/>
+</div>
+
+<!-- Parallax background clouds -->
+<div id="parallax-bg1">
+	<img id="bg1-1" src="{{ STATIC_PREFIX }}images/green-exclamation-old.png" alt="cloud"/>
+	<img id="bg1-2" src="{{ STATIC_PREFIX }}images/green-exclamation-old.png" alt="cloud"/>
+	<img id="bg1-3" src="{{ STATIC_PREFIX }}images/green-exclamation-old.png" alt="cloud"/>
+	<img id="bg1-4" src="{{ STATIC_PREFIX }}images/green-exclamation-old.png" alt="cloud"/>
+</div>
+{% endblock content %}
+
+{% block scripts %}
+<script src="{{ STATIC_PREFIX }}js/modernizr.custom.37797.js"></script> 
+<!-- Grab Google CDN's jQuery. fall back to local if necessary --> 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script>!window.jQuery && document.write('<script src="{{ STATIC_PREFIX }}/js/jquery-1.7.1.min.js"><\/script>')</script>
+<script src="{{ STATIC_PREFIX }}js/jcarousellite.min.js"></script>
+<script src="{{ STATIC_PREFIX }}js/jquery.dotdotdot-1.4.0-packed.js"></script>
+<script src="{{ STATIC_PREFIX }}js/handlebars.js"></script>
+<script src="{{ STATIC_PREFIX }}js/awesome.js"></script>
+<script src="http://use.typekit.com/vpi8egr.js"></script>
+<script >try{Typekit.load();}catch(e){}</script>
+
+<script type="text/javascript">
+var organization = "{{organization.slug}}";
+var branch = "{{branch}}";        
+</script>
+{% endblock scripts %}
+
+{% block templates %}
+
+
+{% verbatim %}
+
+<script id="search-template" type="text/x-handlebars-template">
+
+<p class="num-found">{{num_found}} results</p>
+<span class="left-right">
+	<a class="left">Prev</a>
+	<a class="right">Next</a>
+</span>
+{{>items}}
+
+</script>
+
+{% endverbatim %}
+
+
+{% verbatim %}
+<script id="items-template" type="text/x-handlebars-template">
+
+<ul> 
+	{{#objects}}
+	<li class="item">
+		<a href="{{branch.organization.catalog_base_url}}{{catalogQuery this}}" target="_blank" style="display:none;">{{title}}</a>
+		{{#if cover_art}}
+		<img class="item-cover" src="{{cover_art}}" alt="{{title}}" />
+		{{else}}
+		<!--<img class="item-cover" src="http://covers.openlibrary.org/b/isbn/{{isbn}}-M.jpg" alt="{{title}}" />-->
+		<img class="item-cover" src="{{coverURL this}}" alt="{{title}}" />
+		{{/if}}
+		<div class="item-details">
+			<span class="item-title">
+				{{title}}
+			</span>
+			<span class="item-author">{{creator}}</span>
+			<i class="icon-{{physical_format}} item-format"></i>
+		</div>
+	</li>
+	{{/objects}}
+</ul>
+</script>
+
+{% endverbatim %}
+
+
+{% endblock templates %}
+
+{% block extrascripts %}
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', '{{ga_key}}', 'awesomebox.io');
+  ga('send', 'pageview');
+
+</script>
+{% endblock extrascripts %}
