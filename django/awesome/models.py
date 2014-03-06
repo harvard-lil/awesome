@@ -15,6 +15,10 @@ class Organization(models.Model):
         ('syndetic', 'Syndetic Solutions'),
         ('contentcafe', 'Content Cafe'),
     )
+    THEME_QUERY_CHOICES = (
+        ('original', 'Original green and blue'),
+        ('default', 'Default'),
+    )
     user = models.ForeignKey(User)
     name = models.CharField(max_length=400)
     slug = models.SlugField(unique=True)
@@ -33,6 +37,7 @@ class Organization(models.Model):
     cover_service = models.CharField(max_length=100, choices=COVER_QUERY_CHOICES, default="openlibrary")
     cover_user_id = models.CharField(max_length=35, null=True, blank=True)
     cover_password = models.CharField(max_length=35, null=True, blank=True)
+    theme = models.CharField(max_length=100, choices=THEME_QUERY_CHOICES, default="default")
 
     
     def __unicode__(self):
