@@ -10,7 +10,7 @@ $(document).ready(function() {
 		'format': 'json',
 		'order_by': '-latest_checkin',
 		'branch__organization__slug': organization,
-		'limit': 12,
+		'limit': limit,
 		'offset': 0
 	}
 	
@@ -28,8 +28,8 @@ $(document).ready(function() {
 		recent_url_params.offset = start;
 		if(start >= 0) {
 			draw_recent_items(recentUrl, recent_url_params);	
-		    $('.newer').attr('data-start', start*1 - 9);
-        	$('.older').attr('data-start', start*1 + 9);
+		    $('.newer').attr('data-start', start*1 - limit);
+        	$('.older').attr('data-start', start*1 + limit);
 	  }
 		event.preventDefault();
 	});

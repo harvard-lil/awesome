@@ -11,26 +11,6 @@
 
 {% block content %}
 <body class="extra-long">
-<header>
-    <div class="container">
-    <div class="logo row">
-        <div class="col-md-8">
-							<h1>Awesome at the {{ organization.name }}</h1>
-		</div>
-		<div class="col-md-2 col-md-offset-2" id="feeds">
-			<a href="feed" target="_blank">
-				<img src="{{ STATIC_PREFIX }}images/rss-flat.png" class="rssIcon" alt="Awesome RSS" />
-			</a>
-			{% if twitter_username %}
-			<a href="http://twitter.com/#!/{{twitter_username}}" target="_blank">
-				<img src="{{ STATIC_PREFIX }}images/twitter-flat.png" class="twitterIcon" alt="Follow {{twitter_username}} on Twitter" />
-			</a>
-			{% endif %}
-		</div>
-			</div>
-			</div>
-		</header>
-
 <!--
 	<nav id="primary">
 		<ul>
@@ -51,14 +31,28 @@
 -->
 	    <div class="container" id="recently-awesome">
 	        <div class="row">
-	        <div class="col-md-12 ">
+	        <div class="col-md-8">
 				<h2 class="tk-chaparral-pro">Recently Awesome</h2>
-
+                <h2 class="subhead">at the {{ organization.name }}</h2>
+            </div>
+            <div class="col-md-2 col-md-offset-2" id="feeds">
+			<a href="feed" target="_blank">
+				<img src="{{ STATIC_PREFIX }}images/rss-flat.png" class="rssIcon" alt="Awesome RSS" />
+			</a>
+			{% if twitter_username %}
+			<a href="http://twitter.com/#!/{{twitter_username}}" target="_blank">
+				<img src="{{ STATIC_PREFIX }}images/twitter-flat.png" class="twitterIcon" alt="Follow {{twitter_username}} on Twitter" />
+			</a>
+			{% endif %}
+		</div>
+		</div>
+		<div class="row">
+		<div class="col-md-12">
 			<div id="recent"></div>
 
 			<nav class="next-prev">
 				<a class="newer" data-start="0" alt="Prev">Prev</a>
-				<a class="older" data-start="9" alt="Next">Next</a>
+				<a class="older" data-start="12" alt="Next">Next</a>
 				<!--<a class="next most-awesome" href="#most-awesome">Next</a>-->
 			</nav>
 
@@ -71,9 +65,14 @@
 		</div></div></div>
 
 		<div class="container" id="most-awesome">
+		    <div class="row">
+	        <div class="col-md-8">
+				<h2 class="tk-chaparral-pro">Most Awesome</h2>
+                <h2 class="subhead">at the {{ organization.name }}</h2>
+            </div>
+		</div>
 	        <div class="row">
 	        <div class="col-md-12">
-				<h2 class="tk-chaparral-pro">Most Awesome</h2>
 
 			<div id="most"></div>
 
@@ -148,12 +147,13 @@
 <script src="{{ STATIC_PREFIX }}js/jquery.dotdotdot-1.4.0-packed.js"></script>
 <script src="{{ STATIC_PREFIX }}js/handlebars.js"></script>
 <script src="{{ STATIC_PREFIX }}js/awesome.js"></script>
-<script src="http://use.typekit.com/vpi8egr.js"></script>
-<script >try{Typekit.load();}catch(e){}</script>
+<script type="text/javascript" src="//use.typekit.net/lym2dyi.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 
 <script type="text/javascript">
 var organization = "{{organization.slug}}";
-var branch = "{{branch}}";        
+var branch = "{{branch}}";   
+var limit = 12;
 </script>
 {% endblock scripts %}
 

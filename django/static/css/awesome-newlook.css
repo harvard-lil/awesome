@@ -132,7 +132,7 @@ p {
     position:relative;
     float:left;
     height:28px;
-    margin:15px 8px 0 0;
+    margin:0px 8px 0 0;
     z-index:6;
 }
 
@@ -311,12 +311,20 @@ span.filter:hover, span.filter.selected {
 }
 
 .logo h1 {
-    color: #595959;
+    color: #737493;
     font-size: 22px;
     font-weight:bold;
     text-transform:uppercase;
-    font-family:Arial Narrow;
+    font-family:Arial;
     margin-top:15px;
+}
+h2.subhead {
+    color: #51ADE1;
+    font-size: 22px;
+    font-weight:bold;
+    font-family:Arial;
+    margin-bottom:25px;
+    margin-top:0px;
 }
 #content h2 {
     margin-top:35px;
@@ -328,11 +336,10 @@ span.filter:hover, span.filter.selected {
 
 h2 {
     font-size: 60px;
-    margin-bottom:15px;
     font-weight:bold;
     color:#51ADE1;
     z-index:90;
-    line-height:60px;
+    line-height:50px;
 }
 
 #about {
@@ -348,7 +355,7 @@ h2 {
     font-size:28px;
     line-height:32px;
     color:#595959;
-    margin-bottom:8px;
+    margin-top:8px;
 }
 p.bold {
     font-weight: 700;
