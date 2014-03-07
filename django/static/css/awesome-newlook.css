@@ -122,11 +122,17 @@ p {
     font-weight: bold;
     color:#fff;
 }
+
+#feeds img.rssIcon {
+    margin-left:45px;
+    display:block;
+}
+
 #feeds img {
     position:relative;
-    float:right;
+    float:left;
     height:28px;
-    margin:8px 8px 0 0;
+    margin:15px 8px 0 0;
     z-index:6;
 }
 
@@ -189,7 +195,7 @@ nav.next-prev {
 }
 nav.filtering {
     float:left;
-    margin-left:95px;
+    margin-left:305px;
 }
 .left-right {
     float:left;
@@ -254,7 +260,7 @@ span.filter {
     display:block;
     margin: 10px 0 0 20px;
     font-size:28px;
-    color:#51ADE1;
+    color:#fff;
     background: transparent url('../images/facet-dot.png') 0px -45px no-repeat;
     float:left;
     cursor:pointer;
@@ -264,7 +270,7 @@ span.filter {
 }
 
 span.filter:hover, span.filter.selected {
-    color:#557DBA;
+    color:#EFD13A;
 }
 /* Parallax
 *****************************************************************/
@@ -305,7 +311,7 @@ span.filter:hover, span.filter.selected {
 }
 
 .logo h1 {
-    color: #51ADE1;
+    color: #595959;
     font-size: 22px;
     font-weight:bold;
     text-transform:uppercase;
@@ -321,10 +327,12 @@ span.filter:hover, span.filter.selected {
 }
 
 h2 {
-    font-size: 36px;
+    font-size: 60px;
+    margin-bottom:15px;
     font-weight:bold;
-    color:#595959;
+    color:#51ADE1;
     z-index:90;
+    line-height:60px;
 }
 
 #about {
@@ -340,7 +348,6 @@ h2 {
     font-size:28px;
     line-height:32px;
     color:#595959;
-    width:600px;
     margin-bottom:8px;
 }
 p.bold {
@@ -370,8 +377,8 @@ p.bold {
 /* balloon */
 #bg3-1 {
     position: absolute;
-    top: -71px;
-    left: 355px;
+    top: -55px;
+    left: 295px;
 }
 #bg3-2 {
     position: absolute;

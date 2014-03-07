@@ -14,10 +14,10 @@
 <header>
     <div class="container">
     <div class="logo row">
-        <div class="col-md-8 col-md-offset-1">
+        <div class="col-md-8">
 							<h1>Awesome at the {{ organization.name }}</h1>
 		</div>
-					<div class="col-md-2 col-md-offset-1" id="feeds">
+		<div class="col-md-2 col-md-offset-2" id="feeds">
 			<a href="feed" target="_blank">
 				<img src="{{ STATIC_PREFIX }}images/rss-flat.png" class="rssIcon" alt="Awesome RSS" />
 			</a>
@@ -31,7 +31,7 @@
 			</div>
 		</header>
 
-
+<!--
 	<nav id="primary">
 		<ul>
 			<li>
@@ -48,11 +48,11 @@
 			</li>
 		</ul>
 	</nav>
-
+-->
 	    <div class="container" id="recently-awesome">
 	        <div class="row">
-	        <div class="col-md-10 col-md-offset-1">
-				<h2>Recently Awesome</h2>
+	        <div class="col-md-12 ">
+				<h2 class="tk-chaparral-pro">Recently Awesome</h2>
 
 			<div id="recent"></div>
 
@@ -72,8 +72,8 @@
 
 		<div class="container" id="most-awesome">
 	        <div class="row">
-	        <div class="col-md-10 col-md-offset-1">
-				<h2>Most Awesome</h2>
+	        <div class="col-md-12">
+				<h2 class="tk-chaparral-pro">Most Awesome</h2>
 
 			<div id="most"></div>
 
@@ -86,9 +86,9 @@
 
 		<div class="container" id="about">
 		    <div class="row">
-		        <div class="col-md-10 col-md-offset-1">
+		        <div class="col-md-6">
 			<header>
-				<h2>About Awesome</h2>
+				<h2 class="tk-chaparral-pro">About Awesome</h2>
 			</header>
 			<p>Returning something awesome to the {{organization.name}}?</p>
 			<br />
@@ -116,7 +116,10 @@
 
 
 <!-- Parallax foreground -->
-
+<!--<div id="parallax-bg3">
+	<img id="bg3-1" src="{{ STATIC_PREFIX }}images/awesome-new.png" width="565" height="1300" alt="awesome"/>
+</div>
+-->
 
 <!-- Parallax midground clouds -->
 <div id="parallax-bg2">
@@ -145,6 +148,8 @@
 <script src="{{ STATIC_PREFIX }}js/jquery.dotdotdot-1.4.0-packed.js"></script>
 <script src="{{ STATIC_PREFIX }}js/handlebars.js"></script>
 <script src="{{ STATIC_PREFIX }}js/awesome.js"></script>
+<script src="http://use.typekit.com/vpi8egr.js"></script>
+<script >try{Typekit.load();}catch(e){}</script>
 
 <script type="text/javascript">
 var organization = "{{organization.slug}}";
