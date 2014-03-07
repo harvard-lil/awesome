@@ -316,6 +316,18 @@ li {
     text-align:right;
 }
 
+
+.landing-section {
+    margin-bottom: 100px;
+    margin-top: 100px;
+}
+
+.landing-section .separator{
+    border-top: 2px solid #e6e6e6;
+    /*box-shadow: 0 0 70px #000;*/
+}
+
+
 /*///////////////////Formalize, courtesy of Nathan Smith
 /////////////////////////////////////////////////////////*/
 
