@@ -17,6 +17,10 @@ h5 a:hover {
 	margin-bottom:-54px;
 }
 
+p {
+    font-size: 16px;
+}
+
 footer p {
 	color:#aaa;
 	text-shadow: 1px 1px 0px #fff;
@@ -40,12 +44,16 @@ h3 {
 }
 
 h4 {
-  font-size:24px;
-  line-height:24px;
+  font-size:46px;
+  line-height:47px;
 	color:#111;	
 	text-align:left;
-	margin:8px 0 25px 0;
+	margin:8px 0 55px 0;
 	padding:0;
+}
+
+h4.long-heading {
+    margin-bottom:0px;
 }
 
 /*/ about us page/*/
@@ -70,14 +78,6 @@ h4 {
 
 .awesome {
 	font-size:72px;
-}
-
-.awesome-image {
-	margin-top:20px;
-	margin-right:auto;
-	margin-left:auto;
-	margin-bottom:45px;
-	width:615px;
 }
 
 .text-block p {
@@ -110,6 +110,11 @@ h4 {
 
 #awesome-counter span {
   color: #111;
+}
+
+.awesome-image {
+    max-height: 450px;
+    margin: 50px 0 80px 0;
 }
 
 .text-block p a {
@@ -158,8 +163,8 @@ a.already:hover {
 }
 
 .btn-custom {
-  background-color: #51ADE1;
-  border-color: #51ADE1;
+  background-color: #66B562;
+  border-color: #66B562;
   color:#fff;
 }
 .btn-custom:hover,
