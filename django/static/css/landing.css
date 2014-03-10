@@ -20,6 +20,8 @@ h5 a:hover {
 
 p {
     font-size: 17px;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 footer p {
@@ -47,10 +49,10 @@ h3 {
 h4 {
   font-size:46px;
   line-height:47px;
-	color:#111;	
 	text-align:left;
 	margin:8px 0 55px 0;
 	padding:0;
+	color: #454545;
 }
 
 h4.long-heading {
@@ -72,7 +74,7 @@ h4.long-heading {
 .text-block h1 {
 	font-size:48px;
 	line-height:48px;
-	color:#565656;
+	color:#454545;
 	margin-top:-14px;
 	text-align:center;
 }
