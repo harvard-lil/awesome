@@ -55,21 +55,23 @@
   </div><!--row-->
 
   <div class="row">
-    <div class="col-md-5 col-md-offset-2">
+	<div class="col-md-4 col-md-offset-2">
+    	<img class="img-responsive bezel-screen" src="{{ STATIC_PREFIX }}images/org-landing-bezel.jpg"/>
+	</div>
+
+    <div class="col-md-5">
 		<h4>We can get your Awesome Box online</h4>
 		<p>An account with us allows you to share items on the Web in these ways</p>
 		<ul>
 			<li>Web hosting for your <a href="http://cambridge.awesomebox.io">Awesome Page</a></li>
-			<li>Widget for your library to plug into their own page</li>
+			<li>A widget for your library to plug into their own page</li>
 			<li>An RSS Feed</li>
 			<li>Automatic Tweeting of awesome items</li>
-			<li>An API for displaying items in any way your want.</li>
+			<li>An API for displaying items in any way your want</li>
 		</ul>
 		<p>Your library chooses the pieces that work best.</p>
     </div>
-	<div class="col-md-4">
-    	<img class="img-responsive" style="width:350px" src="{{ STATIC_PREFIX }}images/org-landing-bezel.jpg"/>
-	</div>
+
   </div>
 
   <div class="row landing-section">
@@ -77,14 +79,14 @@
   </div><!--row-->
 
   <div class="row">
-	<div class="col-md-2 col-md-offset-2">
-    	<img class="img-responsive" style="height: 300px" src="{{ STATIC_PREFIX }}images/your-library-decides.png"/>
-	</div>
-    <div class="col-md-5 col-md-offset-1">
+    <div class="col-md-5 col-md-offset-2">
 		<h4>It is easy to get Awesome</h4>
 		<p>You create a physical box and determine how the Awesome Box will fit into your library. We provide you with ways to get started including a nice sign kit and other promotional materials.</p>
 		<p>The details are up to your library and we're here to help.</p>
     </div>
+	<div class="col-md-2 col-md-offset-1">
+    	<img class="img-responsive center" src="{{ STATIC_PREFIX }}images/your-library-decides.png"/>
+	</div>
   </div>
 
   <div class="row landing-section">
@@ -92,7 +94,7 @@
   </div><!--row-->
 
   <div class="row">
-    <div class="col-md-9 col-md-offset-2">
+    <div class="col-md-7 col-md-offset-2">
       <!--<p class="text-block-inverse center">These libraries are already awesome.<br >With a lot of awesome items.</p>-->
 	  <h4 class="long-heading">Many awesome libraries</h4>
       <p>There are over 120 Awesome Boxes in the United States. They're in public libraries, school libraries, and academic libraries.</p>
@@ -153,7 +155,7 @@
   </div><!--row-->
 
   <div class="row offerings">
-    <div class="col-md-9 col-md-offset-2">
+    <div class="col-md-7 col-md-offset-2">
         <h4 class="long-heading">Awesome Network</h4>
 		<p>When we mix our Awesome data together we leverage the power of the Awesome Network to get things like top 10 lists.</p>
         <p>Of all the items dropped in an awesome box at one of those libraries, these are the most awesome of all</p>
@@ -205,13 +207,13 @@
 	<div class="col-md-5  col-md-offset-2">
 	  <h4>Free to all</h4>
       <p>Like the greatest public libraries, the Awesome Box is free to all.</p>
-	  <p>We are generously supported by the Harvard Library Innovation Lab, the Harvard Library Lab, and the Arcadia Fund.</p>
-	  <br>
+	  <p>We are generously supported by the <a href="http://librarylab.law.harvad.edu">Harvard Library Innovation Lab</a>, the <a href="https://osc.hul.harvard.edu/liblab">Harvard Library Lab</a>, and the <a href="http://www.arcadiafund.org.uk/">Arcadia Fund</a>.</p>
+	  <br><br>
 	<a href="{% url 'process_self_register' %}" type="button" class="btn btn-custom btn-lg">Get an Awesome Box at your library</a>
       <p><a href="{{ STATIC_PREFIX }}docs/convince-your-library.pdf" class="small convince">Convince your library you need one</a></p>
 	</div>
     <div class="col-md-4">
-      <a href="http://librarylab.law.harvard.edu/"><img style="width: 200px" src="{{ STATIC_PREFIX }}images/liblabstamp.png"/></a>
+      <a href="http://librarylab.law.harvard.edu/"><img class="img-responsive center bezel-screen" src="{{ STATIC_PREFIX }}images/liblabstamp.png"/></a>
     </div>
   </div>
 {% endblock content %}

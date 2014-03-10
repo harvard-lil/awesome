@@ -54,7 +54,7 @@ h4 {
 }
 
 h4.long-heading {
-    margin-bottom:0px;
+    margin-bottom:10px;
 }
 
 /*/ about us page/*/
@@ -172,8 +172,8 @@ a.already:hover {
 .btn-custom:focus,
 .btn-custom:active,
 .btn-custom.active {
-  background-color: #3ba3dd;
-  border-color: #2699da;
+  background-color: #53a74e;
+  border-color: #478f44;
   color:#fff;
 }
 .btn-custom.disabled:hover,
@@ -259,8 +259,6 @@ hr {
 	text-align:right;
 }
 
-
-
 .logo {
 	margin-top:20px;
 	margin:20px auto 0 auto;
@@ -281,14 +279,12 @@ h3.text-decoration a, h3.text-decoration a:hover {
 }
 
 ul {
-	list-style-type: none;
-padding: 0;
-margin-left: 5px;
-
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
-li {
-	line-height:20px;
+img.bezel-screen {
+    margin-top: 40px;
 }
 
 #learn-how {
