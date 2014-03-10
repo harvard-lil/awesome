@@ -1,0 +1,83 @@
+.aw-widget {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size:14px;
+  border-radius:2px;
+  border: solid 1px #5BA09F;
+  width:325px;
+  min-height:305px;
+  position:relative;
+  text-align:left;
+  background-color:#fff;
+}
+
+.aw-widget .aw-widget-list {
+  padding: 5px 0 15px 10px;
+  margin:0;
+  vertical-align:baseline;
+  position:relative;
+  float:left;
+  width:63%;
+}
+
+.aw-widget .aw-widget-item {
+  color:#666;
+  font-size:13px;
+  margin:8px 0 0 0;
+  padding:0;
+  vertical-align: baseline;
+  line-height: 18px;
+}
+
+.aw-widget .aw-widget-item a {
+  font-size:14px;
+  vertical-align: baseline;
+  margin: 0;
+  padding:0;
+}
+
+.aw-widget a, .aw-widget a:link,
+.aw-widget a:active,
+.aw-widget a:visited {
+  -webkit-transition: color 0.25s ease-out;
+  -moz-transition: color 0.25s ease-out;
+  -o-transition: color 0.25s ease-out;
+  transition: color 0.25s ease-out;
+  color:#51ADE1;
+  outline: none;
+  text-decoration:none;
+}
+
+.aw-widget a:hover { 
+  color:#6EBBE6;
+}
+
+.aw-widget span.aw-widget-creator {
+  display:block;
+  margin:0;
+  line-height: 18px;
+  font-size:12px;
+  padding:0;
+  vertical-align:baseline;
+}
+
+.aw-widget h4.aw-widget-title {
+  margin: 0;
+  background: none repeat scroll 0 0 #5BA09F;
+  padding:10px;
+}
+
+.aw-widget h4.aw-widget-title a {
+  color:#fff;
+  font-size:18px;
+  font-weight:bold;
+  display:block;
+  line-height:1.1em;
+}
+
+.aw-widget img.aw-widget-arrow {
+  float:left;
+  position:relative;
+  display:block;
+  margin-left:8px;
+  margin-top:5px;
+}
