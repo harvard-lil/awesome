@@ -104,15 +104,15 @@ def process_self_register(request):
         
             content = '''Welcome to Awesome Box!  To login into your account, visit your login page.
         
-            http://{slug}.{host}/login
+http://{slug}.{host}/login
             
-            For help getting started, visit the help page.
+For help getting started, visit the help page.
             
-            http://{slug}.{host}/control/help
+http://{slug}.{host}/control/help
             
-            Happy Awesome-ing!
+Happy Awesome-ing!
         
-            '''.format(slug=new_org.slug, host=host)
+'''.format(slug=new_org.slug, host=host)
         
             logger.debug(content)
         
