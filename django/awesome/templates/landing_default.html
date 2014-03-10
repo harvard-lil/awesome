@@ -43,7 +43,7 @@
     <div class="col-md-5 col-md-offset-2">
   	  <h4>What is the Awesome Box?</h4>
 	  <p>It's an alternate returns box that sits alongside your library's regular book drop.</p>
-	  <p>If you're returning a book that you thought was awesome, drop it in the Awesome Box instead of the regular book drop. Your librarian will tag it as Awesome and share it with your library community.</p>
+	  <p>If you are returning an item that you really connected with, drop it in the Awesome Box instead of the regular book drop. Your librarian will tag it as Awesome and share it with your library community.</p>
     </div>
     <div class="col-md-4">
     	<img class="img-responsive" src="{{ STATIC_PREFIX }}images/flow.png"/>
@@ -56,12 +56,11 @@
 
   <div class="row">
 	<div class="col-md-4 col-md-offset-2">
-    	<img class="img-responsive" style="width:350px" src="{{ STATIC_PREFIX }}images/free.png"/>
+    	<img class="img-responsive" style="width:300px" src="{{ STATIC_PREFIX }}images/free.png"/>
 	</div>
     <div class="col-md-5 ">
-	  <h4>Free Awesome! Free as can be.</h4>
-      <p>Like the greatest public libraries, the Awesome Box is free and open to all.</p>
-      <p>Your library owns the data and decides how to implement the box. Awesome Box provides web hosting and a sign and marketing kit.</p>
+		<h4>Awesome items get shared</h4>
+		<p>Items dropped in your library's Awesome Box can be shared in a number of ways. It's up to your library to decide how to share with your community.</p>
     </div>
   </div>
 
@@ -71,12 +70,33 @@
 
   <div class="row">
     <div class="col-md-5 col-md-offset-2">
-	  <h4>Your library owns the implementation</h4>
-      <p>Awesome Box is implemented in your library the way you want it implemented. Your library can set out an Awesome Box and they can decide what happens to the things placed in that box.</p> <p> You can share them on the Awesome Box website (http://your-library.awesomebox.io), through Twitter, using the Awesome Widget, or some other tool that uses the Awesome Box API. Or, heck, maybe you just want to keep it purely physical by putting things dropped in the Awesome Box on an Awesome Box shelf (next to your staff picks shelf). </p>
+		<h4>Many ways to share items on the Web</h4>
+		<p>We provide a number of ways to help  you share items on the Web</p>
+		<ul>
+			<li>Web hosting for your Awesome Page, e.g., cambridge.awesomebox.io</li>
+			<li>Widget for your library to plug into their own page</li>
+			<li>An API for displaying items in any way your want.</li>
+		</ul>
+		<p>Your library chooses the pieces that they want.</p>
     </div>
-	<div class="col-md-2 col-md-offset-1">
-    	<img class="img-responsive" style="height: 500px" src="{{ STATIC_PREFIX }}images/your-library-decides.png"/>
+	<div class="col-md-4">
+    	<img class="img-responsive" style="width:350px" src="{{ STATIC_PREFIX }}images/org-landing-bezel.jpg"/>
 	</div>
+  </div>
+
+  <div class="row landing-section">
+    <div class="col-md-9 col-md-offset-2 separator"></div>
+  </div><!--row-->
+
+  <div class="row">
+	<div class="col-md-2 col-md-offset-2">
+    	<img class="img-responsive" style="height: 300px" src="{{ STATIC_PREFIX }}images/your-library-decides.png"/>
+	</div>
+    <div class="col-md-5 col-md-offset-1">
+		<h4>It is easy to get Awesome</h4>
+		<p>The details are up to your library and we're here to help.</p>
+		<p>You choose the way you want to share items and we provide you with ways to get started, including a nice sign kit.</p>
+    </div>
   </div>
 
   <div class="row landing-section">
@@ -87,7 +107,7 @@
     <div class="col-md-9 col-md-offset-2">
       <!--<p class="text-block-inverse center">These libraries are already awesome.<br >With a lot of awesome items.</p>-->
 	  <h4 class="long-heading">Many awesome libraries</h4>
-      <p class="text-block already">There are over 120 partnering libraries. </p>
+      <p>There are over 120 Awesome Boxes in the United States. They're in public libraries, school libraries, and academic libraries.</p>
     </div>
   </div>
 
@@ -194,28 +214,18 @@
   </div><!--row-->
 
   <div class="row">
-	<div class="col-md-4  col-md-offset-2">
-      <a href="http://librarylab.law.harvard.edu/"><img style="width: 200px" src="{{ STATIC_PREFIX }}images/liblabstamp.png"/></a>
+	<div class="col-md-5  col-md-offset-2">
+	  <h4>Free to all</h4>
+      <p>Like the greatest public libraries, the Awesome Box is free to all.</p>
+	  <p>We are generously supported by the Harvard Library Innovation Lab, the Harvard Library Lab, and the Arcadia Fund.</p>
+	  <br>
+	<a href="{% url 'process_self_register' %}" type="button" class="btn btn-custom btn-lg">Get an Awesome Box at your library</a>
+      <p><a href="{{ STATIC_PREFIX }}docs/convince-your-library.pdf" class="small convince">Convince your library you need one</a></p>
 	</div>
     <div class="col-md-4">
-	  <h4>Free? This is too good to be free.</h4>
-      <p>No catch. The Awesome Box is generously supported by the Harvard Library Innovation Lab, the Harvard Library Lab, and the Arcadia Fund.</p>
+      <a href="http://librarylab.law.harvard.edu/"><img style="width: 200px" src="{{ STATIC_PREFIX }}images/liblabstamp.png"/></a>
     </div>
   </div>
-
-  <div class="row landing-section">
-    <div class="col-md-9 col-md-offset-2 separator"></div>
-  </div><!--row-->
-
-  <div class="row">
-    <div class="col-md-9 col-md-offset-2">
-	  <h4>Get Awesome at your library</h4>
-		<p>Are you a librarian? If so, sign up for an Awesome Box account.</p>
-		<p class="text-block already"><a href="{% url 'process_self_register' %}" type="button" class="btn btn-custom btn-lg">Sign up</a> to discover what's Awesome at your library</p>
-      <p><a href="{{ STATIC_PREFIX }}docs/convince-your-library.pdf" class="small convince">Convince your library you need one</a></p>
-    </div>
-  </div>
-</div>
 {% endblock content %}
 
 {% block scripts %}
