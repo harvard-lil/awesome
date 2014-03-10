@@ -27,7 +27,7 @@
 				<h1>Get a Widget</h1>
 			</header>
 			<h3>Embed the following widget anywhere</h3>	
-			<div class="widget-sample"><script src="{% url 'widget' %}"></script></div>
+			<div class="widget-sample"><script src="{% url 'widget' %}?style=default"></script></div>
 			<label for="widget-code">Copy and paste the code into the HTML of your site</label>
 			<textarea id="widget-code"><script src="http://{{organization.slug}}.{{awesome_domain}}{% url 'widget' %}?style=default"></script></textarea>
 			<br><br>
