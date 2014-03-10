@@ -2,6 +2,7 @@
 body {
 	margin:0;
 	font-family: "Helvetica Neue", Arial, "Liberation Sans", FreeSans, sans-serif;
+	color:#565656;
 }
 
 .container {
@@ -71,7 +72,7 @@ h4.long-heading {
 .text-block h1 {
 	font-size:48px;
 	line-height:48px;
-	color:#111; 
+	color:#565656;
 	margin-top:-14px;
 	text-align:center;
 }
