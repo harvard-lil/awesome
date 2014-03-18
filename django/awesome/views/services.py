@@ -167,7 +167,7 @@ def _item_from_hollis(barcode, branch):
 def _item_from_worldcat(barcode, branch):
     """Given a barcode, get metadata from worldcat"""
     
-    url = "http://www.worldcat.org/webservices/catalog/search/sru?query=srw.sn%3D%22" + barcode + "&wskey=" + WORLDCAT["KEY"] + "&servicelevel=full";
+    url = "http://www.worldcat.org/webservices/catalog/search/sru?query=srw.sn%3D%22" + barcode + "&wskey=" + WORLDCAT["KEY"] + "&servicelevel=full&maximumRecords=1";
     req = urllib2.Request(url)
     
     response = None
@@ -226,6 +226,9 @@ def _item_from_worldcat(barcode, branch):
                 cover_art = _get_rt_movie_poster(title)
                 break
             elif 'sound' in format:
+                physical_format = 'soundrecording'
+                break
+            elif 'audio' in format:
                 physical_format = 'soundrecording'
                 break
                 
