@@ -1,4 +1,4 @@
-import httplib, json, logging, urllib2, re, datetime, os
+import httplib, json, logging, urllib2, re, datetime, os, itertools
 from StringIO import StringIO
 from threading import Thread
 
@@ -12,9 +12,10 @@ from django.shortcuts import get_object_or_404, render_to_response
 from django.conf import settings
 from django.contrib.sites.models import Site
 
-
-from lxml import etree
+from lxml import etree, objectify
 import twitter
+import bottlenose
+from xml.dom.minidom import parseString
 
 
 logger = logging.getLogger(__name__)
@@ -83,6 +84,62 @@ def learn_how(request):
     message_to_return = "Mail sent"
     
     return HttpResponse(message_to_return, status=200)
+    
+def amazon(request, isbn):
+    """Given an Amazon URL, get title, creator, etc. from imdapi.com
+    """
+
+    aws_key = AMZ['KEY']
+    aws_secret_key = AMZ['SECRET_KEY']
+    aws_associate_tag = AMZ['ASSOCIATE_TAG']
+    blob = {}
+        
+    amazon = bottlenose.Amazon(aws_key, aws_secret_key, aws_associate_tag)
+    response = amazon.ItemLookup(ItemId=isbn, ResponseGroup="BrowseNodes", IdType="ISBN", SearchIndex="Books")
+    
+    xml = parseString(response)
+    
+    nodes = xml.getElementsByTagName('Children')
+    for node in nodes:
+        parent = node.parentNode
+        parent.removeChild(node)
+        
+    categories = []              
+    for book in xml.getElementsByTagName('Name'):
+        category = str(book.firstChild.nodeValue)
+        categories.append(category)
+    
+    taglists = []
+    while 'Books' in categories:
+        find = categories.index('Books') + 1
+        list = categories[:find]
+        if 'Products' not in list:
+            taglists.append(list)
+        for word in list:
+            categories.remove(word)
+
+    subjects = []
+    #now, we only return the first item from a list which contains 'Subjects'        
+    for tagset in taglists:
+        while 'Subjects' in tagset:
+            tagset.pop(tagset.index('Subjects'))
+            tagset.pop(tagset.index('Books'))
+            for subject in tagset:
+                subjects.append(subject)
+            
+    if subjects:
+        subjects.sort()
+        last = subjects[-1]
+        for i in range(len(subjects)-2, -1, -1):
+            if last == subjects[i]:
+                del subjects[i]
+            else:
+                last = subjects[i]
+            
+    blob['subjects'] = ':::'.join(subjects)    
+    blob['cats'] = taglists
+    return HttpResponse(json.dumps(subjects), content_type="application/json", status=200)
+
 
 def _item_from_hollis(barcode, branch):
     

@@ -33,6 +33,7 @@ urlpatterns = patterns('awesome.views',
     url(r'^services/learn-how/$', 'services.learn_how', name='services_learn_how'),
     url(r'^services/hollis-count/(?P<unique_id>[0-9A-Za-z]+)$', 'services.unique_id_awesome_count', name='services_unique_id_awesome_count'),
     url(r'^services/isbn-count/(?P<isbn>[0-9A-Za-z]+)$', 'services.isbn_awesome_count', name='services_isbn_awesome_count'),
+    url(r'^services/amazon/(?P<isbn>[0-9A-Za-z]+)$', 'services.amazon', name='services_amazon'),
     
     # Session/account management
     url(r'^password/change/$', auth_views.password_change, {'template_name': 'registration/password_change_form.html'}, name='auth_password_change'),
