@@ -53,6 +53,12 @@ class Branch(models.Model):
     
     def __unicode__(self):
         return self.name
+        
+class Classification(models.Model):
+    name = models.CharField(max_length=400)
+    
+    def __unicode__(self):
+        return self.name
     
 class Item(models.Model):
     branch = models.ForeignKey(Branch)
@@ -65,6 +71,7 @@ class Item(models.Model):
     cover_art = models.URLField(max_length=400, null=True, blank=True)
     latest_checkin = models.DateTimeField(auto_now=True)
     number_checkins = models.PositiveIntegerField(default=1)
+    classifications = models.ManyToManyField(Classification)
     
     def save(self, *args, **kwargs):
         # If we have an item with our unique_id, create a new checkin and update the existing item's latest_checkin and number of checkins

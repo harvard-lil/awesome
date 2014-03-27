@@ -2,7 +2,7 @@ import httplib, json, logging, urllib2, re, datetime, os, itertools
 from StringIO import StringIO
 from threading import Thread
 
-from awesome.models import Branch, Item, Organization
+from awesome.models import Branch, Item, Organization, Classification
 
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -84,8 +84,10 @@ def learn_how(request):
     message_to_return = "Mail sent"
     
     return HttpResponse(message_to_return, status=200)
+
     
-def amazon(request, isbn):
+#def amazon(request, isbn):
+def amazon(isbn):
     """Given an Amazon URL, get title, creator, etc. from imdapi.com
     """
 
@@ -138,7 +140,25 @@ def amazon(request, isbn):
             
     blob['subjects'] = ':::'.join(subjects)    
     blob['cats'] = taglists
-    return HttpResponse(json.dumps(subjects), content_type="application/json", status=200)
+    
+    for subject in subjects:
+        _insert_amazon_subject(isbn, subject)
+        
+    #return HttpResponse(json.dumps(subjects), content_type="application/json", status=200)
+
+def _insert_amazon_subject(isbn, subject):
+    subjects = Classification.objects.filter(name=subject)[:1]
+    
+    classification = Classification(name=subject)
+    if len(subjects) > 0:
+        classification = subjects[0]   
+        
+    classification.save()
+        
+    items = Item.objects.filter(isbn=isbn)
+    
+    for item in items:
+        item.classifications.add(classification)
 
 
 def _item_from_hollis(barcode, branch):
@@ -302,6 +322,8 @@ def _item_from_worldcat(barcode, branch):
     item.save()
     
     current = ThreadedTweet(item)
+    if(massaged_isbn):
+        amazon(massaged_isbn)
     current.start()
     
     return _simple_massage_text(title)

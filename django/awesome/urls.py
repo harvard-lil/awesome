@@ -11,6 +11,7 @@ urlpatterns = patterns('awesome.views',
 
     # Common Pages
     url(r'^$', 'landing.landing', name='landing'),
+    url(r'^explorer/$', 'landing.explorer', name='landing_explorer'),
     url(r'^scan/$', 'scan.scan', name='scan'),
     url(r'^feed/$', LatestEntriesFeed()),
     url(r'^widget/$', 'widget.widget', name='widget'),
