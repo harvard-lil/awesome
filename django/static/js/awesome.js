@@ -57,7 +57,7 @@ $(document).ready(function() {
 	// End of recent items logic
 	//////
 	
-	var mostUrl = "/api/v1/item/?format=json&order_by=-number_checkins&limit=12&branch__organization__slug=" + organization;
+	var mostUrl = "/api/v1/item/?format=json&order_by=-number_checkins&limit=" + limit + "&branch__organization__slug=" + organization;
 	
 	if (branch) {
 	    mostUrl = mostUrl + "&branch__slug=" + branch;
