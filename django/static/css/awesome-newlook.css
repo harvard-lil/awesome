@@ -272,6 +272,11 @@ span.filter {
 span.filter:hover, span.filter.selected {
     color:#EFD13A;
 }
+
+.filter i {
+    margin-top:3px;
+    display:block;
+}
 /* Parallax
 *****************************************************************/
 
