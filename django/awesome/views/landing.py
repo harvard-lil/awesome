@@ -1,4 +1,4 @@
-import logging
+import logging, math
 
 from datetime import date, timedelta
 from awesome.models import Organization, Item, Branch
@@ -39,8 +39,11 @@ def landing(request):
         enddate = startdate - timedelta(days=2)
         recently = Item.objects.filter(latest_checkin__gt=enddate,
                                 latest_checkin__lt=startdate).order_by('-latest_checkin')
+                                
+        num_libraries = Organization.objects.count()
+        num_libraries = int(math.floor(num_libraries%5) * 5)
         
-        context = {'ga_key': GOOGLE['ANALYTICS_KEY'], 'items': items, 'creators': creators, 'recently': recently}
+        context = {'ga_key': GOOGLE['ANALYTICS_KEY'], 'items': items, 'creators': creators, 'recently': recently, 'num_libraries': num_libraries}
                
         context.update(csrf(request))
         return render_to_response('landing_default.html', context)
