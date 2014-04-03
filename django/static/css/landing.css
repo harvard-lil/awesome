@@ -73,6 +73,7 @@ h4.long-heading {
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	margin-left:0;
+	margin-top:0px;
 }
 
 .text-block h1 {
@@ -120,8 +121,8 @@ h4.long-heading {
 }
 
 .awesome-image {
-    max-height: 450px;
-    margin: 50px 0 80px 0;
+    max-height: 400px;
+    margin: 40px 0 40px 0;
 }
 
 .text-block p a {
@@ -328,7 +329,7 @@ img.bezel-screen {
 /*////// Recent items styling   ///////*/
 
 h2.recent-banner {
-    background:#7a8bb2;
+    background:#51ADE1;
     color:#fff;
     padding:8px;
     margin-bottom:15px;
@@ -398,7 +399,7 @@ h2.recent-banner {
 
 .item-library {
     margin-top:15px;
-    background:#7a8bb2;
+    background:#51ADE1;
     padding:3px;
 }
 
