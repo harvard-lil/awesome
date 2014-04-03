@@ -1,5 +1,6 @@
 import logging
 
+from datetime import date, timedelta
 from awesome.models import Organization, Item, Branch
 
 from django.shortcuts import render_to_response
@@ -33,7 +34,13 @@ def landing(request):
     else:
         items = Item.objects.values('title').annotate(total_checkins=Sum('number_checkins')).order_by('-total_checkins')[:10]
         creators = Item.objects.values('creator').annotate(total_checkins=Sum('number_checkins')).order_by('-total_checkins').exclude(creator='')[:10]
-        context = {'ga_key': GOOGLE['ANALYTICS_KEY'], 'items': items, 'creators': creators}
+        
+        startdate = date.today() + timedelta(days=1)
+        enddate = startdate - timedelta(days=2)
+        recently = Item.objects.filter(latest_checkin__gt=enddate,
+                                latest_checkin__lt=startdate).order_by('-latest_checkin')
+        
+        context = {'ga_key': GOOGLE['ANALYTICS_KEY'], 'items': items, 'creators': creators, 'recently': recently}
                
         context.update(csrf(request))
         return render_to_response('landing_default.html', context)

@@ -1,5 +1,5 @@
 {% extends "layouts/base.html" %}
-{% load static %}
+{% load static isbn_converter %}
 {% get_static_prefix as STATIC_PREFIX %}
 
 {% block title %}Awesome Box{% endblock title %}
@@ -149,6 +149,44 @@
     document.onload = drawIt();
     
   </script>
+    
+  <div class="row offerings">
+    <div class="col-sm-9 col-sm-offset-2">
+        <h2 class="recent-banner">Awesome today</h2>
+        <div id="hard-results">
+        {% for recent in recently %}
+	<li class="item">
+		{% if recent.cover_art %}
+		<img class="item-cover" src="{{recent.cover_art}}" alt="{{recent.title}}" />
+		{% else %}
+		<img class="item-cover" src="http://images.amazon.com/images/P/{{recent.isbn|isbn_converter}}.01.ZTZZZZZZ.jpg" alt="{{recent.title}}" />
+		{% endif %}
+		<div class="item-details">
+		    {% if recent.catalog_id %}
+		        <a href="http://www.worldcat.org/search?qt=worldcat_org_all&q={{recent.catalog_id}}" target="_blank" style="display:none;">{{recent.title}}</a>
+		    {% else %}
+		        <a href="http://www.worldcat.org/search?qt=worldcat_org_all&q={{recent.title}}" target="_blank" style="display:none;">{{recent.title}}</a>
+		    {% endif %}
+			<span class="item-title">
+				{{recent.title}}
+			</span>
+			<span class="item-author">{{recent.creator}}</span>
+			{% if recent.catalog_id %}
+			<a class="item-amazon-link" href="http://www.amazon.com/gp/search?keywords={{recent.catalog_id}}&linkCode=q" target="_blank"></a>
+			{% else %}
+			<a class="item-amazon-link" href="http://www.amazon.com/gp/search?keywords={{recent.title}}&linkCode=q" target="_blank"></a>
+			{% endif %}
+			
+		</div>
+		<div class="item-library">
+		    <a href="http://{{recent.branch.organization.slug}}.awesomebox.io">{{recent.branch.organization.name}}</a>
+		</div>
+	</li>
+	{% endfor %}
+	</div>
+    </div>
+  </div>
+
 
   <div class="row landing-section">
     <div class="col-sm-9 col-sm-offset-2 separator"></div>
@@ -222,6 +260,7 @@
 {% block scripts %}
 <script type="text/javascript">
 	var CSRF_TOKEN = "{{ csrf_token }}";
+	var static_prefix = "{{ static_prefix }}";
 </script>
 <!-- Grab Google CDN's jQuery. fall back to local if necessary --> 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
@@ -229,36 +268,9 @@
 <script src='{{ STATIC_PREFIX }}js/raphael.scale.js'></script>
 <script src='{{ STATIC_PREFIX }}js/g.raphael.js'></script>
 <script src='{{ STATIC_PREFIX }}js/usmap.js'></script>
-<script src="{{ STATIC_PREFIX }}js/jquery.collagePlus.js"></script>
-<script src="{{ STATIC_PREFIX }}js/handlebars.js"></script>
+<script src="{{ STATIC_PREFIX }}js/slick.min.js"></script>
 <script src="{{ STATIC_PREFIX }}js/landing.js"></script>
 {% endblock scripts %}
-
-{% block templates %}
-
-{% verbatim %}
-
-<script id="items-template" type="text/x-handlebars-template">
-
-<ul> 
-	{{#objects}}
-	<li class="item">
-		<a href="{{branch.organization.catalog_base_url}}{{catalogQuery this}}" target="_blank" >
-		{{#if cover_art}}
-		<img class="item-cover" src="{{cover_art}}" alt="{{title}}" />
-		{{else}}
-		<img class="item-cover" src="http://covers.openlibrary.org/b/isbn/{{isbn}}-M.jpg" alt="{{title}}" />
-		{{/if}}
-			<p class="item-title">
-				{{title}}
-			</p>
-			</a>
-	</li>
-	{{/objects}}
-</ul>
-</script>
-{% endverbatim %}
-{% endblock templates %}
 
 {% block extrascripts %}
 <script>

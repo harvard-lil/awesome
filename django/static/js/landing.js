@@ -1,9 +1,52 @@
 $(document).ready(function() {
-  $('#learn-how').submit(function() {
-    var email = $('#email').val();
-	  $.post('/services/learn-how/', {csrfmiddlewaretoken: CSRF_TOKEN, email: email}, function(data) {
-      $('#signed-up').text("Thanks, we'll be in touch").fadeIn();
-    });
-  return false;
-  });
+  $('#hard-results li.item').on('click', function(event) {
+    if (!$(event.target).is(".item-amazon-link")) {
+		var link = $(this).find('a').attr('href');
+		window.open(link);
+		return false;
+		}
+	});
+    
+    $('#hard-results').slick({
+          infinite: false,
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          slide: 'li',
+          responsive: [
+            {
+              breakpoint: 1200,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 2,
+                slide: 'li'
+              }
+            },
+            {
+              breakpoint: 1000,
+              settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                slide: 'li'
+              }
+            },
+            {
+              breakpoint: 700,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 2,
+                slide: 'li',
+                arrows: false
+              }
+            },
+            {
+              breakpoint: 570,
+              settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                slide: 'li',
+                arrows:false
+              }
+            }
+          ]
+        });
 });

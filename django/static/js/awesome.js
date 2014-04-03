@@ -156,12 +156,12 @@ $(document).ready(function() {
 });
 
 function showResults(data){ 
-  var source = $("#search-template").html();
+  var source = $("#most-template").html();
 	var template = Handlebars.compile(source);
 	Handlebars.registerPartial("items", $("#items-template").html());
-  $('#search-results').html(template(data));
+  $('#most-results').html(template(data));
   $(".item-title").dotdotdot();
-  $("#search-results").jCarouselLite({
+  $("#most-results").jCarouselLite({
     btnNext: ".right",
     btnPrev: ".left",
     speed: 600,
