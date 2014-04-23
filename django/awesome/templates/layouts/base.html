@@ -7,7 +7,8 @@
 	<meta charset="utf-8">
 	<title>{% block title %}Awesome Box{% endblock title %}</title>
 	{% block favicon %}<link rel="icon" href="{{ STATIC_PREFIX }}images/favicon-new.png" type="image/x-icon">{% endblock favicon %}
-	{% block styles %}{% endblock styles %}
+	{% block styles %}<link rel="stylesheet" href="{{ STATIC_PREFIX }}css/bootstrap.min.css" type="text/css" />
+<link rel="stylesheet" media="all" href="{{ STATIC_PREFIX }}css/awesome-newlook.css" />{% endblock styles %}
 	{% block scripts %}{% endblock scripts %}
 	{% block extrahead %}{% endblock extrahead %}
 </head>

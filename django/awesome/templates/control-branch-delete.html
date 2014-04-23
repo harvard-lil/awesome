@@ -4,22 +4,10 @@
 
 {% block title %}Controls | Awesome Box at the {{organization.name}}{% endblock title %}
 
-{% block styles %}
-<link rel="stylesheet" href="{{ STATIC_PREFIX }}css/bootstrap.css" type="text/css" />
-<link rel="stylesheet" media="all" href="{{ STATIC_PREFIX }}css/awesome-newlook.css" />
-{% endblock styles %}
-
 {% block content %}
 <body>
 <div id="wrapper">
-	<header id="branding">
-		<span id="feeds">
-			<ul>
-				<li><a href="{% url 'auth_logout' %}">Logout</a></li><li>|</li><li><a href="{% url 'control_home' %}">Control Center</a></li>
-			</ul>
-		</span>
-		<h1><a href="{% url 'landing' %}">Awesome Box at the {{ organization.name }}</a></h1>
-	</header>
+	{% include "partials/control-header.html" %}
 	<div id="content">
 	
 		<article class="control thin-centered">
