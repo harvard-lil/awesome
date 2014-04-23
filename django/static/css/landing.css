@@ -5,10 +5,6 @@ body {
 	color:#565656;
 }
 
-.container {
-	margin-top:20px;	
-}
-
 h5 a:hover {
 	color:#09f
 }
@@ -76,12 +72,16 @@ h4.long-heading {
 	margin-top:0px;
 }
 
-.text-block h1 {
+.navbar {
+    border:none;
+}
+
+h1 {
 	font-size:48px;
 	line-height:48px;
 	color:#454545;
 	margin-top:-14px;
-	text-align:center;
+	margin-bottom:35px;
 }
 
 .awesome {
@@ -226,6 +226,10 @@ h3 a:hover {
 	margin-top:10px;
 }
 
+.opening-row .text-block {
+    margin-bottom:75px;
+}
+
 .opening-row h1 {
     	font-weight:bold;
 }
@@ -329,10 +333,11 @@ img.bezel-screen {
 /*////// Recent items styling   ///////*/
 
 h2.recent-banner {
-    background:#51ADE1;
+    /*background:#51ADE1;
     color:#fff;
-    padding:8px;
+    padding:8px;*/
     margin-bottom:15px;
+    margin-top:95px;
 }
 
 .item {
@@ -346,14 +351,17 @@ h2.recent-banner {
     z-index:90;
 }
 
+.recent-cover {
+    height:220px;
+}
+
 .offerings img.item-cover {
     float:left;
     border:0px solid #999;
     margin:0 15px 0px 0;
     background-image:url('../images/faceUp-icons.png');
     background-repeat: no-repeat;
-    height:160px;
-    width:110px;
+    width:150px;
     background-position: -170px -4px;
     padding:0;
     cursor:pointer;
@@ -399,12 +407,12 @@ h2.recent-banner {
 
 .item-library {
     margin-top:15px;
-    background:#51ADE1;
+    /*background:#51ADE1;*/
     padding:3px;
 }
 
 .item-library a {
-    color:#fff;
+    /*color:#fff;*/
     display:block;
     margin-right:18px;
 }
@@ -417,8 +425,8 @@ h2.recent-banner {
     background-repeat: no-repeat;
     float:right;
     position:absolute;
-    top:125px;
-    left:230px;
+    top:195px;
+    left:145px;
 }
 
 

@@ -12,27 +12,78 @@
 {% block content %}
 <body>
 <div class="container">
-	
-	<div class="row center">
-    <div class="text-block opening-row col-sm-12">
-			<h1>Sometimes things are<br/><span class="awesome">Awesome.</span></h1>
-		</div>
-  </div><!--row-->
-
-  <div class="row center">
-    <div class="col-sm-9 col-sm-offset-2">
-    	<img class="img-responsive awesome-image center" src="{{ STATIC_PREFIX }}images/awesome_action.jpg"/>
-	</div>
-  </div><!--row-->
-
-  <div class="row">
-    <div class="col-sm-4 col-sm-offset-2">
-      <p class="text-block">Checked out something awesome from the library? Return it to the Awesome Box.</p>
+	<nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <!--<a class="navbar-brand" href="#">Awesome Box</a>-->
     </div>
-    <div class="col-sm-4 col-sm-offset-1 right">
-      <a href="{% url 'process_self_register' %}" type="button" class="btn btn-custom btn-lg">Get one at your library</a>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Login</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+	<div class="row">
+	    <div class="col-sm-5 col-sm-offset-1 opening-row">
+	        <h1>Sometimes things are Awesome.</h1>
+          <p class="text-block">Checked out something awesome from the library? Return it to the Awesome Box.</p>
+          <a href="{% url 'process_self_register' %}" type="button" class="btn btn-custom btn-lg">Get one at your library</a>
       <p><a href="{{ STATIC_PREFIX }}docs/convince-your-library.pdf" class="small convince">Convince your library you need one</a></p>
-    </div>	
+    </div>
+    <div class="col-sm-6">
+    	<img class="img-responsive" src="{{ STATIC_PREFIX }}images/awesome_action.jpg"/>
+	</div>
+</div>
+  
+  <div class="row offerings">
+    <div class="col-sm-10 col-sm-offset-1">
+        <h2 class="recent-banner">Awesome today</h2>
+        <div id="hard-results">
+        {% for recent in recently %}
+	<li class="item">
+	    {% if recent.catalog_id %}
+			<a class="item-amazon-link" href="http://www.amazon.com/gp/search?keywords={{recent.catalog_id}}&linkCode=q" target="_blank"></a>
+			<a class="item-worldcat-link" href="http://www.worldcat.org/search?qt=worldcat_org_all&q={{recent.catalog_id}}" target="_blank" style="display:none;">{{recent.title}}</a>
+			{% else %}
+			<a class="item-amazon-link" href="http://www.amazon.com/gp/search?keywords={{recent.title}}&linkCode=q" target="_blank"></a>
+			<a class="item-worldcat-link" href="http://www.worldcat.org/search?qt=worldcat_org_all&q={{recent.title}}" target="_blank" style="display:none;">{{recent.title}}</a>
+			{% endif %}
+	    <div class="recent-cover">
+		{% if recent.cover_art %}
+		<img class="item-cover" src="{{recent.cover_art}}" alt="{{recent.title}}" />
+		{% else %}
+		<img class="item-cover" src="http://images.amazon.com/images/P/{{recent.isbn|isbn_converter}}.01.LZZZZZZZ.jpg" alt="{{recent.title}}" />
+		{% endif %}
+		</div>
+		<!--<div class="item-details">
+		    {% if recent.catalog_id %}
+		        <a href="http://www.worldcat.org/search?qt=worldcat_org_all&q={{recent.catalog_id}}" target="_blank" style="display:none;">{{recent.title}}</a>
+		    {% else %}
+		        <a href="http://www.worldcat.org/search?qt=worldcat_org_all&q={{recent.title}}" target="_blank" style="display:none;">{{recent.title}}</a>
+		    {% endif %}
+			<span class="item-title">
+				{{recent.title}}
+			</span>
+			<span class="item-author">{{recent.creator}}</span>
+			{% if recent.catalog_id %}
+			<a class="item-amazon-link" href="http://www.amazon.com/gp/search?keywords={{recent.catalog_id}}&linkCode=q" target="_blank"></a>
+			{% else %}
+			<a class="item-amazon-link" href="http://www.amazon.com/gp/search?keywords={{recent.title}}&linkCode=q" target="_blank"></a>
+			{% endif %}
+			
+		</div>-->
+		<div class="item-library">
+		    <a class="item-library-link" href="http://{{recent.branch.organization.slug}}.awesomebox.io">{{recent.branch.organization.name}}</a>
+		</div>
+	</li>
+	{% endfor %}
+	</div>
+    </div>
   </div>
 
   <div class="row landing-section">
@@ -149,43 +200,6 @@
     document.onload = drawIt();
     
   </script>
-    
-  <div class="row offerings">
-    <div class="col-sm-9 col-sm-offset-2">
-        <h2 class="recent-banner">Awesome today</h2>
-        <div id="hard-results">
-        {% for recent in recently %}
-	<li class="item">
-		{% if recent.cover_art %}
-		<img class="item-cover" src="{{recent.cover_art}}" alt="{{recent.title}}" />
-		{% else %}
-		<img class="item-cover" src="http://images.amazon.com/images/P/{{recent.isbn|isbn_converter}}.01.ZTZZZZZZ.jpg" alt="{{recent.title}}" />
-		{% endif %}
-		<div class="item-details">
-		    {% if recent.catalog_id %}
-		        <a href="http://www.worldcat.org/search?qt=worldcat_org_all&q={{recent.catalog_id}}" target="_blank" style="display:none;">{{recent.title}}</a>
-		    {% else %}
-		        <a href="http://www.worldcat.org/search?qt=worldcat_org_all&q={{recent.title}}" target="_blank" style="display:none;">{{recent.title}}</a>
-		    {% endif %}
-			<span class="item-title">
-				{{recent.title}}
-			</span>
-			<span class="item-author">{{recent.creator}}</span>
-			{% if recent.catalog_id %}
-			<a class="item-amazon-link" href="http://www.amazon.com/gp/search?keywords={{recent.catalog_id}}&linkCode=q" target="_blank"></a>
-			{% else %}
-			<a class="item-amazon-link" href="http://www.amazon.com/gp/search?keywords={{recent.title}}&linkCode=q" target="_blank"></a>
-			{% endif %}
-			
-		</div>
-		<div class="item-library">
-		    <a href="http://{{recent.branch.organization.slug}}.awesomebox.io">{{recent.branch.organization.name}}</a>
-		</div>
-	</li>
-	{% endfor %}
-	</div>
-    </div>
-  </div>
 
 
   <div class="row landing-section">

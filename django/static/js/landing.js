@@ -1,7 +1,7 @@
 $(document).ready(function() {
   $('#hard-results li.item').on('click', function(event) {
     if (!$(event.target).is(".item-amazon-link")) {
-		var link = $(this).find('a').attr('href');
+		var link = $(this).find('a.item-worldcat-link').attr('href');
 		window.open(link);
 		return false;
 		}
@@ -9,8 +9,8 @@ $(document).ready(function() {
     
     $('#hard-results').slick({
           infinite: false,
-          slidesToShow: 3,
-          slidesToScroll: 3,
+          slidesToShow: 5,
+          slidesToScroll: 5,
           slide: 'li',
           responsive: [
             {
