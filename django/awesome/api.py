@@ -23,7 +23,7 @@ class BranchResource(ModelResource):
         queryset = Branch.objects.all()
         resource_name = 'branch'
         allowed_methods = ['get']
-        filtering = {"organization": ALL_WITH_RELATIONS, "slug": ALL }
+        filtering = {"organization": ALL_WITH_RELATIONS, "slug": ALL, "lat": ALL }
         
 class ItemResource(ModelResource):    
     branch = fields.ToOneField(BranchResource, 'branch', full = True )

@@ -18,6 +18,7 @@ ROTTEN_TOMATOES = {
 
 GOOGLE = {
     'ANALYTICS_KEY': 'your GA key here',
+    'ANALTYICS_DOMAIN': 'your domain here',
 }
 
 BITLY = {
