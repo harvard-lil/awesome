@@ -9,6 +9,7 @@ $(document).ready(function() {
     
     $('#hard-results').slick({
           infinite: false,
+          lazyLoad: 'progressive',
           slidesToShow: 5,
           slidesToScroll: 5,
           slide: 'li',
@@ -16,16 +17,16 @@ $(document).ready(function() {
             {
               breakpoint: 1200,
               settings: {
-                slidesToShow: 2,
-                slidesToScroll: 2,
+                slidesToShow: 4,
+                slidesToScroll: 4,
                 slide: 'li'
               }
             },
             {
               breakpoint: 1000,
               settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1,
+                slidesToShow: 3,
+                slidesToScroll: 3,
                 slide: 'li'
               }
             },

@@ -42,7 +42,7 @@
   
   <div class="row offerings">
     <div class="col-sm-10 col-sm-offset-1">
-        <h2 class="recent-banner">Awesome today</h2>
+        <h2 class="recent-banner">Just Awesomed</h2>
         <div id="hard-results">
         {% for recent in recently %}
 	<li class="item">
@@ -55,10 +55,13 @@
 			{% endif %}
 	    <div class="recent-cover">
 		{% if recent.cover_art %}
-		<img class="item-cover" src="{{recent.cover_art}}" alt="{{recent.title}}" />
+		<img class="item-cover" data-lazy="{{recent.cover_art}}" alt="{{recent.title}}" />
+		{% elif recent.isbn %}
+		<img class="item-cover" data-lazy="http://images.amazon.com/images/P/{{recent.isbn|isbn_converter}}.01.LZZZZZZZ.jpg" alt="{{recent.title}}" />
 		{% else %}
-		<img class="item-cover" src="http://images.amazon.com/images/P/{{recent.isbn|isbn_converter}}.01.LZZZZZZZ.jpg" alt="{{recent.title}}" />
+		<img class="item-cover" alt="{{recent.title}}" data-lazy="http://images.amazon.com/images/P/.01.LZZZZZZZ.jpg">
 		{% endif %}
+		<div class="item-label-title">{{recent.title}}</div>
 		</div>
 		<!--<div class="item-details">
 		    {% if recent.catalog_id %}
