@@ -45,7 +45,7 @@ def landing(request):
                                 latest_checkin__lt=startdate).order_by('-latest_checkin')
                                 
         num_libraries = Organization.objects.count()
-        num_libraries = int(math.floor(num_libraries%5) * 5)
+        #num_libraries = int(math.floor(num_libraries%5) * 5)
         
         context = {'ga_key': GOOGLE['ANALYTICS_KEY'], 'items': items, 'creators': creators, 'recently': recently, 'num_libraries': num_libraries}
                
