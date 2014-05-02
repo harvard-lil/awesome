@@ -5,6 +5,7 @@ from awesome.models import Organization, Item, Branch
 
 from django.shortcuts import render_to_response
 from django.core.context_processors import csrf
+from django.template import RequestContext
 from django.db.models import Count, Sum, Q
 
 logger = logging.getLogger(__name__)
@@ -27,10 +28,13 @@ def landing(request):
         org = Organization.objects.get(slug=request.META['subdomain'])
         
         template = 'landing_org_{theme}.html'.format(theme = org.theme)
-    
-        return render_to_response(template, {'user': request.user, 'organization': org,
+        
+        context = {'user': request.user, 'organization': org,
                                                'branch': branch, 'twitter_username': org.twitter_username,
-                                               'ga_key': GOOGLE['ANALYTICS_KEY']})
+                                               'ga_key': GOOGLE['ANALYTICS_KEY']}
+        context = RequestContext(request, context)
+    
+        return render_to_response(template, context)
     else:
         items = Item.objects.values('title').annotate(total_checkins=Sum('number_checkins')).order_by('-total_checkins')[:10]
         creators = Item.objects.values('creator').annotate(total_checkins=Sum('number_checkins')).order_by('-total_checkins').exclude(creator='')[:10]
@@ -45,7 +49,7 @@ def landing(request):
         
         context = {'ga_key': GOOGLE['ANALYTICS_KEY'], 'items': items, 'creators': creators, 'recently': recently, 'num_libraries': num_libraries}
                
-        context.update(csrf(request))
+        context = RequestContext(request, context)
         return render_to_response('landing_default.html', context)
         
 
@@ -63,5 +67,5 @@ def explorer(request):
     
     context = {'ga_key': GOOGLE['ANALYTICS_KEY'], 'items': items, 'creators': creators, 'scifis': scifis, 'comics': comics}
                
-    context.update(csrf(request))
+    context = RequestContext(request, context)
     return render_to_response('explorer.html', context)

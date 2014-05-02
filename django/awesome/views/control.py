@@ -39,6 +39,8 @@ def home(request):
             'user': request.user,
             'organization': org,
         }
+        
+    context = RequestContext(request, context)
     
     return render_to_response('control.html', context)
     
@@ -55,6 +57,8 @@ def supplies(request):
             'user': request.user,
             'organization': org,
         }
+        
+    context = RequestContext(request, context)
     
     return render_to_response('control-supplies.html', context)
     
@@ -71,6 +75,8 @@ def help(request):
             'user': request.user,
             'organization': org,
         }
+        
+    context = RequestContext(request, context)
     
     return render_to_response('control-help.html', context)
     
@@ -97,7 +103,8 @@ def org(request):
                 'organization': org,
                 'form': submitted_form,
             }
-            context = RequestContext(request, context)    
+            context = RequestContext(request, context)  
+            
             return render_to_response('control-org.html', context)
             
     else:  
@@ -136,7 +143,7 @@ def branch(request):
                 'branches': branches,
                 'form': submitted_form,
             }
-            context.update(csrf(request))    
+            context = RequestContext(request, context)
             return render_to_response('control-branch.html', context)
 
     else:
@@ -149,7 +156,7 @@ def branch(request):
             'branches': branches,
             'form': form,            
         }
-        context.update(csrf(request))    
+        context = RequestContext(request, context)   
         return render_to_response('control-branch.html', context)
         
         
@@ -179,7 +186,7 @@ def branch_edit(request):
                 'form': submitted_form,
                 'branch': branch,
             }
-            context.update(csrf(request))    
+            context = RequestContext(request, context)   
             return render_to_response('control-branch-edit.html', context)
 
     else:
@@ -193,7 +200,7 @@ def branch_edit(request):
             'form': form,
             'branch': branch    
         }
-        context.update(csrf(request))
+        context = RequestContext(request, context)
         return render_to_response('control-branch-edit.html', context)
 
 def branch_delete(request):
@@ -233,7 +240,7 @@ def branch_delete(request):
             'branch': branch,
             'transfer_branches': transfer_branches,
         }
-        context.update(csrf(request))
+        context = RequestContext(request, context)
         return render_to_response('control-branch-delete.html', context)
 
 def analytics(request):
@@ -294,12 +301,12 @@ def analytics(request):
             return render_to_response('control-analytics.html', context)
         else:
             context['form'] = submitted_form
-            context.update(csrf(request))   
+            context = RequestContext(request, context)  
             return render_to_response('control-analytics.html', context)
     else:
         
         context['form'] = AnalyticsForm()
-        context.update(csrf(request))    
+        context = RequestContext(request, context)  
         return render_to_response('control-analytics.html', context)
 
 
@@ -399,6 +406,8 @@ def twitter_callback(request):
         
     else:
         context['twitter_success'] = False
+        
+    context = RequestContext(request, context)
 
     return render_to_response('control-twitter-confirm.html', context)
     
@@ -486,7 +495,7 @@ def item_delete(request):
         'items': items,
     }
     
-    context.update(csrf(request))
+    context = RequestContext(request, context)
 
     return render_to_response('delete-item.html', context)
 

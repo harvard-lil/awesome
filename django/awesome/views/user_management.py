@@ -9,6 +9,7 @@ from awesome.forms import (
 )
 
 from django.http import  HttpResponseRedirect
+from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.core.urlresolvers import reverse
 from django.core.context_processors import csrf
@@ -63,6 +64,7 @@ def process_register(request):
             c.update({'user_reg_form': user_reg_form,
                       'org_form': org_form,
                       'branch_form': branch_form})
+            c = RequestContext(request, c)
                       
             return render_to_response('register.html', c)
     else:
@@ -73,6 +75,7 @@ def process_register(request):
         c.update({'user_reg_form': user_reg_form,
                   'org_form': org_form,
                   'branch_form': branch_form})
+        c = RequestContext(request, c)
         return render_to_response("register.html", c)
         
         
@@ -132,6 +135,7 @@ Happy Awesome-ing!
         else:
             c.update({'user_reg_form': user_reg_form,
                       'org_form': org_form})
+            c = RequestContext(request, c)
                       
             return render_to_response('self_register.html', c)
     else:
@@ -140,4 +144,5 @@ Happy Awesome-ing!
         
         c.update({'awesome_domain': awesome_domain, 'user_reg_form': user_reg_form,
                   'org_form': org_form})
+        c = RequestContext(request, c)
         return render_to_response("self_register.html", c)
