@@ -1,5 +1,5 @@
 {% extends "layouts/base.html" %}
-{% load static isbn_converter %}
+{% load static isbn_converter tz %}
 {% get_static_prefix as STATIC_PREFIX %}
 
 {% block title %}Awesome Box{% endblock title %}
@@ -81,7 +81,7 @@
 			
 		</div>-->
 		<div class="item-library">
-		    <a class="item-library-link" href="http://{{recent.branch.organization.slug}}.awesomebox.io">{{recent.branch.organization.name}}</a>
+		    <a class="item-library-link" href="http://{{recent.branch.organization.slug}}.awesomebox.io">{%comment%}{% localtime on %}{{recent.latest_checkin}}{% endlocaltime %}{%endcomment%}{{recent.branch.organization.name}}</a>
 		</div>
 	</li>
 	{% endfor %}
