@@ -141,6 +141,8 @@ $(document).ready(function() {
         return object.catalog_id;
       else if(object.branch.organization.catalog_query == 'title')
         return object.title;
+      else if(object.branch.organization.catalog_query == 'titleauthor')
+        return object.title + "+" + object.creator;
       else if(object.branch.organization.catalog_query == 'landing')
         return '';
   });

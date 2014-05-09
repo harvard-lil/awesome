@@ -8,6 +8,7 @@ class Organization(models.Model):
     CATALOG_QUERY_CHOICES = (
         ('isbn', 'ISBN'),
         ('title', 'Title'),
+        ('titleauthor', 'Title and Author'),
         ('landing', 'Landing'),
     )
     COVER_QUERY_CHOICES = (

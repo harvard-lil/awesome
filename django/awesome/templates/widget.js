@@ -35,6 +35,8 @@ document.write('<div class="aw-widget-list">');
     }
     else if('{{organization.catalog_query}}' == 'title')
         catalogQuery = '{{organization.catalog_base_url}}{{item.title}}';
+    else if('{{organization.catalog_query}}' == 'titleauthor')
+        catalogQuery = '{{organization.catalog_base_url}}{{item.title}}+{{item.creator}}';
 	document.write('<p class="aw-widget-item"><a href="' + catalogQuery + '" target="_blank">{{item.title}}</a> <span class="aw-widget-creator">{{item.creator}}</span></p>');
 {% endfor %}
 document.write('</div>');
