@@ -15,6 +15,7 @@ class Organization(models.Model):
         ('openlibrary', 'Open Library'),
         ('syndetic', 'Syndetic Solutions'),
         ('contentcafe', 'Content Cafe'),
+        ('tlc', 'TLC'),
     )
     THEME_QUERY_CHOICES = (
         ('original', 'Original green and blue'),
