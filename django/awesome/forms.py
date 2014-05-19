@@ -72,6 +72,7 @@ class OrganizationForm(forms.ModelForm):
         super(OrganizationForm, self).__init__(*args, **kwargs)
         self.fields['cover_user_id'].help_text = "'client' for Syndetic Solutions, 'userID' for Content Cafe, 'customerid' for TLC"
         self.fields['cover_service'].help_text = "Be sure your terms of service allow use of cover images on this website"
+        self.fields['catalog_base_url'].label = "Catalog search URL"
     
 
 class TwitterSettingsForm(forms.ModelForm):

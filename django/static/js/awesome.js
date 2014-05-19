@@ -143,7 +143,7 @@ $(document).ready(function() {
         return object.title;
       else if(object.branch.organization.catalog_query == 'titleauthor')
         return object.title + "+" + object.creator;
-      else if(object.branch.organization.catalog_query == 'landing')
+      else if(object.branch.organization.catalog_query == 'landing' || object.branch.organization.catalog_query == 'notset')
         return '';
   });
   

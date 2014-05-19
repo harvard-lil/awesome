@@ -53,6 +53,6 @@ class LatestEntriesFeed(Feed):
           value = item.title
         elif library.catalog_query == 'titleauthor':
           value = item.title + '+' + item.creator
-        elif library.catalog_query == 'landing':
+        elif library.catalog_query == 'landing' or library.catalog_query == 'notset':
             value = ''
         return library.catalog_base_url + value

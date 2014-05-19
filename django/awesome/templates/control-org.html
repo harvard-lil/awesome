@@ -53,10 +53,12 @@
 <!-- Grab Google CDN's jQuery. fall back to local if necessary --> 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script>!window.jQuery && document.write('<script src="{{ STATIC_PREFIX }}/js/jquery-1.7.1.min.js"><\/script>')</script>
+<script src="{{ STATIC_PREFIX }}js/bootstrap.min.js"></script> 
 <script src="{{ STATIC_PREFIX }}js/control-org.js"></script> 
 
 <script type="text/javascript">
 var organization = "{{organization.slug}}";
+var catalog_query = "{{organization.catalog_query}}";
 var branch = "{{branch}}";        
 </script>
 {% endblock scripts %}

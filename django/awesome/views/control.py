@@ -34,10 +34,12 @@ def home(request):
         return HttpResponseRedirect(reverse('auth_login'))
 
     org = Organization.objects.get(user=request.user)
+    num_items = Item.objects.filter(branch__organization=org).count()
     
     context = {
             'user': request.user,
             'organization': org,
+            'num_items': num_items,
         }
         
     context = RequestContext(request, context)
@@ -522,18 +524,10 @@ def csv_export(request):
 
     if not request.user.is_authenticated():
         return HttpResponseRedirect(reverse('auth_login'))
-
-    passed_in_branch_id = request.GET.get('filtered_branch')
         
-    org = Organization.objects.get(user=request.user)
-    branches = Branch.objects.filter(organization=org)
+    org = Organization.objects.get(user=request.user)  
         
-    filter_branch = branches[0]
-        
-    if passed_in_branch_id:
-        filter_branch = Branch.objects.get(id=passed_in_branch_id)
-        
-    items = Item.objects.filter(branch=filter_branch, branch__organization=org).order_by('-latest_checkin')[:1000]
+    items = Item.objects.filter(branch__organization=org).order_by('-latest_checkin')[:1000]
     # Create the HttpResponse object with the appropriate CSV header.
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="awesome_list.csv"'

@@ -29,7 +29,7 @@ else {
 document.write('<h4 class="aw-widget-title"><a href="http://{{organization.slug}}.{{awesome_domain}}">Awesome at {{organization}}</a></h4>');
 document.write('<div class="aw-widget-list">');
 {% for item in items %}		
-    var catalogQuery = '';
+    var catalogQuery = '{{organization.catalog_base_url}}';
     if('{{organization.catalog_query}}' == 'isbn') {
         catalogQuery = '{{organization.catalog_base_url}}{{item.catalog_id}}';
     }

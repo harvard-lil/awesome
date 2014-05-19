@@ -95,7 +95,7 @@ def process_self_register(request):
             new_org = org_form.save(commit=False)
         
             new_org.user = new_user
-            new_org.catalog_query = 'landing'
+            new_org.catalog_query = 'notset'
             new_org.save()
             new_branch = Branch.objects.create(organization=new_org, name="Main", slug="main")
             new_branch.save()

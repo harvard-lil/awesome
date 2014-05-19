@@ -10,6 +10,7 @@ class Organization(models.Model):
         ('title', 'Title'),
         ('titleauthor', 'Title and Author'),
         ('landing', 'Landing'),
+        ('notset', 'Not Set'),
     )
     COVER_QUERY_CHOICES = (
         ('openlibrary', 'Open Library'),

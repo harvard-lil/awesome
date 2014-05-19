@@ -103,6 +103,10 @@ p {
     margin:0;
 }
 
+b, strong {
+    font-weight: 700;
+}
+
 /* Page structure
 *****************************************************************/
 
@@ -622,6 +626,21 @@ p.bold {
 .control_list_export a {
     display:block;
     margin-top:25px;
+}
+
+.popover {
+  color: #fff;
+  background-color: #66B562;
+}
+.popover .popover-title {
+  color: #478f44;
+  background-color: #cbe6ca;
+  border-bottom-color: #66B562;
+  font-weight:700;
+  font-size:14px;
+}
+.popover.right .arrow:after {
+  border-right-color: #66B562;
 }
 
 .color-block {
