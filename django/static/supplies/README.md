@@ -18,7 +18,8 @@
 ## Stickers
  * [awesome-sticker.ai](awesome-sticker.ai)
  * [awesome-sticker.png](awesome-sticker.png)
-We ordered 1.2" x 4.0" die cut stickers from [Sticker Mule](http://www.stickermule.com/products/die-cut-stickers) using the first file.
+
+We ordered 1.2" x 4.0" die cut stickers from [Sticker Mule](http://www.stickermule.com/products/die-cut-stickers) using the [first file](awesome-sticker.ai).
 
 ## Images
 
