@@ -14,17 +14,6 @@
 			<header>
 				<h1>Control Center</h1>
 			</header>
-			{% comment %}
-			{% if organization.catalog_query == 'notset' %}
-			<div class="alert alert-info"><strong>Welcome!</strong> 
-			<p>Let's link the items on your Awesome Box page to records in your catalog.  Go to your <a href="{% url 'control_org' %}">organization's info page</a> and enter a search URL for your catalog.</p>  
-			<p>No idea what we're talking about?  Send us an email at <a href="mailto:info@awesomebox.io">info@awesomebox.io</a> and we'll take care of it.</p></div>
-			{% elif num_items < 1 %}
-			<div class="alert alert-info"><strong>All right!</strong> 
-			<p>Let's Awesome something.  Go to your <a href="{% url 'scan' %}">scan page</a> and get out the old barcode scanner.</p>  
-			</div>
-			{% endif %}
-			{% endcomment %}
 			<p class="control_list"><a href="{% url 'scan' %}" {% if num_items < 1 %} id="scan-something" data-container="body" data-toggle="popover" data-placement="right"data-content="Let's Awesome something. Fire up the old barcode scanner." data-original-title="All right!"{% endif %}>Scan an item</a></p>		
 			<p class="control_list"><a href="{% url 'control_item_delete' %}">Delete an item</a></p>
 			<p class="control_list"><a href="{% url 'control_org' %}" {% if organization.catalog_query == 'notset' %} id="connect-catalog" data-container="body" data-toggle="popover" data-placement="right" data-content="Let's link the items on your Awesome Box page to records in your catalog." data-original-title="Welcome!"{% endif %}>Update your organization's info</a></p>

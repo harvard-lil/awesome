@@ -1,4 +1,4 @@
-from awesome.models import Organization, Branch
+from awesome.models import Organization, Branch, Item
 
 from django.http import HttpResponseRedirect
 from django.template import RequestContext
@@ -17,11 +17,13 @@ def scan(request):
     
     branch = request.GET.get('branch')
     org = Organization.objects.get(user=request.user)
+    num_items = Item.objects.filter(branch__organization=org).count()
     branches = Branch.objects.filter(organization=org)
 
     context = {'user': request.user,
                'organization': org,
-               'branches': branches}
+               'branches': branches,
+               'num_items': num_items}
                
     context = RequestContext(request, context)
     

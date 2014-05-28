@@ -114,6 +114,22 @@ header, ul, li {
   font-size:14px;
   z-index:6;
 }
+  
+#innerlay .popover {
+  color: #fff;
+  background-color: #EA9B3A;
+}
+#innerlay .popover .popover-title {
+  color: #e78b1b;
+  background-color: #fae9d3;
+  border-bottom-color: #EA9B3A;
+  font-weight:700;
+  font-size:14px;
+}
+.popover.bottom .arrow:after {
+  border-bottom-color: #EA9B3A;
+}
+
 </style>
 {% endblock styles %}
 
@@ -123,7 +139,11 @@ header, ul, li {
 </script>
 <script src="{{ STATIC_PREFIX }}js/modernizr.custom.37797.js"></script> 
 <script type="text/javascript" src="{{ STATIC_PREFIX }}js/jquery-1.7.1.min.js"></script>
+<script src="{{ STATIC_PREFIX }}js/bootstrap.min.js"></script>
 <script type="text/javascript" src="{{ STATIC_PREFIX }}js/scan.js"></script>
+<script type="text/javascript">
+var num_items = "{{num_items}}";     
+</script>
 
 {% endblock scripts %}
 

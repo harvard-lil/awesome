@@ -630,17 +630,17 @@ p.bold {
 
 .popover {
   color: #fff;
-  background-color: #66B562;
+  background-color: #EA9B3A;
 }
 .popover .popover-title {
-  color: #478f44;
-  background-color: #cbe6ca;
-  border-bottom-color: #66B562;
+  color: #e78b1b;
+  background-color: #fae9d3;
+  border-bottom-color: #EA9B3A;
   font-weight:700;
   font-size:14px;
 }
 .popover.right .arrow:after {
-  border-right-color: #66B562;
+  border-right-color: #EA9B3A;
 }
 
 .color-block {
