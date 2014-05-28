@@ -1,8 +1,13 @@
 {% extends "layouts/base.html" %}
-{% load static %}
+{% load static subdomain_link %}
 {% get_static_prefix as STATIC_PREFIX %}
 
 {% block title %}Controls | Awesome Box at the {{organization.name}}{% endblock title %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ STATIC_PREFIX }}css/bootstrap.css" type="text/css" />
+<link rel="stylesheet" media="all" href="{{ STATIC_PREFIX }}css/awesome-newlook.css" />
+{% endblock styles %}
 
 {% block content %}
 <body>
@@ -21,6 +26,7 @@
 				<tr>
 					<th>Branch Name</th>
 					<th>Web Friendly Name</th>
+					<th>Branch Scan Page</th>
 					<th>Latitude</th>
 					<th>Longitude</th>
 					<th>Delete</th>
@@ -28,8 +34,9 @@
 				</tr>
 			{% for branch in branches %}
 				<tr>
-					<td>{{branch.name}}</td>
+					<td><a href="{{user|subdomain_link}}?branch={{branch.slug}}">{{branch.name}}</a></td>
 					<td>{{branch.slug}}</td>
+					<td><a href="{% url 'scan' %}?branch={{branch.slug}}">{{branch.name}} scan page</a></td>
 					<td>{{branch.lat}}</td>
 					<td>{{branch.long}}</td>
 					<td><a href="{% url 'control_branch_delete' %}?branch-id={{branch.id}}">Delete</a></td>
@@ -42,7 +49,18 @@
 			<h2>Create a New Branch</h2>
 			<form method="post" action="">
 				{% csrf_token %}
-				{{ form }}
+				<fieldset>
+		  <span class="text-error">{{ form.non_field_errors }}</span>
+        {% for field in form %}
+          <label for="id_{{ field.name }}">{{ field.label }}</label>
+          {{ field }}
+          {% if field.errors %}<br/>
+            {% for error in field.errors %}<span class="text-error">{{ error }}</span>{% endfor %}
+          {%elif field.help_text %}
+            <span class="help-inline help_{{ field.name }}">{{ field.help_text }}</span>
+          {% endif %}
+        {% endfor %}  
+      </fieldset>
 				<br />
 				<input type="submit" value="Add New Branch" class="btn btn-custom" />
 			</form>
