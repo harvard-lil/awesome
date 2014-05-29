@@ -1,9 +1,11 @@
 $(document).ready(function() {
   $('#hard-results li.item').on('click', function(event) {
     if (!$(event.target).is(".item-amazon-link")) {
-		var link = $(this).find('a.item-worldcat-link').attr('href');
-		window.open(link);
-		return false;
+        if (!$(event.target).is(".item-library-link")){
+            var link = $(this).find('a.item-worldcat-link').attr('href');
+            window.open(link);
+            return false;
+		}
 		}
 	});
     
