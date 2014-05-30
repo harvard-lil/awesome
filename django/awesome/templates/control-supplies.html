@@ -5,7 +5,7 @@
 {% block title %}Controls | Awesome Box at the {{organization.name}}{% endblock title %}
 
 {% block styles %}
-<link rel="stylesheet" href="{{ STATIC_PREFIX }}css/bootstrap.css" type="text/css" />
+<link rel="stylesheet" href="{{ STATIC_PREFIX }}css/bootstrap.min.css" type="text/css" />
 <link rel="stylesheet" media="all" href="{{ STATIC_PREFIX }}css/awesome-newlook.css" />
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
 <style>
@@ -95,7 +95,7 @@
 				<p>Create a box, you're in charge.  So many possibilities. (These use the original Awesome green & blue)</p>
 				<div class="collage collage-container"></div>
             <script type="text/javascript">
-var  html = '', limitItem = 33;
+var  html = '', limitItem = 34;
 			for (var i = 1; i < limitItem; ++i) {
 			    var name = 100 + i;
 				html += "<img src='{{ STATIC_PREFIX }}images/box-images/ab_" + name + ".jpg' class='cell'>";
