@@ -639,11 +639,6 @@ p.bold {
   background-color: #f8e1c4;
   border-bottom-color: #EA9B3A;
   font-size:14px;
-  font-weight:700;
-}
-
-.popover-content {
-    font-style:italic;
 }
 .popover.right .arrow:after {
   border-right-color: #fcf1e2;
