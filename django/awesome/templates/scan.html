@@ -116,18 +116,28 @@ header, ul, li {
 }
   
 #innerlay .popover {
-  color: #fff;
-  background-color: #EA9B3A;
+  color: #888;
+  background-color: #fcf1e2;
+  border-color:#EA9B3A;
+  max-width:294px;
 }
 #innerlay .popover .popover-title {
-  color: #e78b1b;
-  background-color: #fae9d3;
+  color:#da8217;
+  background-color: #f8e1c4;
   border-bottom-color: #EA9B3A;
-  font-weight:700;
   font-size:14px;
+  font-weight:700;
 }
-.popover.bottom .arrow:after {
+.popover-content {
+    font-style:italic;
+}
+
+.popover.bottom .arrow {
   border-bottom-color: #EA9B3A;
+}
+
+.popover.bottom .arrow:after {
+  border-bottom-color: #f8e1c4;
 }
 
 </style>
@@ -140,6 +150,8 @@ header, ul, li {
 <script src="{{ STATIC_PREFIX }}js/modernizr.custom.37797.js"></script> 
 <script type="text/javascript" src="{{ STATIC_PREFIX }}js/jquery-1.7.1.min.js"></script>
 <script src="{{ STATIC_PREFIX }}js/bootstrap.min.js"></script>
+<script type="text/javascript" src="//use.typekit.net/lym2dyi.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 <script type="text/javascript" src="{{ STATIC_PREFIX }}js/scan.js"></script>
 <script type="text/javascript">
 var num_items = "{{num_items}}";     

@@ -628,19 +628,29 @@ p.bold {
     margin-top:25px;
 }
 
-.popover {
-  color: #fff;
-  background-color: #EA9B3A;
+.popover, .control .popover {
+  color: #888;
+  background-color: #fcf1e2;
+  border-color:#EA9B3A;
+  max-width:294px;
 }
-.popover .popover-title {
-  color: #e78b1b;
-  background-color: #fae9d3;
+.popover .popover-title, .control .popover h3 {
+  color:#da8217;
+  background-color: #f8e1c4;
   border-bottom-color: #EA9B3A;
-  font-weight:700;
   font-size:14px;
+  font-weight:700;
+}
+
+.popover-content {
+    font-style:italic;
 }
 .popover.right .arrow:after {
-  border-right-color: #EA9B3A;
+  border-right-color: #fcf1e2;
+}
+
+.popover.right .arrow {
+    border-right-color: #EA9B3A;
 }
 
 .color-block {
