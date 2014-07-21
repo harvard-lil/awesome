@@ -61,8 +61,11 @@ def explorer(request):
         logger.error('Unable to load local_settings.py:', e)
         
     items = Item.objects.filter(classifications__name__icontains="teen").values('title').annotate(total_checkins=Sum('number_checkins')).order_by('-total_checkins').distinct()[:10]
+    
     creators = Item.objects.filter(classifications__name__icontains="children").exclude(classifications__name__icontains="teen").values('title').annotate(total_checkins=Sum('number_checkins')).order_by('-total_checkins').distinct()[:10]
+    
     scifis = Item.objects.filter(classifications__name__icontains="science fiction").values('title').annotate(total_checkins=Sum('number_checkins')).order_by('-total_checkins').distinct()[:10]
+    
     comics = Item.objects.filter(Q(classifications__name__icontains="graphic novel") | Q(classifications__name__icontains="comics")).values('title').annotate(total_checkins=Sum('number_checkins', distinct = True)).order_by('-total_checkins')[:10]
     
     context = {'ga_key': GOOGLE['ANALYTICS_KEY'], 'items': items, 'creators': creators, 'scifis': scifis, 'comics': comics}
