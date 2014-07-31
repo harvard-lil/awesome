@@ -15,9 +15,9 @@
 
   <div class="row offerings">
     <div class="col-sm-7 col-sm-offset-2">
-        <h4 class="long-heading">Awesome Network</h4>
-		<p>When we mix our Awesome data together we leverage the power of the Awesome Network to get things like top 10 lists.</p>
-        <p>Of all the items dropped in all of the Awesome Boxes, these are the most awesome of all.</p>
+        <h4 class="long-heading">Awesome Explorer</h4>
+		<p>We're just beginning to experiment with presenting Awesome data in a useful way.</p>
+        <p>Until that happens enjoy these lists of the most Awesome items in a few categories.</p>
     </div>
   </div>
   <div class="row">
@@ -93,6 +93,11 @@
     </table>
     </div>
   </div>
+  <div class="row offerings">
+    <div class="col-sm-7 col-sm-offset-2">
+		<p>Create your own.</p>
+    </div>
+  </div>
 </div>
 {% endblock content %}
 
@@ -102,37 +107,4 @@
 </script>
 <!-- Grab Google CDN's jQuery. fall back to local if necessary --> 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script src='{{ STATIC_PREFIX }}js/raphael.js'></script>
-<script src='{{ STATIC_PREFIX }}js/raphael.scale.js'></script>
-<script src='{{ STATIC_PREFIX }}js/g.raphael.js'></script>
-<script src='{{ STATIC_PREFIX }}js/usmap.js'></script>
-<script src="{{ STATIC_PREFIX }}js/jquery.collagePlus.js"></script>
-<script src="{{ STATIC_PREFIX }}js/handlebars.js"></script>
-<script src="{{ STATIC_PREFIX }}js/landing.js"></script>
 {% endblock scripts %}
-
-{% block templates %}
-
-{% verbatim %}
-
-<script id="items-template" type="text/x-handlebars-template">
-
-<ul> 
-	{{#objects}}
-	<li class="item">
-		<a href="{{branch.organization.catalog_base_url}}{{catalogQuery this}}" target="_blank" >
-		{{#if cover_art}}
-		<img class="item-cover" src="{{cover_art}}" alt="{{title}}" />
-		{{else}}
-		<img class="item-cover" src="http://covers.openlibrary.org/b/isbn/{{isbn}}-M.jpg" alt="{{title}}" />
-		{{/if}}
-			<p class="item-title">
-				{{title}}
-			</p>
-			</a>
-	</li>
-	{{/objects}}
-</ul>
-</script>
-{% endverbatim %}
-{% endblock templates %}
