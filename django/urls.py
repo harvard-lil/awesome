@@ -15,6 +15,7 @@ v1_api.register(CheckinResource())
 
 urlpatterns = patterns('',
     (r'^api/', include(v1_api.urls)),
+    (r'^search/', include('haystack.urls')),
     
     # Common Pages
     url(r'^', include('awesome.urls')),

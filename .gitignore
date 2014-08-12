@@ -3,3 +3,4 @@
 *.pyc
 django/awesome/local_settings.py
 django/awesome/settings.py
+django/awesome/whoosh_index/
