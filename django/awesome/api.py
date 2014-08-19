@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import *
 from django.core.paginator import Paginator, InvalidPage
 from django.http import Http404
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from haystack.query import SearchQuerySet
 from tastypie import fields

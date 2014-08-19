@@ -1,7 +1,7 @@
 import logging, math
 
 from datetime import date, timedelta
-from awesome.models import Organization, Item, Branch
+from awesome.models import Organization, Item, Branch, Checkin
 
 from django.shortcuts import render_to_response
 from django.core.context_processors import csrf
@@ -72,3 +72,29 @@ def explorer(request):
                
     context = RequestContext(request, context)
     return render_to_response('explorer.html', context)
+    
+    
+def discover(request):
+
+    try:
+        from awesome.local_settings import *
+    except ImportError, e:
+        logger.error('Unable to load local_settings.py:', e)
+        
+    items = Item.objects.filter(classifications__name__icontains="teen").values('title', 'creator').annotate(total_checkins=Sum('number_checkins')).order_by('-total_checkins').distinct()[:10]
+    
+    creators = Item.objects.filter(classifications__name__icontains="children").exclude(classifications__name__icontains="teen").values('title').annotate(total_checkins=Sum('number_checkins')).order_by('-total_checkins').distinct()[:10]
+    
+    startdate = date.today() + timedelta(days=1)
+    enddate = startdate - timedelta(days=30)
+    
+    scifis = Checkin.objects.filter(item__classifications__name__icontains="science fiction", checked_in_time__gt=enddate, checked_in_time__lt=startdate).values('item__title').annotate(total_checkins=Count('item')).order_by('-total_checkins')[:10]
+    
+    logger.debug(scifis)
+    
+    comics = Item.objects.filter(Q(classifications__name__icontains="graphic novel") | Q(classifications__name__icontains="comics")).values('title').annotate(total_checkins=Sum('number_checkins', distinct = True)).order_by('-total_checkins')[:10]
+    
+    context = {'ga_key': GOOGLE['ANALYTICS_KEY'], 'items': items, 'creators': creators, 'scifis': scifis, 'comics': comics}
+               
+    context = RequestContext(request, context)
+    return render_to_response('discover.html', context)
