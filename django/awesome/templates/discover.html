@@ -1,0 +1,121 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% get_static_prefix as STATIC_PREFIX %}
+
+{% block title %}Awesome Box{% endblock title %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ STATIC_PREFIX }}css/bootstrap.min.css" type="text/css" />
+<link rel="stylesheet" media="all" href="{{ STATIC_PREFIX }}css/discover.css" />
+{% endblock styles %}
+
+{% block content %}
+<body>
+<div class="container">
+	<nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <!--<a class="navbar-brand" href="#">Awesome Box</a>-->
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="{% url 'auth_login' %}">Login</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+  <div class="row offerings">
+    <div class="col-sm-7">
+        <h3 class="long-heading">Discover Awesome items</h3>
+		<p>We're just beginning to experiment with presenting Awesome data in a useful way.</p>
+        <p>Until that happens enjoy these lists of the most Awesome items in a few categories.</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-5">
+    <div class="list-group">
+        <h5>TEEN</h5>
+
+    {% for item in items %}
+        <a href="http://www.worldcat.org/search?qt=worldcat_org_all&q={{item.title}} {{item.creator}}" class="list-group-item" target="_blank">
+        <h4 class="list-group-item-heading">{{item.title}}</h4>
+        <span class="badge">{{item.total_checkins}}</span>
+        <p class="list-group-item-text">{{item.creator}}<br></p>
+        </a>
+    {% endfor %}
+    </div>
+    </div>
+    <div class="col-sm-5 col-sm-offset-1">
+        <table class="table table-bordered">
+    <thead>
+        <tr>
+            <th class="small-th">CURRENT RANK</th>
+            <th>CHILDREN'S</th>
+            <th class="small-th">NUMBER AWESOMES</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for creator in creators %}
+        <!--<p class="text-block">{{item.title}}</p>-->
+        <tr><td class="rank-td">{{forloop.counter}}</td><td>{{creator.title}}</td><td class="awesomes-td">{{creator.total_checkins}}</td></tr>
+    {% endfor %}
+    </tbody>
+    </table>
+    </div>
+  </div>
+  
+    <div class="row">
+    <div class="col-sm-5">
+    <table class="table table-bordered">
+    <thead>
+        <tr>
+            <th class="small-th">CURRENT RANK</th>
+            <th>COMICS</th>
+            <th class="small-th">NUMBER AWESOMES</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for comic in comics %}
+        <!--<p class="text-block">{{item.title}}</p>-->
+        <tr><td class="rank-td">{{forloop.counter}}</td><td>{{comic.title}}</td><td class="awesomes-td">{{comic.total_checkins}}</td></tr>
+    {% endfor %}
+    </tbody>
+    </table>
+    </div>
+    <div class="col-sm-5 col-sm-offset-1">
+        <table class="table table-bordered">
+    <thead>
+        <tr>
+            <th class="small-th">CURRENT RANK</th>
+            <th>SCIENCE FICTION</th>
+            <th class="small-th">NUMBER AWESOMES</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for scifi in scifis %}
+        <!--<p class="text-block">{{item.title}}</p>-->
+        <tr><td class="rank-td">{{forloop.counter}}</td><td>{{scifi.item__title}}</td><td class="awesomes-td">{{scifi.total_checkins}}</td></tr>
+    {% endfor %}
+    </tbody>
+    </table>
+    </div>
+  </div>
+  <div class="row offerings">
+    <div class="col-sm-7 col-sm-offset-2">
+		<p>Create your own.</p>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+
+{% block scripts %}
+<script type="text/javascript">
+	var CSRF_TOKEN = "{{ csrf_token }}";
+</script>
+<!-- Grab Google CDN's jQuery. fall back to local if necessary --> 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+{% endblock scripts %}

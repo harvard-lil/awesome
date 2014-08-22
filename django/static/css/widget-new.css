@@ -3,7 +3,7 @@
   font-size:14px;
   border-radius:2px;
   border: solid 1px #5BA09F;
-  width:325px;
+  width:300px;
   min-height:305px;
   position:relative;
   text-align:left;
@@ -16,8 +16,7 @@
   margin:0;
   vertical-align:baseline;
   position:relative;
-  float:left;
-  width:63%;
+  width:100%
 }
 
 .aw-widget .aw-widget-item {
@@ -27,6 +26,7 @@
   padding:0;
   vertical-align: baseline;
   line-height: 18px;
+  width:63%
 }
 
 .aw-widget .aw-widget-item a {
@@ -76,9 +76,14 @@
 }
 
 .aw-widget img.aw-widget-arrow {
-  float:left;
-  position:relative;
-  display:block;
+  position:absolute;
   margin-left:8px;
   margin-top:5px;
+  opacity:0.25;
+  /* IE 8 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=25)";
+  /* IE 5-7 */
+  filter: alpha(opacity=25);
+  right:5px;
+  top:0;
 }

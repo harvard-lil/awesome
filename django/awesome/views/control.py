@@ -509,11 +509,13 @@ def widget(request):
         return HttpResponseRedirect(reverse('auth_login'))
 
     org = Organization.objects.get(user=request.user)
+    branches = Branch.objects.filter(organization=org)
     awesome_domain = Site.objects.get_current().domain
     
     context = {
             'user': request.user,
             'organization': org,
+            'branches': branches,
             'awesome_domain': awesome_domain,
         }
     

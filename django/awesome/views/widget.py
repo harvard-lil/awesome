@@ -8,6 +8,16 @@ def widget(request):
     
     branch = request.GET.get('branch', '')
     style = request.GET.get('style', '') 
+    width = request.GET.get('width', '')
+    if width:
+        width = int(width)
+        if width < 180:
+            width = 180
+        if width > 325:
+            width = 325
+    else: 
+        width = 300
+        
     org = Organization.objects.get(slug=request.META['subdomain'])
     awesome_domain = Site.objects.get_current().domain
     
@@ -18,7 +28,7 @@ def widget(request):
         
 
     return render_to_response('widget.js', {'awesome_domain': awesome_domain, 'user': request.user, 'organization': org,
-                              'branch': branch, 'items':items, 'style': style}, mimetype='Content-type: text/javascript')
+                              'branch': branch, 'items':items, 'style': style, 'width': width}, mimetype='Content-type: text/javascript')
                               
 def catalog_include(request, isbn):
     

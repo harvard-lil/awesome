@@ -663,10 +663,32 @@ p.bold {
 .widget-sample {
   margin-top:25px;
   margin-bottom:25px;
+  width:375px;
+  float:left;
 }
 
-#widget-code {
-  width: 315px;
+.widget-customizer {
+    float:left;
+    width:275px;
+    margin-top:25px;
+}
+
+#width-slider {
+    margin-top:10px;
+    width:65%;
+    float:left;
+    border:1px solid #51ADE1;
+}
+
+#width-field {
+    float:left;
+    width:20%;
+    margin-left:20px;
+    margin-bottom:25px;
+}
+
+.widget-code {
+  width: 375px;
   height:55px;
 }
 

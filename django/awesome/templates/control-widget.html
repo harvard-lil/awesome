@@ -3,6 +3,11 @@
 {% get_static_prefix as STATIC_PREFIX %}
 
 {% block title %}Controls | Awesome Box at the {{organization.name}}{% endblock title %}
+{% block styles %}
+<link rel="stylesheet" href="{{ STATIC_PREFIX }}css/bootstrap.min.css" type="text/css" />
+<link rel="stylesheet" media="all" href="{{ STATIC_PREFIX }}css/awesome-newlook.css" />
+<link rel="stylesheet" media="all" href="{{ STATIC_PREFIX }}css/jquery.nouislider.css" />
+{% endblock styles %}
 
 {% block content %}
 <body>
@@ -15,19 +20,40 @@
 				<h1>Get a Widget</h1>
 			</header>
 			<h3>Embed the following widget anywhere</h3>	
-			<div class="widget-sample"><script src="{% url 'widget' %}?style=default"></script></div>
+			<div class="widget-sample">
+			<script class="default-widget" src="{% url 'widget' %}?style=default"></script>
+			</div>
+			<div class="widget-customizer">
+			    <h3>Customize this widget</h3>
+			    <br>
+			    <label for="width-field">Width</label>
+			    <br>
+			    <div id="width-slider"></div><input id="width-field">
+			    <!--<br>
+			    <label for="widget-branch">Branch</label>
+			    <br>
+			    <select id="widget-branch">
+			        <option value="">All</option>
+			        {% for branch in branches %}
+			        <option value="{{branch.slug}}">{{branch.name}}</option>
+			        {% endfor %}
+			    </select>-->
+			</div>
 			<label for="widget-code">Copy and paste the code into the HTML of your site</label>
-			<textarea id="widget-code"><script src="http://{{organization.slug}}.{{awesome_domain}}{% url 'widget' %}?style=default"></script></textarea>
+			<br>
+			<textarea class="widget-code"><script src="http://{{organization.slug}}.{{awesome_domain}}{% url 'widget' %}?style=default"></script></textarea>
 			<br><br>
 			<h3>Don't like the colors?  Embed this plain widget and style it yourself.</h3>		
 			<div class="widget-sample"><script src="{% url 'widget' %}?style=none"></script></div>
 			<label for="widget-code">Copy and paste the code into the HTML of your site</label>
-			<textarea id="widget-code"><script src="http://{{organization.slug}}.{{awesome_domain}}{% url 'widget' %}?style=none"></script></textarea>
+			<br>
+			<textarea class="widget-code"><script src="http://{{organization.slug}}.{{awesome_domain}}{% url 'widget' %}?style=none"></script></textarea>
 			<br><br>
 			<h3>Looking for the original widget?</h3>	
 			<!--<div class="widget-sample"><script src="{% url 'widget' %}"></script></div>-->
 			<label for="widget-code">Copy and paste the code into the HTML of your site</label>
-			<textarea id="widget-code"><script src="http://{{organization.slug}}.{{awesome_domain}}{% url 'widget' %}"></script></textarea>
+			<br>
+			<textarea class="widget-code"><script src="http://{{organization.slug}}.{{awesome_domain}}{% url 'widget' %}"></script></textarea>
 		</article>
 	</div><!-- end content -->
 </div> <!-- end wrapper -->
@@ -38,15 +64,64 @@
 <!-- Grab Google CDN's jQuery. fall back to local if necessary --> 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script>!window.jQuery && document.write('<script src="{{ STATIC_PREFIX }}/js/jquery-1.7.1.min.js"><\/script>')</script>
+<script src="{{ STATIC_PREFIX }}js/jquery.nouislider.min.js"></script> 
 
 <script type="text/javascript">
 var organization = "{{organization.slug}}";
 var branch = "{{branch}}";    
 $(function () {
-  $("#content #widget-code").on("click", function(event){
+  $("#content .widget-code").on("click", function(event){
     var $this = $(this);
     $this.select();
   });
+  
+  
+$("#width-slider").noUiSlider({
+	start: 300,
+	step: 1,
+	range: {
+		'min': 180,
+		'max': 325
+	},
+	serialization: {
+		lower: [
+		// Write the values to
+		// an input with id 'field'
+			$.Link({
+				target: $("#width-field")
+			})
+		],
+		format: {
+		// Set formatting
+			decimals: 0
+		}
+	}
+});
+
+$('#width-slider').on('set', function(){
+    var width = $('#width-slider').val();
+    var embed = "http://{{organization.slug}}.{{awesome_domain}}{% url 'widget' %}?style=default&width=" + width;
+    if(width < 180) {
+        $('#width-slider').set(180);
+    }
+    if(width > 325) {
+        $('#width-slider').set(325);
+    }
+	$('.aw-widget').first().css('width', width);
+	$('.widget-code:first').val('<script src="' + embed + '"></scr' + 'ipt>');
+});
+
+$('#widget-branch').on('change', function() {
+    branch = $(this).val();
+    var embed = $('.default-widget').attr('src');
+    embed = embed + '&branch=' + branch; console.log(embed)
+    $( ".aw-widget:first" ).remove();
+    /*$.getScript( "http://hlslibappdev.law.harvard.edu:8005/widget/?style=default", function( data ) {
+console.log( data ); // Data returned
+
+});*/
+});
+
 });
 </script>
 {% endblock scripts %}

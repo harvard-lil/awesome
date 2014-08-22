@@ -21,7 +21,7 @@ else if('{{style}}' === 'default') {
     //fileref.setAttribute("href", "{{ STATIC_PREFIX }}css/widget.css");
     document.getElementsByTagName("head")[0].appendChild(fileref);
     
-    document.write('<div class="aw-widget">');
+    document.write('<div class="aw-widget" style="width:{{width}}px;">');
 }
 else {
   document.write('<div class="aw-widget-plain">');
@@ -39,9 +39,10 @@ document.write('<div class="aw-widget-list">');
         catalogQuery = '{{organization.catalog_base_url}}{{item.title}}+{{item.creator}}';
 	document.write('<p class="aw-widget-item"><a href="' + catalogQuery + '" target="_blank">{{item.title}}</a> <span class="aw-widget-creator">{{item.creator}}</span></p>');
 {% endfor %}
-document.write('</div>');
 if('{{style}}' === 'default') {
 document.write('<img src="http://{{organization.slug}}.{{awesome_domain}}{{ STATIC_PREFIX }}images/widget-exclamation.png" class="aw-widget-exclamation" />');
 //document.write('<img src="http://hlslibappdev.law.harvard.edu:8005{{ STATIC_PREFIX }}images/widget-exclamation.png" class="aw-widget-arrow" />');
 }
+document.write('</div>');
+
 document.write('</div>');
