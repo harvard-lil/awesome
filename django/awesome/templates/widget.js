@@ -41,7 +41,7 @@ document.write('<div class="aw-widget-list">');
 {% endfor %}
 if('{{style}}' === 'default') {
 document.write('<img src="http://{{organization.slug}}.{{awesome_domain}}{{ STATIC_PREFIX }}images/widget-exclamation.png" class="aw-widget-exclamation" />');
-//document.write('<img src="http://hlslibappdev.law.harvard.edu:8005{{ STATIC_PREFIX }}images/widget-exclamation.png" class="aw-widget-arrow" />');
+//document.write('<img src="http://hlslibappdev.law.harvard.edu:8005{{ STATIC_PREFIX }}images/widget-exclamation.png" class="aw-widget-exclamation" />');
 }
 document.write('</div>');
 
