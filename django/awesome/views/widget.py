@@ -18,7 +18,7 @@ def widget(request):
     else: 
         width = 300
         
-    org = Organization.objects.get(slug=request.META['subdomain'])
+    org = Organization.objects.get(user=request.user)
     awesome_domain = Site.objects.get_current().domain
     
     if len(branch) != 0:
