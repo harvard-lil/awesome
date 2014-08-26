@@ -18,7 +18,7 @@ def widget(request):
     else: 
         width = 300
         
-    org = Organization.objects.get(user=request.user)
+    org = Organization.objects.get(slug=request.META['subdomain'])
     awesome_domain = Site.objects.get_current().domain
     
     if len(branch) != 0:
@@ -27,7 +27,7 @@ def widget(request):
         items = Item.objects.filter(branch__organization=org).order_by('-latest_checkin')[:5]
         
 
-    return render_to_response('widget.js', {'awesome_domain': awesome_domain, 'user': request.user, 'organization': org,
+    return render_to_response('widget.js', {'awesome_domain': awesome_domain, 'organization': org,
                               'branch': branch, 'items':items, 'style': style, 'width': width}, mimetype='Content-type: text/javascript')
                               
 def catalog_include(request, isbn):
