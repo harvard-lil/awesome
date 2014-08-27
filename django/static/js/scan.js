@@ -2,7 +2,7 @@ var val = 10;
 var timer;
 
 $(document).ready(function() {
-	$('#barcode').focus(); console.log(num_items)
+	$('#barcode').focus();
 	if(num_items < 1) {
       $('#barcode').popover({'title': 'Ready Aim Fire', 'content': 'Point your barcode scanner at the ISBN/UPC code on the item', 'trigger': 'manual', 'placement': 'bottom'});
       $('#barcode').popover('show');
