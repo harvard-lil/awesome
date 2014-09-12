@@ -105,13 +105,17 @@ def process_self_register(request):
             if settings.DEBUG == False:
               host = settings.HOST
         
-            content = '''Welcome to Awesome Box!  To login into your account, visit your login page.
+            content = '''Welcome to Awesome Box!  A brand new Awesome Box page has been created for you.
+            
+            http://{slug}.host
+            
+            To login into your account, visit your login page.
         
-http://{slug}.{host}/login
+http://{host}/login
             
 For help getting started, visit the help page.
             
-http://{slug}.{host}/control/help
+http://{host}/control/help
             
 Happy Awesome-ing!
         
