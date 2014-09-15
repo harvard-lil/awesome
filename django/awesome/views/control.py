@@ -35,11 +35,13 @@ def home(request):
 
     org = Organization.objects.get(user=request.user)
     num_items = Item.objects.filter(branch__organization=org).count()
+    awesome_domain = Site.objects.get_current().domain
     
     context = {
             'user': request.user,
             'organization': org,
             'num_items': num_items,
+            'awesome_domain': awesome_domain,
         }
         
     context = RequestContext(request, context)

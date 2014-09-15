@@ -84,7 +84,8 @@ a:visited.btn-custom{
 }
 a, a:link,
 a:active,
-a:visited {
+a:visited
+{
     -webkit-transition: color 0.25s ease-out;
     -moz-transition: color 0.25s ease-out;
     -o-transition: color 0.25s ease-out;
@@ -309,10 +310,21 @@ span.filter:hover, span.filter.selected {
 #content h1 {
     /*color:#bee620;*/
     color: #595959;
-    margin: 0 0 25px 0;
+    margin: 15px 0 35px 0;
     font-size: 48px;
     font-weight:bold;
-    line-height: 65px;
+    line-height: 35px;
+}
+
+#content h1 small {
+    font-size:18px;
+    margin-left:2px;
+}
+
+header a,
+header a:link,
+header a:active {
+    color:#888;
 }
 
 .logo {

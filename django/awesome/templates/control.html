@@ -12,7 +12,7 @@
 		<article class="control thin-centered">
 		
 			<header>
-				<h1>Control Center</h1>
+				<h1>Control Center<br><small><a href="{{organization.slug}}.{{awesome_domain}}">{{organization.slug}}.{{awesome_domain}}</a></small></h1>
 			</header>
 			<p class="control_list"><a href="{% url 'scan' %}" {% if num_items < 1 %} id="scan-something" data-container="body" data-toggle="popover" data-placement="right"data-content="Let's Awesome something. Fire up the old barcode scanner." data-original-title="All right!"{% endif %}>Scan an item</a></p>		
 			<p class="control_list"><a href="{% url 'control_item_delete' %}">Delete an item</a></p>
