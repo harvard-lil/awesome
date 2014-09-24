@@ -462,9 +462,15 @@ def isbn_awesome_count(request, isbn):
     (At Harvard we offer a feature in the OPAC that allows the user how many
     times something has been awesomed. Here we take the isbn and return a count)
     """
-    
     org = get_object_or_404(Organization, slug=request.META['subdomain'])
-    item_count = Item.objects.filter(isbn=isbn, branch__organization=org).count()
+    
+    if ":" in isbn:
+        item_count = 0
+        isbn_list = isbn.split(":")
+        for single_isbn in isbn_list:
+            item_count = item_count + Item.objects.filter(isbn=single_isbn, branch__organization=org).count()
+    else:
+        item_count = Item.objects.filter(isbn=isbn, branch__organization=org).count()
     
     response = {'count': item_count}
     jsoned_response = json.dumps(response)

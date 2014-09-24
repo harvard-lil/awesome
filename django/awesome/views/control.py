@@ -513,7 +513,7 @@ def widget(request):
     org = Organization.objects.get(user=request.user)
     branches = Branch.objects.filter(organization=org)
     awesome_domain = Site.objects.get_current().domain
-    
+
     context = {
             'user': request.user,
             'organization': org,

@@ -33,7 +33,14 @@ def widget(request):
 def catalog_include(request, isbn):
     
     org = get_object_or_404(Organization, slug=request.META['subdomain'])
-    item_count = Item.objects.filter(isbn=isbn, branch__organization=org).count()
+    if ":" in isbn:
+        item_count = 0
+        isbn_list = isbn.split(":")
+        for single_isbn in isbn_list:
+            item_count = item_count + Item.objects.filter(isbn=single_isbn, branch__organization=org).count()
+    else:
+        item_count = Item.objects.filter(isbn=isbn, branch__organization=org).count()
+        
     awesome_domain = Site.objects.get_current().domain   
         
     return render_to_response('catalog_include.js', {'awesome_domain': awesome_domain, 'item_count': item_count}, mimetype='Content-type: text/javascript')

@@ -21,7 +21,7 @@
 			</header>
 			<h3>Embed the following widget anywhere</h3>	
 			<div class="widget-sample">
-			<script class="default-widget" src="{% url 'widget' %}?style=default"></script>
+			<script class="default-widget" src="http://{{organization.slug}}.{{awesome_domain}}{% url 'widget' %}?style=default"></script>
 			</div>
 			<div class="widget-customizer">
 			    <h3>Customize this widget</h3>
@@ -44,7 +44,7 @@
 			<textarea class="widget-code"><script src="http://{{organization.slug}}.{{awesome_domain}}{% url 'widget' %}?style=default"></script></textarea>
 			<br><br>
 			<h3>Don't like the colors?  Embed this plain widget and style it yourself.</h3>		
-			<div class="widget-sample"><script src="{% url 'widget' %}?style=none"></script></div>
+			<div class="widget-sample"><script src="http://{{organization.slug}}.{{awesome_domain}}{% url 'widget' %}?style=none"></script></div>
 			<label for="widget-code">Copy and paste the code into the HTML of your site</label>
 			<br>
 			<textarea class="widget-code"><script src="http://{{organization.slug}}.{{awesome_domain}}{% url 'widget' %}?style=none"></script></textarea>
