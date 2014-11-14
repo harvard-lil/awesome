@@ -107,7 +107,7 @@ def process_self_register(request):
         
             content = '''Welcome to Awesome Box!  A brand new Awesome Box page has been created for you.
             
-            http://{slug}.host
+            http://{slug}.{host}
             
             To login into your account, visit your login page.
         
