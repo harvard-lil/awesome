@@ -1,0 +1,24 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% get_static_prefix as STATIC_PREFIX %}
+
+{% block title %}Deactivated{% endblock title %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ STATIC_PREFIX }}css/bootstrap.css" type="text/css" />
+<link rel="stylesheet" media="all" href="{{ STATIC_PREFIX }}css/awesome-newlook.css" />
+{% endblock styles %}
+
+{% block content %}
+<body>
+<div id="wrapper">	
+	<header id="branding">
+		<h1><a href="http://{{awesome_domain}}">Awesome Box</a></h1>
+	</header>
+	<div id="content">
+		<article class="register thin-centered">
+			<h2>This Awesome Box account has been deactivated</h2>
+		</article>
+	</div><!-- end content -->
+</div> <!-- end wrapper -->
+{% endblock content %}

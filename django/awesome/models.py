@@ -41,6 +41,7 @@ class Organization(models.Model):
     cover_user_id = models.CharField(max_length=35, null=True, blank=True)
     cover_password = models.CharField(max_length=35, null=True, blank=True)
     theme = models.CharField(max_length=100, choices=THEME_QUERY_CHOICES, default="default")
+    is_active = models.BooleanField(default=True)
 
     
     def __unicode__(self):

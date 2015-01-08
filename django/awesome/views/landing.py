@@ -7,6 +7,7 @@ from django.shortcuts import render_to_response
 from django.core.context_processors import csrf
 from django.template import RequestContext
 from django.db.models import Count, Sum, Q
+from django.contrib.sites.models import Site
 
 logger = logging.getLogger(__name__)
 
@@ -27,13 +28,20 @@ def landing(request):
         branch = request.GET.get('branch', '')
         org = Organization.objects.get(slug=request.META['subdomain'])
         
-        template = 'landing_org_{theme}.html'.format(theme = org.theme)
+        if org.is_active:
         
-        context = {'user': request.user, 'organization': org,
-                                               'branch': branch, 'twitter_username': org.twitter_username,
-                                               'ga_key': GOOGLE['ANALYTICS_KEY']}
-        context = RequestContext(request, context)
+            template = 'landing_org_{theme}.html'.format(theme = org.theme)
+            
+            context = {'user': request.user, 'organization': org,
+                                                   'branch': branch, 'twitter_username': org.twitter_username,
+                                                   'ga_key': GOOGLE['ANALYTICS_KEY']}
+        
+        else:
+            template = 'landing_org_deactivated.html'
+            awesome_domain = Site.objects.get_current().domain
+            context = {'awesome_domain': awesome_domain, 'ga_key': GOOGLE['ANALYTICS_KEY']}
     
+        context = RequestContext(request, context)
         return render_to_response(template, context)
     else:
         items = Item.objects.values('title').annotate(total_checkins=Sum('number_checkins')).order_by('-total_checkins')[:10]
