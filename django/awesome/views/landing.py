@@ -27,19 +27,26 @@ def landing(request):
     if 'subdomain' in request.META:
         branch = request.GET.get('branch', '')
         org = Organization.objects.get(slug=request.META['subdomain'])
+        num_items = Item.objects.filter(branch__organization=org).count()
         
         if org.is_active:
         
             template = 'landing_org_{theme}.html'.format(theme = org.theme)
             
             context = {'user': request.user, 'organization': org,
-                                                   'branch': branch, 'twitter_username': org.twitter_username,
+                                                   'branch': branch, 
+                                                   'num_items': num_items,'twitter_username': org.twitter_username,
                                                    'ga_key': GOOGLE['ANALYTICS_KEY']}
         
         else:
             template = 'landing_org_deactivated.html'
             awesome_domain = Site.objects.get_current().domain
             context = {'awesome_domain': awesome_domain, 'ga_key': GOOGLE['ANALYTICS_KEY']}
+            
+        if request.method == 'POST':
+            org.cover_service = 'openlibrary'
+            org.save()
+            return render_to_response(template, context)
     
         context = RequestContext(request, context)
         return render_to_response(template, context)

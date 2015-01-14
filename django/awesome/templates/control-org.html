@@ -1,11 +1,11 @@
 {% extends "layouts/base.html" %}
-{% load static %}
+{% load static bootstrap_tags %}
 {% get_static_prefix as STATIC_PREFIX %}
 
 {% block title %}Controls | Awesome Box at the {{organization.name}}{% endblock title %}
 
 {% block styles %}
-<link rel="stylesheet" href="{{ STATIC_PREFIX }}css/bootstrap.css" type="text/css" />
+<link rel="stylesheet" href="{{ STATIC_PREFIX }}css/bootstrap.min.css" type="text/css" />
 <link rel="stylesheet" media="all" href="{{ STATIC_PREFIX }}css/awesome-newlook.css" />
 {% endblock styles %}
 
@@ -20,6 +20,7 @@
 			<header>
 				<h1>Control Organization</h1>
 			</header>
+			<p>Change your organization name, about page blurb, cover images service and more.</p>
             {% if messages %}
                 {% for message in messages %}
                     <div class="alert alert-success control-message">{% if 'safe' in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}</div>
@@ -27,18 +28,7 @@
             {% endif %}
 			<form method="post" action="" class="control-form">
 				{% csrf_token %}
-				<fieldset>
-		  <span class="text-error">{{ form.non_field_errors }}</span>
-        {% for field in form %}
-          <label for="id_{{ field.name }}">{{ field.label }}</label>
-          {{ field }}
-          {% if field.errors %}<br/>
-            {% for error in field.errors %}<span class="text-error">{{ error }}</span>{% endfor %}
-          {%elif field.help_text %}
-            <span class="help-inline help_{{ field.name }}">{{ field.help_text }}</span>
-          {% endif %}
-        {% endfor %}  
-      </fieldset>
+				{{ form|as_bootstrap }}
 				<br />
 				<input type="submit" value="Submit Form" class="btn btn-lg btn-custom" />
 			</form>

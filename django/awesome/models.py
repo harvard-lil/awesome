@@ -17,6 +17,7 @@ class Organization(models.Model):
         ('syndetic', 'Syndetic Solutions'),
         ('contentcafe', 'Content Cafe'),
         ('tlc', 'TLC'),
+        ('notset', 'Not Set'),
     )
     THEME_QUERY_CHOICES = (
         ('original', 'Original green and blue'),
@@ -28,19 +29,19 @@ class Organization(models.Model):
     service_lookup = models.CharField(max_length=100, default="worldcat")
     catalog_base_url = models.URLField(max_length=2000)
     catalog_query = models.CharField(max_length=100, choices=CATALOG_QUERY_CHOICES, default="isbn")
-    public_link = models.URLField(max_length=2000, null=True, blank=True)
-    public_email = models.EmailField(max_length=254, null=True, blank=True)
+    cover_service = models.CharField(max_length=100, choices=COVER_QUERY_CHOICES, default="notset")
+    cover_user_id = models.CharField(max_length=35, null=True, blank=True)
+    cover_password = models.CharField(max_length=35, null=True, blank=True)
+    theme = models.CharField(max_length=100, choices=THEME_QUERY_CHOICES, default="default")
     logo_link = models.URLField(max_length=2000, null=True, blank=True)
     about_page_blurb = models.TextField(max_length=4000, default="The Awesome Box is a collaboration with the Harvard Library Innovation Lab. It allows the community to see what others have found helpful, entertaining, or mind-blowing.")
+    public_link = models.URLField(max_length=2000, null=True, blank=True)
+    public_email = models.EmailField(max_length=254, null=True, blank=True)
     twitter_username = models.CharField(max_length=15, null=True, blank=True)
     twitter_oauth_token = models.CharField(max_length=200, null=True, blank=True)
     twitter_oauth_secret = models.CharField(max_length=200, null=True, blank=True)
     twitter_intro = models.CharField(max_length=35, null=True, blank=True)
     twitter_show_title = models.BooleanField(default=True)
-    cover_service = models.CharField(max_length=100, choices=COVER_QUERY_CHOICES, default="openlibrary")
-    cover_user_id = models.CharField(max_length=35, null=True, blank=True)
-    cover_password = models.CharField(max_length=35, null=True, blank=True)
-    theme = models.CharField(max_length=100, choices=THEME_QUERY_CHOICES, default="default")
     is_active = models.BooleanField(default=True)
 
     

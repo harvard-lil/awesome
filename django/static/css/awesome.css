@@ -1008,3 +1008,61 @@ readers do not read off random characters that represent icons */
 .icon-paste:before                { content: "\f0ea"; }
 
 .icon-user-md:before              { content: "\f200"; }
+
+.popover, .control .popover {
+  color: #888;
+  background-color: #fcf1e2;
+  border-color:#EA9B3A;
+  max-width:294px;
+}
+.popover .popover-title, .control .popover h3 {
+  color:#da8217;
+  background-color: #f8e1c4;
+  border-bottom-color: #EA9B3A;
+  font-size:14px;
+}
+.popover.right .arrow:after {
+  border-right-color: #fcf1e2;
+}
+
+.popover.right .arrow {
+    border-right-color: #EA9B3A;
+}
+
+.popover.bottom .arrow {
+    border-bottom-color: #EA9B3A;
+}
+
+.popover.bottom .arrow:after {
+    border-bottom-color: #f8e1c4;
+    top:2px;
+}
+
+.btn-custom {
+  background-color: #51ADE1;
+  border-color: #51ADE1;
+  color:#fff;
+}
+.btn-custom:hover,
+.btn-custom:focus,
+.btn-custom:active,
+.btn-custom.active {
+  background-color: #3ba3dd;
+  border-color: #2699da;
+  color:#fff;
+}
+.btn-custom.disabled:hover,
+.btn-custom.disabled:focus,
+.btn-custom.disabled:active,
+.btn-custom.disabled.active,
+.btn-custom[disabled]:hover,
+.btn-custom[disabled]:focus,
+.btn-custom[disabled]:active,
+.btn-custom[disabled].active,
+fieldset[disabled] .btn-custom:hover,
+fieldset[disabled] .btn-custom:focus,
+fieldset[disabled] .btn-custom:active,
+fieldset[disabled] .btn-custom.active {
+  background-color: #51ADE1;
+  border-color: #51ADE1;
+}

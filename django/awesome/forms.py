@@ -66,7 +66,10 @@ class OrganizationForm(forms.ModelForm):
 
     class Meta:
         model = Organization
-        exclude = ('user', 'slug', 'service_lookup', 'twitter_username', 'twitter_oauth_token', 'twitter_oauth_secret', 'twitter_show_title', 'twitter_intro')
+        widgets = {
+          'about_page_blurb': forms.Textarea(attrs={'rows':4}),
+        }
+        exclude = ('user', 'slug', 'service_lookup', 'twitter_username', 'twitter_oauth_token', 'twitter_oauth_secret', 'twitter_show_title', 'twitter_intro', 'is_active')
         
     def __init__(self, *args, **kwargs):
         super(OrganizationForm, self).__init__(*args, **kwargs)

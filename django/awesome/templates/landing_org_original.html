@@ -47,12 +47,13 @@
 	</nav>
 
 	<div id="content">
-		<article id="recently-awesome">
+		<article id="recently-awesome" {% if num_items > 0 and user.id == organization.user_id and organization.cover_service == 'notset' %} data-container="body" data-toggle="popover" data-placement="bottom" data-content="You can <a href='/control/org'>connect an account</a> (Syndetics, Content Cafe or TLC) for better cover images<br><br><form action='' method='post'>
+          {% csrf_token %}<button class='btn btn-custom btn-xs' type='submit'>No thanks</button></form>" data-original-title="Seeing too many blank covers?" {% endif %}>
 			<header>
 				<h1>Recently Awesome</h1>
 			</header>
 
-			<div id="recent"></div>
+			<div id="recent" data-container="body" data-toggle="popover" data-placement="right"data-content="Let's Awesome something. Fire up the old barcode scanner." data-original-title="All right!"></div>
 
 			<nav class="next-prev">
 				<a class="newer" data-start="0" alt="Prev">Prev</a>
@@ -149,11 +150,17 @@
 <script src="{{ STATIC_PREFIX }}js/awesome.js"></script>
 <script src="http://use.typekit.com/vpi8egr.js"></script>
 <script >try{Typekit.load();}catch(e){}</script>
+<script src="{{ STATIC_PREFIX }}js/bootstrap.min.js"></script> 
 
 <script type="text/javascript">
 var organization = "{{organization.slug}}";
 var branch = "{{branch}}";    
 var limit = 9;
+
+$(document).ready(function() {
+    $('#recently-awesome').popover({html:true});
+    $('#recently-awesome').popover('show');
+});
 </script>
 {% endblock scripts %}
 

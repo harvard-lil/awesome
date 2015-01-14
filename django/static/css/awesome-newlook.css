@@ -602,6 +602,10 @@ p.bold {
 
 /* Control forms */
 
+.control-form {
+    max-width:480px;
+}
+
 .control-form label {
  font-weight:bold;
  color:#333;
@@ -658,6 +662,15 @@ p.bold {
 
 .popover.right .arrow {
     border-right-color: #EA9B3A;
+}
+
+.popover.bottom .arrow {
+    border-bottom-color: #EA9B3A;
+}
+
+.popover.bottom .arrow:after {
+    border-bottom-color: #f8e1c4;
+    top:2px;
 }
 
 .color-block {

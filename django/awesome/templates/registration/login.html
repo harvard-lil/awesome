@@ -15,7 +15,9 @@
 
 
 <script type="text/javascript">
-	$('input[name=username]').focus();
+	$(document).ready(function(){
+    $('input[type=text]:first').focus();
+});
 </script>
 {% endblock scripts %}
 
