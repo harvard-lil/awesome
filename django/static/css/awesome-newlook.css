@@ -271,7 +271,7 @@ span.filter {
     cursor:pointer;
     height:45px;
     width:45px;
-    padding:0 0 0 11px;
+    padding:0 0 0 10px;
 }
 
 span.filter:hover, span.filter.selected {
@@ -1281,7 +1281,7 @@ li[class^="icon-"].icon-large:before, li[class*=" icon-"].icon-large:before {
 readers do not read off random characters that represent icons */
 .icon-glass:before                { content: "\f000"; }
 .icon-music:before                { content: "\f001"; }
-.icon-soundrecording:before       { content: "\f001"; }
+/*.icon-soundrecording:before       { content: "\f001"; }*/
 .icon-search:before               { content: "\f002"; }
 .icon-envelope:before             { content: "\f003"; }
 .icon-heart:before                { content: "\f004"; }
@@ -1319,6 +1319,7 @@ readers do not read off random characters that represent icons */
 .icon-lock:before                 { content: "\f023"; }
 .icon-flag:before                 { content: "\f024"; }
 .icon-headphones:before           { content: "\f025"; }
+.icon-soundrecording:before           { content: "\f025"; }
 .icon-volume-off:before           { content: "\f026"; }
 .icon-volume-down:before          { content: "\f027"; }
 .icon-volume-up:before            { content: "\f028"; }
