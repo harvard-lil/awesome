@@ -37,7 +37,7 @@
           {% csrf_token %}<button class='btn btn-custom btn-xs' type='submit'>No thanks</button></form>" data-original-title="Seeing too many grey boxes?" {% endif %}>at the {{ organization.name }}</h2>
             </div>
             <div class="col-md-2 col-md-offset-2" id="feeds">
-			<a href="feed" target="_blank">
+			<a href="feed{% if branch %}/{{branch}}{%endif%}" target="_blank">
 				<img src="{{ STATIC_PREFIX }}images/rss-flat.png" class="rssIcon" alt="Awesome RSS" />
 			</a>
 			{% if twitter_username %}

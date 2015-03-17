@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.conf.urls.defaults import patterns, url
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib.auth import views as auth_views
-from awesome.views.feed import LatestEntriesFeed
+from awesome.views.feed import LatestEntriesFeed, BranchLatestEntriesFeed
 
 
 admin.autodiscover()
@@ -15,6 +15,7 @@ urlpatterns = patterns('awesome.views',
     url(r'^discover/$', 'landing.discover', name='landing_discover'),
     url(r'^scan/$', 'scan.scan', name='scan'),
     url(r'^feed/$', LatestEntriesFeed()),
+    url(r'^feed/(?P<branch_slug>[0-9A-Za-z:]+)/$', BranchLatestEntriesFeed()),
     url(r'^widget/$', 'widget.widget', name='widget'),
     url(r'^catalog-include/(?P<isbn>[0-9A-Za-z:]+)$', 'widget.catalog_include', name='widget_catalog_include'),
     url(r'^control/$', 'control.home', name='control_home'),

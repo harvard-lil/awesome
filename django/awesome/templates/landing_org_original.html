@@ -16,7 +16,7 @@
 	
 	<header id="branding">
 		<span id="feeds">
-			<a href="feed" target="_blank">
+			<a href="feed{% if branch %}/{{branch}}{%endif%}" target="_blank">
 				<img src="{{ STATIC_PREFIX }}images/rss.png" class="rssIcon" alt="Awesome RSS" />
 			</a>
 			{% if twitter_username %}
