@@ -34,10 +34,10 @@
 	        <div class="col-md-8">
 				<h2 class="tk-chaparral-pro">Recently Awesome</h2>
                 <h2 class="subhead" {% if num_items > 0 and user.id == organization.user_id and organization.cover_service == 'notset' %} data-container="body" data-toggle="popover" data-placement="bottom" data-content="You can <a href='/control/org'>connect an account</a> (Syndetics, Content Cafe or TLC) for better cover images<br><br><form action='' method='post'>
-          {% csrf_token %}<button class='btn btn-custom btn-xs' type='submit'>No thanks</button></form>" data-original-title="Seeing too many grey boxes?" {% endif %}>at the {{ organization.name }}</h2>
+          {% csrf_token %}<button class='btn btn-custom btn-xs' type='submit'>No thanks</button></form>" data-original-title="Seeing too many grey boxes?" {% endif %}>at the {{ organization.name }}{% if branch %}<br><small>{{branch.name}}</small>{%endif%}</h2>
             </div>
             <div class="col-md-2 col-md-offset-2" id="feeds">
-			<a href="feed{% if branch %}/{{branch}}{%endif%}" target="_blank">
+			<a href="feed{% if branch %}/{{branch.slug}}{%endif%}" target="_blank">
 				<img src="{{ STATIC_PREFIX }}images/rss-flat.png" class="rssIcon" alt="Awesome RSS" />
 			</a>
 			{% if twitter_username %}
@@ -69,7 +69,7 @@
 		    <div class="row">
 	        <div class="col-md-8">
 				<h2 class="tk-chaparral-pro">Most Awesome</h2>
-                <h2 class="subhead">at the {{ organization.name }}</h2>
+                <h2 class="subhead">at the {{ organization.name }}{% if branch %}, {{branch.name}}{%endif%}</h2>
             </div>
 		</div>
 	        <div class="row">
@@ -144,7 +144,6 @@
 <!-- Grab Google CDN's jQuery. fall back to local if necessary --> 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script>!window.jQuery && document.write('<script src="{{ STATIC_PREFIX }}/js/jquery-1.7.1.min.js"><\/script>')</script>
-<script src="{{ STATIC_PREFIX }}js/jcarousellite.min.js"></script>
 <script src="{{ STATIC_PREFIX }}js/jquery.dotdotdot-1.4.0-packed.js"></script>
 <script src="{{ STATIC_PREFIX }}js/handlebars.js"></script>
 <script src="{{ STATIC_PREFIX }}js/awesome.js"></script>
@@ -154,7 +153,10 @@
 
 <script type="text/javascript">
 var organization = "{{organization.slug}}";
-var branch = "{{branch}}";   
+var branch = null;
+{% if branch %}
+branch = "{{branch.slug}}";
+{% endif %} 
 var limit = 12;
 
 $(document).ready(function() {

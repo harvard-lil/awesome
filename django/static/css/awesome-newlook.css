@@ -345,8 +345,15 @@ h2.subhead {
     font-weight:bold;
     font-family:Arial;
     margin-bottom:25px;
-    margin-top:0px;
+    margin-top:16px;
+    line-height:24px;
 }
+
+h2.subhead small {
+    color:#51ade1;
+    font-size:85%;
+}
+
 #content h2 {
     margin-top:35px;
     font-size: 30px;

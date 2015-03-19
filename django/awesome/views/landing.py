@@ -25,10 +25,14 @@ def landing(request):
         logger.error('Unable to load local_settings.py:', e)
     
     if 'subdomain' in request.META:
-        branch = request.GET.get('branch', '')
+        branch_slug = request.GET.get('branch', '')
+        if branch_slug:
+            branch = Branch.objects.get(slug=branch_slug, organization__slug=request.META['subdomain'])
+        else:
+            branch = None
         org = Organization.objects.get(slug=request.META['subdomain'])
         num_items = Item.objects.filter(branch__organization=org).count()
-        
+        logger.debug(branch)
         if org.is_active:
         
             template = 'landing_org_{theme}.html'.format(theme = org.theme)
