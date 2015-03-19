@@ -8,6 +8,7 @@ from django.core.context_processors import csrf
 from django.template import RequestContext
 from django.db.models import Count, Sum, Q
 from django.contrib.sites.models import Site
+from django.http import Http404  
 
 logger = logging.getLogger(__name__)
 
@@ -27,7 +28,10 @@ def landing(request):
     if 'subdomain' in request.META:
         branch_slug = request.GET.get('branch', '')
         if branch_slug:
-            branch = Branch.objects.get(slug=branch_slug, organization__slug=request.META['subdomain'])
+            try:
+                branch = Branch.objects.get(slug=branch_slug, organization__slug=request.META['subdomain'])
+            except:
+                raise Http404  
         else:
             branch = None
         org = Organization.objects.get(slug=request.META['subdomain'])
