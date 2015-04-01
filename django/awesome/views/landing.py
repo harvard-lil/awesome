@@ -91,7 +91,14 @@ def explorer(request):
     
     comics = Item.objects.filter(Q(classifications__name__icontains="graphic novel") | Q(classifications__name__icontains="comics")).values('title').annotate(total_checkins=Sum('number_checkins', distinct = True)).order_by('-total_checkins')[:10]
     
-    context = {'ga_key': GOOGLE['ANALYTICS_KEY'], 'items': items, 'creators': creators, 'scifis': scifis, 'comics': comics}
+    search_results = None
+    search_query = None
+    # handle search
+    search_query = request.GET.get('query', '')
+    if search_query:
+        search_results = Item.objects.filter(classifications__name__icontains=search_query).values('title').annotate(total_checkins=Sum('number_checkins')).order_by('-total_checkins').distinct()[:10]
+    
+    context = {'ga_key': GOOGLE['ANALYTICS_KEY'], 'items': items, 'creators': creators, 'scifis': scifis, 'comics': comics, 'search_results': search_results, 'query': search_query}
                
     context = RequestContext(request, context)
     return render_to_response('explorer.html', context)

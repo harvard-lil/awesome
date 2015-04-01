@@ -96,6 +96,34 @@
   <div class="row offerings">
     <div class="col-sm-7 col-sm-offset-2">
 		<p>Create your own.</p>
+		<form class="form-inline">
+            <div class="form-group">
+                <label for="categoryQuery">Category</label>
+                <input type="text" class="form-control" id="categoryQuery" name="query" placeholder="Search categories" {% if search_results %}value="{{query}}"{% endif %}>
+            </div>
+            <button type="submit" class="btn btn-default">Search</button>
+        </form>
+    </div>
+    </div>
+    <div class="row offerings">
+    <div class="col-sm-4 col-sm-offset-2">
+        {% if search_results %}
+        <table class="table table-bordered">
+    <thead>
+        <tr>
+            <th class="small-th">CURRENT RANK</th>
+            <th>{{ query|upper }}</th>
+            <th class="small-th">NUMBER AWESOMES</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for search_result in search_results %}
+        <!--<p class="text-block">{{item.title}}</p>-->
+        <tr><td class="rank-td">{{forloop.counter}}</td><td>{{search_result.title}}</td><td class="awesomes-td">{{search_result.total_checkins}}</td></tr>
+    {% endfor %}
+    </tbody>
+    </table>
+    {% endif %}
     </div>
   </div>
 </div>
