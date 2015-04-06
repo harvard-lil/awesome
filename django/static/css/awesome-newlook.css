@@ -400,6 +400,12 @@ p.bold {
 #about p.tiny {
     font-size:12px;
 }
+
+#about p.tiny img {
+    display:inline-block;
+    height:15px;
+}
+
 /* foreground (ballons/landscape) */
 #parallax-bg3 {
     z-index: 3;
@@ -510,16 +516,28 @@ p.bold {
     z-index:90;
 }
 
-.item-cover {
+.item-cover-container {
     float:left;
+    height:160px;
+    width:125px;
+    background-image:url('../images/faceUp-icons.png');
+    background-position: -170px -4px;
+    background-repeat: no-repeat;
+}
+
+.item-cover {
     border:0px solid #999;
     margin:0 15px 15px 0;
-    background-image:url('../images/faceUp-icons.png');
-    background-repeat: no-repeat;
     height:160px;
     width:110px;
-    background-position: -170px -4px;
     padding:0;
+    position:absolute;
+}
+
+.item-cover-backup {
+    position:absolute;
+    top:0;
+    left:0;
 }
 
 .item-details {

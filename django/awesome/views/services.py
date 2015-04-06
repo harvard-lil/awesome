@@ -300,7 +300,7 @@ def _item_from_worldcat(barcode, branch):
         for format in formats:
             if 'video' in format:
                 physical_format = 'videofilm'
-                cover_art = _get_rt_movie_poster(title)
+                cover_art = _get_tmdb_movie_poster(title)
                 break
             elif 'sound' in format:
                 physical_format = 'soundrecording'
@@ -356,6 +356,68 @@ def _get_rt_movie_poster(title):
     if 'movies' in jsoned_response:
     	if len(jsoned_response['movies']) > 0:
     		poster_url = jsoned_response['movies'][0]['posters']['profile']
+
+    return poster_url
+    
+def _get_omdb_movie_poster(title):
+    """Try to get a poster url from open movie database"""
+    
+    url = "http://www.omdbapi.com/?t=" + urlquote(title) + "&y=&plot=short&r=json";
+    req = urllib2.Request(url)
+    
+    response = None
+    
+    try: 
+        f = urllib2.urlopen(req)
+        response = f.read()
+        f.close()
+    except urllib2.HTTPError, e:
+        logger.warn('Item from Open Movie Database, HTTPError = ' + str(e.code))
+    except urllib2.URLError, e:
+        logger.warn('Item from Open Movie Database, URLError = ' + str(e.reason))
+    except httplib.HTTPException, e:
+        logger.warn('Item from Open Movie Database, HTTPException')
+    except Exception:
+        import traceback
+        logger.warn('Item from Open Movie Database, generic exception: ' + traceback.format_exc())
+    
+    jsoned_response = json.loads(response)
+    poster_url = None
+    
+    if 'Response' in jsoned_response:
+    	if jsoned_response['Response'] == 'True':
+    		poster_url = jsoned_response['Poster']
+
+    return poster_url
+    
+def _get_tmdb_movie_poster(title):
+    """Try to get a poster url from TMDB"""
+    
+    url = "http://api.themoviedb.org/3/search/movie?api_key=" + TMDB['KEY'] + "&query=" + urlquote(title);
+    req = urllib2.Request(url)
+    
+    response = None
+    
+    try: 
+        f = urllib2.urlopen(req)
+        response = f.read()
+        f.close()
+    except urllib2.HTTPError, e:
+        logger.warn('Item from TMDB, HTTPError = ' + str(e.code))
+    except urllib2.URLError, e:
+        logger.warn('Item from TMDB, URLError = ' + str(e.reason))
+    except httplib.HTTPException, e:
+        logger.warn('Item from TMDB, HTTPException')
+    except Exception:
+        import traceback
+        logger.warn('Item from TMDB, generic exception: ' + traceback.format_exc())
+    
+    jsoned_response = json.loads(response)
+    poster_url = None
+    
+    if 'results' in jsoned_response:
+    	if len(jsoned_response['results']) > 0:
+    		poster_url = "https://image.tmdb.org/t/p/w150" + jsoned_response['results'][0]['poster_path']
 
     return poster_url
     

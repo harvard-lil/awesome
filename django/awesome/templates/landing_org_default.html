@@ -108,7 +108,7 @@
 			<p class="small">Contact us at <a href="mailto:{{organization.public_email}}">{{organization.public_email}}</a>
 			</p>
 			{% endif %}
-			<p class="tiny">Movie images provided by <a href="http://www.flixster.com/">Flixster</a></p>
+			<p class="tiny">Some movie images provided by <a href="http://www.themoviedb.org/">TMDb</a></p>
 			<nav class="next-prev">
 				<!--<a class="prev search" href="#search">Prev</a>-->
 			</nav>
@@ -192,12 +192,13 @@ $(document).ready(function() {
 	{{#objects}}
 	<li class="item">
 		<a href="{{branch.organization.catalog_base_url}}{{catalogQuery this}}" target="_blank" style="display:none;">{{title}}</a>
+		<div class="item-cover-container">
 		{{#if cover_art}}
-		<img class="item-cover" src="{{cover_art}}" alt="{{title}}" />
-		{{else}}
+		<img class="item-cover item-cover-backup" src="{{cover_art}}" alt="{{title}}" />
+		{{/if}}
 		<!--<img class="item-cover" src="http://covers.openlibrary.org/b/isbn/{{isbn}}-M.jpg" alt="{{title}}" />-->
 		<img class="item-cover" src="{{coverURL this}}" alt="{{title}}" />
-		{{/if}}
+		</div>
 		<div class="item-details">
 			<span class="item-title">
 				{{title}}

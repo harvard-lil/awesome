@@ -335,6 +335,7 @@ p.bold {
 #about p.tiny {
     font-size:12px;
 }
+
 /* foreground (ballons/landscape) */
 #parallax-bg3 {
     z-index: 3;
@@ -444,16 +445,28 @@ p.bold {
     position:relative;
 }
 
-.item-cover {
+.item-cover-container {
     float:left;
+    height:160px;
+    width:125px;
+    background-image:url('../images/faceUp-icons-old.png');
+    background-position: -170px -4px;
+    background-repeat: no-repeat;
+}
+
+.item-cover {
     border:0px solid #999;
     margin:0 15px 15px 0;
-    background-image:url('../images/faceUp-icons-old.png');
-    background-repeat: no-repeat;
     height:160px;
     width:110px;
-    background-position: -170px -4px;
     padding:0;
+    position:absolute;
+}
+
+.item-cover-backup {
+    position:absolute;
+    top:0;
+    left:0;
 }
 
 .item-details {
