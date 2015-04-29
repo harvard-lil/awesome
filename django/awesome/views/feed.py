@@ -93,9 +93,16 @@ class BranchLatestEntriesFeed(Feed):
     		return '<img class="item-cover" src="' + item.cover_art + '" />' + item.title + ' by ' + item.creator
     	else:
     	  if item.isbn:
-    	    return '<img src="http://covers.openlibrary.org/b/isbn/' + item.isbn + '-M.jpg" />' + item.title + ' by ' + item.creator
+    	    if item.branch.organization.cover_service == 'openlibrary' or item.branch.organization.cover_service == 'notset':
+                return '<img src="http://covers.openlibrary.org/b/isbn/' + item.isbn + '-M.jpg" />' + item.title + ' by ' + item.creator
+            elif item.branch.organization.cover_service == 'syndetic':
+                return '<img src="http://www.syndetics.com/index.php?isbn=' + item.isbn + '/mc.gif&client=' + object.branch.organization.cover_user_id + '" />' + item.title + ' by ' + item.creator
+            elif item.branch.organization.cover_service == 'tlc':
+                return '<img src="http://content.tlcdelivers.com/tlccontent?customerid=' + item.branch.organization.cover_user_id + '&requesttype=bookjacket-md&isbn=' + item.isbn + '" />' + item.title + ' by ' + item.creator
+            elif item.branch.organization.cover_service == 'contentcafe':
+                return '<img src="http://contentcafe2.btol.com/ContentCafe/Jacket.aspx?&userID=' + item.branch.organization.cover_user_id + '&password=' + item.branch.organization.cover_password + '&Value=' + item.isbn + '&content=M&Return=1&Type=M' + '" />' + item.title + ' by ' + item.creator
     	  else:
-    	    return item.title + ' by' + item.creator
+    	    return '<img src="static/images/grey-cover.png" />' + item.title + ' by ' + item.creator
 
     # item_link is only needed if NewsItem has no get_absolute_url method.
     def item_link(self, item):
