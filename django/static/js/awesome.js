@@ -148,7 +148,7 @@ $(document).ready(function() {
   });
   
   Handlebars.registerHelper('coverURL', function(object) {
-    if(object.isbn == '' && object.isbn != null)
+    if(object.isbn === '' || object.isbn === null)
         return "http://" + object.branch.organization.slug + ".awesomebox.io/static/images/grey-cover.png";
     else if(object.branch.organization.cover_service == 'openlibrary' || object.branch.organization.cover_service == 'notset')
         return "http://covers.openlibrary.org/b/isbn/" + object.isbn + "-M.jpg";
