@@ -195,9 +195,8 @@ $(document).ready(function() {
 		<div class="item-cover-container">
 		{{#if cover_art}}
 		<img class="item-cover item-cover-backup" src="{{cover_art}}" alt="{{title}}" />
-		{{/if}}
+		{{else}}
 		<!--<img class="item-cover" src="http://covers.openlibrary.org/b/isbn/{{isbn}}-M.jpg" alt="{{title}}" />-->
-		{{#if isbn}}
 		<img class="item-cover" src="{{coverURL this}}" alt="{{title}}" />
 		{{/if}}
 		</div>
