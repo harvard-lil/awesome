@@ -147,8 +147,10 @@ $(document).ready(function() {
         return '';
   });
   
-  Handlebars.registerHelper('coverURL', function(object) {
-    if(object.branch.organization.cover_service == 'openlibrary' || object.branch.organization.cover_service == 'notset')
+  Handlebars.registerHelper('coverURL', function(object) { console.log(object.isbn)
+    if(object.isbn == '')
+        return "http://" + object.branch.organization.slug + ".awesomebox.io/static/images/grey-cover.png";
+    else if(object.branch.organization.cover_service == 'openlibrary' || object.branch.organization.cover_service == 'notset')
         return "http://covers.openlibrary.org/b/isbn/" + object.isbn + "-M.jpg";
     else if(object.branch.organization.cover_service == 'syndetic')
         return "http://www.syndetics.com/index.php?isbn=" + object.isbn + "/mc.gif&client=" + object.branch.organization.cover_user_id;
