@@ -416,7 +416,7 @@ def _get_tmdb_movie_poster(title):
     poster_url = None
     
     if 'results' in jsoned_response:
-    	if len(jsoned_response['results']) > 0:
+    	if len(jsoned_response['results']) > 0 and jsoned_response['results'][0]['poster_path'] is not None:
     		poster_url = "https://image.tmdb.org/t/p/w150" + jsoned_response['results'][0]['poster_path']
 
     return poster_url
