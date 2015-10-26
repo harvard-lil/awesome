@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <meta name="description" content="{{shelf.title}}">
+  <meta name="author" content="{{organization.name}}">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+{% load static %}
+{% get_static_prefix as STATIC_PREFIX %}
+
+<title>Scan | Awesome Box at the {{organization.name}}</title>
+
+<link rel="stylesheet" href="{{ STATIC_PREFIX }}css/normalize.css" type="text/css" />
+<link rel="stylesheet" href="{{ STATIC_PREFIX }}css/skeleton.css" type="text/css" />
+<style>
+body {
+  font-family: "Open Sans", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size:1.6em;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+    <div class="row">
+      <div class="one-half column">
+        <h4>{{shelf.title}}</h4>
+        <p>Build your shelf here.</p>
+      </div>
+    </div>
+    <form id="lookup">
+    	<div class="row">
+    		<div class="six columns">
+    			<input class="u-full-width" placeholder="ISBN/UPC code" id="barcode" type="text">
+    		</div>
+    		<div class="six columns">
+    			<p class="status"></p>
+    		</div>
+    	</div>
+	</form>
+	<div class="row">
+		<div class="six columns" id="shelf-items">
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	var CSRF_TOKEN = "{{ csrf_token }}",
+	shelf='{{shelf.id}}';
+</script>
+<script type="text/javascript" src="{{ STATIC_PREFIX }}js/jquery-1.7.1.min.js"></script>
+<script src="{{ STATIC_PREFIX }}js/handlebars.js"></script>
+<script type="text/javascript" src="{{ STATIC_PREFIX }}js/scan-shelf.js"></script>
+</body>
+
+{% verbatim %}
+<script id="items-template" type="text/x-handlebars-template">
+
+<ul> 
+	{{#objects}}
+	<div class="item">
+		<div class="item-details">
+			<span class="item-title">
+				{{title}}
+			</span>
+			<span class="item-author">{{creator}}</span>
+		</div>
+	</div>
+	{{/objects}}
+</ul>
+</script>
+
+{% endverbatim %}

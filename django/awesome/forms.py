@@ -1,4 +1,4 @@
-from awesome.models import Organization, Branch
+from awesome.models import Organization, Branch, Shelf
 
 from django import forms
 from django.contrib.auth.models import User
@@ -139,3 +139,17 @@ class BranchForm(forms.ModelForm):
 class AnalyticsForm(forms.Form):
     start_date = forms.DateField()
     end_date = forms.DateField()
+    
+
+class ShelfForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+            super(ShelfForm, self).__init__(*args, **kwargs)
+            self.fields['slug'].label = "Web friendly name (letters, numbers, underscores or hyphens)"
+    
+    class Meta:
+        model = Shelf
+        exclude = ('organization')
+        widgets = {
+          'description': forms.Textarea(attrs={'rows':4}),
+        }

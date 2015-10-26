@@ -1,9 +1,10 @@
-from awesome.models import Organization, Branch, Item, Checkin
+from awesome.models import Organization, Branch, Item, Checkin, Shelf
 from awesome.forms import (
     OrganizationForm, 
     BranchForm, 
     AnalyticsForm, 
     TwitterSettingsForm,
+    ShelfForm
 )
 
 import datetime, logging, urlparse, csv
@@ -11,7 +12,7 @@ import datetime, logging, urlparse, csv
 import oauth2 as oauth
 
 from django.core.context_processors import csrf
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.core.urlresolvers import reverse
@@ -554,3 +555,66 @@ def csv_export(request):
         ])
     return response
 csv_export.short_description = u"Export CSV"
+
+
+def shelf(request):
+
+	if not request.user.is_authenticated():
+		return HttpResponseRedirect(reverse('auth_login'))
+		
+	org = Organization.objects.get(user=request.user)
+	
+	if request.method == 'POST':
+		submitted_form = ShelfForm(request.POST,)
+		
+		if submitted_form.is_valid():
+			display_shelf = submitted_form.save(commit=False)
+			display_shelf.organization = org
+			display_shelf.save()
+			
+			return HttpResponseRedirect(reverse('control_shelf'))
+		else:
+			shelves = Shelf.objects.filter(organization=org)
+			
+			context = {
+				'user': request.user,
+				'organization': org,
+				'form': submitted_form,
+				'shelves': shelves,
+			}
+			context = RequestContext(request, context)
+			return render_to_response('control-create-shelf.html', context)
+			
+	else:
+		form = ShelfForm()
+		shelves = Shelf.objects.filter(organization=org)
+    	
+    	context = {
+            'user': request.user,
+            'organization': org,
+            'shelves': shelves,
+            'form': form,            
+        }
+        context = RequestContext(request, context)   
+        return render_to_response('control-create-shelf.html', context)
+        
+        
+def shelf_builder(request, shelf_slug):
+
+	if not request.user.is_authenticated():
+		return HttpResponseRedirect(reverse('auth_login'))
+	
+	org = Organization.objects.get(user=request.user)
+	
+	try:
+		shelf = Shelf.objects.get(slug=shelf_slug, organization=org)
+	except:
+		raise Http404 
+		
+	context = {
+		'user': request.user,
+		'organization': org,
+		'shelf': shelf,
+	}
+	context = RequestContext(request, context)
+	return render_to_response('scan-shelf.html', context)

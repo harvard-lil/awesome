@@ -1,4 +1,4 @@
-from awesome.api import OrganizationResource, BranchResource, ItemResource, CheckinResource
+from awesome.api import OrganizationResource, BranchResource, ItemResource, CheckinResource, ShelfResource, ShelfItemResource
 
 from django.conf.urls.defaults import patterns, url, include
 from django.contrib import admin
@@ -12,6 +12,8 @@ v1_api.register(OrganizationResource())
 v1_api.register(BranchResource())
 v1_api.register(ItemResource())
 v1_api.register(CheckinResource())
+v1_api.register(ShelfResource())
+v1_api.register(ShelfItemResource())
 
 urlpatterns = patterns('',
     (r'^api/', include(v1_api.urls)),

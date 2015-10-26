@@ -2,7 +2,7 @@ import httplib, json, logging, urllib2, re, datetime, os, itertools
 from StringIO import StringIO
 from threading import Thread
 
-from awesome.models import Branch, Item, Organization, Classification
+from awesome.models import Branch, Item, Organization, Classification, ShelfItem, Shelf
 
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -67,6 +67,109 @@ def new_item(request):
 
     
     return HttpResponse(message_to_return, status=200)
+    
+    
+def new_shelf_item(request):
+    """Something coming in from our shelf scan page"""
+    
+    if not request.user.is_authenticated():
+        return HttpResponse(status=401)
+    
+    if 'barcode' not in request.POST:
+        return HttpResponse(status=400)
+    
+    barcode = request.POST["barcode"]
+    barcode = barcode.replace('-', '')
+    shelf = request.POST["shelf"]
+        
+    # We have the barcode, we need to determine if it's an isbn or an institution barcode or ... 
+    
+    
+    # If we are using the harvard lookup system
+    
+    org = Organization.objects.get(user=request.user)
+    shelf = get_object_or_404(Shelf, id=shelf)
+    
+    message_to_return = "No Title"
+    
+    url = "http://www.worldcat.org/webservices/catalog/search/sru?query=srw.sn%3D%22" + barcode + "&wskey=" + WORLDCAT["KEY"] + "&servicelevel=full&maximumRecords=1";
+    req = urllib2.Request(url)
+    
+    response = None
+    
+    try: 
+        f = urllib2.urlopen(req)
+        response = f.read()
+        f.close()
+    except urllib2.HTTPError, e:
+        logger.warn('Item from WorldCat, HTTPError = ' + str(e.code))
+    except urllib2.URLError, e:
+        logger.warn('Item from WorldCat, URLError = ' + str(e.reason))
+    except httplib.HTTPException, e:
+        logger.warn('Item from WorldCat, HTTPException')
+    except Exception:
+        import traceback
+        logger.warn('Item from WorldCat, generic exception: ' + traceback.format_exc())
+    
+    
+    parser = etree.XMLParser(ns_clean=True, recover=True)
+    tree = etree.parse(StringIO(response), parser)
+    
+    unique_id= None
+    unique_id_list = tree.xpath('//*[@tag="001"]/text()')
+    if unique_id_list:
+        unique_id = unique_id_list[0]
+    else:
+        raise NameError('Error getting Data')
+    
+    title = 'No title'
+    title_list = tree.xpath('//*[@tag="245"]/*[@code="a"]/text()')
+    if title_list:
+        title = unicode(title_list[0])
+    
+    creator = ''
+    creator_list = tree.xpath('//*[@tag="100"]/*[@code="a"]/text()')
+    if creator_list:
+        creator = unicode(creator_list[0])
+        
+    massaged_isbn = None
+    isbn_list = tree.xpath('//*[@tag="020"]/*[@code="a"]/text()')
+    if isbn_list:
+        isbn = isbn_list[0]
+        massaged_isbn = isbn.split()[0]
+    
+    cover_art = ''
+    
+    physical_format = 'book'
+    
+    formats = tree.xpath('//*[@tag="300"]/*/text()')
+            
+    if formats:
+        for format in formats:
+            if 'video' in format:
+                physical_format = 'videofilm'
+                cover_art = _get_tmdb_movie_poster(title)
+                break
+            elif 'sound' in format:
+                physical_format = 'soundrecording'
+                break
+            elif 'audio' in format:
+                physical_format = 'soundrecording'
+                break
+                
+    item = ShelfItem(shelf=shelf,
+                title=_simple_massage_text(title),
+                creator=_simple_massage_text(creator),
+                unique_id=unique_id,
+                catalog_id=barcode,
+                isbn=massaged_isbn,
+                physical_format=physical_format,
+                cover_art=cover_art,)
+    
+    
+    item.save()
+    
+    return HttpResponse(_simple_massage_text(title), status=200)
     
 def learn_how(request):
     """Something coming in from our landing page"""

@@ -103,3 +103,29 @@ class Checkin(models.Model):
     
     def __unicode__(self):
         return self.item.title
+        
+class Shelf(models.Model):
+	organization = models.ForeignKey(Organization)
+	title = models.CharField(max_length=400)
+	description = models.TextField(max_length=4000)
+	slug = models.SlugField()
+	
+	class Meta:
+		unique_together = ('organization', 'slug',)
+
+class ShelfItem(models.Model):
+    shelf = models.ForeignKey(Shelf)
+    title = models.CharField(max_length=400)
+    creator = models.CharField(max_length=400, null=True, blank=True)
+    unique_id = models.CharField(max_length=100, null=True, blank=True) #usually the institution id or worldcat
+    catalog_id = models.CharField(max_length=200, null=True, blank=True) #the ID we use for linking. probably the institution id, isbn, upc 
+    isbn = models.CharField(max_length=20, null=True, blank=True) # used to get the cover images
+    physical_format = models.CharField(max_length=50, default="book")
+    cover_art = models.URLField(max_length=400, null=True, blank=True)
+    classifications = models.ManyToManyField(Classification)
+    sort_order = models.PositiveSmallIntegerField(null=True, blank=True)
+    description = models.CharField(max_length=400, null=True, blank=True)
+        
+    def __unicode__(self):
+        return self.title
+        

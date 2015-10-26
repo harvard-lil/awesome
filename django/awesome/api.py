@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 from haystack.query import SearchQuerySet
 from tastypie import fields
 from tastypie.resources import ModelResource, ALL, ALL_WITH_RELATIONS
-from awesome.models import Organization, Branch, Item, Checkin
+from awesome.models import Organization, Branch, Item, Checkin, Shelf, ShelfItem
 
 
 from tastypie.utils import trailing_slash
@@ -30,6 +30,15 @@ class BranchResource(ModelResource):
         resource_name = 'branch'
         allowed_methods = ['get']
         filtering = {"organization": ALL_WITH_RELATIONS, "slug": ALL, "lat": ALL }
+        
+class ShelfResource(ModelResource):
+    organization = fields.ToOneField(OrganizationResource, 'organization', full = True )
+
+    class Meta:
+        queryset = Shelf.objects.all()
+        resource_name = 'shelf'
+        allowed_methods = ['get']
+        filtering = {"organization": ALL_WITH_RELATIONS, "slug": ALL}
         
 class ItemResource(ModelResource):    
     branch = fields.ToOneField(BranchResource, 'branch', full = True )
@@ -79,3 +88,14 @@ class CheckinResource(ModelResource):
     class Meta:
         queryset = Checkin.objects.all()
         resource_name = 'checkin'
+        
+class ShelfItemResource(ModelResource):    
+    shelf = fields.ToOneField(ShelfResource, 'shelf', full = True )
+    
+    class Meta:
+        queryset = ShelfItem.objects.all()
+        resource_name = 'shelf-item'
+        filtering = {"shelf": ALL_WITH_RELATIONS }
+        ordering = ['sort_order']
+        allowed_methods = ['get',]
+        
