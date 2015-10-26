@@ -241,18 +241,24 @@ a.right:hover {
 span.filter {
     display:block;
     margin: 10px 0 0 20px;
-    font-size:28px;
+    font-size:26px;
     color:#00333c;
-    background: transparent url('../images/facet-dot-old.png') 0px -45px no-repeat;
+    background-color:#BEE620;
     float:left;
     cursor:pointer;
+    border-radius:50%;
     height:45px;
     width:45px;
-    padding:0 0 0 11px;
+    padding:0px;
+    text-align:center;
 }
 
 span.filter:hover, span.filter.selected {
     color:#007992;
+}
+
+.filter i {
+    width: 1.28571429em;
 }
 /* Parallax
 *****************************************************************/
@@ -740,15 +746,24 @@ Work: http://lemonwi.se co-founder
 
 */
 @font-face {
-    font-family: "FontAwesome";
-    src: url('../font/fontawesome-webfont.eot');
-    src: url('../font/fontawesome-webfont.eot?#iefix') format('eot'), url('../font/fontawesome-webfont.woff') format('woff'), url('../font/fontawesome-webfont.ttf') format('truetype'), url('../font/fontawesome-webfont.svg#FontAwesome') format('svg');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'FontAwesome';
+  src: url('../font/fontawesome-webfont.eot?v=4.4.0');
+  src: url('../font/fontawesome-webfont.eot?#iefix&v=4.4.0') format('embedded-opentype'), url('../font/fontawesome-webfont.woff2?v=4.4.0') format('woff2'), url('../font/fontawesome-webfont.woff?v=4.4.0') format('woff'), url('../font/fontawesome-webfont.ttf?v=4.4.0') format('truetype'), url('../font/fontawesome-webfont.svg?v=4.4.0#fontawesomeregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
 }
 
 /*  Font Awesome styles
 ------------------------------------------------------- */
+.fa {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 [class^="icon-"]:before, [class*=" icon-"]:before {
     font-family: FontAwesome;
     font-weight: normal;
