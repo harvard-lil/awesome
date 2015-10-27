@@ -27,6 +27,26 @@ body {
   font-family: "Open Sans", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size:1.6em;
 }
+
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('{{ STATIC_PREFIX }}font/fontawesome-webfont.eot?v=4.4.0');
+  src: url('{{ STATIC_PREFIX }}font/fontawesome-webfont.eot?#iefix&v=4.4.0') format('embedded-opentype'), url('{{ STATIC_PREFIX }}font/fontawesome-webfont.woff2?v=4.4.0') format('woff2'), url('{{ STATIC_PREFIX }}font/fontawesome-webfont.woff?v=4.4.0') format('woff'), url('{{ STATIC_PREFIX }}font/fontawesome-webfont.ttf?v=4.4.0') format('truetype'), url('{{ STATIC_PREFIX }}font/fontawesome-webfont.svg?v=4.4.0#fontawesomeregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+.fa {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.fa-amazon:before {
+  content: "\f270";
+}
 </style>
 </head>
 
@@ -74,6 +94,7 @@ body {
 				{{title}}
 			</span>
 			<span class="item-author">{{creator}}</span>
+			<i class="fa fa-amazon"></i>
 		</div>
 	</div>
 	{{/objects}}

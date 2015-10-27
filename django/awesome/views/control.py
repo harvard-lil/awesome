@@ -563,16 +563,17 @@ def shelf(request):
 		return HttpResponseRedirect(reverse('auth_login'))
 		
 	org = Organization.objects.get(user=request.user)
+	shelf_instance = Shelf(organization=org)
 	
 	if request.method == 'POST':
-		submitted_form = ShelfForm(request.POST,)
+		submitted_form = ShelfForm(request.POST, instance=shelf_instance)
 		
-		if submitted_form.is_valid():
+		if submitted_form.is_valid() and submitted_form.form_valid():
 			display_shelf = submitted_form.save(commit=False)
 			display_shelf.organization = org
 			display_shelf.save()
 			
-			return HttpResponseRedirect(reverse('control_shelf'))
+			return HttpResponseRedirect(reverse('control_shelf_builder', args=[display_shelf.slug]))
 		else:
 			shelves = Shelf.objects.filter(organization=org)
 			
@@ -586,7 +587,7 @@ def shelf(request):
 			return render_to_response('control-create-shelf.html', context)
 			
 	else:
-		form = ShelfForm()
+		form = ShelfForm(instance=shelf_instance)
 		shelves = Shelf.objects.filter(organization=org)
     	
     	context = {

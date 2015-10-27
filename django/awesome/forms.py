@@ -2,6 +2,7 @@ from awesome.models import Organization, Branch, Shelf
 
 from django import forms
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 
 
 class UserRegForm(forms.ModelForm):
@@ -144,8 +145,8 @@ class AnalyticsForm(forms.Form):
 class ShelfForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
-            super(ShelfForm, self).__init__(*args, **kwargs)
-            self.fields['slug'].label = "Web friendly name (letters, numbers, underscores or hyphens)"
+        super(ShelfForm, self).__init__(*args, **kwargs)
+        self.fields['slug'].label = "Web friendly name (letters, numbers, underscores or hyphens)"
     
     class Meta:
         model = Shelf
@@ -153,3 +154,15 @@ class ShelfForm(forms.ModelForm):
         widgets = {
           'description': forms.Textarea(attrs={'rows':4}),
         }
+        
+    def form_valid(self):
+        self.object = self.save(commit=False)
+        try:
+            self.object.full_clean()
+        except ValidationError:
+            # here you can return the same view with error messages
+            # e.g. field level error or...
+            self._errors["slug"] = self.error_class([u"You already have a shelf with that name."])
+            return False
+        return True
+        
