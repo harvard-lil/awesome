@@ -169,7 +169,10 @@ def new_shelf_item(request):
     
     item.save()
     
-    return HttpResponse(_simple_massage_text(title), status=200)
+    response = {'title': _simple_massage_text(title), 'creator': _simple_massage_text(creator), 'id': item.id, 'shelf': shelf.id}
+    jsoned_response = json.dumps(response)
+    
+    return HttpResponse(jsoned_response, mimetype='application/json')
     
 def learn_how(request):
     """Something coming in from our landing page"""

@@ -22,54 +22,93 @@
 
 <link rel="stylesheet" href="{{ STATIC_PREFIX }}css/normalize.css" type="text/css" />
 <link rel="stylesheet" href="{{ STATIC_PREFIX }}css/skeleton.css" type="text/css" />
-<style>
-body {
-  font-family: "Open Sans", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size:1.6em;
-}
-
-@font-face {
-  font-family: 'FontAwesome';
-  src: url('{{ STATIC_PREFIX }}font/fontawesome-webfont.eot?v=4.4.0');
-  src: url('{{ STATIC_PREFIX }}font/fontawesome-webfont.eot?#iefix&v=4.4.0') format('embedded-opentype'), url('{{ STATIC_PREFIX }}font/fontawesome-webfont.woff2?v=4.4.0') format('woff2'), url('{{ STATIC_PREFIX }}font/fontawesome-webfont.woff?v=4.4.0') format('woff'), url('{{ STATIC_PREFIX }}font/fontawesome-webfont.ttf?v=4.4.0') format('truetype'), url('{{ STATIC_PREFIX }}font/fontawesome-webfont.svg?v=4.4.0#fontawesomeregular') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
-.fa {
-  display: inline-block;
-  font: normal normal normal 14px/1 FontAwesome;
-  font-size: inherit;
-  text-rendering: auto;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.fa-amazon:before {
-  content: "\f270";
-}
-</style>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="{{ STATIC_PREFIX }}css/build-shelf.css" type="text/css" />
 </head>
 
 <body>
 <div class="container">
     <div class="row">
-      <div class="one-half column">
-        <h4>{{shelf.title}}</h4>
-        <p>Build your shelf here.</p>
-      </div>
-    </div>
-    <form id="lookup">
+      <div class="eight columns">
+      	<h4>Build your shelf</h4>
+      	<form id="lookup">
     	<div class="row">
-    		<div class="six columns">
+    		<div class="eight columns">
     			<input class="u-full-width" placeholder="ISBN/UPC code" id="barcode" type="text">
     		</div>
-    		<div class="six columns">
+    		<div class="four columns">
+    			<h5>Add Items</h5>
     			<p class="status"></p>
     		</div>
     	</div>
 	</form>
+      </div>
+    </div>
+    <form action="." method="post">
+      <div class="row">
+      	<div class="eight columns">
+      	{% csrf_token %}
+      	{% if add_item_form.errors %}
+      	<ul class="errorlist">
+        	<li>Please fix the error(s) below.</li>
+      	</ul>
+      	{% endif %}
+		<p class="build-shelf-title">{{ form.title }}{{ form.title.errors }}</p>
+		<p class="build-shelf-permalink">http://{{shelf.organization.slug}}.{{awesome_domain}}/{{form.slug}}{{form.slug.errors}}</p>
+		<p class="build-shelf-description">{{ form.description }}{{ form.description.errors }}</p>
+		{{ formset.management_form }}
+		</div>
+		<div class="four columns">
+			<h5>Shelf Details</h5>
+			<p>Your shelf's title, link and description</p>
+			<button class="button-primary">Save Shelf</button>
+			{% if messages %}
+        		{% for message in messages %}
+            		<p id="build-shelf-message">{% if 'safe' in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}</p>
+        		{% endfor %}
+    		{% endif %}
+		</div>
+		</div>
+		<div class="row">
+		<div class="twelve columns">
+		<div class="order_list">
+		{% for form in formset.forms %}
+		<div class="order_item item" id="item-{{ forloop.counter }}">
+		{% for field in form.visible_fields %}
+
+		{# include hidden fields #}
+		{% if forloop.first %}
+        	{% for hidden in form.hidden_fields %}
+        	{{ hidden }}
+        	{% endfor %}
+		{% endif %}
+
+		{% if "sort_order" in field.html_name %}
+		<span class="order">
+		{{ field.as_hidden }}
+		</span>
+		{% elif "shelf" in field.html_name or "id" in field.html_name %}
+		<span class="description">
+		{{ field.as_hidden }}
+		</span>
+		{% else %}
+		<span class="description">
+
+		{{ field.errors }}
+		{{ field }}
+
+		</span>
+		{% endif %}
+
+		{% endfor %}
+		</div>
+		{% endfor %}
+		</div>
+		</div>
+		</div>
+		</form>
 	<div class="row">
-		<div class="six columns" id="shelf-items">
+		<div class="twelve columns" id="shelf-items">
 		</div>
 	</div>
 </div>
@@ -79,26 +118,41 @@ body {
 	shelf='{{shelf.id}}';
 </script>
 <script type="text/javascript" src="{{ STATIC_PREFIX }}js/jquery-1.7.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 <script src="{{ STATIC_PREFIX }}js/handlebars.js"></script>
 <script type="text/javascript" src="{{ STATIC_PREFIX }}js/scan-shelf.js"></script>
+
 </body>
 
 {% verbatim %}
-<script id="items-template" type="text/x-handlebars-template">
-
-<ul> 
-	{{#objects}}
+<script id="items-template" type="text/x-handlebars-template"> 
 	<div class="item">
 		<div class="item-details">
-			<span class="item-title">
+			<p class="item-title">
 				{{title}}
-			</span>
-			<span class="item-author">{{creator}}</span>
+			</p>
+			<p class="item-author">{{creator}}</p>
 			<i class="fa fa-amazon"></i>
 		</div>
 	</div>
-	{{/objects}}
-</ul>
+</script>
+
+<script id="items-template2" type="text/x-handlebars-template">
+	<div class="order_item item ui-sortable-handle" id="item-{{item_num}}">
+	<input id="id_form-{{form_num}}-id" name="form-{{form_num}}-id" value="{{id}}" type="hidden">
+	<span class="description">
+	<input id="id_form-{{form_num}}-title" maxlength="400" name="form-{{form_num}}-title" value="{{title}}" type="text">
+	</span>
+	<span class="description">
+	<input id="id_form-{{form_num}}-creator" maxlength="400" name="form-{{form_num}}-creator" value="{{creator}}" type="text">
+	</span>
+	<span class="order hidden">
+	<input id="id_form-{{form_num}}-sort_order" name="form-{{form_num}}-sort_order" value="{{sort}}" type="hidden">
+	</span>
+	<span class="description">
+	<input id="id_form-{{form_num}}-shelf" name="form-{{form_num}}-shelf" value="{{shelf}}" type="hidden">
+	</span>
+	</div>
 </script>
 
 {% endverbatim %}

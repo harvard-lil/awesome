@@ -1,4 +1,5 @@
-from awesome.models import Organization, Branch, Item, Checkin, Shelf
+from django.forms.models import modelformset_factory
+from awesome.models import Organization, Branch, Item, Checkin, Shelf, ShelfItem
 from awesome.forms import (
     OrganizationForm, 
     BranchForm, 
@@ -606,16 +607,50 @@ def shelf_builder(request, shelf_slug):
 		return HttpResponseRedirect(reverse('auth_login'))
 	
 	org = Organization.objects.get(user=request.user)
+	awesome_domain = Site.objects.get_current().domain
 	
 	try:
 		shelf = Shelf.objects.get(slug=shelf_slug, organization=org)
 	except:
 		raise Http404 
 		
-	context = {
-		'user': request.user,
-		'organization': org,
-		'shelf': shelf,
-	}
-	context = RequestContext(request, context)
-	return render_to_response('scan-shelf.html', context)
+	form = ShelfForm(instance=shelf)
+	ShelfItemFormSet = modelformset_factory(ShelfItem, extra = 0, fields=("title", "creator", "sort_order", "shelf", "id"))
+	
+	if request.method == 'POST':
+		form = ShelfForm(request.POST, instance=shelf)
+		formset = ShelfItemFormSet(request.POST)
+		
+		if form.is_valid() and form.form_valid() and formset.is_valid():
+			formset.save()
+			# reset the order to what's been saved
+			formset = ShelfItemFormSet(queryset=ShelfItem.objects.order_by('sort_order'))
+			
+			display_shelf = form.save()
+			messages.success(request, 'Saved!')
+			return HttpResponseRedirect(reverse('control_shelf_builder', args=[display_shelf.slug]))
+		else:
+			context = {
+				'user': request.user,
+				'organization': org,
+				'shelf': shelf,
+				'awesome_domain': awesome_domain,
+				'form': form,
+				'formset': formset,
+			}
+			context = RequestContext(request, context)
+			return render_to_response('scan-shelf.html', context)
+	else:
+		form = ShelfForm(instance=shelf)
+		formset = ShelfItemFormSet(queryset=ShelfItem.objects.order_by('sort_order'))
+		
+		context = {
+			'user': request.user,
+			'organization': org,
+			'shelf': shelf,
+			'awesome_domain': awesome_domain,
+			'form': form,
+			'formset': formset,
+		}
+		context = RequestContext(request, context)
+		return render_to_response('scan-shelf.html', context)

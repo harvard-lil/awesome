@@ -1,0 +1,73 @@
+body {
+  font-family: "Open Sans", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size:1.6em;
+}
+
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('../font/fontawesome-webfont.eot?v=4.4.0');
+  src: url('../font/fontawesome-webfont.eot?#iefix&v=4.4.0') format('embedded-opentype'), url('../font/fontawesome-webfont.woff2?v=4.4.0') format('woff2'), url('../font/fontawesome-webfont.woff?v=4.4.0') format('woff'), url('../font/fontawesome-webfont.ttf?v=4.4.0') format('truetype'), url('../font/fontawesome-webfont.svg?v=4.4.0#fontawesomeregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+.fa {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.fa-amazon:before {
+  content: "\f270";
+}
+
+h4, h5 {
+	color:#999;
+	text-transform:uppercase;
+}
+
+.build-shelf-title {
+	margin-bottom:0px;
+}
+
+.build-shelf-title input {
+	width:100%;
+	font-size:1.8em;
+	height:48px;
+}
+
+.build-shelf-permalink {
+	font-size:.8em;
+	margin-bottom:.5em;
+}
+
+.build-shelf-permalink input {
+	height:28px;
+	margin-left:3px;
+	padding:5px 10px;
+}
+
+.build-shelf-description textarea {
+	width:100%;
+}
+
+ul.errorlist {
+	list-style:none;
+	color:#CE023B;
+}
+
+#build-shelf-message{
+	color:#17ab47;
+}
+
+.item {
+	float:left;
+	height:200px;
+	width:225px;
+	padding:20px;
+	margin-right:10px;
+	margin-bottom:10px;
+	border:1px solid #888;
+}

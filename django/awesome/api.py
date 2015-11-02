@@ -96,6 +96,6 @@ class ShelfItemResource(ModelResource):
         queryset = ShelfItem.objects.all()
         resource_name = 'shelf-item'
         filtering = {"shelf": ALL_WITH_RELATIONS }
-        ordering = ['sort_order']
+        ordering = ['date_created', 'sort_order']
         allowed_methods = ['get',]
         

@@ -109,6 +109,7 @@ class Shelf(models.Model):
 	title = models.CharField(max_length=400)
 	description = models.TextField(max_length=4000)
 	slug = models.SlugField()
+	date_created = models.DateTimeField(auto_now=True, null=True)
 	
 	class Meta:
 		unique_together = ('organization', 'slug',)
@@ -125,6 +126,7 @@ class ShelfItem(models.Model):
     classifications = models.ManyToManyField(Classification)
     sort_order = models.PositiveSmallIntegerField(null=True, blank=True)
     description = models.CharField(max_length=400, null=True, blank=True)
+    date_created = models.DateTimeField(auto_now=True, null=True)
         
     def __unicode__(self):
         return self.title
