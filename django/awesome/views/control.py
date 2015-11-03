@@ -615,7 +615,7 @@ def shelf_builder(request, shelf_slug):
 		raise Http404 
 		
 	form = ShelfForm(instance=shelf)
-	ShelfItemFormSet = modelformset_factory(ShelfItem, extra = 0, fields=("title", "creator", "sort_order", "shelf", "id"))
+	ShelfItemFormSet = modelformset_factory(ShelfItem, extra = 0, fields=("title", "creator", "sort_order", "shelf"), can_delete=True)
 	
 	if request.method == 'POST':
 		form = ShelfForm(request.POST, instance=shelf)

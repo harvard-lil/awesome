@@ -71,3 +71,7 @@ ul.errorlist {
 	margin-bottom:10px;
 	border:1px solid #888;
 }
+
+.item.deleted-item {
+	border-color:#CE023B;
+}

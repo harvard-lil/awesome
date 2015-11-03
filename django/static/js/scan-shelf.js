@@ -30,6 +30,10 @@ $(document).ready(function() {
 		return false;
 	});
 	
+	$( ".order_list" ).on( "click", "input:checkbox", function() {
+  		$(this).closest('.order_item').addClass('deleted-item');
+	});
+	
 	// hide order fields 
     $('span.order').addClass('hidden');
 

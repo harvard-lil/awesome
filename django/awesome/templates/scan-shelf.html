@@ -87,9 +87,11 @@
 		<span class="order">
 		{{ field.as_hidden }}
 		</span>
-		{% elif "shelf" in field.html_name or "id" in field.html_name %}
-		<span class="description">
+		{% elif "shelf" in field.html_name %}
 		{{ field.as_hidden }}
+		{% elif "DELETE" in field.html_name %}
+		<span class="delete">
+		<label>{{ field }} <span class="label-body">DELETE</span></label>
 		</span>
 		{% else %}
 		<span class="description">
