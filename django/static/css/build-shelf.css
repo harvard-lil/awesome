@@ -28,6 +28,24 @@ h4, h5 {
 	text-transform:uppercase;
 }
 
+#lookup {
+	border:1px solid #444;
+	background-color:#eee;
+	padding:25px;
+	height:130px;
+	box-sizing:border-box;
+}
+
+#lookup p.error {
+	margin-bottom:0px;
+	color:#CE023B;
+}
+
+#lookup p.success {
+	margin-bottom:0px;
+	color:#17ab47;
+}
+
 .build-shelf-title {
 	margin-bottom:0px;
 }
@@ -64,14 +82,28 @@ ul.errorlist {
 
 .item {
 	float:left;
-	height:200px;
-	width:225px;
+	height:460px;
+	width:32%;
 	padding:20px;
 	margin-right:10px;
 	margin-bottom:10px;
 	border:1px solid #888;
+	box-sizing: border-box;
 }
 
 .item.deleted-item {
 	border-color:#CE023B;
+}
+
+.item .item-cover {
+	max-width:150px;
+	max-height:160px;
+}
+
+.item .item-cover-container {
+	height:175px;
+}
+
+.item input[type="text"] {
+	width:100%;
 }

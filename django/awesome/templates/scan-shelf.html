@@ -15,7 +15,7 @@
   <!-- FONT
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
-{% load static %}
+{% load static isbn_converter placeholder %}
 {% get_static_prefix as STATIC_PREFIX %}
 
 <title>Scan | Awesome Box at the {{organization.name}}</title>
@@ -31,19 +31,20 @@
     <div class="row">
       <div class="eight columns">
       	<h4>Build your shelf</h4>
+      	</div>
+      </div>
       	<form id="lookup">
     	<div class="row">
     		<div class="eight columns">
     			<input class="u-full-width" placeholder="ISBN/UPC code" id="barcode" type="text">
+    			<p class="error"></p>
+    			<p class="success"></p>
     		</div>
     		<div class="four columns">
-    			<h5>Add Items</h5>
-    			<p class="status"></p>
+    			<h5>Scan New Items Here</h5>
     		</div>
     	</div>
 	</form>
-      </div>
-    </div>
     <form action="." method="post">
       <div class="row">
       	<div class="eight columns">
@@ -89,10 +90,18 @@
 		</span>
 		{% elif "shelf" in field.html_name %}
 		{{ field.as_hidden }}
+		{% elif "isbn" in field.html_name %}
+		<div class="item-cover-container">
+		<img class="item-cover" src="http://images.amazon.com/images/P/{{field.value|isbn_converter}}.01.LZZZZZZZ.jpg" alt="{{field.value}} cover image" />
+		</div>
+		{{ field.as_hidden }}
 		{% elif "DELETE" in field.html_name %}
 		<span class="delete">
 		<label>{{ field }} <span class="label-body">DELETE</span></label>
 		</span>
+		{% elif "description" in field.html_name %}
+		{{ field.errors }}
+		{{ field|placeholder:"Optional description"}}
 		{% else %}
 		<span class="description">
 
@@ -154,6 +163,13 @@
 	<span class="description">
 	<input id="id_form-{{form_num}}-shelf" name="form-{{form_num}}-shelf" value="{{shelf}}" type="hidden">
 	</span>
+	<div class="item-cover-container">
+	<img class="item-cover" src="http://images.amazon.com/images/P/{{isbn}}.01.LZZZZZZZ.jpg" alt="{{isbn}} cover image">
+	</div>
+	<input id="id_form-{{form_num}}-isbn" name="form-{{form_num}}-isbn" value="{{isbn}}" type="hidden">
+	<input id="id_form-{{form_num}}-description" maxlength="400" name="form-{{form_num}}-description" placeholder="Optional description" type="text">
+	<span class="delete">
+	<label><input id="id_form-{{form_num}}-DELETE" name="form-{{form_num}}-DELETE" type="checkbox"> <span class="label-body">DELETE</span></label>
 	</div>
 </script>
 

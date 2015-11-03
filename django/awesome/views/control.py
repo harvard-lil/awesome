@@ -1,4 +1,3 @@
-from django.forms.models import modelformset_factory
 from awesome.models import Organization, Branch, Item, Checkin, Shelf, ShelfItem
 from awesome.forms import (
     OrganizationForm, 
@@ -7,6 +6,8 @@ from awesome.forms import (
     TwitterSettingsForm,
     ShelfForm
 )
+
+from django.forms.models import modelformset_factory
 
 import datetime, logging, urlparse, csv
 
@@ -615,7 +616,7 @@ def shelf_builder(request, shelf_slug):
 		raise Http404 
 		
 	form = ShelfForm(instance=shelf)
-	ShelfItemFormSet = modelformset_factory(ShelfItem, extra = 0, fields=("title", "creator", "sort_order", "shelf"), can_delete=True)
+	ShelfItemFormSet = modelformset_factory(ShelfItem, extra = 0, fields=("title", "creator", "sort_order", "shelf", "isbn", "description"), can_delete=True)
 	
 	if request.method == 'POST':
 		form = ShelfForm(request.POST, instance=shelf)

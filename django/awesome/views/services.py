@@ -13,7 +13,7 @@ from django.conf import settings
 from django.contrib.sites.models import Site
 
 from lxml import etree, objectify
-import twitter
+import twitter, string, sys
 import bottlenose
 from xml.dom.minidom import parseString
 
@@ -81,6 +81,7 @@ def new_shelf_item(request):
     barcode = request.POST["barcode"]
     barcode = barcode.replace('-', '')
     shelf = request.POST["shelf"]
+    sort = request.POST["sort"]
         
     # We have the barcode, we need to determine if it's an isbn or an institution barcode or ... 
     
@@ -137,6 +138,8 @@ def new_shelf_item(request):
     if isbn_list:
         isbn = isbn_list[0]
         massaged_isbn = isbn.split()[0]
+        
+    isbn_10 = isbn_converter(massaged_isbn)
     
     cover_art = ''
     
@@ -164,12 +167,13 @@ def new_shelf_item(request):
                 catalog_id=barcode,
                 isbn=massaged_isbn,
                 physical_format=physical_format,
-                cover_art=cover_art,)
+                cover_art=cover_art,
+                sort_order=sort,)
     
     
     item.save()
     
-    response = {'title': _simple_massage_text(title), 'creator': _simple_massage_text(creator), 'id': item.id, 'shelf': shelf.id}
+    response = {'title': _simple_massage_text(title), 'creator': _simple_massage_text(creator), 'id': item.id, 'shelf': shelf.id, 'isbn': isbn_10}
     jsoned_response = json.dumps(response)
     
     return HttpResponse(jsoned_response, mimetype='application/json')
@@ -644,3 +648,21 @@ def isbn_awesome_count(request, isbn):
     jsoned_response = json.dumps(response)
     
     return HttpResponse(jsoned_response, mimetype='application/json')
+    
+def isbn_converter(isbn_13):
+    """
+        Given a 13 digit ISBN, return a 10 digit ISBN
+    """
+    if len(isbn_13) != 13:
+        return isbn_13
+    isbn_13 = string.replace(isbn_13,"-","")
+    isbn_10 = isbn_13[3:12]
+    sum = 0
+    for i in range(9):
+        digit = string.atoi(isbn_10[i])
+        sum += (10-i)*digit
+    gap_num = 11 - sum%11
+    if gap_num == 11: gap_num = 0
+    if gap_num == 10: gap_num = "X"
+    isbn_10 += str(gap_num)
+    return isbn_10

@@ -7,24 +7,28 @@ $(document).ready(function() {
 	
 	$('#lookup').submit(function() {
 		var barcode = $('#barcode').val();
+		var sort = 10;
+		var last_sort = $('.order_item:last').find('.order input').val();
+		if(last_sort)
+			sort = parseInt(last_sort) + 10;
 		
-		$.post('/services/new-shelf-item/', {barcode: barcode, shelf: shelf, csrfmiddlewaretoken: CSRF_TOKEN}).done(function(data) {
+		$.post('/services/new-shelf-item/', {barcode: barcode, shelf: shelf, csrfmiddlewaretoken: CSRF_TOKEN, sort: sort}).done(function(data) {
 			$('#barcode').val('').focus();
+			$('.success, .error').hide();
 			//getItems()
 			var total = $('#id_form-TOTAL_FORMS').val();
 			data.form_num = total;
    		 	total++;
    		 	data.item_num = total;
-   		 	var last_sort = $('.order_item:last').find('.order input').val();
-   		 	data.sort = parseInt(last_sort) + 10;
+   		 	data.sort = sort;
     		$('#id_form-TOTAL_FORMS').val(total);
     		$('#id_form-INITIAL_FORMS').val(total);
 			var source = $("#items-template2").html();
 	  		var template = Handlebars.compile(source);
       		$('.order_list').append(template(data));
-			$('.status').text('');
+			$('.success').text('Got it!').fadeIn();
 		}).fail(function(data) {
-    			$('.status').text('The barcode lookup failed - no data');
+    			$('.error').text('The barcode lookup failed - no data').fadeIn();
     		});
 		
 		return false;
