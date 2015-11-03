@@ -178,6 +178,37 @@ def new_shelf_item(request):
     
     return HttpResponse(jsoned_response, mimetype='application/json')
     
+    
+def new_blank_shelf_item(request):
+    """Something coming in from our shelf scan page"""
+    
+    if not request.user.is_authenticated():
+        return HttpResponse(status=401)
+
+    shelf = request.POST["shelf"]
+    sort = request.POST["sort"]
+        
+    # We have the barcode, we need to determine if it's an isbn or an institution barcode or ... 
+    
+    
+    # If we are using the harvard lookup system
+    
+    org = Organization.objects.get(user=request.user)
+    shelf = get_object_or_404(Shelf, id=shelf)
+    
+    message_to_return = "No Title"
+                
+    item = ShelfItem(shelf=shelf,
+                sort_order=sort,)
+    
+    
+    item.save()
+    
+    response = {'id': item.id, 'shelf': shelf.id}
+    jsoned_response = json.dumps(response)
+    
+    return HttpResponse(jsoned_response, mimetype='application/json')
+    
 def learn_how(request):
     """Something coming in from our landing page"""
     
