@@ -98,7 +98,7 @@ ul.errorlist {
 	color:#17ab47;
 }
 
-.item {
+.build-item {
 	float:left;
 	height:460px;
 	width:270px;
@@ -109,19 +109,19 @@ ul.errorlist {
 	box-sizing: border-box;
 }
 
-.item.deleted-item {
+.build-item.deleted-item {
 	border-color:#CE023B;
 }
 
-.item .item-cover {
+.build-item .item-cover {
 	max-width:150px;
 	max-height:160px;
 }
 
-.item .item-cover-container {
+.build-item .item-cover-container {
 	height:175px;
 }
 
-.item input[type="text"] {
+.build-item input[type="text"] {
 	width:100%;
 }

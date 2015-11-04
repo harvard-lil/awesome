@@ -75,7 +75,7 @@
 		<div class="twelve columns">
 		<div class="order_list">
 		{% for form in formset.forms %}
-		<div class="order_item item" id="item-{{ forloop.counter }}">
+		<div class="order_item build-item" id="item-{{ forloop.counter }}">
 		{% for field in form.visible_fields %}
 
 		{# include hidden fields #}
@@ -150,7 +150,7 @@
 </script>
 
 <script id="items-template2" type="text/x-handlebars-template">
-	<div class="order_item item ui-sortable-handle" id="item-{{item_num}}">
+	<div class="order_item build-item ui-sortable-handle" id="item-{{item_num}}">
 	<input id="id_form-{{form_num}}-id" name="form-{{form_num}}-id" value="{{id}}" type="hidden">
 	<span class="description">
 	<input id="id_form-{{form_num}}-title" maxlength="400" name="form-{{form_num}}-title" value="{{title}}" type="text">
