@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <meta name="description" content="{{shelf.title}}">
+  <meta name="author" content="{{organization.name}}">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+{% load static isbn_converter %}
+{% get_static_prefix as STATIC_PREFIX %}
+
+<title>Scan | Awesome Box at the {{organization.name}}</title>
+
+<link rel="stylesheet" href="{{ STATIC_PREFIX }}css/normalize.css" type="text/css" />
+<link rel="stylesheet" href="{{ STATIC_PREFIX }}css/skeleton.css" type="text/css" />
+<link rel="stylesheet" href="{{ STATIC_PREFIX }}css/shelf.css" type="text/css" />
+</head>
+
+<body>
+<div class="container">
+    <div class="row">
+      <div class="eight columns">
+      	<h4>{{shelf.title}}</h4>
+      	<p>{{shelf.description}}</p>
+      	</div>
+      </div>
+      
+      <div class="row">
+      	<div class="twelve columns">
+      	{% for item in items %}
+      	<div class="item">
+		<div class="item-details">
+		<div class="item-cover-container">
+		<img class="item-cover" src="http://images.amazon.com/images/P/{{item.isbn|isbn_converter}}.01.LZZZZZZZ.jpg" alt="{{item.title}} cover image" />
+		<div class="item-cover-backup">{{item.title}}</div>
+		</div>
+			<p class="item-title">
+				{{item.title}}
+				<i class="fa fa-amazon"></i>
+			</p>
+			<p class="item-author">{{item.creator}}</p>
+		</div>
+	</div>
+      	{% endfor %}
+      	</div>
+      </div>
+</div>
+
+<script type="text/javascript">
+	var CSRF_TOKEN = "{{ csrf_token }}",
+	shelf='{{shelf.id}}';
+</script>
+<script type="text/javascript" src="{{ STATIC_PREFIX }}js/jquery-1.7.1.min.js"></script>
+<script src="{{ STATIC_PREFIX }}js/handlebars.js"></script>
+<script type="text/javascript" src="{{ STATIC_PREFIX }}js/scan-shelf.js"></script>
+
+</body>

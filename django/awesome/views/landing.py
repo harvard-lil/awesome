@@ -1,7 +1,7 @@
 import logging, math
 
 from datetime import date, timedelta
-from awesome.models import Organization, Item, Branch, Checkin
+from awesome.models import Organization, Item, Branch, Checkin, Shelf, ShelfItem
 
 from django.shortcuts import render_to_response
 from django.core.context_processors import csrf
@@ -74,6 +74,40 @@ def landing(request):
                
         context = RequestContext(request, context)
         return render_to_response('landing_default.html', context)
+        
+
+def shelf(request, shelf_slug):
+    """The welcome page."""
+    
+    try:
+        from awesome.local_settings import *
+    except ImportError, e:
+        logger.error('Unable to load local_settings.py:', e)
+    
+    if 'subdomain' in request.META:
+        try:
+        	shelf = Shelf.objects.get(slug=shelf_slug, organization__slug=request.META['subdomain'])
+        except:
+        	raise Http404  
+
+        org = Organization.objects.get(slug=request.META['subdomain'])
+        items = ShelfItem.objects.filter(shelf = shelf).order_by('-sort_order')
+
+        if org.is_active:
+        
+            template = 'shelf.html'
+            
+            context = {'user': request.user, 'organization': org, 'shelf': shelf, 'items': items}
+        
+        else:
+            template = 'landing_org_deactivated.html'
+            awesome_domain = Site.objects.get_current().domain
+            context = {'awesome_domain': awesome_domain, 'ga_key': GOOGLE['ANALYTICS_KEY']}
+    
+        context = RequestContext(request, context)
+        return render_to_response(template, context)
+    else:
+        raise Http404 
         
 
 def explorer(request):
