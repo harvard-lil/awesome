@@ -3,6 +3,24 @@ body {
   font-size:1.6em;
 }
 
+.container {
+	max-width:1170px;
+}
+
+/* For devices larger than 1190px */
+@media (min-width: 1190px) {
+	.container {
+		width:100%;
+	}
+}
+
+/* For devices larger than 550px */
+@media (min-width: 550px) {
+	.container {
+		width:90%;
+	}
+}
+
 @font-face {
   font-family: 'FontAwesome';
   src: url('../font/fontawesome-webfont.eot?v=4.4.0');
@@ -83,7 +101,7 @@ ul.errorlist {
 .item {
 	float:left;
 	height:460px;
-	width:32%;
+	width:270px;
 	padding:20px;
 	margin-right:10px;
 	margin-bottom:10px;
