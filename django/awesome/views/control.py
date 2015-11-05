@@ -625,7 +625,7 @@ def shelf_builder(request, shelf_slug):
 		if form.is_valid() and form.form_valid() and formset.is_valid():
 			formset.save()
 			# reset the order to what's been saved
-			formset = ShelfItemFormSet(queryset=ShelfItem.objects.order_by('sort_order'))
+			formset = ShelfItemFormSet(queryset=ShelfItem.objects.order_by('-sort_order'))
 			
 			display_shelf = form.save()
 			messages.success(request, 'Saved!')
@@ -643,7 +643,7 @@ def shelf_builder(request, shelf_slug):
 			return render_to_response('scan-shelf.html', context)
 	else:
 		form = ShelfForm(instance=shelf)
-		formset = ShelfItemFormSet(queryset=ShelfItem.objects.order_by('sort_order'))
+		formset = ShelfItemFormSet(queryset=ShelfItem.objects.order_by('-sort_order'))
 		
 		context = {
 			'user': request.user,

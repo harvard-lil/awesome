@@ -7,20 +7,6 @@ body {
 	max-width:1170px;
 }
 
-/* For devices larger than 1190px */
-@media (min-width: 1190px) {
-	.container {
-		width:100%;
-	}
-}
-
-/* For devices larger than 550px */
-@media (min-width: 550px) {
-	.container {
-		width:90%;
-	}
-}
-
 @font-face {
   font-family: 'FontAwesome';
   src: url('../font/fontawesome-webfont.eot?v=4.4.0');
@@ -80,12 +66,7 @@ h4, h5 {
 	float:left;
 	margin-right:20px;
 	width:260px;
-	height:400px;
 	position:relative;
-}
-
-.item-cover-container {
-	height:330px;
 }
 
 .item-cover {
@@ -124,6 +105,24 @@ h4, h5 {
 .fa-amazon {
 	float:right;
 	line-height:1.6em;
+	color:#AEB1B8;
+}
+
+/* For devices larger than 1190px */
+@media (min-width: 1190px) {
+	.container {
+		width:100%;
+	}
+}
+
+/* For devices larger than 550px */
+@media (min-width: 700px) {
+	.item {
+		height:400px;
+	}
+	.item-cover-container {
+		height:330px;
+	}
 }
 
 /* shelf builder styles */

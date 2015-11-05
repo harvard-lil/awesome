@@ -9,6 +9,8 @@ def isbn_converter(isbn_13):
     """
         Given a 13 digit ISBN, return a 10 digit ISBN
     """
+    if not isbn_13:
+    	return isbn_13
     if len(isbn_13) != 13:
         return isbn_13
     isbn_13 = string.replace(isbn_13,"-","")

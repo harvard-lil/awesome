@@ -45,7 +45,7 @@
 		</div>
 			<p class="item-title">
 				{{item.title}}
-				<i class="fa fa-amazon"></i>
+				<a href="http://www.amazon.com/gp/search?keywords={% if item.isbn %}{{item.isbn}}{% else %}{{item.title}}{% endif %}" target="_blank"><i class="fa fa-amazon"></i></a>
 			</p>
 			<p class="item-author">{{item.creator}}</p>
 		</div>

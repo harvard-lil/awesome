@@ -8,7 +8,7 @@ $(document).ready(function() {
 	$('#lookup').submit(function() {
 		var barcode = $('#barcode').val();
 		var sort = 10;
-		var last_sort = $('.order_item:last').find('.order input').val();
+		var last_sort = $('.order_item:first').find('.order input').val();
 		if(last_sort)
 			sort = parseInt(last_sort) + 10;
 		
@@ -25,7 +25,7 @@ $(document).ready(function() {
     		$('#id_form-INITIAL_FORMS').val(total);
 			var source = $("#items-template2").html();
 	  		var template = Handlebars.compile(source);
-      		$('.order_list').append(template(data));
+      		$('.order_list').prepend(template(data));
 			$('.success').text('Got it!').fadeIn();
 		}).fail(function(data) {
     			$('.error').text('The barcode lookup failed - no data').fadeIn();
@@ -34,9 +34,9 @@ $(document).ready(function() {
 		return false;
 	});
 	
-	$('#new-blank-item').on("click", function(event) {
+	$('#new-blank-item').on("click", function(event) { console.log(shelf)
 		var sort = 10;
-		var last_sort = $('.order_item:last').find('.order input').val();
+		var last_sort = $('.order_item:first').find('.order input').val();
 		if(last_sort)
 			sort = parseInt(last_sort) + 10;
 		$.post('/services/new-blank-shelf-item/', {shelf: shelf, csrfmiddlewaretoken: CSRF_TOKEN, sort: sort}).done(function(data) {
@@ -49,7 +49,7 @@ $(document).ready(function() {
     		$('#id_form-INITIAL_FORMS').val(total);
 			var source = $("#items-template2").html();
 	  		var template = Handlebars.compile(source);
-      		$('.order_list').append(template(data));
+      		$('.order_list').prepend(template(data));
 		});
 		
       	event.preventDefault();
@@ -67,10 +67,12 @@ $(document).ready(function() {
         update: function(event, ui) {
             var item_order =  $(this).sortable('toArray');
             
+            var j = 0;
             // redo all of the order numbers in multiples of 10
-            for( i = 0; i < item_order.length; i++ ) {
+            for( i = item_order.length - 1; i >= 0; i-- ) {
                 var item = item_order[i];
-                var new_order = (i + 1) * 10;
+                var new_order = (j + 1) * 10;
+                j++;
                 var selector = '#'+item+' span.order input';
                 $(selector).val(new_order);
             }

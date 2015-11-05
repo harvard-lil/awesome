@@ -116,7 +116,7 @@ class Shelf(models.Model):
 
 class ShelfItem(models.Model):
     shelf = models.ForeignKey(Shelf)
-    title = models.CharField(max_length=400)
+    title = models.CharField(max_length=400, blank=True)
     creator = models.CharField(max_length=400, null=True, blank=True)
     unique_id = models.CharField(max_length=100, null=True, blank=True) #usually the institution id or worldcat
     catalog_id = models.CharField(max_length=200, null=True, blank=True) #the ID we use for linking. probably the institution id, isbn, upc 
