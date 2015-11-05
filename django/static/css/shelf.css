@@ -28,7 +28,8 @@ body {
 }
 
 a {
-  color: #66B562; }
+  color: #66B562;
+  text-decoration:none; }
 a:hover {
   color: #53a74e; }
   
@@ -70,8 +71,9 @@ h4, h5 {
 }
 
 .item-cover {
-	width:100%;
+	max-width:100%;
 	max-height:325px;
+	min-height:130px;
 }
 
 .item-cover-backup {
@@ -83,9 +85,9 @@ h4, h5 {
 	z-index: -1;
 	overflow: hidden;
 	font-size: 1.2em;
-	width: 200px;
+	width: 180px;
 	height: 100px;
-	border: 2px solid #333;
+	border: 2px solid #AEB1B8;
 	box-sizing:border-box;
 	padding:20px;
 }
@@ -122,6 +124,13 @@ h4, h5 {
 	}
 	.item-cover-container {
 		height:330px;
+	}
+	.shelf-description {
+		margin-bottom:25px;
+	}
+	.org-link {
+		float:right;
+		margin-top:10px;
 	}
 }
 
