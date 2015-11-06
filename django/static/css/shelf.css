@@ -27,6 +27,10 @@ body {
   content: "\f270";
 }
 
+.fa-plus-square:before {
+  content: "\f0fe";
+}
+
 a {
   color: #66B562;
   text-decoration:none; }
@@ -59,6 +63,10 @@ input[type="button"].button-primary:focus {
 h4, h5 {
 	color:#999;
 	text-transform:uppercase;
+}
+
+h5 {
+	line-height:1.2em;
 }
 
 /* shelf styles */
@@ -110,48 +118,47 @@ h4, h5 {
 	color:#AEB1B8;
 }
 
-/* For devices larger than 1190px */
-@media (min-width: 1190px) {
-	.container {
-		width:100%;
-	}
-}
-
-/* For devices larger than 550px */
-@media (min-width: 700px) {
-	.item {
-		height:400px;
-	}
-	.item-cover-container {
-		height:330px;
-	}
-	.shelf-description {
-		margin-bottom:25px;
-	}
-	.org-link {
-		float:right;
-		margin-top:10px;
-	}
-}
-
 /* shelf builder styles */
 
 #lookup {
 	border:1px solid #444;
 	background-color:#eee;
 	padding:25px;
-	height:130px;
+	/*height:130px;*/
 	box-sizing:border-box;
+	position:absolute;
+	top:430px;
+	left:0;
+	right:0;
 }
 
-#lookup p.error {
+#lookup p.alert {
+	height:20px;
 	margin-bottom:0px;
+}
+
+#lookup .error {
 	color:#CE023B;
 }
 
-#lookup p.success {
-	margin-bottom:0px;
+#lookup .success {
 	color:#17ab47;
+}
+
+#lookup h5 {
+	margin-bottom:0px;
+}
+
+#lookup a {
+	font-size:0.9em;
+}
+
+#new-blank-item i {
+	margin-right:5px;
+}
+
+.order_list {
+	margin-top:205px;
 }
 
 .build-shelf-title {
@@ -188,6 +195,10 @@ ul.errorlist {
 	color:#17ab47;
 }
 
+.build-shelf-description {
+	margin-bottom:0px;
+}
+
 .build-item {
 	float:left;
 	height:460px;
@@ -215,4 +226,43 @@ ul.errorlist {
 
 .build-item input[type="text"] {
 	width:100%;
+}
+
+/* For devices larger than 1190px */
+@media (min-width: 1190px) {
+	.container {
+		width:100%;
+	}
+}
+
+@media (min-width: 555px) {
+	#lookup {
+		top:280px;
+	}
+	#lookup .column, #lookup .columns {
+		margin-left:0px;
+	}
+	#lookup .column:first-child, #lookup .columns:first-child {
+		margin-left:4%;
+	}
+	.build-shelf-description {
+		margin-bottom:2.5rem;
+	}
+}
+
+/* For devices larger than 550px */
+@media (min-width: 700px) {
+	.item {
+		height:400px;
+	}
+	.item-cover-container {
+		height:330px;
+	}
+	.shelf-description {
+		margin-bottom:25px;
+	}
+	.org-link {
+		float:right;
+		margin-top:10px;
+	}
 }

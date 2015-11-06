@@ -107,7 +107,7 @@ class Checkin(models.Model):
 class Shelf(models.Model):
 	organization = models.ForeignKey(Organization)
 	title = models.CharField(max_length=400)
-	description = models.TextField(max_length=4000)
+	description = models.TextField(max_length=4000, null=True, blank=True)
 	slug = models.SlugField()
 	date_created = models.DateTimeField(auto_now=True, null=True)
 	

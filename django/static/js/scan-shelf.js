@@ -26,9 +26,9 @@ $(document).ready(function() {
 			var source = $("#items-template2").html();
 	  		var template = Handlebars.compile(source);
       		$('.order_list').prepend(template(data));
-			$('.success').text('Got it!').fadeIn();
+			$('.alert').html('<span class="success">Got it!</span>').fadeIn();
 		}).fail(function(data) {
-    			$('.error').text('The barcode lookup failed - no data').fadeIn();
+    			$('.alert').html('<span class="error">The barcode lookup failed - no data</span>').fadeIn();
     		});
 		
 		return false;

@@ -559,12 +559,13 @@ def csv_export(request):
 csv_export.short_description = u"Export CSV"
 
 
-def shelf(request):
+def new_shelf(request):
 
 	if not request.user.is_authenticated():
 		return HttpResponseRedirect(reverse('auth_login'))
 		
 	org = Organization.objects.get(user=request.user)
+	awesome_domain = Site.objects.get_current().domain
 	shelf_instance = Shelf(organization=org)
 	
 	if request.method == 'POST':
@@ -584,9 +585,10 @@ def shelf(request):
 				'organization': org,
 				'form': submitted_form,
 				'shelves': shelves,
+				'awesome_domain': awesome_domain,
 			}
 			context = RequestContext(request, context)
-			return render_to_response('control-create-shelf.html', context)
+			return render_to_response('control-new-shelf.html', context)
 			
 	else:
 		form = ShelfForm(instance=shelf_instance)
@@ -596,10 +598,11 @@ def shelf(request):
             'user': request.user,
             'organization': org,
             'shelves': shelves,
-            'form': form,            
+            'form': form,   
+            'awesome_domain': awesome_domain,         
         }
         context = RequestContext(request, context)   
-        return render_to_response('control-create-shelf.html', context)
+        return render_to_response('control-new-shelf.html', context)
         
         
 def shelf_builder(request, shelf_slug):
@@ -625,7 +628,7 @@ def shelf_builder(request, shelf_slug):
 		if form.is_valid() and form.form_valid() and formset.is_valid():
 			formset.save()
 			# reset the order to what's been saved
-			formset = ShelfItemFormSet(queryset=ShelfItem.objects.order_by('-sort_order'))
+			formset = ShelfItemFormSet(queryset=ShelfItem.objects.filter(shelf=shelf).order_by('-sort_order'))
 			
 			display_shelf = form.save()
 			messages.success(request, 'Saved!')
@@ -643,7 +646,7 @@ def shelf_builder(request, shelf_slug):
 			return render_to_response('scan-shelf.html', context)
 	else:
 		form = ShelfForm(instance=shelf)
-		formset = ShelfItemFormSet(queryset=ShelfItem.objects.order_by('-sort_order'))
+		formset = ShelfItemFormSet(queryset=ShelfItem.objects.filter(shelf=shelf).order_by('-sort_order'))
 		
 		context = {
 			'user': request.user,

@@ -27,7 +27,7 @@
 </head>
 
 <body>
-<div class="container">
+<div class="container build-shelf">
     <div class="row">
       <div class="eight columns">
       	<h4>Build your shelf</h4>
@@ -35,32 +35,31 @@
       </div>
       	<form id="lookup">
     	<div class="row">
+    		<div class="four columns u-pull-right">
+    			<h5>Scan New Items Here</h5>
+    			<a href="#" id="new-blank-item"><i class="fa fa-plus-square"></i>new blank item</a>
+    		</div>
     		<div class="eight columns">
     			<input class="u-full-width" placeholder="ISBN/UPC code" id="barcode" type="text">
-    			<p class="error"></p>
-    			<p class="success"></p>
-    		</div>
-    		<div class="four columns">
-    			<h5>Scan New Items Here</h5>
-    			<a href="#" id="new-blank-item">Manually add new item</a>
+    			<p class="alert"></p>
     		</div>
     	</div>
 	</form>
     <form action="." method="post">
-      <div class="row">
+      <div class="row shelf-details">
       	<div class="eight columns">
       	{% csrf_token %}
-      	{% if add_item_form.errors %}
+      	{% if form.errors %}
       	<ul class="errorlist">
         	<li>Please fix the error(s) below.</li>
       	</ul>
       	{% endif %}
-		<p class="build-shelf-title">{{ form.title }}{{ form.title.errors }}</p>
+		<p class="build-shelf-title">{{ form.title|placeholder:"Title" }}{{ form.title.errors }}</p>
 		<p class="build-shelf-permalink">http://{{shelf.organization.slug}}.{{awesome_domain}}/{{form.slug}}{{form.slug.errors}}</p>
-		<p class="build-shelf-description">{{ form.description }}{{ form.description.errors }}</p>
+		<p class="build-shelf-description">{{ form.description|placeholder:"Optional description" }}{{ form.description.errors }}</p>
 		{{ formset.management_form }}
 		</div>
-		<div class="four columns">
+		<div class="four columns u-pull-right">
 			<h5>Shelf Details</h5>
 			<p>Your shelf's title, link and description</p>
 			<button class="button-primary">Save Shelf</button>
@@ -137,17 +136,6 @@
 </body>
 
 {% verbatim %}
-<script id="items-template" type="text/x-handlebars-template"> 
-	<div class="item">
-		<div class="item-details">
-			<p class="item-title">
-				{{title}}
-			</p>
-			<p class="item-author">{{creator}}</p>
-			<i class="fa fa-amazon"></i>
-		</div>
-	</div>
-</script>
 
 <script id="items-template2" type="text/x-handlebars-template">
 	<div class="order_item build-item ui-sortable-handle" id="item-{{item_num}}">

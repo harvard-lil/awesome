@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <meta name="description" content="{{shelf.title}}">
+  <meta name="author" content="{{organization.name}}">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+{% load static isbn_converter placeholder %}
+{% get_static_prefix as STATIC_PREFIX %}
+
+<title>Scan | Awesome Box at the {{organization.name}}</title>
+
+<link rel="stylesheet" href="{{ STATIC_PREFIX }}css/normalize.css" type="text/css" />
+<link rel="stylesheet" href="{{ STATIC_PREFIX }}css/skeleton.css" type="text/css" />
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="{{ STATIC_PREFIX }}css/shelf.css" type="text/css" />
+</head>
+
+<body>
+<div class="container">
+    <div class="row">
+      <div class="eight columns">
+      	<h4>New shelf</h4>
+      	</div>
+      </div>
+    <form action="." method="post">
+      <div class="row">
+      	<div class="eight columns">
+      	{% csrf_token %}
+      	{% if form.errors %}
+      	<ul class="errorlist">
+        	<li>Please fix the error(s) below.</li>
+      	</ul>
+      	{% endif %}
+		<p class="build-shelf-title">{{ form.title|placeholder:"Title" }}{{ form.title.errors }}</p>
+		<p class="build-shelf-permalink">http://{{organization.slug}}.{{awesome_domain}}/{{form.slug}}{{form.slug.errors}}</p>
+		<p class="build-shelf-description">{{ form.description|placeholder:"Optional description" }}{{ form.description.errors }}</p>
+		</div>
+		<div class="four columns">
+			<h5>Shelf Details</h5>
+			<p>Your shelf's title, link and description</p>
+			<button class="button-primary">Save Shelf</button>
+			{% if messages %}
+        		{% for message in messages %}
+            		<p id="build-shelf-message">{% if 'safe' in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}</p>
+        		{% endfor %}
+    		{% endif %}
+		</div>
+		</div>
+		
+</div>
+</body>
