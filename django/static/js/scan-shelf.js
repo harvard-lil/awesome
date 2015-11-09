@@ -14,7 +14,6 @@ $(document).ready(function() {
 		
 		$.post('/services/new-shelf-item/', {barcode: barcode, shelf: shelf, csrfmiddlewaretoken: CSRF_TOKEN, sort: sort}).done(function(data) {
 			$('#barcode').val('').focus();
-			$('.success, .error').hide();
 			//getItems()
 			var total = $('#id_form-TOTAL_FORMS').val();
 			data.form_num = total;
@@ -26,9 +25,9 @@ $(document).ready(function() {
 			var source = $("#items-template2").html();
 	  		var template = Handlebars.compile(source);
       		$('.order_list').prepend(template(data));
-			$('.alert').html('<span class="success">Got it!</span>').fadeIn();
+			$('.alert').html('<span class="success">Got it!</span>');
 		}).fail(function(data) {
-    			$('.alert').html('<span class="error">The barcode lookup failed - no data</span>').fadeIn();
+    			$('.alert').html('<span class="error">The barcode lookup failed - no data</span>');
     		});
 		
 		return false;
