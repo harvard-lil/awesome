@@ -75,6 +75,64 @@ def landing(request):
         context = RequestContext(request, context)
         return render_to_response('landing_default.html', context)
         
+def landing_goodbye(request):
+    """The welcome page."""
+    
+    try:
+        from awesome.local_settings import *
+    except ImportError, e:
+        logger.error('Unable to load local_settings.py:', e)
+    
+    if 'subdomain' in request.META:
+        branch_slug = request.GET.get('branch', '')
+        if branch_slug:
+            try:
+                branch = Branch.objects.get(slug=branch_slug, organization__slug=request.META['subdomain'])
+            except:
+                raise Http404  
+        else:
+            branch = None
+        org = Organization.objects.get(slug=request.META['subdomain'])
+        num_items = Item.objects.filter(branch__organization=org).count()
+        logger.debug(branch)
+        if org.is_active:
+        
+            template = 'landing_org_{theme}.html'.format(theme = org.theme)
+            
+            context = {'user': request.user, 'organization': org,
+                                                   'branch': branch, 
+                                                   'num_items': num_items,'twitter_username': org.twitter_username,
+                                                   'ga_key': GOOGLE['ANALYTICS_KEY']}
+        
+        else:
+            template = 'landing_org_deactivated.html'
+            awesome_domain = Site.objects.get_current().domain
+            context = {'awesome_domain': awesome_domain, 'ga_key': GOOGLE['ANALYTICS_KEY']}
+            
+        if request.method == 'POST':
+            org.cover_service = 'openlibrary'
+            org.save()
+            return render_to_response(template, context)
+    
+        context = RequestContext(request, context)
+        return render_to_response(template, context)
+    else:
+        items = Item.objects.values('title').annotate(total_checkins=Sum('number_checkins')).order_by('-total_checkins')[:10]
+        creators = Item.objects.values('creator').annotate(total_checkins=Sum('number_checkins')).order_by('-total_checkins').exclude(creator='')[:10]
+        
+        startdate = date.today() + timedelta(days=1)
+        enddate = startdate - timedelta(days=2)
+        recently = Item.objects.filter(latest_checkin__gt=enddate,
+                                latest_checkin__lt=startdate).order_by('-latest_checkin')
+                                
+        num_libraries = Organization.objects.count()
+        #num_libraries = int(math.floor(num_libraries%5) * 5)
+        
+        context = {'ga_key': GOOGLE['ANALYTICS_KEY'], 'items': items, 'creators': creators, 'recently': recently, 'num_libraries': num_libraries}
+               
+        context = RequestContext(request, context)
+        return render_to_response('landing_goodbye.html', context)
+        
 
 def shelf(request, shelf_slug):
     """The welcome page."""

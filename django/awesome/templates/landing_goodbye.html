@@ -1,0 +1,48 @@
+{% extends "layouts/base.html" %}
+{% load static isbn_converter tz %}
+{% get_static_prefix as STATIC_PREFIX %}
+
+{% block title %}Awesome Box{% endblock title %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ STATIC_PREFIX }}css/bootstrap.min.css" type="text/css" />
+<link rel="stylesheet" media="all" href="{{ STATIC_PREFIX }}css/landing.css" />
+{% endblock styles %}
+
+{% block content %}
+<body>
+<div class="container">
+	<nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <!--<a class="navbar-brand" href="#">Awesome Box</a>-->
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="{% url 'auth_login' %}">Login</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+	<div class="row">
+	    <div class="col-sm-5 col-sm-offset-1 opening-row">
+	        <h1>It's time to say goodbye</h1>
+          <p class="goodbye-text">Together we have built an amazing Awesome network of over 500 libraries, but we are sad to say that awesomebox.io will be shutting down.</p>
+          <p class="goodbye-text">We are sincerely grateful to every library that ever scanned an item into our system. The idea has always belonged to the community and we hope to see Awesome Box live on in other forms and via other platforms.</p>
+          <p class="goodbye-text">Thank you.</p>
+          <a href="{% url 'control_csv_export' %}" type="button" class="btn btn-custom btn-lg goodbye-export">Export your Awesome items</a>
+    </div>
+    <div class="col-sm-6">
+    	<img class="img-responsive" src="{{ STATIC_PREFIX }}images/awesome_action.jpg"/>
+	</div>
+</div>
+  
+  
+</div>
+{% endblock content %}
+
+</body>
