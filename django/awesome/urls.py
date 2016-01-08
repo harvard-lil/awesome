@@ -10,7 +10,7 @@ admin.autodiscover()
 urlpatterns = patterns('awesome.views',
 
     # Common Pages
-    url(r'^$', 'landing.landing', name='landing'),
+    url(r'^$', 'landing.landing_goodbye', name='landing_goodbye'),
     url(r'^goodbye/$', 'landing.landing_goodbye', name='landing_goodbye'),
     url(r'^explorer/$', 'landing.explorer', name='landing_explorer'),
     url(r'^discover/$', 'landing.discover', name='landing_discover'),
